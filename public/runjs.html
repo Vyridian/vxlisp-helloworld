@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <title>vxlisp</title>
+  <head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  </head>
+  <body>
+    <script type="module">
+      import vx_core from "../build/js/src/vx/core.js"
+      import app from "../build/js/src/mydomain/mypackage.js"
+      const context = app.f_context_main(vx_core.e_anylist)
+      app.f_main_html(context, vx_core.e_anylist)
+    </script>
+    <div id="app"></div>
+  </body>
+</html>

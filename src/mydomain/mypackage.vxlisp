@@ -1,0 +1,62 @@
+(package mydomain/mypackage
+ :libs (lib html    :path vx/web/html)
+       (lib htmldoc :path vx/web/htmldoc)
+ :doc "This is a simple helloworld program")
+
+(type mycontext : struct
+ :traits [context]
+ :doc "A user defined context.")
+
+(func myfunc : int
+ [arg1 : int
+  arg2 : int]
+ (* (+ arg1 arg2) 2)
+ :test (test 10 (myfunc 2 3))
+ :doc "This function adds two integers and multiplies by 2. It includes documentation and a test case.")
+
+(func context-main : context
+ [args : anylist :...]
+ :doc "Returns the context for execution. Arguments come from the command line.")
+
+(func main-exe : string
+ [args : anylist :...]
+ "Hello World"
+ :context
+ :doc "The default function for app main execution. Arguments come from the command line.")
+
+(func main-html : string
+ [args : anylist :...]
+ (string-render<-text
+  "Hello World")
+ :context
+ :doc "The default function for app main html output. Arguments come from the command line.")
+
+(func p<-text : html/p
+ [text : string]
+ (html/p :text text)
+ :test (test
+        (html/p :text "a")
+        (p<-text "a"))
+ :doc "Returns an HTML paragraph tag from text.")
+
+(func string-html<-text : string
+ [text : string]
+ (let : string
+  [p : html/p :=
+    (p<-text text)]
+  (html/string<-node p))
+ :test (test
+        "<p>a</p>"
+        (string-html<-text "a"))
+ :doc "Returns HTML text from text with id=app.")
+
+(func string-render<-text : string
+ [text : string]
+ (let : string
+  [shtml : string :=
+    (string-html<-text text)
+   iswrite : boolean :=
+    (htmldoc/boolean-write<-id-htmltext
+	 "app" shtml)]
+  shtml)
+ :doc "Replaces HTML node with id=app.")
