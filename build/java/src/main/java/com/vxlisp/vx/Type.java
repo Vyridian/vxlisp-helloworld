@@ -45,11 +45,11 @@ public final class Type {
         }
       }
     } else {
-	     output = text.indexOf(find);
-		  }
+      output = text.indexOf(find);
+    }
     output += 1;
-		  return output;
- 	}
+    return output;
+  }
 
   // vx_int_from_string_findkeyword(string, string)
   public static Core.Type_int vx_int_from_string_findkeyword(Core.Type_string text, Core.Type_string find) {

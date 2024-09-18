@@ -1807,7 +1807,7 @@ export default class vx_core {
    * The test path from project file
    * {string}
    */
-  static c_path_test_resources = "js/test/resources"
+  static c_path_test_resources = "test/resources"
 
   /**
    * Constant: quote

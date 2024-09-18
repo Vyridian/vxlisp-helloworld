@@ -425,11 +425,11 @@ public final class Core {
   // vx_global_package_set(string, map<any>, map<any>, map<func>)
   public static void vx_global_package_set(String pkgname, Map<String, Core.Type_any> maptype, Map<String, Core.Type_any> mapconst, Map<String, Core.Type_func> mapfunc) {
     Core.Class_typemap typemap = new Core.Class_typemap();
-		  typemap.vx_p_map = Core.immutablemap(maptype);
-	   Core.Class_constmap constmap = new Core.Class_constmap();
-		  constmap.vx_p_map = Core.immutablemap(mapconst);
-		  Core.Class_funcmap funcmap = new Core.Class_funcmap();
-		  funcmap.vx_p_map = Core.immutablemap(mapfunc);
+    typemap.vx_p_map = Core.immutablemap(maptype);
+    Core.Class_constmap constmap = new Core.Class_constmap();
+    constmap.vx_p_map = Core.immutablemap(mapconst);
+    Core.Class_funcmap funcmap = new Core.Class_funcmap();
+    funcmap.vx_p_map = Core.immutablemap(mapfunc);
     Core.Class_project global = (Core.Class_project)Core.c_global;
     Core.Class_packagemap packagemap = (Core.Class_packagemap)global.vx_p_packagemap;
     if (packagemap == null) {
@@ -437,10 +437,10 @@ public final class Core {
       global.vx_p_packagemap = packagemap;
     }
     Map<String, Core.Type_package> mappackage = new LinkedHashMap<>(packagemap.vx_p_map);
-		  Core.Class_package pkg = new Core.Class_package();
-		  pkg.vx_p_constmap = constmap;
-		  pkg.vx_p_typemap = typemap;
-		  pkg.vx_p_funcmap = funcmap;
+    Core.Class_package pkg = new Core.Class_package();
+    pkg.vx_p_constmap = constmap;
+    pkg.vx_p_typemap = typemap;
+    pkg.vx_p_funcmap = funcmap;
     mappackage.put(pkgname, pkg);
     packagemap.vx_p_map = Core.immutablemap(mappackage);
   }
@@ -14679,7 +14679,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     public static void const_new(Core.Type_string output) {
       Core.Class_string outval = (Core.Class_string)output;
       outval.vx_p_constdef = constdef();
-      outval.vxstring = "java/src/test/resources";
+      outval.vxstring = "src/test/resources";
     }
 
   }
