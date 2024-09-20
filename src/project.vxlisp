@@ -2,7 +2,7 @@
  :version    "0.1"
  :author     ""
  :doc        "This is a sample project shell"
- :projects   "../vxlisp-runtime/vxlisp"
+ :projects   "../../vxlisp/dist/vxlisp"
  :javadomain "com.myurl"
  :libs
   (lib javaniofile
