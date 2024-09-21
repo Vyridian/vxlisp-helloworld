@@ -1,83 +1,62 @@
 # Getting Started
 
+## Links
+* [Compiler Web Site](https://vyridian.github.io/vxlisp)
+* [Compiler Repository](https://github.com/Vyridian/vxlisp)
+* [Docs](https://github.com/Vyridian/vxlisp/tree/main/docs)
+
 ## Installation
 
 1. Create a folder to hold vxlisp projects. (e.g. vxprojects)
 
-2. Copy contents of this gettingstarted folder into it.
+2. Copy the [vxlisp](https://github.com/Vyridian/vxlisp) folder into it.
 
-## Create your own project
+3. Copy this vxlisp-helloworld folder into it.
 
-1. Copy the projecttemplate folder and rename it. (e.g. myproject)
-
-## Create a package
-
-1. Rename the packagetemplate folder inside your project (e.g. myproject/mypackage)
-
-## Create a program
-
-1. Rename the programtemplate.vxlisp file in your package (e.g. myproject/mypackage/myprogram.vxlisp)
-
-2. Open the .vxlisp file and rename the package header at the top:
-(package mypackage/myprogram
- :doc "This is my program")
-
-3. Now you can add a function:
-(func myfunc : int
- [arg1 : int
-  arg2 : int]
- (* (+ arg1 arg2) 2)
- :test (test 10 (myfunc 2 3))
- :doc "This function adds two integers and multiplies by 2. It includes documentation and a test case.")
-
-## Compile the code
+## Compile the code for JavaScript
 
 1. Open a commnd prompt.
 
-2. Change directories to the vxruntime folder.
+2. Change directories to the vxlisp-helloworld/batches folder.
 
-3. Run the vxlisp executable passing the path and any commands you want to run. The runcomile.bat and rundoc.bat files in the sample folder are examples.
-(e.g. "vxlisp_win64.exe srcjs testjs srcjava testjava doc --path ..myproject/vxlisp" will compile source and test code for Javascript and Java and make documentation.)
+3. Run the runbuildjs batch file.
 
 ## Examine your code
 
-1. If you generated documentation, it will be in your project/doc folder. (e.g. myproject/doc)
+1. If you generated documentation, it will be in your {project}/build/doc folder. (e.g. vxlisp-helloworld/build/doc)
 
-2. If you generated Javascript, it will be in your project/js folder. (e.g. myproject/js)
+2. If you generated JavaScript, it will be in your {project}/build/js folder. (e.g. vxlisp-helloworld/build/js)
 
-3. If you generated Java, it will be in your project/java folder. (e.g. myproject/java)
+3. If you generated Java, it will be in your {project}/build/java folder. (e.g. vxlisp-helloworld/build/java)
 
-4. If you generated C++, it will be in your project/cpp folder. (e.g. myproject/cpp)
+4. If you generated C++, it will be in your {project}/build/cpp folder. (e.g. vxlisp-helloworld/build/cpp)
 
-5. If you generated CSharp, it will be in your project/csharp folder. (e.g. myproject/csharp)
+5. If you generated CSharp, it will be in your {project}/build/csharp folder. (e.g. vxlisp-helloworld/build/csharp)
 
-6. If you generated Kotlin, it will be in your project/kotlin folder. (e.g. myproject/kotlin)
+6. If you generated Kotlin, it will be in your {project}/build/kotlin folder. (e.g. vxlisp-helloworld/build/kotlin)
 
-## View Documentation or Javascript test suite
+## View Documentation or JavaScript Run or JavaScript test suite
 
-1. Run the built in Webserver by running the vxlisp executable passing the path and the webserver command. The runwebserver.bat in the sample folder is an example.
-(e.g. "vxlisp_win64.exe webserver --path ..myproject/vxlisp")
+1. Run the built in Webserver by opening a terminal and running the vxlisp-helloworld/batches/runwebserver batch file
 
-2. Open http://localhost:8081/html
+2. Open http://localhost:8081/
 
-3. Choose Documentation if you want to see the docs including your project.
+* Docs - build/doc/doc.html
+* JavaScript - public/runjs.html
+* JavaScript Test - public/testjs.html
 
-4. Choose Test Suite if you want to see the full Javascript test suite including as your project.
+3. When you are done, return to the running terminal and press ctl-c to terminate the webserver.
 
-5. When you are done, return to the running command prompt and press ctl-c to terminate the webserver.
+## Run the Java Code
 
-## Run the Java test suite
+* Prerequisites - You must hava Java and Gradle installed.
+
+* Open a terminal and change directories to vxlisp-helloworld/build/java.
 
 * Test - If you want to run test suite:
 
 1. At the command prompt run: ./runtest OR .gradlew test
 
 * Run - If you want run a program set up by vxlisp:
-
-1. Change your application in build.gradle file to:
-application {
-    // Define the main class for the application.
-    mainClass = 'com.vxlisp.vx.App'
-}
 
 2. At the command prompt run: ./runapp or .gradlew run
