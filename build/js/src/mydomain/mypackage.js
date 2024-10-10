@@ -30,7 +30,7 @@ export default class mydomain_mypackage {
   // (func context-main)
   static f_context_main(...args) {
     let output = vx_core.e_context
-    args = vx_core.f_new(vx_core.t_anylist, ...args)
+    args = vx_core.f_new_from_type(vx_core.t_anylist, ...args)
     return output
   }
 
@@ -50,7 +50,7 @@ export default class mydomain_mypackage {
   // (func main-exe)
   static f_main_exe(context, ...args) {
     let output = vx_core.e_string
-    args = vx_core.f_new(vx_core.t_anylist, ...args)
+    args = vx_core.f_new_from_type(vx_core.t_anylist, ...args)
     output = "Hello World"
     return output
   }
@@ -71,7 +71,7 @@ export default class mydomain_mypackage {
   // (func main-html)
   static f_main_html(context, ...args) {
     let output = vx_core.e_string
-    args = vx_core.f_new(vx_core.t_anylist, ...args)
+    args = vx_core.f_new_from_type(vx_core.t_anylist, ...args)
     output = mydomain_mypackage.f_string_render_from_text("Hello World")
     return output
   }
@@ -116,11 +116,7 @@ export default class mydomain_mypackage {
   // (func p<-text)
   static f_p_from_text(text) {
     let output = vx_web_html.e_p
-    output = vx_core.f_new(
-      vx_web_html.t_p,
-      ":text",
-      text
-    )
+    output = vx_core.f_new({"any-1": vx_web_html.t_p}, ":text", text)
     return output
   }
 
@@ -143,7 +139,7 @@ export default class mydomain_mypackage {
     output = vx_core.f_let(
       {"any-1": vx_core.t_string},
       [],
-      vx_core.f_new(vx_core.t_any_from_func, () => {
+      vx_core.f_new_from_type(vx_core.t_any_from_func, () => {
         const p = mydomain_mypackage.f_p_from_text(text)
         return vx_web_html.f_string_from_node(p)
       })
@@ -170,7 +166,7 @@ export default class mydomain_mypackage {
     output = vx_core.f_let(
       {"any-1": vx_core.t_string},
       [],
-      vx_core.f_new(vx_core.t_any_from_func, () => {
+      vx_core.f_new_from_type(vx_core.t_any_from_func, () => {
         const shtml = mydomain_mypackage.f_string_html_from_text(text)
         const iswrite = vx_web_htmldoc.f_boolean_write_from_id_htmltext("app", shtml)
         return shtml
@@ -272,7 +268,7 @@ export default class mydomain_mypackage {
       disallowtypes : [],
       allowvalues   : [],
       disallowvalues: [],
-      traits        : [],
+      traits        : [vx_core.t_func],
       properties    : [],
       proplast      : {},
       fn            : mydomain_mypackage.f_context_main
@@ -290,7 +286,7 @@ export default class mydomain_mypackage {
       disallowtypes : [],
       allowvalues   : [],
       disallowvalues: [],
-      traits        : [],
+      traits        : [vx_core.t_func],
       properties    : [],
       proplast      : {},
       fn            : mydomain_mypackage.f_main_exe
@@ -308,7 +304,7 @@ export default class mydomain_mypackage {
       disallowtypes : [],
       allowvalues   : [],
       disallowvalues: [],
-      traits        : [],
+      traits        : [vx_core.t_func],
       properties    : [],
       proplast      : {},
       fn            : mydomain_mypackage.f_main_html
@@ -326,7 +322,7 @@ export default class mydomain_mypackage {
       disallowtypes : [],
       allowvalues   : [],
       disallowvalues: [],
-      traits        : [],
+      traits        : [vx_core.t_func],
       properties    : [],
       proplast      : {},
       fn            : mydomain_mypackage.f_myfunc
@@ -344,7 +340,7 @@ export default class mydomain_mypackage {
       disallowtypes : [],
       allowvalues   : [],
       disallowvalues: [],
-      traits        : [],
+      traits        : [vx_core.t_func],
       properties    : [],
       proplast      : {},
       fn            : mydomain_mypackage.f_p_from_text
@@ -362,7 +358,7 @@ export default class mydomain_mypackage {
       disallowtypes : [],
       allowvalues   : [],
       disallowvalues: [],
-      traits        : [],
+      traits        : [vx_core.t_func],
       properties    : [],
       proplast      : {},
       fn            : mydomain_mypackage.f_string_html_from_text
@@ -380,7 +376,7 @@ export default class mydomain_mypackage {
       disallowtypes : [],
       allowvalues   : [],
       disallowvalues: [],
-      traits        : [],
+      traits        : [vx_core.t_func],
       properties    : [],
       proplast      : {},
       fn            : mydomain_mypackage.f_string_render_from_text

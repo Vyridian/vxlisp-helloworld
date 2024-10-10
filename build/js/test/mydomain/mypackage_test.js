@@ -11,7 +11,7 @@ export default class mydomain_mypackage_test {
 
   static test_package(context) {
     const testcaselist = mydomain_mypackage_test.test_cases(context)
-    const output = vx_core.f_new(
+    const output = vx_core.f_new_from_type(
       vx_test.t_testpackage,
       ":testpkg", "mydomain/mypackage",
       ":caselist", testcaselist,
@@ -22,34 +22,35 @@ export default class mydomain_mypackage_test {
   }
 
   static test_coveragesummary() {
-    return vx_core.f_new(
+    const output = vx_core.f_new_from_type(
       vx_test.t_testcoveragesummary,
       "testpkg",   "mydomain/mypackage", 
-      "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 8, ":total", 8), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 42, ":tests", 3, ":total", 7), 
-      "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 37, ":tests", 3, ":total", 8), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1)
+      "constnums", vx_core.f_new_from_type(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
+      "docnums", vx_core.f_new_from_type(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 8, ":total", 8), 
+      "funcnums", vx_core.f_new_from_type(vx_test.t_testcoveragenums, ":pct", 42, ":tests", 3, ":total", 7), 
+      "bigospacenums", vx_core.f_new_from_type(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
+      "bigotimenums", vx_core.f_new_from_type(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
+      "totalnums", vx_core.f_new_from_type(vx_test.t_testcoveragenums, ":pct", 37, ":tests", 3, ":total", 8), 
+      "typenums", vx_core.f_new_from_type(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1)
     )
+    return output
   }
 
   static test_coveragedetail() {
-    return vx_core.f_new(
+    const output = vx_core.f_new_from_type(
       vx_test.t_testcoveragedetail,
       "testpkg", "mydomain/mypackage",
       "typemap",
-        vx_core.f_new(
+        vx_core.f_new_from_type(
           vx_core.t_intmap,
           "mycontext", 0
         ),
       "constmap",
-        vx_core.f_new(
+        vx_core.f_new_from_type(
           vx_core.t_intmap
         ),
       "funcmap",
-        vx_core.f_new(
+        vx_core.f_new_from_type(
           vx_core.t_intmap,
           "context-main", 0,
           "main-exe", 0,
@@ -60,18 +61,19 @@ export default class mydomain_mypackage_test {
           "string-render<-text", 0
         )
     )
+    return output
   }
 
   static f_myfunc(context) {
-    const output = vx_core.f_new(
+    const output = vx_core.f_new_from_type(
       vx_test.t_testcase,
       ":passfail", false,
       ":testpkg", "mydomain/mypackage",
       ":casename", "myfunc",
       ":describelist",
-        vx_core.f_new(
+        vx_core.f_new_from_type(
           vx_test.t_testdescribelist,
-          vx_core.f_new(
+          vx_core.f_new_from_type(
             vx_test.t_testdescribe,
             ":describename", "(test 10 (myfunc 2 3))",
             ":testresult",
@@ -87,25 +89,21 @@ export default class mydomain_mypackage_test {
   }
 
   static f_p_from_text(context) {
-    const output = vx_core.f_new(
+    const output = vx_core.f_new_from_type(
       vx_test.t_testcase,
       ":passfail", false,
       ":testpkg", "mydomain/mypackage",
       ":casename", "p<-text",
       ":describelist",
-        vx_core.f_new(
+        vx_core.f_new_from_type(
           vx_test.t_testdescribelist,
-          vx_core.f_new(
+          vx_core.f_new_from_type(
             vx_test.t_testdescribe,
             ":describename", "(test\n (html/p :text \"a\")\n (p<-text \"a\"))",
             ":testresult",
             vx_test.f_test(
               context,
-              vx_core.f_new(
-                vx_web_html.t_p,
-                ":text",
-                "a"
-              ),
+              vx_core.f_new({"any-1": vx_web_html.t_p}, ":text", "a"),
               mydomain_mypackage.f_p_from_text("a")
             )
           )
@@ -115,15 +113,15 @@ export default class mydomain_mypackage_test {
   }
 
   static f_string_html_from_text(context) {
-    const output = vx_core.f_new(
+    const output = vx_core.f_new_from_type(
       vx_test.t_testcase,
       ":passfail", false,
       ":testpkg", "mydomain/mypackage",
       ":casename", "string-html<-text",
       ":describelist",
-        vx_core.f_new(
+        vx_core.f_new_from_type(
           vx_test.t_testdescribelist,
-          vx_core.f_new(
+          vx_core.f_new_from_type(
             vx_test.t_testdescribe,
             ":describename", "(test\n \"<p>a</p>\"\n (string-html<-text \"a\"))",
             ":testresult",
@@ -139,7 +137,7 @@ export default class mydomain_mypackage_test {
   }
 
   static test_cases(context) {
-    const output = vx_core.f_new(
+    const output = vx_core.f_new_from_type(
       vx_test.t_testcaselist,
       mydomain_mypackage_test.f_myfunc(context),
       mydomain_mypackage_test.f_p_from_text(context),
