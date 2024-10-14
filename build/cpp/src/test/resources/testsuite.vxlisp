@@ -1073,6 +1073,53 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/core"
+     :casename "constdef<-any"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (constdef
+  :pkgname \"vx/core\"
+  :name \"false\"
+  :type boolean)
+ (constdef<-any false))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (constdef
+            :pkgname "vx/core"
+            :name "false"
+            :type boolean)
+          :actual
+           (constdef
+            :pkgname ":eq"
+            :name "list<-list"
+            :type boolean)))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
+     :casename "constname<-any"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"vx/core/false\"
+ (constname<-any false))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "vx/core/false"
+          :actual "vx/core/false"))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
      :casename "contains"
      :describelist
       (vx/test/testdescribelist
@@ -1609,71 +1656,6 @@
           :passfail true
           :expected 7
           :actual 7))))
-    (vx/test/testcase
-     :passfail true
-     :testpkg "vx/core"
-     :casename "list-join<-list"
-     :describelist
-      (vx/test/testdescribelist
-       (vx/test/testdescribe
-        :describename
-         "(test
- (stringlist \"a\" \"b\" \"c\" \"d\")
- (list-join<-list : stringlist
-  (stringlistlist
-   (stringlist \"a\" \"b\")
-   (stringlist \"c\" \"d\"))))"
-        :testpkg "vx/core"
-        :testresult
-         (vx/test/testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (stringlist
-            "a"
-            "b"
-            "c"
-            "d")
-          :actual
-           (stringlist
-            "a"
-            "b"
-            "c"
-            "d")))))
-    (vx/test/testcase
-     :passfail true
-     :testpkg "vx/core"
-     :casename "list-join<-list_1"
-     :describelist
-      (vx/test/testdescribelist
-       (vx/test/testdescribe
-        :describename
-         "(test
- (stringlist \"a\" \"b\" \"c\" \"d\")
- (list-join<-list : stringlist
-  (stringlistlist
-   (stringlist \"a\" \"b\")
-   (stringlist \"c\" \"d\"))
-  (fn : stringlist
-   [values : stringlist]
-   values)))"
-        :testpkg "vx/core"
-        :testresult
-         (vx/test/testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (stringlist
-            "a"
-            "b"
-            "c"
-            "d")
-          :actual
-           (stringlist
-            "a"
-            "b"
-            "c"
-            "d")))))
     (vx/test/testcase
      :passfail true
      :testpkg "vx/core"
@@ -2463,6 +2445,8 @@
       :case 0
       :case_1 0
       :compare 2
+      :constdef<-any 1
+      :constname<-any 1
       :contains 2
       :contains_1 3
       :context-main 0
@@ -2496,8 +2480,6 @@
       :length_2 0
       :let 1
       :let-async 0
-      :list-join<-list 1
-      :list-join<-list_1 1
       :list<-list 1
       :list<-list-async 0
       :list<-list-intany 1
@@ -2662,13 +2644,13 @@
      (vx/test/testcoveragenums
       :pct 55
       :tests 75
-      :total 135)
+      :total 136)
     :testpkg "vx/core"
     :totalnums
      (vx/test/testcoveragenums
       :pct 37
       :tests 84
-      :total 226)
+      :total 227)
     :typenums
      (vx/test/testcoveragenums
       :pct 9
@@ -4365,6 +4347,106 @@ ab
     (vx/test/testcase
      :passfail true
      :testpkg "vx/collection"
+     :casename "list<-list-flatten"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringlist \"a\" \"b\" \"c\")
+ (list<-list-flatten : stringlist
+  (intlist 1 2)
+  (fn : stringlist
+   [index : int]
+   (switch : stringlist
+    index
+    (case 1
+     (stringlist \"a\" \"b\"))
+    (case 2
+     (stringlist \"c\"))))))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "a"
+            "b"
+            "c")
+          :actual
+           (stringlist
+            "a"
+            "b"
+            "c")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "list<-list-join"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringlist \"a\" \"b\" \"c\" \"d\")
+ (list<-list-join : stringlist
+  (stringlistlist
+   (stringlist \"a\" \"b\")
+   (stringlist \"c\" \"d\"))))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "a"
+            "b"
+            "c"
+            "d")
+          :actual
+           (stringlist
+            "a"
+            "b"
+            "c"
+            "d")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "list<-list-join_1"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringlist \"a\" \"b\" \"c\" \"d\")
+ (list<-list-join : stringlist
+  (stringlistlist
+   (stringlist \"a\" \"b\")
+   (stringlist \"c\" \"d\"))
+  (fn : stringlist
+   [values : stringlist]
+   values)))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "a"
+            "b"
+            "c"
+            "d")
+          :actual
+           (stringlist
+            "a"
+            "b"
+            "c"
+            "d")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/collection"
      :casename "list<-list-start"
      :describelist
       (vx/test/testdescribelist
@@ -4598,6 +4680,9 @@ ab
       :list<-list-end 1
       :list<-list-filter 1
       :list<-list-filtertypes 1
+      :list<-list-flatten 1
+      :list<-list-join 1
+      :list<-list-join_1 1
       :list<-list-start 1
       :list<-list-start-end 1
       :map<-map-end 1
@@ -4610,29 +4695,29 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 27)
+      :total 30)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 27)
+      :total 30)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 27
-      :total 27)
+      :tests 30
+      :total 30)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 76
-      :tests 20
-      :total 26)
+      :pct 82
+      :tests 23
+      :total 28)
     :testpkg "vx/collection"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 76
-      :tests 20
-      :total 26)
+      :pct 82
+      :tests 23
+      :total 28)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))
