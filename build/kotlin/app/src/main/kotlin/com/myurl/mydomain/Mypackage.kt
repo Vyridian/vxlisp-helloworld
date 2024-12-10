@@ -6,6 +6,11 @@ import com.vxlisp.vx.web.*
 object mydomain_mypackage {
 
 
+  /**
+   * type: mycontext
+   * A user defined context.
+   * (type mycontext)
+   */
   interface Type_mycontext : vx_core.Type_struct, vx_core.Type_context {
   }
 
@@ -60,13 +65,13 @@ object mydomain_mypackage {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":code")) {
+      } else if ((skey == ":code")) {
         output = this.code()
-      } else if ((skey==":session")) {
+      } else if ((skey == ":session")) {
         output = this.session()
-      } else if ((skey==":setting")) {
+      } else if ((skey == ":setting")) {
         output = this.setting()
-      } else if ((skey==":state")) {
+      } else if ((skey == ":state")) {
         output = this.state()
       }
       return output
@@ -150,7 +155,7 @@ object mydomain_mypackage {
           }
         } else {
           if (false) {
-          } else if ((key==":code")) {
+          } else if ((key == ":code")) {
             if (valsub == vx_p_code) {
             } else if (valsub is vx_core.Type_string) {
               var valcode : vx_core.Type_string = valsub as vx_core.Type_string
@@ -174,7 +179,7 @@ object mydomain_mypackage {
               msg = vx_core.vx_msg_from_error("mydomain/mypackage/mycontext", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":session")) {
+          } else if ((key == ":session")) {
             if (valsub == vx_p_session) {
             } else if (valsub is vx_core.Type_session) {
               var valsession : vx_core.Type_session = valsub as vx_core.Type_session
@@ -195,7 +200,7 @@ object mydomain_mypackage {
               msg = vx_core.vx_msg_from_error("mydomain/mypackage/mycontext", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":setting")) {
+          } else if ((key == ":setting")) {
             if (valsub == vx_p_setting) {
             } else if (valsub is vx_core.Type_setting) {
               var valsetting : vx_core.Type_setting = valsub as vx_core.Type_setting
@@ -216,7 +221,7 @@ object mydomain_mypackage {
               msg = vx_core.vx_msg_from_error("mydomain/mypackage/mycontext", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":state")) {
+          } else if ((key == ":state")) {
             if (valsub == vx_p_state) {
             } else if (valsub is vx_core.Type_state) {
               var valstate : vx_core.Type_state = valsub as vx_core.Type_state
@@ -290,7 +295,13 @@ object mydomain_mypackage {
 
   val e_mycontext : mydomain_mypackage.Type_mycontext = mydomain_mypackage.Class_mycontext()
   val t_mycontext : mydomain_mypackage.Type_mycontext = mydomain_mypackage.Class_mycontext()
-
+  /**
+   * @function context_main
+   * Returns the context for execution. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {context}
+   * (func context-main)
+   */
   interface Func_context_main : vx_core.Func_any_from_any {
     fun vx_context_main(args : vx_core.Type_anylist) : vx_core.Type_context
   }
@@ -380,7 +391,13 @@ object mydomain_mypackage {
     return output
   }
 
-
+  /**
+   * @function main_exe
+   * The default function for app main execution. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {string}
+   * (func main-exe)
+   */
   interface Func_main_exe : vx_core.Func_any_from_any_context {
     fun vx_main_exe(context : vx_core.Type_context, args : vx_core.Type_anylist) : vx_core.Type_string
   }
@@ -472,7 +489,13 @@ object mydomain_mypackage {
     return output
   }
 
-
+  /**
+   * @function main_html
+   * The default function for app main html output. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {string}
+   * (func main-html)
+   */
   interface Func_main_html : vx_core.Func_any_from_any_context {
     fun vx_main_html(context : vx_core.Type_context, args : vx_core.Type_anylist) : vx_core.Type_string
   }
@@ -566,7 +589,14 @@ object mydomain_mypackage {
     return output
   }
 
-
+  /**
+   * @function myfunc
+   * This function adds two integers and multiplies by 2. It includes documentation and a test case.
+   * @param  {int} arg1
+   * @param  {int} arg2
+   * @return {int}
+   * (func myfunc)
+   */
   interface Func_myfunc : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_myfunc(arg1 : vx_core.Type_int, arg2 : vx_core.Type_int) : vx_core.Type_int
   }
@@ -652,7 +682,13 @@ object mydomain_mypackage {
     return output
   }
 
-
+  /**
+   * @function p_from_text
+   * Returns an HTML paragraph tag from text.
+   * @param  {string} text
+   * @return {p}
+   * (func p<-text)
+   */
   interface Func_p_from_text : vx_core.Func_any_from_any {
     fun vx_p_from_text(text : vx_core.Type_string) : vx_web_html.Type_p
   }
@@ -750,7 +786,13 @@ object mydomain_mypackage {
     return output
   }
 
-
+  /**
+   * @function string_html_from_text
+   * Returns HTML text from text with id=app.
+   * @param  {string} text
+   * @return {string}
+   * (func string-html<-text)
+   */
   interface Func_string_html_from_text : vx_core.Func_any_from_any {
     fun vx_string_html_from_text(text : vx_core.Type_string) : vx_core.Type_string
   }
@@ -852,7 +894,13 @@ object mydomain_mypackage {
     return output
   }
 
-
+  /**
+   * @function string_render_from_text
+   * Replaces HTML node with id=app.
+   * @param  {string} text
+   * @return {string}
+   * (func string-render<-text)
+   */
   interface Func_string_render_from_text : vx_core.Func_any_from_any {
     fun vx_string_render_from_text(text : vx_core.Type_string) : vx_core.Type_string
   }

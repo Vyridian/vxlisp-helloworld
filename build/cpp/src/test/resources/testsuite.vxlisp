@@ -166,6 +166,333 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/core"
+     :casename "msgblock"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (decimal
+  (msgblock
+   :msgs
+    (msglist
+     (msg
+      :text \"Err\"))))
+ (decimal
+  (msg
+   :text \"Err\")))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (decimal "0.0"
+            :msgblock
+             (msgblock
+              :msgs
+               (msglist
+                (msg
+                 :text "Err"))))
+          :actual
+           (decimal "0.0"
+            :msgblock
+             (msgblock
+              :msgs
+               (msglist
+                (msg
+                 :text "Err"))))
+          :msgblock
+           (msgblock
+            :msgblocks
+             (msgblocklist
+              (msgblock
+               :msgs
+                (msglist
+                 (msg
+                  :text "Err")))
+              (msgblock
+               :msgs
+                (msglist
+                 (msg
+                  :text "Err"))))))
+        :msgblock
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgblocks
+                 (msgblocklist
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :text "Err")))
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :text "Err")))))
+               (msgblock
+                :msgblocks
+                 (msgblocklist
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :text "Err")))
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :text "Err")))))))
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :text "Err")))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :text "Err"))))))))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (decimal
+  (msgblock
+   :msgs
+    (msglist
+     (msg :text \"Err\"))))
+ (let : decimal
+  [mymsgblock : msgblock :=
+   (msgblock
+    (msg
+     :text \"Err\"))]
+  (decimal
+   (copy
+    mymsgblock
+    mymsgblock))))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (decimal "0.0"
+            :msgblock
+             (msgblock
+              :msgs
+               (msglist
+                (msg
+                 :text "Err"))))
+          :actual
+           (decimal "0.0"
+            :msgblock
+             (msgblock
+              :msgs
+               (msglist
+                (msg
+                 :text "Err"))))
+          :msgblock
+           (msgblock
+            :msgblocks
+             (msgblocklist
+              (msgblock
+               :msgs
+                (msglist
+                 (msg
+                  :text "Err")))
+              (msgblock
+               :msgs
+                (msglist
+                 (msg
+                  :text "Err"))))))
+        :msgblock
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgblocks
+                 (msgblocklist
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :text "Err")))
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :text "Err")))))
+               (msgblock
+                :msgblocks
+                 (msgblocklist
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :text "Err")))
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :text "Err")))))))
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :text "Err")))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :text "Err")))))))))
+     :msgblock
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :text "Err")))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :text "Err")))))
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :text "Err")))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :text "Err")))))))
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :text "Err")))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :text "Err")))))
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :text "Err")))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :text "Err"))))))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
+     :casename "msgblocklist"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (msgblocklist
+  (msgblock
+   (msg :text \"Err\")))
+ (let : msgblocklist
+  [mymsgblock : msgblock :=
+   (msgblock
+    (msg :text \"Err\"))]
+  (msgblocklist
+   mymsgblock
+   mymsgblock)))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :text "Err"))))
+          :actual
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :text "Err"))))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
+     :casename "msglist"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (msglist
+  (msg :text \"Err\"))
+ (let : msglist
+  [mymsg : msg :=
+   (msg :text \"Err\")]
+  (msglist
+   mymsg
+   mymsg)))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (msglist
+            (msg
+             :text "Err"))
+          :actual
+           (msglist
+            (msg
+             :text "Err"))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
      :casename "string"
      :describelist
       (vx/test/testdescribelist
@@ -991,6 +1318,57 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/core"
+     :casename "any<-struct"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"sname\"
+ (any<-struct : string
+  (translation
+   :name \"sname\")
+  :name))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "sname"
+          :actual "sname"))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"sname\"
+ (any<-struct : string
+  (translation
+   :name \"sname\")
+  \"name\"))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "sname"
+          :actual "sname"))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"sname\"
+ (any<-struct : string
+  (translation
+   :name \"sname\")
+  \":name\"))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "sname"
+          :actual "sname"))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
      :casename "boolean-write<-map-name-value"
      :describelist
       (vx/test/testdescribelist
@@ -1096,8 +1474,8 @@
             :type boolean)
           :actual
            (constdef
-            :pkgname ":eq"
-            :name "list<-list"
+            :pkgname "vx/core"
+            :name "false"
             :type boolean)))))
     (vx/test/testcase
      :passfail true
@@ -1479,6 +1857,26 @@
           :actual true))
        (vx/test/testdescribe
         :describename "(test-true (is-empty (map)))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
+     :casename "is-error"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test-true
+ (is-error
+  (stringlist
+   (msg
+    :code \"My Err\"))))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -2435,7 +2833,7 @@
       :any<-reduce-async 0
       :any<-reduce-next 0
       :any<-reduce-next-async 0
-      :any<-struct 0
+      :any<-struct 3
       :async 0
       :boolean-permission<-func 0
       :boolean-write<-map-name-value 2
@@ -2469,6 +2867,7 @@
       :is-empty 0
       :is-empty_1 4
       :is-endswith 0
+      :is-error 1
       :is-float 0
       :is-func 0
       :is-int 4
@@ -2489,6 +2888,7 @@
       :list<-map_1 1
       :list<-type 0
       :log 0
+      :log-error 0
       :log_1 0
       :main 0
       :map<-list 1
@@ -2498,6 +2898,7 @@
       :msg<-error_1 0
       :msg<-error_2 0
       :msg<-warning 0
+      :msgblock<-any 0
       :msgblock<-msgblock-msg 0
       :msgblock<-msgblock-msgblock 0
       :name<-typedef 0
@@ -2583,9 +2984,9 @@
       :maptype 0
       :mempool 0
       :msg 0
-      :msgblock 0
-      :msgblocklist 0
-      :msglist 0
+      :msgblock 2
+      :msgblocklist 1
+      :msglist 1
       :none 0
       :notype 0
       :number 0
@@ -2625,11 +3026,11 @@
     :bigospacenums
      (vx/test/testcoveragenums
       :tests 1
-      :total 167)
+      :total 170)
     :bigotimenums
      (vx/test/testcoveragenums
       :tests 1
-      :total 167)
+      :total 170)
     :constnums
      (vx/test/testcoveragenums
       :pct 13
@@ -2638,26 +3039,88 @@
     :docnums
      (vx/test/testcoveragenums
       :pct 91
-      :tests 236
-      :total 258)
+      :tests 239
+      :total 261)
     :funcnums
      (vx/test/testcoveragenums
       :pct 55
-      :tests 75
-      :total 136)
+      :tests 77
+      :total 139)
     :testpkg "vx/core"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 37
-      :tests 84
-      :total 227)
+      :pct 38
+      :tests 89
+      :total 230)
     :typenums
      (vx/test/testcoveragenums
-      :pct 9
-      :tests 7
+      :pct 13
+      :tests 10
       :total 76))
   :passfail true
-  :testpkg "vx/core")
+  :testpkg "vx/core"
+  :msgblock
+   (msgblock
+    :msgblocks
+     (msgblocklist
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :text "Err")))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :text "Err")))))
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :text "Err")))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :text "Err")))))))
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :text "Err")))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :text "Err")))))
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :text "Err")))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :text "Err"))))))))))
  (vx/test/testpackage
   :coveragedetail
    (vx/test/testcoveragedetail
@@ -4982,22 +5445,13 @@ ab
         :text \"a\"
         :startpos 2
         :endpos 2))
-     (msgblock
-      (msg
-       :code \"closedelimmissing\"
-       :detail
-        (delim
-         :name \"delimclose\"
-         :starttext \">\")
-       :severity 2))))
-  (msgblock
-   (msg
-    :code \"closedelimmissing\"
-    :detail
-     (delim
-      :name \"delimclose\"
-      :starttext \">\")
-    :severity 2)))
+     (msg
+      :code \"closedelimmissing\"
+      :detail
+       (delim
+        :name \"delimclose\"
+        :starttext \">\")
+      :severity msg-error))))
  (textblock-delimnotfound
   (textblock
    :text \"a\"
@@ -5049,7 +5503,28 @@ ab
                  (vx/data/textblock/textblock
                   :text "a"
                   :startpos 2
-                  :endpos 2)))))
+                  :endpos 2))
+               :msgblock
+                (msgblock
+                 :msgs
+                  (msglist
+                   (msg
+                    :code "closedelimmissing"
+                    :severity msg-error))))
+              :msgblock
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code "closedelimmissing"
+                   :severity msg-error))))
+            :msgblock
+             (msgblock
+              :msgs
+               (msglist
+                (msg
+                 :code "closedelimmissing"
+                 :severity msg-error))))
           :actual
            (vx/data/textblock/textblock
             :text "<a"
@@ -5072,7 +5547,96 @@ ab
                  (vx/data/textblock/textblock
                   :text "a"
                   :startpos 2
-                  :endpos 2)))))))
+                  :endpos 2))
+               :msgblock
+                (msgblock
+                 :msgs
+                  (msglist
+                   (msg
+                    :code "closedelimmissing"
+                    :severity msg-error))))
+              :msgblock
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code "closedelimmissing"
+                   :severity msg-error))))
+            :msgblock
+             (msgblock
+              :msgs
+               (msglist
+                (msg
+                 :code "closedelimmissing"
+                 :severity msg-error))))
+          :msgblock
+           (msgblock
+            :msgblocks
+             (msgblocklist
+              (msgblock
+               :msgs
+                (msglist
+                 (msg
+                  :code "closedelimmissing"
+                  :severity msg-error)))
+              (msgblock
+               :msgs
+                (msglist
+                 (msg
+                  :code "closedelimmissing"
+                  :severity msg-error))))))
+        :msgblock
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgblocks
+                 (msgblocklist
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :code "closedelimmissing"
+                      :severity msg-error)))
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :code "closedelimmissing"
+                      :severity msg-error)))))
+               (msgblock
+                :msgblocks
+                 (msgblocklist
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :code "closedelimmissing"
+                      :severity msg-error)))
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :code "closedelimmissing"
+                      :severity msg-error)))))))
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code "closedelimmissing"
+                   :severity msg-error)))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code "closedelimmissing"
+                   :severity msg-error))))))))
        (vx/test/testdescribe
         :describename
          "(test
@@ -6041,7 +6605,41 @@ ab
                  :delim
                   (vx/data/textblock/delim
                    :name "delimcomma"
-                   :starttext ",")))))))))
+                   :starttext ","))))))))
+     :msgblock
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))))
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error))))))))
     (vx/test/testcase
      :passfail true
      :testpkg "vx/data/textblock"
@@ -6368,22 +6966,13 @@ ab
         :text \"a\"
         :startpos 2
         :endpos 2))
-     (msgblock
-      (msg
-       :code \"closedelimmissing\"
-       :detail
-        (delim
-         :name \"delimclose\"
-         :starttext \">\")
-       :severity 2))))
-  (msgblock
-   (msg
-    :code \"closedelimmissing\"
-    :detail
-     (delim
-      :name \"delimclose\"
-      :starttext \">\")
-    :severity 2)))
+     (msg
+      :code \"closedelimmissing\"
+      :detail
+       (delim
+        :name \"delimclose\"
+        :starttext \">\")
+      :severity msg-error))))
  (textblock-parse-one
   (textblock
    :text \"a\"
@@ -6435,7 +7024,28 @@ ab
                  (vx/data/textblock/textblock
                   :text "a"
                   :startpos 2
-                  :endpos 2)))))
+                  :endpos 2))
+               :msgblock
+                (msgblock
+                 :msgs
+                  (msglist
+                   (msg
+                    :code "closedelimmissing"
+                    :severity msg-error))))
+              :msgblock
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code "closedelimmissing"
+                   :severity msg-error))))
+            :msgblock
+             (msgblock
+              :msgs
+               (msglist
+                (msg
+                 :code "closedelimmissing"
+                 :severity msg-error))))
           :actual
            (vx/data/textblock/textblock
             :text "<a"
@@ -6458,7 +7068,96 @@ ab
                  (vx/data/textblock/textblock
                   :text "a"
                   :startpos 2
-                  :endpos 2)))))))
+                  :endpos 2))
+               :msgblock
+                (msgblock
+                 :msgs
+                  (msglist
+                   (msg
+                    :code "closedelimmissing"
+                    :severity msg-error))))
+              :msgblock
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code "closedelimmissing"
+                   :severity msg-error))))
+            :msgblock
+             (msgblock
+              :msgs
+               (msglist
+                (msg
+                 :code "closedelimmissing"
+                 :severity msg-error))))
+          :msgblock
+           (msgblock
+            :msgblocks
+             (msgblocklist
+              (msgblock
+               :msgs
+                (msglist
+                 (msg
+                  :code "closedelimmissing"
+                  :severity msg-error)))
+              (msgblock
+               :msgs
+                (msglist
+                 (msg
+                  :code "closedelimmissing"
+                  :severity msg-error))))))
+        :msgblock
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgblocks
+                 (msgblocklist
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :code "closedelimmissing"
+                      :severity msg-error)))
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :code "closedelimmissing"
+                      :severity msg-error)))))
+               (msgblock
+                :msgblocks
+                 (msgblocklist
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :code "closedelimmissing"
+                      :severity msg-error)))
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :code "closedelimmissing"
+                      :severity msg-error)))))))
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code "closedelimmissing"
+                   :severity msg-error)))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code "closedelimmissing"
+                   :severity msg-error))))))))
        (vx/test/testdescribe
         :describename
          "(test
@@ -12004,7 +12703,41 @@ ab
                     (vx/data/textblock/textblock
                      :text "d"
                      :startpos 11
-                     :endpos 11)))))))))))
+                     :endpos 11))))))))))
+     :msgblock
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))))
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error))))))))
     (vx/test/testcase
      :passfail true
      :testpkg "vx/data/textblock"
@@ -14093,7 +14826,77 @@ ab
       :tests 1
       :total 4))
   :passfail true
-  :testpkg "vx/data/textblock")
+  :testpkg "vx/data/textblock"
+  :msgblock
+   (msgblock
+    :msgblocks
+     (msgblocklist
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))))
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))))))
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))))
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error)))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity msg-error))))))))))
  (vx/test/testpackage
   :caselist
    (vx/test/testcaselist
@@ -14298,7 +15101,127 @@ ab
         :testresult
          (vx/test/testresult
           :code ":eq"
-          :passfail true))))
+          :passfail true
+          :expected
+           (vx/repl/repl
+            :msgblock
+             (msgblock
+              :msgs
+               (msglist
+                (msg
+                 :severity msg-error
+                 :text "Empty delim cannot have more than one child."))))
+          :actual
+           (vx/repl/repl
+            :msgblock
+             (msgblock
+              :msgs
+               (msglist
+                (msg
+                 :severity msg-error
+                 :text "Empty delim cannot have more than one child."))))
+          :msgblock
+           (msgblock
+            :msgblocks
+             (msgblocklist
+              (msgblock
+               :msgs
+                (msglist
+                 (msg
+                  :severity msg-error
+                  :text "Empty delim cannot have more than one child.")))
+              (msgblock
+               :msgs
+                (msglist
+                 (msg
+                  :severity msg-error
+                  :text "Empty delim cannot have more than one child."))))))
+        :msgblock
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgblocks
+                 (msgblocklist
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :severity msg-error
+                      :text "Empty delim cannot have more than one child.")))
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :severity msg-error
+                      :text "Empty delim cannot have more than one child.")))))
+               (msgblock
+                :msgblocks
+                 (msgblocklist
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :severity msg-error
+                      :text "Empty delim cannot have more than one child.")))
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :severity msg-error
+                      :text "Empty delim cannot have more than one child.")))))))
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :severity msg-error
+                   :text "Empty delim cannot have more than one child.")))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :severity msg-error
+                   :text "Empty delim cannot have more than one child.")))))))))
+     :msgblock
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :severity msg-error
+                :text "Empty delim cannot have more than one child.")))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :severity msg-error
+                :text "Empty delim cannot have more than one child.")))))
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :severity msg-error
+                :text "Empty delim cannot have more than one child.")))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :severity msg-error
+                :text "Empty delim cannot have more than one child."))))))))
     (vx/test/testcase
      :passfail true
      :testpkg "vx/repl"
@@ -15283,7 +16206,41 @@ ab
      (vx/test/testcoveragenums
       :total 4))
   :passfail true
-  :testpkg "vx/repl")
+  :testpkg "vx/repl"
+  :msgblock
+   (msgblock
+    :msgblocks
+     (msgblocklist
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgs
+           (msglist
+            (msg
+             :severity msg-error
+             :text "Empty delim cannot have more than one child.")))
+         (msgblock
+          :msgs
+           (msglist
+            (msg
+             :severity msg-error
+             :text "Empty delim cannot have more than one child.")))))
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgs
+           (msglist
+            (msg
+             :severity msg-error
+             :text "Empty delim cannot have more than one child.")))
+         (msgblock
+          :msgs
+           (msglist
+            (msg
+             :severity msg-error
+             :text "Empty delim cannot have more than one child."))))))))
  (vx/test/testpackage
   :caselist
    (vx/test/testcaselist
@@ -16317,7 +17274,7 @@ ab
      :endpos 0
      :line 0
      :column 0)
-   :severity 2))
+   :severity msg-error))
  (xml-close<-xml-textblock
   (xml
    :tag \"doc\")
@@ -16330,10 +17287,92 @@ ab
           :passfail true
           :expected
            (vx/data/xml/xml
-            :tag "doc")
+            :tag "doc"
+            :msgblock
+             (msgblock
+              :msgs
+               (msglist
+                (msg
+                 :code ":invalidxmlclosetag"
+                 :severity msg-error))))
           :actual
            (vx/data/xml/xml
-            :tag "doc")))
+            :tag "doc"
+            :msgblock
+             (msgblock
+              :msgs
+               (msglist
+                (msg
+                 :code ":invalidxmlclosetag"
+                 :severity msg-error))))
+          :msgblock
+           (msgblock
+            :msgblocks
+             (msgblocklist
+              (msgblock
+               :msgs
+                (msglist
+                 (msg
+                  :code ":invalidxmlclosetag"
+                  :severity msg-error)))
+              (msgblock
+               :msgs
+                (msglist
+                 (msg
+                  :code ":invalidxmlclosetag"
+                  :severity msg-error))))))
+        :msgblock
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgblocks
+                 (msgblocklist
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :code ":invalidxmlclosetag"
+                      :severity msg-error)))
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :code ":invalidxmlclosetag"
+                      :severity msg-error)))))
+               (msgblock
+                :msgblocks
+                 (msgblocklist
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :code ":invalidxmlclosetag"
+                      :severity msg-error)))
+                  (msgblock
+                   :msgs
+                    (msglist
+                     (msg
+                      :code ":invalidxmlclosetag"
+                      :severity msg-error)))))))
+            (msgblock
+             :msgblocks
+              (msgblocklist
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code ":invalidxmlclosetag"
+                   :severity msg-error)))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code ":invalidxmlclosetag"
+                   :severity msg-error))))))))
        (vx/test/testdescribe
         :describename
          "(test
@@ -16369,7 +17408,41 @@ ab
             :children
              (vx/data/xml/xmllist
               (vx/data/xml/xml
-               :tag "doc")))))))
+               :tag "doc"))))))
+     :msgblock
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code ":invalidxmlclosetag"
+                :severity msg-error)))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code ":invalidxmlclosetag"
+                :severity msg-error)))))
+         (msgblock
+          :msgblocks
+           (msgblocklist
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code ":invalidxmlclosetag"
+                :severity msg-error)))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code ":invalidxmlclosetag"
+                :severity msg-error))))))))
     (vx/test/testcase
      :passfail true
      :testpkg "vx/data/xml"
@@ -17438,7 +18511,41 @@ ab
      (vx/test/testcoveragenums
       :total 3))
   :passfail true
-  :testpkg "vx/data/xml")
+  :testpkg "vx/data/xml"
+  :msgblock
+   (msgblock
+    :msgblocks
+     (msgblocklist
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgs
+           (msglist
+            (msg
+             :code ":invalidxmlclosetag"
+             :severity msg-error)))
+         (msgblock
+          :msgs
+           (msglist
+            (msg
+             :code ":invalidxmlclosetag"
+             :severity msg-error)))))
+      (msgblock
+       :msgblocks
+        (msgblocklist
+         (msgblock
+          :msgs
+           (msglist
+            (msg
+             :code ":invalidxmlclosetag"
+             :severity msg-error)))
+         (msgblock
+          :msgs
+           (msglist
+            (msg
+             :code ":invalidxmlclosetag"
+             :severity msg-error))))))))
  (vx/test/testpackage
   :caselist
    (vx/test/testcaselist

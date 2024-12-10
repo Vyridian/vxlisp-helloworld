@@ -29,7 +29,7 @@ public static class Db {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
       if (false) {
-      } else if ((skey==":dbid")) {
+      } else if ((skey == ":dbid")) {
         output = this.dbid();
       }
       return output;
@@ -101,7 +101,7 @@ public static class Db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbid")) {
+          } else if ((key == ":dbid")) {
             if (valsub == vx_p_dbid) {
             } else if (valsub is Vx.Core.Type_string valdbid) {
               ischanged = true;
@@ -248,15 +248,15 @@ public static class Db {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
       if (false) {
-      } else if ((skey==":dbcellid")) {
+      } else if ((skey == ":dbcellid")) {
         output = this.dbcellid();
-      } else if ((skey==":dbcellmap")) {
+      } else if ((skey == ":dbcellmap")) {
         output = this.dbcellmap();
-      } else if ((skey==":dbfieldmap")) {
+      } else if ((skey == ":dbfieldmap")) {
         output = this.dbfieldmap();
-      } else if ((skey==":dbparent")) {
+      } else if ((skey == ":dbparent")) {
         output = this.dbparent();
-      } else if ((skey==":dbtable")) {
+      } else if ((skey == ":dbtable")) {
         output = this.dbtable();
       }
       return output;
@@ -340,7 +340,7 @@ public static class Db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbcellid")) {
+          } else if ((key == ":dbcellid")) {
             if (valsub == vx_p_dbcellid) {
             } else if (valsub is Vx.Core.Type_string valdbcellid) {
               ischanged = true;
@@ -362,7 +362,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":dbcellmap")) {
+          } else if ((key == ":dbcellmap")) {
             if (valsub == vx_p_dbcellmap) {
             } else if (valsub is Vx.Data.Db.Type_dbcellmap valdbcellmap) {
               ischanged = true;
@@ -381,7 +381,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":dbfieldmap")) {
+          } else if ((key == ":dbfieldmap")) {
             if (valsub == vx_p_dbfieldmap) {
             } else if (valsub is Vx.Data.Db.Type_dbfieldmap valdbfieldmap) {
               ischanged = true;
@@ -400,7 +400,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":dbparent")) {
+          } else if ((key == ":dbparent")) {
             if (valsub == vx_p_dbparent) {
             } else if (valsub is Vx.Data.Db.Type_dbcell valdbparent) {
               ischanged = true;
@@ -419,7 +419,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":dbtable")) {
+          } else if ((key == ":dbtable")) {
             if (valsub == vx_p_dbtable) {
             } else if (valsub is Vx.Data.Db.Type_dbtable valdbtable) {
               ischanged = true;
@@ -737,11 +737,11 @@ public static class Db {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
       if (false) {
-      } else if ((skey==":dbfieldid")) {
+      } else if ((skey == ":dbfieldid")) {
         output = this.dbfieldid();
-      } else if ((skey==":type")) {
+      } else if ((skey == ":type")) {
         output = this.type();
-      } else if ((skey==":value")) {
+      } else if ((skey == ":value")) {
         output = this.value();
       }
       return output;
@@ -819,7 +819,7 @@ public static class Db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbfieldid")) {
+          } else if ((key == ":dbfieldid")) {
             if (valsub == vx_p_dbfieldid) {
             } else if (valsub is Vx.Core.Type_string valdbfieldid) {
               ischanged = true;
@@ -841,7 +841,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":type")) {
+          } else if ((key == ":type")) {
             if (valsub == vx_p_type) {
             } else if (valsub is Vx.Core.Type_any valtype) {
               ischanged = true;
@@ -860,7 +860,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":value")) {
+          } else if ((key == ":value")) {
             if (valsub == vx_p_value) {
             } else if (valsub is Vx.Core.Type_any valvalue) {
               ischanged = true;
@@ -1229,9 +1229,9 @@ public static class Db {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
       if (false) {
-      } else if ((skey==":fromid")) {
+      } else if ((skey == ":fromid")) {
         output = this.fromid();
-      } else if ((skey==":toid")) {
+      } else if ((skey == ":toid")) {
         output = this.toid();
       }
       return output;
@@ -1306,7 +1306,7 @@ public static class Db {
           }
         } else {
           if (false) {
-          } else if ((key==":fromid")) {
+          } else if ((key == ":fromid")) {
             if (valsub == vx_p_fromid) {
             } else if (valsub is Vx.Data.Db.Type_dbid valfromid) {
               ischanged = true;
@@ -1325,7 +1325,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dblink", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":toid")) {
+          } else if ((key == ":toid")) {
             if (valsub == vx_p_toid) {
             } else if (valsub is Vx.Data.Db.Type_dbid valtoid) {
               ischanged = true;
@@ -1467,8 +1467,9 @@ public static class Db {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Data.Db.Type_dblink) {
+          Vx.Data.Db.Type_dblink subitem = (Vx.Data.Db.Type_dblink)valsub;
           ischanged = true;
-          listval.Add((Vx.Data.Db.Type_dblink)valsub);
+          listval.Add(subitem);
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -1566,9 +1567,9 @@ public static class Db {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
       if (false) {
-      } else if ((skey==":dbid")) {
+      } else if ((skey == ":dbid")) {
         output = this.dbid();
-      } else if ((skey==":links")) {
+      } else if ((skey == ":links")) {
         output = this.links();
       }
       return output;
@@ -1643,7 +1644,7 @@ public static class Db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbid")) {
+          } else if ((key == ":dbid")) {
             if (valsub == vx_p_dbid) {
             } else if (valsub is Vx.Data.Db.Type_dbid valdbid) {
               ischanged = true;
@@ -1662,7 +1663,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbnode", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":links")) {
+          } else if ((key == ":links")) {
             if (valsub == vx_p_links) {
             } else if (valsub is Vx.Data.Db.Type_dblinklist vallinks) {
               ischanged = true;
@@ -1807,15 +1808,15 @@ public static class Db {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
       if (false) {
-      } else if ((skey==":dbid")) {
+      } else if ((skey == ":dbid")) {
         output = this.dbid();
-      } else if ((skey==":valid")) {
+      } else if ((skey == ":valid")) {
         output = this.valid();
-      } else if ((skey==":noteid")) {
+      } else if ((skey == ":noteid")) {
         output = this.noteid();
-      } else if ((skey==":valueid")) {
+      } else if ((skey == ":valueid")) {
         output = this.valueid();
-      } else if ((skey==":value")) {
+      } else if ((skey == ":value")) {
         output = this.value();
       }
       return output;
@@ -1899,7 +1900,7 @@ public static class Db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbid")) {
+          } else if ((key == ":dbid")) {
             if (valsub == vx_p_dbid) {
             } else if (valsub is Vx.Data.Db.Type_dbid valdbid) {
               ischanged = true;
@@ -1918,7 +1919,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":valid")) {
+          } else if ((key == ":valid")) {
             if (valsub == vx_p_valid) {
             } else if (valsub is Vx.Data.Db.Type_dbid valvalid) {
               ischanged = true;
@@ -1937,7 +1938,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":noteid")) {
+          } else if ((key == ":noteid")) {
             if (valsub == vx_p_noteid) {
             } else if (valsub is Vx.Data.Db.Type_dbid valnoteid) {
               ischanged = true;
@@ -1956,7 +1957,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":valueid")) {
+          } else if ((key == ":valueid")) {
             if (valsub == vx_p_valueid) {
             } else if (valsub is Vx.Data.Db.Type_dbid valvalueid) {
               ischanged = true;
@@ -1975,7 +1976,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":value")) {
+          } else if ((key == ":value")) {
             if (valsub == vx_p_value) {
             } else if (valsub is Vx.Core.Type_string valvalue) {
               ischanged = true;
@@ -2114,13 +2115,13 @@ public static class Db {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
       if (false) {
-      } else if ((skey==":dbtableid")) {
+      } else if ((skey == ":dbtableid")) {
         output = this.dbtableid();
-      } else if ((skey==":db")) {
+      } else if ((skey == ":db")) {
         output = this.db();
-      } else if ((skey==":dbcellmap")) {
+      } else if ((skey == ":dbcellmap")) {
         output = this.dbcellmap();
-      } else if ((skey==":dbfieldmap")) {
+      } else if ((skey == ":dbfieldmap")) {
         output = this.dbfieldmap();
       }
       return output;
@@ -2201,7 +2202,7 @@ public static class Db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbtableid")) {
+          } else if ((key == ":dbtableid")) {
             if (valsub == vx_p_dbtableid) {
             } else if (valsub is Vx.Core.Type_string valdbtableid) {
               ischanged = true;
@@ -2223,7 +2224,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":db")) {
+          } else if ((key == ":db")) {
             if (valsub == vx_p_db) {
             } else if (valsub is Vx.Data.Db.Type_db valdb) {
               ischanged = true;
@@ -2242,7 +2243,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":dbcellmap")) {
+          } else if ((key == ":dbcellmap")) {
             if (valsub == vx_p_dbcellmap) {
             } else if (valsub is Vx.Data.Db.Type_dbcellmap valdbcellmap) {
               ischanged = true;
@@ -2261,7 +2262,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":dbfieldmap")) {
+          } else if ((key == ":dbfieldmap")) {
             if (valsub == vx_p_dbfieldmap) {
             } else if (valsub is Vx.Data.Db.Type_dbfieldmap valdbfieldmap) {
               ischanged = true;
@@ -2420,17 +2421,17 @@ public static class Db {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
       if (false) {
-      } else if ((skey==":dbid")) {
+      } else if ((skey == ":dbid")) {
         output = this.dbid();
-      } else if ((skey==":fromid")) {
+      } else if ((skey == ":fromid")) {
         output = this.fromid();
-      } else if ((skey==":toid")) {
+      } else if ((skey == ":toid")) {
         output = this.toid();
-      } else if ((skey==":noteid")) {
+      } else if ((skey == ":noteid")) {
         output = this.noteid();
-      } else if ((skey==":valid")) {
+      } else if ((skey == ":valid")) {
         output = this.valid();
-      } else if ((skey==":valtext")) {
+      } else if ((skey == ":valtext")) {
         output = this.valtext();
       }
       return output;
@@ -2517,7 +2518,7 @@ public static class Db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbid")) {
+          } else if ((key == ":dbid")) {
             if (valsub == vx_p_dbid) {
             } else if (valsub is Vx.Data.Db.Type_dbid valdbid) {
               ischanged = true;
@@ -2536,7 +2537,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":fromid")) {
+          } else if ((key == ":fromid")) {
             if (valsub == vx_p_fromid) {
             } else if (valsub is Vx.Data.Db.Type_dbid valfromid) {
               ischanged = true;
@@ -2555,7 +2556,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":toid")) {
+          } else if ((key == ":toid")) {
             if (valsub == vx_p_toid) {
             } else if (valsub is Vx.Data.Db.Type_dbid valtoid) {
               ischanged = true;
@@ -2574,7 +2575,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":noteid")) {
+          } else if ((key == ":noteid")) {
             if (valsub == vx_p_noteid) {
             } else if (valsub is Vx.Data.Db.Type_dbid valnoteid) {
               ischanged = true;
@@ -2593,7 +2594,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":valid")) {
+          } else if ((key == ":valid")) {
             if (valsub == vx_p_valid) {
             } else if (valsub is Vx.Data.Db.Type_dbid valvalid) {
               ischanged = true;
@@ -2612,7 +2613,7 @@ public static class Db {
               msg = Vx.Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":valtext")) {
+          } else if ((key == ":valtext")) {
             if (valsub == vx_p_valtext) {
             } else if (valsub is Vx.Core.Type_string valvaltext) {
               ischanged = true;

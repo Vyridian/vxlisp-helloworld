@@ -66,9 +66,13 @@ namespace mydomain_mypackage {
     }
 
     // vx_get_any(key)
-    vx_core::Type_any Class_mycontext::vx_get_any(vx_core::Type_string key) const {
+    vx_core::Type_any Class_mycontext::vx_get_any(
+      vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
+      if (!vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = ":" + skey;
+      }
       if (false) {
       } else if (skey == ":code") {
         output = this->code();
@@ -103,13 +107,17 @@ namespace mydomain_mypackage {
       if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
-      mydomain_mypackage::Type_mycontext val = vx_core::vx_any_from_any(mydomain_mypackage::t_mycontext, copyval);
-      output = val;
-      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
-      vx_core::Type_string vx_p_code = val->code();
-      vx_core::Type_session vx_p_session = val->session();
-      vx_core::Type_setting vx_p_setting = val->setting();
-      vx_core::Type_state vx_p_state = val->state();
+      mydomain_mypackage::Type_mycontext value = vx_core::vx_any_from_any(
+        mydomain_mypackage::t_mycontext, copyval
+      );
+      output = value;
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(
+        value->vx_msgblock(), vals
+      );
+      vx_core::Type_string vx_p_code = value->code();
+      vx_core::Type_session vx_p_session = value->session();
+      vx_core::Type_setting vx_p_setting = value->setting();
+      vx_core::Type_state vx_p_state = value->state();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -142,7 +150,9 @@ namespace mydomain_mypackage {
             if (vx_p_code == valsub) {
             } else if (valsubtype == vx_core::t_string) {
               ischanged = true;
-              vx_p_code = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+              vx_p_code = vx_core::vx_any_from_any(
+                vx_core::t_string, valsub
+              );
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new mycontext :code " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -151,7 +161,9 @@ namespace mydomain_mypackage {
             if (vx_p_session == valsub) {
             } else if (valsubtype == vx_core::t_session) {
               ischanged = true;
-              vx_p_session = vx_core::vx_any_from_any(vx_core::t_session, valsub);
+              vx_p_session = vx_core::vx_any_from_any(
+                vx_core::t_session, valsub
+              );
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new mycontext :session " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -160,7 +172,9 @@ namespace mydomain_mypackage {
             if (vx_p_setting == valsub) {
             } else if (valsubtype == vx_core::t_setting) {
               ischanged = true;
-              vx_p_setting = vx_core::vx_any_from_any(vx_core::t_setting, valsub);
+              vx_p_setting = vx_core::vx_any_from_any(
+                vx_core::t_setting, valsub
+              );
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new mycontext :setting " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -169,7 +183,9 @@ namespace mydomain_mypackage {
             if (vx_p_state == valsub) {
             } else if (valsubtype == vx_core::t_state) {
               ischanged = true;
-              vx_p_state = vx_core::vx_any_from_any(vx_core::t_state, valsub);
+              vx_p_state = vx_core::vx_any_from_any(
+                vx_core::t_state, valsub
+              );
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new mycontext :state " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -187,42 +203,51 @@ namespace mydomain_mypackage {
           if (output->vx_p_code) {
             vx_core::vx_release_one(output->vx_p_code);
           }
-          output->vx_p_code = vx_p_code;
           vx_core::vx_reserve(vx_p_code);
+          output->vx_p_code = vx_p_code;
         }
         if (output->vx_p_session != vx_p_session) {
           if (output->vx_p_session) {
             vx_core::vx_release_one(output->vx_p_session);
           }
-          output->vx_p_session = vx_p_session;
           vx_core::vx_reserve(vx_p_session);
+          output->vx_p_session = vx_p_session;
         }
         if (output->vx_p_setting != vx_p_setting) {
           if (output->vx_p_setting) {
             vx_core::vx_release_one(output->vx_p_setting);
           }
-          output->vx_p_setting = vx_p_setting;
           vx_core::vx_reserve(vx_p_setting);
+          output->vx_p_setting = vx_p_setting;
         }
         if (output->vx_p_state != vx_p_state) {
           if (output->vx_p_state) {
             vx_core::vx_release_one(output->vx_p_state);
           }
-          output->vx_p_state = vx_p_state;
           vx_core::vx_reserve(vx_p_state);
+          output->vx_p_state = vx_p_state;
         }
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+        if (msgblock != vx_core::e_msgblock) {
+          vx_core::vx_reserve(msgblock);
+          output->vx_p_msgblock = msgblock;
+        }
       }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
     }
 
-    vx_core::Type_msgblock Class_mycontext::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany mydomain_mypackage::Class_mycontext::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_msgblock Class_mycontext::vx_msgblock() const {
+      vx_core::Type_msgblock output = this->vx_p_msgblock;
+      if (!output) {
+        output = vx_core::e_msgblock;
+      }
+      return output;
+    }
+
+    vx_core::vx_Type_listany mydomain_mypackage::Class_mycontext::vx_dispose() {
+      return vx_core::emptylistany;
+    }
     vx_core::Type_any Class_mycontext::vx_empty() const {return mydomain_mypackage::e_mycontext;}
     vx_core::Type_any Class_mycontext::vx_type() const {return mydomain_mypackage::t_mycontext;}
 
@@ -336,7 +361,11 @@ namespace mydomain_mypackage {
     }
 
     vx_core::Type_msgblock Class_context_main::vx_msgblock() const {
-      return this->vx_p_msgblock;
+      vx_core::Type_msgblock output = this->vx_p_msgblock;
+      if (!output) {
+        output = vx_core::e_msgblock;
+      }
+      return output;
     }
 
     vx_core::vx_Type_listany Class_context_main::vx_dispose() {
@@ -452,7 +481,11 @@ namespace mydomain_mypackage {
     }
 
     vx_core::Type_msgblock Class_main_exe::vx_msgblock() const {
-      return this->vx_p_msgblock;
+      vx_core::Type_msgblock output = this->vx_p_msgblock;
+      if (!output) {
+        output = vx_core::e_msgblock;
+      }
+      return output;
     }
 
     vx_core::vx_Type_listany Class_main_exe::vx_dispose() {
@@ -569,7 +602,11 @@ namespace mydomain_mypackage {
     }
 
     vx_core::Type_msgblock Class_main_html::vx_msgblock() const {
-      return this->vx_p_msgblock;
+      vx_core::Type_msgblock output = this->vx_p_msgblock;
+      if (!output) {
+        output = vx_core::e_msgblock;
+      }
+      return output;
     }
 
     vx_core::vx_Type_listany Class_main_html::vx_dispose() {
@@ -690,7 +727,11 @@ namespace mydomain_mypackage {
     }
 
     vx_core::Type_msgblock Class_myfunc::vx_msgblock() const {
-      return this->vx_p_msgblock;
+      vx_core::Type_msgblock output = this->vx_p_msgblock;
+      if (!output) {
+        output = vx_core::e_msgblock;
+      }
+      return output;
     }
 
     vx_core::vx_Type_listany Class_myfunc::vx_dispose() {
@@ -801,7 +842,11 @@ namespace mydomain_mypackage {
     }
 
     vx_core::Type_msgblock Class_p_from_text::vx_msgblock() const {
-      return this->vx_p_msgblock;
+      vx_core::Type_msgblock output = this->vx_p_msgblock;
+      if (!output) {
+        output = vx_core::e_msgblock;
+      }
+      return output;
     }
 
     vx_core::vx_Type_listany Class_p_from_text::vx_dispose() {
@@ -926,7 +971,11 @@ namespace mydomain_mypackage {
     }
 
     vx_core::Type_msgblock Class_string_html_from_text::vx_msgblock() const {
-      return this->vx_p_msgblock;
+      vx_core::Type_msgblock output = this->vx_p_msgblock;
+      if (!output) {
+        output = vx_core::e_msgblock;
+      }
+      return output;
     }
 
     vx_core::vx_Type_listany Class_string_html_from_text::vx_dispose() {
@@ -1053,7 +1102,11 @@ namespace mydomain_mypackage {
     }
 
     vx_core::Type_msgblock Class_string_render_from_text::vx_msgblock() const {
-      return this->vx_p_msgblock;
+      vx_core::Type_msgblock output = this->vx_p_msgblock;
+      if (!output) {
+        output = vx_core::e_msgblock;
+      }
+      return output;
     }
 
     vx_core::vx_Type_listany Class_string_render_from_text::vx_dispose() {

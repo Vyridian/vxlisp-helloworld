@@ -5,6 +5,11 @@ import com.vxlisp.vx.*
 object vx_data_db {
 
 
+  /**
+   * type: db
+   * Database trait
+   * (type db)
+   */
   interface Type_db : vx_core.Type_struct {
     fun dbid() : vx_core.Type_string
   }
@@ -27,7 +32,7 @@ object vx_data_db {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":dbid")) {
+      } else if ((skey == ":dbid")) {
         output = this.dbid()
       }
       return output
@@ -102,7 +107,7 @@ object vx_data_db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbid")) {
+          } else if ((key == ":dbid")) {
             if (valsub == vx_p_dbid) {
             } else if (valsub is vx_core.Type_string) {
               var valdbid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -177,6 +182,11 @@ object vx_data_db {
   val e_db : vx_data_db.Type_db = vx_data_db.Class_db()
   val t_db : vx_data_db.Type_db = vx_data_db.Class_db()
 
+  /**
+   * type: dbcell
+   * Database Cell trait
+   * (type dbcell)
+   */
   interface Type_dbcell : vx_core.Type_struct {
     fun dbcellid() : vx_core.Type_string
     fun dbcellmap() : vx_data_db.Type_dbcellmap
@@ -247,15 +257,15 @@ object vx_data_db {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":dbcellid")) {
+      } else if ((skey == ":dbcellid")) {
         output = this.dbcellid()
-      } else if ((skey==":dbcellmap")) {
+      } else if ((skey == ":dbcellmap")) {
         output = this.dbcellmap()
-      } else if ((skey==":dbfieldmap")) {
+      } else if ((skey == ":dbfieldmap")) {
         output = this.dbfieldmap()
-      } else if ((skey==":dbparent")) {
+      } else if ((skey == ":dbparent")) {
         output = this.dbparent()
-      } else if ((skey==":dbtable")) {
+      } else if ((skey == ":dbtable")) {
         output = this.dbtable()
       }
       return output
@@ -342,7 +352,7 @@ object vx_data_db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbcellid")) {
+          } else if ((key == ":dbcellid")) {
             if (valsub == vx_p_dbcellid) {
             } else if (valsub is vx_core.Type_string) {
               var valdbcellid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -366,7 +376,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":dbcellmap")) {
+          } else if ((key == ":dbcellmap")) {
             if (valsub == vx_p_dbcellmap) {
             } else if (valsub is vx_data_db.Type_dbcellmap) {
               var valdbcellmap : vx_data_db.Type_dbcellmap = valsub as vx_data_db.Type_dbcellmap
@@ -387,7 +397,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":dbfieldmap")) {
+          } else if ((key == ":dbfieldmap")) {
             if (valsub == vx_p_dbfieldmap) {
             } else if (valsub is vx_data_db.Type_dbfieldmap) {
               var valdbfieldmap : vx_data_db.Type_dbfieldmap = valsub as vx_data_db.Type_dbfieldmap
@@ -408,7 +418,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":dbparent")) {
+          } else if ((key == ":dbparent")) {
             if (valsub == vx_p_dbparent) {
             } else if (valsub is vx_data_db.Type_dbcell) {
               var valdbparent : vx_data_db.Type_dbcell = valsub as vx_data_db.Type_dbcell
@@ -429,7 +439,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":dbtable")) {
+          } else if ((key == ":dbtable")) {
             if (valsub == vx_p_dbtable) {
             } else if (valsub is vx_data_db.Type_dbtable) {
               var valdbtable : vx_data_db.Type_dbtable = valsub as vx_data_db.Type_dbtable
@@ -505,6 +515,11 @@ object vx_data_db {
   val e_dbcell : vx_data_db.Type_dbcell = vx_data_db.Class_dbcell()
   val t_dbcell : vx_data_db.Type_dbcell = vx_data_db.Class_dbcell()
 
+  /**
+   * type: dbcellmap
+   * Database Cell Map
+   * (type dbcellmap)
+   */
   interface Type_dbcellmap : vx_core.Type_map {
     fun vx_mapdbcell() : Map<String, vx_data_db.Type_dbcell>
     fun vx_dbcell(key : vx_core.Type_string) : vx_data_db.Type_dbcell
@@ -701,6 +716,11 @@ object vx_data_db {
   val e_dbcellmap : vx_data_db.Type_dbcellmap = vx_data_db.Class_dbcellmap()
   val t_dbcellmap : vx_data_db.Type_dbcellmap = vx_data_db.Class_dbcellmap()
 
+  /**
+   * type: dbfield
+   * Database Field trait
+   * (type dbfield)
+   */
   interface Type_dbfield : vx_core.Type_struct {
     fun dbfieldid() : vx_core.Type_string
     fun type() : vx_core.Type_any
@@ -747,11 +767,11 @@ object vx_data_db {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":dbfieldid")) {
+      } else if ((skey == ":dbfieldid")) {
         output = this.dbfieldid()
-      } else if ((skey==":type")) {
+      } else if ((skey == ":type")) {
         output = this.type()
-      } else if ((skey==":value")) {
+      } else if ((skey == ":value")) {
         output = this.value()
       }
       return output
@@ -832,7 +852,7 @@ object vx_data_db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbfieldid")) {
+          } else if ((key == ":dbfieldid")) {
             if (valsub == vx_p_dbfieldid) {
             } else if (valsub is vx_core.Type_string) {
               var valdbfieldid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -856,7 +876,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbfield", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":type")) {
+          } else if ((key == ":type")) {
             if (valsub == vx_p_type) {
             } else if (valsub is vx_core.Type_any) {
               var valtype : vx_core.Type_any = valsub as vx_core.Type_any
@@ -877,7 +897,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbfield", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":value")) {
+          } else if ((key == ":value")) {
             if (valsub == vx_p_value) {
             } else if (valsub is vx_core.Type_any) {
               var valvalue : vx_core.Type_any = valsub as vx_core.Type_any
@@ -951,6 +971,11 @@ object vx_data_db {
   val e_dbfield : vx_data_db.Type_dbfield = vx_data_db.Class_dbfield()
   val t_dbfield : vx_data_db.Type_dbfield = vx_data_db.Class_dbfield()
 
+  /**
+   * type: dbfieldmap
+   * Database Field Map
+   * (type dbfieldmap)
+   */
   interface Type_dbfieldmap : vx_core.Type_map {
     fun vx_mapdbfield() : Map<String, vx_data_db.Type_dbfield>
     fun vx_dbfield(key : vx_core.Type_string) : vx_data_db.Type_dbfield
@@ -1147,6 +1172,11 @@ object vx_data_db {
   val e_dbfieldmap : vx_data_db.Type_dbfieldmap = vx_data_db.Class_dbfieldmap()
   val t_dbfieldmap : vx_data_db.Type_dbfieldmap = vx_data_db.Class_dbfieldmap()
 
+  /**
+   * type: dbid
+   * Database id
+   * (type dbid)
+   */
   interface Type_dbid : vx_core.Type_any {
   }
 
@@ -1208,6 +1238,11 @@ object vx_data_db {
   val e_dbid : vx_data_db.Type_dbid = vx_data_db.Class_dbid()
   val t_dbid : vx_data_db.Type_dbid = vx_data_db.Class_dbid()
 
+  /**
+   * type: dblink
+   * Database link
+   * (type dblink)
+   */
   interface Type_dblink : vx_core.Type_struct {
     fun fromid() : vx_data_db.Type_dbid
     fun toid() : vx_data_db.Type_dbid
@@ -1242,9 +1277,9 @@ object vx_data_db {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":fromid")) {
+      } else if ((skey == ":fromid")) {
         output = this.fromid()
-      } else if ((skey==":toid")) {
+      } else if ((skey == ":toid")) {
         output = this.toid()
       }
       return output
@@ -1322,7 +1357,7 @@ object vx_data_db {
           }
         } else {
           if (false) {
-          } else if ((key==":fromid")) {
+          } else if ((key == ":fromid")) {
             if (valsub == vx_p_fromid) {
             } else if (valsub is vx_data_db.Type_dbid) {
               var valfromid : vx_data_db.Type_dbid = valsub as vx_data_db.Type_dbid
@@ -1343,7 +1378,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dblink", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":toid")) {
+          } else if ((key == ":toid")) {
             if (valsub == vx_p_toid) {
             } else if (valsub is vx_data_db.Type_dbid) {
               var valtoid : vx_data_db.Type_dbid = valsub as vx_data_db.Type_dbid
@@ -1416,6 +1451,11 @@ object vx_data_db {
   val e_dblink : vx_data_db.Type_dblink = vx_data_db.Class_dblink()
   val t_dblink : vx_data_db.Type_dblink = vx_data_db.Class_dblink()
 
+  /**
+   * type: dblinklist
+   * Database link
+   * (type dblinklist)
+   */
   interface Type_dblinklist : vx_core.Type_list {
     fun vx_listdblink() : List<vx_data_db.Type_dblink>
     fun vx_dblink(index : vx_core.Type_int) : vx_data_db.Type_dblink
@@ -1485,8 +1525,9 @@ object vx_data_db {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_data_db.Type_dblink) {
+          var subitem : vx_data_db.Type_dblink = valsub as vx_data_db.Type_dblink
           ischanged = true
-          listval.add(valsub as vx_data_db.Type_dblink)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -1549,6 +1590,11 @@ object vx_data_db {
   val e_dblinklist : vx_data_db.Type_dblinklist = vx_data_db.Class_dblinklist()
   val t_dblinklist : vx_data_db.Type_dblinklist = vx_data_db.Class_dblinklist()
 
+  /**
+   * type: dbnode
+   * Database node
+   * (type dbnode)
+   */
   interface Type_dbnode : vx_core.Type_struct {
     fun dbid() : vx_data_db.Type_dbid
     fun links() : vx_data_db.Type_dblinklist
@@ -1583,9 +1629,9 @@ object vx_data_db {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":dbid")) {
+      } else if ((skey == ":dbid")) {
         output = this.dbid()
-      } else if ((skey==":links")) {
+      } else if ((skey == ":links")) {
         output = this.links()
       }
       return output
@@ -1663,7 +1709,7 @@ object vx_data_db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbid")) {
+          } else if ((key == ":dbid")) {
             if (valsub == vx_p_dbid) {
             } else if (valsub is vx_data_db.Type_dbid) {
               var valdbid : vx_data_db.Type_dbid = valsub as vx_data_db.Type_dbid
@@ -1684,7 +1730,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbnode", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":links")) {
+          } else if ((key == ":links")) {
             if (valsub == vx_p_links) {
             } else if (valsub is vx_data_db.Type_dblinklist) {
               var vallinks : vx_data_db.Type_dblinklist = valsub as vx_data_db.Type_dblinklist
@@ -1757,6 +1803,11 @@ object vx_data_db {
   val e_dbnode : vx_data_db.Type_dbnode = vx_data_db.Class_dbnode()
   val t_dbnode : vx_data_db.Type_dbnode = vx_data_db.Class_dbnode()
 
+  /**
+   * type: dbnote
+   * Database Value
+   * (type dbnote)
+   */
   interface Type_dbnote : vx_core.Type_struct {
     fun dbid() : vx_data_db.Type_dbid
     fun valid() : vx_data_db.Type_dbid
@@ -1827,15 +1878,15 @@ object vx_data_db {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":dbid")) {
+      } else if ((skey == ":dbid")) {
         output = this.dbid()
-      } else if ((skey==":valid")) {
+      } else if ((skey == ":valid")) {
         output = this.valid()
-      } else if ((skey==":noteid")) {
+      } else if ((skey == ":noteid")) {
         output = this.noteid()
-      } else if ((skey==":valueid")) {
+      } else if ((skey == ":valueid")) {
         output = this.valueid()
-      } else if ((skey==":value")) {
+      } else if ((skey == ":value")) {
         output = this.value()
       }
       return output
@@ -1922,7 +1973,7 @@ object vx_data_db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbid")) {
+          } else if ((key == ":dbid")) {
             if (valsub == vx_p_dbid) {
             } else if (valsub is vx_data_db.Type_dbid) {
               var valdbid : vx_data_db.Type_dbid = valsub as vx_data_db.Type_dbid
@@ -1943,7 +1994,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":valid")) {
+          } else if ((key == ":valid")) {
             if (valsub == vx_p_valid) {
             } else if (valsub is vx_data_db.Type_dbid) {
               var valvalid : vx_data_db.Type_dbid = valsub as vx_data_db.Type_dbid
@@ -1964,7 +2015,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":noteid")) {
+          } else if ((key == ":noteid")) {
             if (valsub == vx_p_noteid) {
             } else if (valsub is vx_data_db.Type_dbid) {
               var valnoteid : vx_data_db.Type_dbid = valsub as vx_data_db.Type_dbid
@@ -1985,7 +2036,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":valueid")) {
+          } else if ((key == ":valueid")) {
             if (valsub == vx_p_valueid) {
             } else if (valsub is vx_data_db.Type_dbid) {
               var valvalueid : vx_data_db.Type_dbid = valsub as vx_data_db.Type_dbid
@@ -2006,7 +2057,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":value")) {
+          } else if ((key == ":value")) {
             if (valsub == vx_p_value) {
             } else if (valsub is vx_core.Type_string) {
               var valvalue : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2085,6 +2136,11 @@ object vx_data_db {
   val e_dbnote : vx_data_db.Type_dbnote = vx_data_db.Class_dbnote()
   val t_dbnote : vx_data_db.Type_dbnote = vx_data_db.Class_dbnote()
 
+  /**
+   * type: dbtable
+   * Database Table trait
+   * (type dbtable)
+   */
   interface Type_dbtable : vx_core.Type_struct {
     fun dbtableid() : vx_core.Type_string
     fun db() : vx_data_db.Type_db
@@ -2143,13 +2199,13 @@ object vx_data_db {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":dbtableid")) {
+      } else if ((skey == ":dbtableid")) {
         output = this.dbtableid()
-      } else if ((skey==":db")) {
+      } else if ((skey == ":db")) {
         output = this.db()
-      } else if ((skey==":dbcellmap")) {
+      } else if ((skey == ":dbcellmap")) {
         output = this.dbcellmap()
-      } else if ((skey==":dbfieldmap")) {
+      } else if ((skey == ":dbfieldmap")) {
         output = this.dbfieldmap()
       }
       return output
@@ -2233,7 +2289,7 @@ object vx_data_db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbtableid")) {
+          } else if ((key == ":dbtableid")) {
             if (valsub == vx_p_dbtableid) {
             } else if (valsub is vx_core.Type_string) {
               var valdbtableid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2257,7 +2313,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":db")) {
+          } else if ((key == ":db")) {
             if (valsub == vx_p_db) {
             } else if (valsub is vx_data_db.Type_db) {
               var valdb : vx_data_db.Type_db = valsub as vx_data_db.Type_db
@@ -2278,7 +2334,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":dbcellmap")) {
+          } else if ((key == ":dbcellmap")) {
             if (valsub == vx_p_dbcellmap) {
             } else if (valsub is vx_data_db.Type_dbcellmap) {
               var valdbcellmap : vx_data_db.Type_dbcellmap = valsub as vx_data_db.Type_dbcellmap
@@ -2299,7 +2355,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":dbfieldmap")) {
+          } else if ((key == ":dbfieldmap")) {
             if (valsub == vx_p_dbfieldmap) {
             } else if (valsub is vx_data_db.Type_dbfieldmap) {
               var valdbfieldmap : vx_data_db.Type_dbfieldmap = valsub as vx_data_db.Type_dbfieldmap
@@ -2374,6 +2430,11 @@ object vx_data_db {
   val e_dbtable : vx_data_db.Type_dbtable = vx_data_db.Class_dbtable()
   val t_dbtable : vx_data_db.Type_dbtable = vx_data_db.Class_dbtable()
 
+  /**
+   * type: dbvalue
+   * Database Value
+   * (type dbvalue)
+   */
   interface Type_dbvalue : vx_core.Type_struct {
     fun dbid() : vx_data_db.Type_dbid
     fun fromid() : vx_data_db.Type_dbid
@@ -2456,17 +2517,17 @@ object vx_data_db {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":dbid")) {
+      } else if ((skey == ":dbid")) {
         output = this.dbid()
-      } else if ((skey==":fromid")) {
+      } else if ((skey == ":fromid")) {
         output = this.fromid()
-      } else if ((skey==":toid")) {
+      } else if ((skey == ":toid")) {
         output = this.toid()
-      } else if ((skey==":noteid")) {
+      } else if ((skey == ":noteid")) {
         output = this.noteid()
-      } else if ((skey==":valid")) {
+      } else if ((skey == ":valid")) {
         output = this.valid()
-      } else if ((skey==":valtext")) {
+      } else if ((skey == ":valtext")) {
         output = this.valtext()
       }
       return output
@@ -2556,7 +2617,7 @@ object vx_data_db {
           }
         } else {
           if (false) {
-          } else if ((key==":dbid")) {
+          } else if ((key == ":dbid")) {
             if (valsub == vx_p_dbid) {
             } else if (valsub is vx_data_db.Type_dbid) {
               var valdbid : vx_data_db.Type_dbid = valsub as vx_data_db.Type_dbid
@@ -2577,7 +2638,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":fromid")) {
+          } else if ((key == ":fromid")) {
             if (valsub == vx_p_fromid) {
             } else if (valsub is vx_data_db.Type_dbid) {
               var valfromid : vx_data_db.Type_dbid = valsub as vx_data_db.Type_dbid
@@ -2598,7 +2659,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":toid")) {
+          } else if ((key == ":toid")) {
             if (valsub == vx_p_toid) {
             } else if (valsub is vx_data_db.Type_dbid) {
               var valtoid : vx_data_db.Type_dbid = valsub as vx_data_db.Type_dbid
@@ -2619,7 +2680,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":noteid")) {
+          } else if ((key == ":noteid")) {
             if (valsub == vx_p_noteid) {
             } else if (valsub is vx_data_db.Type_dbid) {
               var valnoteid : vx_data_db.Type_dbid = valsub as vx_data_db.Type_dbid
@@ -2640,7 +2701,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":valid")) {
+          } else if ((key == ":valid")) {
             if (valsub == vx_p_valid) {
             } else if (valsub is vx_data_db.Type_dbid) {
               var valvalid : vx_data_db.Type_dbid = valsub as vx_data_db.Type_dbid
@@ -2661,7 +2722,7 @@ object vx_data_db {
               msg = vx_core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":valtext")) {
+          } else if ((key == ":valtext")) {
             if (valsub == vx_p_valtext) {
             } else if (valsub is vx_core.Type_string) {
               var valvaltext : vx_core.Type_string = valsub as vx_core.Type_string

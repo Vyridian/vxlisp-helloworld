@@ -61,13 +61,13 @@ public static class Mypackage {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
       if (false) {
-      } else if ((skey==":code")) {
+      } else if ((skey == ":code")) {
         output = this.code();
-      } else if ((skey==":session")) {
+      } else if ((skey == ":session")) {
         output = this.session();
-      } else if ((skey==":setting")) {
+      } else if ((skey == ":setting")) {
         output = this.setting();
-      } else if ((skey==":state")) {
+      } else if ((skey == ":state")) {
         output = this.state();
       }
       return output;
@@ -148,7 +148,7 @@ public static class Mypackage {
           }
         } else {
           if (false) {
-          } else if ((key==":code")) {
+          } else if ((key == ":code")) {
             if (valsub == vx_p_code) {
             } else if (valsub is Vx.Core.Type_string valcode) {
               ischanged = true;
@@ -170,7 +170,7 @@ public static class Mypackage {
               msg = Vx.Core.vx_msg_from_error("mydomain/mypackage/mycontext", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":session")) {
+          } else if ((key == ":session")) {
             if (valsub == vx_p_session) {
             } else if (valsub is Vx.Core.Type_session valsession) {
               ischanged = true;
@@ -189,7 +189,7 @@ public static class Mypackage {
               msg = Vx.Core.vx_msg_from_error("mydomain/mypackage/mycontext", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":setting")) {
+          } else if ((key == ":setting")) {
             if (valsub == vx_p_setting) {
             } else if (valsub is Vx.Core.Type_setting valsetting) {
               ischanged = true;
@@ -208,7 +208,7 @@ public static class Mypackage {
               msg = Vx.Core.vx_msg_from_error("mydomain/mypackage/mycontext", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-          } else if ((key==":state")) {
+          } else if ((key == ":state")) {
             if (valsub == vx_p_state) {
             } else if (valsub is Vx.Core.Type_state valstate) {
               ischanged = true;

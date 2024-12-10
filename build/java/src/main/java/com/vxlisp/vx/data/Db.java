@@ -1594,8 +1594,9 @@ public final class Db {
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Db.Type_dblink) {
+          Db.Type_dblink subitem = (Db.Type_dblink)valsub;
           ischanged = true;
-          listval.add((Db.Type_dblink)valsub);
+          listval.add(subitem);
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {

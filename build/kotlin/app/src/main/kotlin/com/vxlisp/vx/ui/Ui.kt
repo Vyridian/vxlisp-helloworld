@@ -6,6 +6,11 @@ import com.vxlisp.vx.data.*
 object vx_ui_ui {
 
 
+  /**
+   * type: align
+   * Universal Alignment
+   * (type align)
+   */
   interface Type_align : vx_core.Type_struct {
   }
 
@@ -78,6 +83,11 @@ object vx_ui_ui {
   val e_align : vx_ui_ui.Type_align = vx_ui_ui.Class_align()
   val t_align : vx_ui_ui.Type_align = vx_ui_ui.Class_align()
 
+  /**
+   * type: bounds
+   * Universal Bounds
+   * (type bounds)
+   */
   interface Type_bounds : vx_core.Type_struct {
     fun left() : vx_core.Type_int
     fun right() : vx_core.Type_int
@@ -136,13 +146,13 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":left")) {
+      } else if ((skey == ":left")) {
         output = this.left()
-      } else if ((skey==":right")) {
+      } else if ((skey == ":right")) {
         output = this.right()
-      } else if ((skey==":top")) {
+      } else if ((skey == ":top")) {
         output = this.top()
-      } else if ((skey==":bottom")) {
+      } else if ((skey == ":bottom")) {
         output = this.bottom()
       }
       return output
@@ -226,7 +236,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":left")) {
+          } else if ((key == ":left")) {
             if (valsub == vx_p_left) {
             } else if (valsub is vx_core.Type_int) {
               var valleft : vx_core.Type_int = valsub as vx_core.Type_int
@@ -250,7 +260,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/bounds", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":right")) {
+          } else if ((key == ":right")) {
             if (valsub == vx_p_right) {
             } else if (valsub is vx_core.Type_int) {
               var valright : vx_core.Type_int = valsub as vx_core.Type_int
@@ -274,7 +284,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/bounds", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":top")) {
+          } else if ((key == ":top")) {
             if (valsub == vx_p_top) {
             } else if (valsub is vx_core.Type_int) {
               var valtop : vx_core.Type_int = valsub as vx_core.Type_int
@@ -298,7 +308,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/bounds", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":bottom")) {
+          } else if ((key == ":bottom")) {
             if (valsub == vx_p_bottom) {
             } else if (valsub is vx_core.Type_int) {
               var valbottom : vx_core.Type_int = valsub as vx_core.Type_int
@@ -376,6 +386,11 @@ object vx_ui_ui {
   val e_bounds : vx_ui_ui.Type_bounds = vx_ui_ui.Class_bounds()
   val t_bounds : vx_ui_ui.Type_bounds = vx_ui_ui.Class_bounds()
 
+  /**
+   * type: cursor
+   * Univeral Cursor Type
+   * (type cursor)
+   */
   interface Type_cursor : vx_core.Type_struct {
   }
 
@@ -448,6 +463,10 @@ object vx_ui_ui {
   val e_cursor : vx_ui_ui.Type_cursor = vx_ui_ui.Class_cursor()
   val t_cursor : vx_ui_ui.Type_cursor = vx_ui_ui.Class_cursor()
 
+  /**
+   * type: cursor-pointer
+   * (type cursor-pointer)
+   */
   interface Type_cursor_pointer : vx_core.Type_any {
   }
 
@@ -509,6 +528,11 @@ object vx_ui_ui {
   val e_cursor_pointer : vx_ui_ui.Type_cursor_pointer = vx_ui_ui.Class_cursor_pointer()
   val t_cursor_pointer : vx_ui_ui.Type_cursor_pointer = vx_ui_ui.Class_cursor_pointer()
 
+  /**
+   * type: flip
+   * Universal ui flip horizontal or vertical or both.
+   * (type flip)
+   */
   interface Type_flip : vx_core.Type_struct {
   }
 
@@ -581,6 +605,11 @@ object vx_ui_ui {
   val e_flip : vx_ui_ui.Type_flip = vx_ui_ui.Class_flip()
   val t_flip : vx_ui_ui.Type_flip = vx_ui_ui.Class_flip()
 
+  /**
+   * type: font
+   * Univeral Font Type
+   * (type font)
+   */
   interface Type_font : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun fontface() : vx_ui_ui.Type_fontface
@@ -639,13 +668,13 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":fontface")) {
+      } else if ((skey == ":fontface")) {
         output = this.fontface()
-      } else if ((skey==":fontsize")) {
+      } else if ((skey == ":fontsize")) {
         output = this.fontsize()
-      } else if ((skey==":fontstyle")) {
+      } else if ((skey == ":fontstyle")) {
         output = this.fontstyle()
       }
       return output
@@ -729,7 +758,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -753,7 +782,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/font", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":fontface")) {
+          } else if ((key == ":fontface")) {
             if (valsub == vx_p_fontface) {
             } else if (valsub is vx_ui_ui.Type_fontface) {
               var valfontface : vx_ui_ui.Type_fontface = valsub as vx_ui_ui.Type_fontface
@@ -774,7 +803,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/font", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":fontsize")) {
+          } else if ((key == ":fontsize")) {
             if (valsub == vx_p_fontsize) {
             } else if (valsub is vx_core.Type_int) {
               var valfontsize : vx_core.Type_int = valsub as vx_core.Type_int
@@ -798,7 +827,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/font", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":fontstyle")) {
+          } else if ((key == ":fontstyle")) {
             if (valsub == vx_p_fontstyle) {
             } else if (valsub is vx_ui_ui.Type_fontstyle) {
               var valfontstyle : vx_ui_ui.Type_fontstyle = valsub as vx_ui_ui.Type_fontstyle
@@ -873,6 +902,11 @@ object vx_ui_ui {
   val e_font : vx_ui_ui.Type_font = vx_ui_ui.Class_font()
   val t_font : vx_ui_ui.Type_font = vx_ui_ui.Class_font()
 
+  /**
+   * type: fontface
+   * Univeral Font Face Type
+   * (type fontface)
+   */
   interface Type_fontface : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun weight() : vx_core.Type_string
@@ -931,13 +965,13 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":weight")) {
+      } else if ((skey == ":weight")) {
         output = this.weight()
-      } else if ((skey==":unicode")) {
+      } else if ((skey == ":unicode")) {
         output = this.unicode()
-      } else if ((skey==":filelist")) {
+      } else if ((skey == ":filelist")) {
         output = this.filelist()
       }
       return output
@@ -1021,7 +1055,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -1045,7 +1079,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/fontface", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":weight")) {
+          } else if ((key == ":weight")) {
             if (valsub == vx_p_weight) {
             } else if (valsub is vx_core.Type_string) {
               var valweight : vx_core.Type_string = valsub as vx_core.Type_string
@@ -1069,7 +1103,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/fontface", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":unicode")) {
+          } else if ((key == ":unicode")) {
             if (valsub == vx_p_unicode) {
             } else if (valsub is vx_core.Type_string) {
               var valunicode : vx_core.Type_string = valsub as vx_core.Type_string
@@ -1093,7 +1127,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/fontface", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":filelist")) {
+          } else if ((key == ":filelist")) {
             if (valsub == vx_p_filelist) {
             } else if (valsub is vx_data_file.Type_filelist) {
               var valfilelist : vx_data_file.Type_filelist = valsub as vx_data_file.Type_filelist
@@ -1168,6 +1202,11 @@ object vx_ui_ui {
   val e_fontface : vx_ui_ui.Type_fontface = vx_ui_ui.Class_fontface()
   val t_fontface : vx_ui_ui.Type_fontface = vx_ui_ui.Class_fontface()
 
+  /**
+   * type: fontfacelist
+   * List of fontface
+   * (type fontfacelist)
+   */
   interface Type_fontfacelist : vx_core.Type_list {
     fun vx_listfontface() : List<vx_ui_ui.Type_fontface>
     fun vx_fontface(index : vx_core.Type_int) : vx_ui_ui.Type_fontface
@@ -1237,8 +1276,9 @@ object vx_ui_ui {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_ui_ui.Type_fontface) {
+          var subitem : vx_ui_ui.Type_fontface = valsub as vx_ui_ui.Type_fontface
           ischanged = true
-          listval.add(valsub as vx_ui_ui.Type_fontface)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -1301,6 +1341,11 @@ object vx_ui_ui {
   val e_fontfacelist : vx_ui_ui.Type_fontfacelist = vx_ui_ui.Class_fontfacelist()
   val t_fontfacelist : vx_ui_ui.Type_fontfacelist = vx_ui_ui.Class_fontfacelist()
 
+  /**
+   * type: fontfacemap
+   * Map of fontface
+   * (type fontfacemap)
+   */
   interface Type_fontfacemap : vx_core.Type_map {
     fun vx_mapfontface() : Map<String, vx_ui_ui.Type_fontface>
     fun vx_fontface(key : vx_core.Type_string) : vx_ui_ui.Type_fontface
@@ -1497,6 +1542,11 @@ object vx_ui_ui {
   val e_fontfacemap : vx_ui_ui.Type_fontfacemap = vx_ui_ui.Class_fontfacemap()
   val t_fontfacemap : vx_ui_ui.Type_fontfacemap = vx_ui_ui.Class_fontfacemap()
 
+  /**
+   * type: fontmap
+   * Map of font
+   * (type fontmap)
+   */
   interface Type_fontmap : vx_core.Type_map {
     fun vx_mapfont() : Map<String, vx_ui_ui.Type_font>
     fun vx_font(key : vx_core.Type_string) : vx_ui_ui.Type_font
@@ -1693,6 +1743,11 @@ object vx_ui_ui {
   val e_fontmap : vx_ui_ui.Type_fontmap = vx_ui_ui.Class_fontmap()
   val t_fontmap : vx_ui_ui.Type_fontmap = vx_ui_ui.Class_fontmap()
 
+  /**
+   * type: fontstyle
+   * Univeral Font Style Type
+   * (type fontstyle)
+   */
   interface Type_fontstyle : vx_core.Type_struct {
     fun name() : vx_core.Type_string
   }
@@ -1715,7 +1770,7 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
       }
       return output
@@ -1790,7 +1845,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -1865,6 +1920,11 @@ object vx_ui_ui {
   val e_fontstyle : vx_ui_ui.Type_fontstyle = vx_ui_ui.Class_fontstyle()
   val t_fontstyle : vx_ui_ui.Type_fontstyle = vx_ui_ui.Class_fontstyle()
 
+  /**
+   * type: fontstylemap
+   * Map of fontstyle
+   * (type fontstylemap)
+   */
   interface Type_fontstylemap : vx_core.Type_map {
     fun vx_mapfontstyle() : Map<String, vx_ui_ui.Type_fontstyle>
     fun vx_fontstyle(key : vx_core.Type_string) : vx_ui_ui.Type_fontstyle
@@ -2061,6 +2121,11 @@ object vx_ui_ui {
   val e_fontstylemap : vx_ui_ui.Type_fontstylemap = vx_ui_ui.Class_fontstylemap()
   val t_fontstylemap : vx_ui_ui.Type_fontstylemap = vx_ui_ui.Class_fontstylemap()
 
+  /**
+   * type: image
+   * Univeral Image Type
+   * (type image)
+   */
   interface Type_image : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun label() : vx_core.Type_string
@@ -2107,11 +2172,11 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":label")) {
+      } else if ((skey == ":label")) {
         output = this.label()
-      } else if ((skey==":file")) {
+      } else if ((skey == ":file")) {
         output = this.file()
       }
       return output
@@ -2192,7 +2257,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2216,7 +2281,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/image", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":label")) {
+          } else if ((key == ":label")) {
             if (valsub == vx_p_label) {
             } else if (valsub is vx_core.Type_string) {
               var vallabel : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2240,7 +2305,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/image", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":file")) {
+          } else if ((key == ":file")) {
             if (valsub == vx_p_file) {
             } else if (valsub is vx_data_file.Type_file) {
               var valfile : vx_data_file.Type_file = valsub as vx_data_file.Type_file
@@ -2314,6 +2379,11 @@ object vx_ui_ui {
   val e_image : vx_ui_ui.Type_image = vx_ui_ui.Class_image()
   val t_image : vx_ui_ui.Type_image = vx_ui_ui.Class_image()
 
+  /**
+   * type: layout
+   * Universal Layout
+   * (type layout)
+   */
   interface Type_layout : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun fn_layout() : vx_ui_ui.Func_ui_layout_from_ui_orig_parent
@@ -2348,9 +2418,9 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":fn-layout")) {
+      } else if ((skey == ":fn-layout")) {
         output = this.fn_layout()
       }
       return output
@@ -2428,7 +2498,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2452,7 +2522,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/layout", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":fn-layout")) {
+          } else if ((key == ":fn-layout")) {
             if (valsub == vx_p_fn_layout) {
             } else if (valsub is vx_ui_ui.Func_ui_layout_from_ui_orig_parent) {
               var valfn_layout : vx_ui_ui.Func_ui_layout_from_ui_orig_parent = valsub as vx_ui_ui.Func_ui_layout_from_ui_orig_parent
@@ -2525,6 +2595,11 @@ object vx_ui_ui {
   val e_layout : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
   val t_layout : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
+  /**
+   * type: layoutengine
+   * Pluggable layoutengine
+   * (type layoutengine)
+   */
   interface Type_layoutengine : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun boolean_print() : vx_ui_ui.Func_boolean_print
@@ -2631,21 +2706,21 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":boolean-print")) {
+      } else if ((skey == ":boolean-print")) {
         output = this.boolean_print()
-      } else if ((skey==":boolean-layoutremove")) {
+      } else if ((skey == ":boolean-layoutremove")) {
         output = this.boolean_layoutremove()
-      } else if ((skey==":boolean-layoutselected")) {
+      } else if ((skey == ":boolean-layoutselected")) {
         output = this.boolean_layoutselected()
-      } else if ((skey==":boolean-layoutvisible")) {
+      } else if ((skey == ":boolean-layoutvisible")) {
         output = this.boolean_layoutvisible()
-      } else if ((skey==":layoutmap")) {
+      } else if ((skey == ":layoutmap")) {
         output = this.layoutmap()
-      } else if ((skey==":layoutelse")) {
+      } else if ((skey == ":layoutelse")) {
         output = this.layoutelse()
-      } else if ((skey==":stylesheetrender")) {
+      } else if ((skey == ":stylesheetrender")) {
         output = this.stylesheetrender()
       }
       return output
@@ -2741,7 +2816,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2765,7 +2840,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":boolean-print")) {
+          } else if ((key == ":boolean-print")) {
             if (valsub == vx_p_boolean_print) {
             } else if (valsub is vx_ui_ui.Func_boolean_print) {
               var valboolean_print : vx_ui_ui.Func_boolean_print = valsub as vx_ui_ui.Func_boolean_print
@@ -2786,7 +2861,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":boolean-layoutremove")) {
+          } else if ((key == ":boolean-layoutremove")) {
             if (valsub == vx_p_boolean_layoutremove) {
             } else if (valsub is vx_ui_ui.Func_boolean_layoutremove_from_ui) {
               var valboolean_layoutremove : vx_ui_ui.Func_boolean_layoutremove_from_ui = valsub as vx_ui_ui.Func_boolean_layoutremove_from_ui
@@ -2807,7 +2882,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":boolean-layoutselected")) {
+          } else if ((key == ":boolean-layoutselected")) {
             if (valsub == vx_p_boolean_layoutselected) {
             } else if (valsub is vx_ui_ui.Func_boolean_layoutselected_from_ui) {
               var valboolean_layoutselected : vx_ui_ui.Func_boolean_layoutselected_from_ui = valsub as vx_ui_ui.Func_boolean_layoutselected_from_ui
@@ -2828,7 +2903,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":boolean-layoutvisible")) {
+          } else if ((key == ":boolean-layoutvisible")) {
             if (valsub == vx_p_boolean_layoutvisible) {
             } else if (valsub is vx_ui_ui.Func_boolean_layoutvisible_from_ui) {
               var valboolean_layoutvisible : vx_ui_ui.Func_boolean_layoutvisible_from_ui = valsub as vx_ui_ui.Func_boolean_layoutvisible_from_ui
@@ -2849,7 +2924,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":layoutmap")) {
+          } else if ((key == ":layoutmap")) {
             if (valsub == vx_p_layoutmap) {
             } else if (valsub is vx_ui_ui.Type_layoutmap) {
               var vallayoutmap : vx_ui_ui.Type_layoutmap = valsub as vx_ui_ui.Type_layoutmap
@@ -2870,7 +2945,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":layoutelse")) {
+          } else if ((key == ":layoutelse")) {
             if (valsub == vx_p_layoutelse) {
             } else if (valsub is vx_ui_ui.Type_layout) {
               var vallayoutelse : vx_ui_ui.Type_layout = valsub as vx_ui_ui.Type_layout
@@ -2891,7 +2966,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylesheetrender")) {
+          } else if ((key == ":stylesheetrender")) {
             if (valsub == vx_p_stylesheetrender) {
             } else if (valsub is vx_ui_ui.Func_stylesheet_render) {
               var valstylesheetrender : vx_ui_ui.Func_stylesheet_render = valsub as vx_ui_ui.Func_stylesheet_render
@@ -2970,6 +3045,11 @@ object vx_ui_ui {
   val e_layoutengine : vx_ui_ui.Type_layoutengine = vx_ui_ui.Class_layoutengine()
   val t_layoutengine : vx_ui_ui.Type_layoutengine = vx_ui_ui.Class_layoutengine()
 
+  /**
+   * type: layoutlist
+   * Map of layout
+   * (type layoutlist)
+   */
   interface Type_layoutlist : vx_core.Type_list {
     fun vx_listlayout() : List<vx_ui_ui.Type_layout>
     fun vx_layout(index : vx_core.Type_int) : vx_ui_ui.Type_layout
@@ -3039,8 +3119,9 @@ object vx_ui_ui {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_ui_ui.Type_layout) {
+          var subitem : vx_ui_ui.Type_layout = valsub as vx_ui_ui.Type_layout
           ischanged = true
-          listval.add(valsub as vx_ui_ui.Type_layout)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -3103,6 +3184,11 @@ object vx_ui_ui {
   val e_layoutlist : vx_ui_ui.Type_layoutlist = vx_ui_ui.Class_layoutlist()
   val t_layoutlist : vx_ui_ui.Type_layoutlist = vx_ui_ui.Class_layoutlist()
 
+  /**
+   * type: layoutmap
+   * Map of layout
+   * (type layoutmap)
+   */
   interface Type_layoutmap : vx_core.Type_map {
     fun vx_maplayout() : Map<String, vx_ui_ui.Type_layout>
     fun vx_layout(key : vx_core.Type_string) : vx_ui_ui.Type_layout
@@ -3299,6 +3385,11 @@ object vx_ui_ui {
   val e_layoutmap : vx_ui_ui.Type_layoutmap = vx_ui_ui.Class_layoutmap()
   val t_layoutmap : vx_ui_ui.Type_layoutmap = vx_ui_ui.Class_layoutmap()
 
+  /**
+   * type: pin
+   * Pin an element
+   * (type pin)
+   */
   interface Type_pin : vx_core.Type_struct {
     fun name() : vx_core.Type_string
   }
@@ -3321,7 +3412,7 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
       }
       return output
@@ -3396,7 +3487,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -3471,6 +3562,11 @@ object vx_ui_ui {
   val e_pin : vx_ui_ui.Type_pin = vx_ui_ui.Class_pin()
   val t_pin : vx_ui_ui.Type_pin = vx_ui_ui.Class_pin()
 
+  /**
+   * type: point
+   * Universal Point
+   * (type point)
+   */
   interface Type_point : vx_core.Type_struct {
     fun x() : vx_core.Type_int
     fun y() : vx_core.Type_int
@@ -3553,17 +3649,17 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":x")) {
+      } else if ((skey == ":x")) {
         output = this.x()
-      } else if ((skey==":y")) {
+      } else if ((skey == ":y")) {
         output = this.y()
-      } else if ((skey==":z")) {
+      } else if ((skey == ":z")) {
         output = this.z()
-      } else if ((skey==":t")) {
+      } else if ((skey == ":t")) {
         output = this.t()
-      } else if ((skey==":i")) {
+      } else if ((skey == ":i")) {
         output = this.i()
-      } else if ((skey==":pointtype")) {
+      } else if ((skey == ":pointtype")) {
         output = this.pointtype()
       }
       return output
@@ -3653,7 +3749,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":x")) {
+          } else if ((key == ":x")) {
             if (valsub == vx_p_x) {
             } else if (valsub is vx_core.Type_int) {
               var valx : vx_core.Type_int = valsub as vx_core.Type_int
@@ -3677,7 +3773,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":y")) {
+          } else if ((key == ":y")) {
             if (valsub == vx_p_y) {
             } else if (valsub is vx_core.Type_int) {
               var valy : vx_core.Type_int = valsub as vx_core.Type_int
@@ -3701,7 +3797,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":z")) {
+          } else if ((key == ":z")) {
             if (valsub == vx_p_z) {
             } else if (valsub is vx_core.Type_int) {
               var valz : vx_core.Type_int = valsub as vx_core.Type_int
@@ -3725,7 +3821,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":t")) {
+          } else if ((key == ":t")) {
             if (valsub == vx_p_t) {
             } else if (valsub is vx_core.Type_int) {
               var valt : vx_core.Type_int = valsub as vx_core.Type_int
@@ -3749,7 +3845,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":i")) {
+          } else if ((key == ":i")) {
             if (valsub == vx_p_i) {
             } else if (valsub is vx_core.Type_int) {
               var vali : vx_core.Type_int = valsub as vx_core.Type_int
@@ -3773,7 +3869,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":pointtype")) {
+          } else if ((key == ":pointtype")) {
             if (valsub == vx_p_pointtype) {
             } else if (valsub is vx_ui_ui.Type_pointtype) {
               var valpointtype : vx_ui_ui.Type_pointtype = valsub as vx_ui_ui.Type_pointtype
@@ -3850,6 +3946,11 @@ object vx_ui_ui {
   val e_point : vx_ui_ui.Type_point = vx_ui_ui.Class_point()
   val t_point : vx_ui_ui.Type_point = vx_ui_ui.Class_point()
 
+  /**
+   * type: pointtype
+   * Universal Point Scale
+   * (type pointtype)
+   */
   interface Type_pointtype : vx_core.Type_any {
   }
 
@@ -3911,6 +4012,11 @@ object vx_ui_ui {
   val e_pointtype : vx_ui_ui.Type_pointtype = vx_ui_ui.Class_pointtype()
   val t_pointtype : vx_ui_ui.Type_pointtype = vx_ui_ui.Class_pointtype()
 
+  /**
+   * type: style
+   * Universal Style
+   * (type style)
+   */
   interface Type_style : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun align() : vx_ui_ui.Type_align
@@ -4185,49 +4291,49 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":align")) {
+      } else if ((skey == ":align")) {
         output = this.align()
-      } else if ((skey==":boundsmargin")) {
+      } else if ((skey == ":boundsmargin")) {
         output = this.boundsmargin()
-      } else if ((skey==":boundspadding")) {
+      } else if ((skey == ":boundspadding")) {
         output = this.boundspadding()
-      } else if ((skey==":color-bkg")) {
+      } else if ((skey == ":color-bkg")) {
         output = this.color_bkg()
-      } else if ((skey==":color-bkghover")) {
+      } else if ((skey == ":color-bkghover")) {
         output = this.color_bkghover()
-      } else if ((skey==":color-border")) {
+      } else if ((skey == ":color-border")) {
         output = this.color_border()
-      } else if ((skey==":color-font")) {
+      } else if ((skey == ":color-font")) {
         output = this.color_font()
-      } else if ((skey==":cursor")) {
+      } else if ((skey == ":cursor")) {
         output = this.cursor()
-      } else if ((skey==":flip")) {
+      } else if ((skey == ":flip")) {
         output = this.flip()
-      } else if ((skey==":font")) {
+      } else if ((skey == ":font")) {
         output = this.font()
-      } else if ((skey==":hidden")) {
+      } else if ((skey == ":hidden")) {
         output = this.hidden()
-      } else if ((skey==":image-bkg")) {
+      } else if ((skey == ":image-bkg")) {
         output = this.image_bkg()
-      } else if ((skey==":layout")) {
+      } else if ((skey == ":layout")) {
         output = this.layout()
-      } else if ((skey==":type")) {
+      } else if ((skey == ":type")) {
         output = this.type()
-      } else if ((skey==":pin")) {
+      } else if ((skey == ":pin")) {
         output = this.pin()
-      } else if ((skey==":pointorigin")) {
+      } else if ((skey == ":pointorigin")) {
         output = this.pointorigin()
-      } else if ((skey==":pointpos")) {
+      } else if ((skey == ":pointpos")) {
         output = this.pointpos()
-      } else if ((skey==":pointrotate")) {
+      } else if ((skey == ":pointrotate")) {
         output = this.pointrotate()
-      } else if ((skey==":pointsize")) {
+      } else if ((skey == ":pointsize")) {
         output = this.pointsize()
-      } else if ((skey==":scroll-x")) {
+      } else if ((skey == ":scroll-x")) {
         output = this.scroll_x()
-      } else if ((skey==":scroll-y")) {
+      } else if ((skey == ":scroll-y")) {
         output = this.scroll_y()
       }
       return output
@@ -4365,7 +4471,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4389,7 +4495,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":align")) {
+          } else if ((key == ":align")) {
             if (valsub == vx_p_align) {
             } else if (valsub is vx_ui_ui.Type_align) {
               var valalign : vx_ui_ui.Type_align = valsub as vx_ui_ui.Type_align
@@ -4410,7 +4516,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":boundsmargin")) {
+          } else if ((key == ":boundsmargin")) {
             if (valsub == vx_p_boundsmargin) {
             } else if (valsub is vx_ui_ui.Type_bounds) {
               var valboundsmargin : vx_ui_ui.Type_bounds = valsub as vx_ui_ui.Type_bounds
@@ -4431,7 +4537,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":boundspadding")) {
+          } else if ((key == ":boundspadding")) {
             if (valsub == vx_p_boundspadding) {
             } else if (valsub is vx_ui_ui.Type_bounds) {
               var valboundspadding : vx_ui_ui.Type_bounds = valsub as vx_ui_ui.Type_bounds
@@ -4452,7 +4558,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":color-bkg")) {
+          } else if ((key == ":color-bkg")) {
             if (valsub == vx_p_color_bkg) {
             } else if (valsub is vx_core.Type_string) {
               var valcolor_bkg : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4476,7 +4582,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":color-bkghover")) {
+          } else if ((key == ":color-bkghover")) {
             if (valsub == vx_p_color_bkghover) {
             } else if (valsub is vx_core.Type_string) {
               var valcolor_bkghover : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4500,7 +4606,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":color-border")) {
+          } else if ((key == ":color-border")) {
             if (valsub == vx_p_color_border) {
             } else if (valsub is vx_core.Type_string) {
               var valcolor_border : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4524,7 +4630,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":color-font")) {
+          } else if ((key == ":color-font")) {
             if (valsub == vx_p_color_font) {
             } else if (valsub is vx_core.Type_string) {
               var valcolor_font : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4548,7 +4654,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":cursor")) {
+          } else if ((key == ":cursor")) {
             if (valsub == vx_p_cursor) {
             } else if (valsub is vx_ui_ui.Type_cursor) {
               var valcursor : vx_ui_ui.Type_cursor = valsub as vx_ui_ui.Type_cursor
@@ -4569,7 +4675,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":flip")) {
+          } else if ((key == ":flip")) {
             if (valsub == vx_p_flip) {
             } else if (valsub is vx_ui_ui.Type_flip) {
               var valflip : vx_ui_ui.Type_flip = valsub as vx_ui_ui.Type_flip
@@ -4590,7 +4696,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":font")) {
+          } else if ((key == ":font")) {
             if (valsub == vx_p_font) {
             } else if (valsub is vx_ui_ui.Type_font) {
               var valfont : vx_ui_ui.Type_font = valsub as vx_ui_ui.Type_font
@@ -4611,7 +4717,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":hidden")) {
+          } else if ((key == ":hidden")) {
             if (valsub == vx_p_hidden) {
             } else if (valsub is vx_core.Type_boolean) {
               var valhidden : vx_core.Type_boolean = valsub as vx_core.Type_boolean
@@ -4635,7 +4741,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":image-bkg")) {
+          } else if ((key == ":image-bkg")) {
             if (valsub == vx_p_image_bkg) {
             } else if (valsub is vx_ui_ui.Type_image) {
               var valimage_bkg : vx_ui_ui.Type_image = valsub as vx_ui_ui.Type_image
@@ -4656,7 +4762,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":layout")) {
+          } else if ((key == ":layout")) {
             if (valsub == vx_p_layout) {
             } else if (valsub is vx_ui_ui.Type_layout) {
               var vallayout : vx_ui_ui.Type_layout = valsub as vx_ui_ui.Type_layout
@@ -4677,7 +4783,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":type")) {
+          } else if ((key == ":type")) {
             if (valsub == vx_p_type) {
             } else if (valsub is vx_ui_ui.Type_styletype) {
               var valtype : vx_ui_ui.Type_styletype = valsub as vx_ui_ui.Type_styletype
@@ -4698,7 +4804,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":pin")) {
+          } else if ((key == ":pin")) {
             if (valsub == vx_p_pin) {
             } else if (valsub is vx_ui_ui.Type_pin) {
               var valpin : vx_ui_ui.Type_pin = valsub as vx_ui_ui.Type_pin
@@ -4719,7 +4825,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":pointorigin")) {
+          } else if ((key == ":pointorigin")) {
             if (valsub == vx_p_pointorigin) {
             } else if (valsub is vx_ui_ui.Type_point) {
               var valpointorigin : vx_ui_ui.Type_point = valsub as vx_ui_ui.Type_point
@@ -4740,7 +4846,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":pointpos")) {
+          } else if ((key == ":pointpos")) {
             if (valsub == vx_p_pointpos) {
             } else if (valsub is vx_ui_ui.Type_point) {
               var valpointpos : vx_ui_ui.Type_point = valsub as vx_ui_ui.Type_point
@@ -4761,7 +4867,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":pointrotate")) {
+          } else if ((key == ":pointrotate")) {
             if (valsub == vx_p_pointrotate) {
             } else if (valsub is vx_ui_ui.Type_point) {
               var valpointrotate : vx_ui_ui.Type_point = valsub as vx_ui_ui.Type_point
@@ -4782,7 +4888,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":pointsize")) {
+          } else if ((key == ":pointsize")) {
             if (valsub == vx_p_pointsize) {
             } else if (valsub is vx_ui_ui.Type_point) {
               var valpointsize : vx_ui_ui.Type_point = valsub as vx_ui_ui.Type_point
@@ -4803,7 +4909,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":scroll-x")) {
+          } else if ((key == ":scroll-x")) {
             if (valsub == vx_p_scroll_x) {
             } else if (valsub is vx_core.Type_boolean) {
               var valscroll_x : vx_core.Type_boolean = valsub as vx_core.Type_boolean
@@ -4827,7 +4933,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":scroll-y")) {
+          } else if ((key == ":scroll-y")) {
             if (valsub == vx_p_scroll_y) {
             } else if (valsub is vx_core.Type_boolean) {
               var valscroll_y : vx_core.Type_boolean = valsub as vx_core.Type_boolean
@@ -4923,6 +5029,11 @@ object vx_ui_ui {
   val e_style : vx_ui_ui.Type_style = vx_ui_ui.Class_style()
   val t_style : vx_ui_ui.Type_style = vx_ui_ui.Class_style()
 
+  /**
+   * type: stylelist
+   * Universal Stylelist
+   * (type stylelist)
+   */
   interface Type_stylelist : vx_core.Type_list {
     fun vx_liststyle() : List<vx_ui_ui.Type_style>
     fun vx_style(index : vx_core.Type_int) : vx_ui_ui.Type_style
@@ -4992,8 +5103,9 @@ object vx_ui_ui {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_ui_ui.Type_style) {
+          var subitem : vx_ui_ui.Type_style = valsub as vx_ui_ui.Type_style
           ischanged = true
-          listval.add(valsub as vx_ui_ui.Type_style)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -5056,6 +5168,11 @@ object vx_ui_ui {
   val e_stylelist : vx_ui_ui.Type_stylelist = vx_ui_ui.Class_stylelist()
   val t_stylelist : vx_ui_ui.Type_stylelist = vx_ui_ui.Class_stylelist()
 
+  /**
+   * type: stylemap
+   * Universal Stylemap
+   * (type stylemap)
+   */
   interface Type_stylemap : vx_core.Type_map {
     fun vx_mapstyle() : Map<String, vx_ui_ui.Type_style>
     fun vx_style(key : vx_core.Type_string) : vx_ui_ui.Type_style
@@ -5252,6 +5369,11 @@ object vx_ui_ui {
   val e_stylemap : vx_ui_ui.Type_stylemap = vx_ui_ui.Class_stylemap()
   val t_stylemap : vx_ui_ui.Type_stylemap = vx_ui_ui.Class_stylemap()
 
+  /**
+   * type: stylesheet
+   * Universal Stylesheet
+   * (type stylesheet)
+   */
   interface Type_stylesheet : vx_core.Type_struct {
     fun fontfacemap() : vx_ui_ui.Type_fontfacemap
     fun stylemap() : vx_ui_ui.Type_stylemap
@@ -5286,9 +5408,9 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":fontfacemap")) {
+      } else if ((skey == ":fontfacemap")) {
         output = this.fontfacemap()
-      } else if ((skey==":stylemap")) {
+      } else if ((skey == ":stylemap")) {
         output = this.stylemap()
       }
       return output
@@ -5366,7 +5488,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":fontfacemap")) {
+          } else if ((key == ":fontfacemap")) {
             if (valsub == vx_p_fontfacemap) {
             } else if (valsub is vx_ui_ui.Type_fontfacemap) {
               var valfontfacemap : vx_ui_ui.Type_fontfacemap = valsub as vx_ui_ui.Type_fontfacemap
@@ -5387,7 +5509,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/stylesheet", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylemap")) {
+          } else if ((key == ":stylemap")) {
             if (valsub == vx_p_stylemap) {
             } else if (valsub is vx_ui_ui.Type_stylemap) {
               var valstylemap : vx_ui_ui.Type_stylemap = valsub as vx_ui_ui.Type_stylemap
@@ -5460,6 +5582,11 @@ object vx_ui_ui {
   val e_stylesheet : vx_ui_ui.Type_stylesheet = vx_ui_ui.Class_stylesheet()
   val t_stylesheet : vx_ui_ui.Type_stylesheet = vx_ui_ui.Class_stylesheet()
 
+  /**
+   * type: styletype
+   * Universal Style Type
+   * (type styletype)
+   */
   interface Type_styletype : vx_core.Type_struct {
   }
 
@@ -5532,6 +5659,11 @@ object vx_ui_ui {
   val e_styletype : vx_ui_ui.Type_styletype = vx_ui_ui.Class_styletype()
   val t_styletype : vx_ui_ui.Type_styletype = vx_ui_ui.Class_styletype()
 
+  /**
+   * type: ui
+   * Universal UI Element
+   * (type ui)
+   */
   interface Type_ui : vx_core.Type_struct {
     fun uid() : vx_core.Type_string
     fun name() : vx_core.Type_string
@@ -5686,29 +5818,29 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":uid")) {
+      } else if ((skey == ":uid")) {
         output = this.uid()
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":layout")) {
+      } else if ((skey == ":layout")) {
         output = this.layout()
-      } else if ((skey==":path")) {
+      } else if ((skey == ":path")) {
         output = this.path()
-      } else if ((skey==":hidden")) {
+      } else if ((skey == ":hidden")) {
         output = this.hidden()
-      } else if ((skey==":selected")) {
+      } else if ((skey == ":selected")) {
         output = this.selected()
-      } else if ((skey==":selectmulti")) {
+      } else if ((skey == ":selectmulti")) {
         output = this.selectmulti()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":data")) {
+      } else if ((skey == ":data")) {
         output = this.data()
-      } else if ((skey==":uimap")) {
+      } else if ((skey == ":uimap")) {
         output = this.uimap()
       }
       return output
@@ -5816,7 +5948,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":uid")) {
+          } else if ((key == ":uid")) {
             if (valsub == vx_p_uid) {
             } else if (valsub is vx_core.Type_string) {
               var valuid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -5840,7 +5972,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -5864,7 +5996,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":layout")) {
+          } else if ((key == ":layout")) {
             if (valsub == vx_p_layout) {
             } else if (valsub is vx_ui_ui.Type_layout) {
               var vallayout : vx_ui_ui.Type_layout = valsub as vx_ui_ui.Type_layout
@@ -5885,7 +6017,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":path")) {
+          } else if ((key == ":path")) {
             if (valsub == vx_p_path) {
             } else if (valsub is vx_core.Type_string) {
               var valpath : vx_core.Type_string = valsub as vx_core.Type_string
@@ -5909,7 +6041,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":hidden")) {
+          } else if ((key == ":hidden")) {
             if (valsub == vx_p_hidden) {
             } else if (valsub is vx_core.Type_boolean) {
               var valhidden : vx_core.Type_boolean = valsub as vx_core.Type_boolean
@@ -5933,7 +6065,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":selected")) {
+          } else if ((key == ":selected")) {
             if (valsub == vx_p_selected) {
             } else if (valsub is vx_core.Type_boolean) {
               var valselected : vx_core.Type_boolean = valsub as vx_core.Type_boolean
@@ -5957,7 +6089,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":selectmulti")) {
+          } else if ((key == ":selectmulti")) {
             if (valsub == vx_p_selectmulti) {
             } else if (valsub is vx_core.Type_boolean) {
               var valselectmulti : vx_core.Type_boolean = valsub as vx_core.Type_boolean
@@ -5981,7 +6113,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_ui_ui.Type_style) {
               var valstyle : vx_ui_ui.Type_style = valsub as vx_ui_ui.Type_style
@@ -6002,7 +6134,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_ui_ui.Type_stylelist) {
               var valstylelist : vx_ui_ui.Type_stylelist = valsub as vx_ui_ui.Type_stylelist
@@ -6023,7 +6155,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -6044,7 +6176,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":data")) {
+          } else if ((key == ":data")) {
             if (valsub == vx_p_data) {
             } else if (valsub is vx_core.Type_any) {
               var valdata : vx_core.Type_any = valsub as vx_core.Type_any
@@ -6065,7 +6197,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":uimap")) {
+          } else if ((key == ":uimap")) {
             if (valsub == vx_p_uimap) {
             } else if (valsub is vx_ui_ui.Type_uimap) {
               var valuimap : vx_ui_ui.Type_uimap = valsub as vx_ui_ui.Type_uimap
@@ -6148,6 +6280,11 @@ object vx_ui_ui {
   val e_ui : vx_ui_ui.Type_ui = vx_ui_ui.Class_ui()
   val t_ui : vx_ui_ui.Type_ui = vx_ui_ui.Class_ui()
 
+  /**
+   * type: uiengine
+   * Template for uiengine
+   * (type uiengine)
+   */
   interface Type_uiengine : vx_core.Type_struct {
     fun parentmap() : vx_ui_ui.Type_uimap
     fun layoutengine() : vx_ui_ui.Type_layoutengine
@@ -6206,13 +6343,13 @@ object vx_ui_ui {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":parentmap")) {
+      } else if ((skey == ":parentmap")) {
         output = this.parentmap()
-      } else if ((skey==":layoutengine")) {
+      } else if ((skey == ":layoutengine")) {
         output = this.layoutengine()
-      } else if ((skey==":stylesheet")) {
+      } else if ((skey == ":stylesheet")) {
         output = this.stylesheet()
-      } else if ((skey==":ui")) {
+      } else if ((skey == ":ui")) {
         output = this.ui()
       }
       return output
@@ -6296,7 +6433,7 @@ object vx_ui_ui {
           }
         } else {
           if (false) {
-          } else if ((key==":parentmap")) {
+          } else if ((key == ":parentmap")) {
             if (valsub == vx_p_parentmap) {
             } else if (valsub is vx_ui_ui.Type_uimap) {
               var valparentmap : vx_ui_ui.Type_uimap = valsub as vx_ui_ui.Type_uimap
@@ -6317,7 +6454,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/uiengine", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":layoutengine")) {
+          } else if ((key == ":layoutengine")) {
             if (valsub == vx_p_layoutengine) {
             } else if (valsub is vx_ui_ui.Type_layoutengine) {
               var vallayoutengine : vx_ui_ui.Type_layoutengine = valsub as vx_ui_ui.Type_layoutengine
@@ -6338,7 +6475,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/uiengine", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylesheet")) {
+          } else if ((key == ":stylesheet")) {
             if (valsub == vx_p_stylesheet) {
             } else if (valsub is vx_ui_ui.Type_stylesheet) {
               var valstylesheet : vx_ui_ui.Type_stylesheet = valsub as vx_ui_ui.Type_stylesheet
@@ -6359,7 +6496,7 @@ object vx_ui_ui {
               msg = vx_core.vx_msg_from_error("vx/ui/ui/uiengine", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":ui")) {
+          } else if ((key == ":ui")) {
             if (valsub == vx_p_ui) {
             } else if (valsub is vx_ui_ui.Type_ui) {
               var valui : vx_ui_ui.Type_ui = valsub as vx_ui_ui.Type_ui
@@ -6434,6 +6571,11 @@ object vx_ui_ui {
   val e_uiengine : vx_ui_ui.Type_uiengine = vx_ui_ui.Class_uiengine()
   val t_uiengine : vx_ui_ui.Type_uiengine = vx_ui_ui.Class_uiengine()
 
+  /**
+   * type: uilist
+   * List of ui
+   * (type uilist)
+   */
   interface Type_uilist : vx_core.Type_list {
     fun vx_listui() : List<vx_ui_ui.Type_ui>
     fun vx_ui(index : vx_core.Type_int) : vx_ui_ui.Type_ui
@@ -6503,8 +6645,9 @@ object vx_ui_ui {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_ui_ui.Type_ui) {
+          var subitem : vx_ui_ui.Type_ui = valsub as vx_ui_ui.Type_ui
           ischanged = true
-          listval.add(valsub as vx_ui_ui.Type_ui)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -6567,6 +6710,11 @@ object vx_ui_ui {
   val e_uilist : vx_ui_ui.Type_uilist = vx_ui_ui.Class_uilist()
   val t_uilist : vx_ui_ui.Type_uilist = vx_ui_ui.Class_uilist()
 
+  /**
+   * type: uimap
+   * Map of ui
+   * (type uimap)
+   */
   interface Type_uimap : vx_core.Type_map {
     fun vx_mapui() : Map<String, vx_ui_ui.Type_ui>
     fun vx_ui(key : vx_core.Type_string) : vx_ui_ui.Type_ui
@@ -6763,6 +6911,11 @@ object vx_ui_ui {
   val e_uimap : vx_ui_ui.Type_uimap = vx_ui_ui.Class_uimap()
   val t_uimap : vx_ui_ui.Type_uimap = vx_ui_ui.Class_uimap()
 
+  /**
+   * Constant: align-center
+   * Logical Center Align in parent
+   * {align}
+   */
   class Const_align_center {
     constructor() {}
     companion object {
@@ -6787,6 +6940,11 @@ object vx_ui_ui {
   val c_align_center : vx_ui_ui.Type_align = vx_ui_ui.Class_align()
 
 
+  /**
+   * Constant: align-left
+   * Logical Left Align in parent
+   * {align}
+   */
   class Const_align_left {
     constructor() {}
     companion object {
@@ -6811,6 +6969,11 @@ object vx_ui_ui {
   val c_align_left : vx_ui_ui.Type_align = vx_ui_ui.Class_align()
 
 
+  /**
+   * Constant: align-right
+   * Logical Right Align in parent
+   * {align}
+   */
   class Const_align_right {
     constructor() {}
     companion object {
@@ -6835,6 +6998,11 @@ object vx_ui_ui {
   val c_align_right : vx_ui_ui.Type_align = vx_ui_ui.Class_align()
 
 
+  /**
+   * Constant: flip-x
+   * Logical Flip Horizontally
+   * {align}
+   */
   class Const_flip_x {
     constructor() {}
     companion object {
@@ -6859,6 +7027,11 @@ object vx_ui_ui {
   val c_flip_x : vx_ui_ui.Type_align = vx_ui_ui.Class_align()
 
 
+  /**
+   * Constant: flip-xy
+   * Logical Flip Vertically and Horizontally
+   * {align}
+   */
   class Const_flip_xy {
     constructor() {}
     companion object {
@@ -6883,6 +7056,11 @@ object vx_ui_ui {
   val c_flip_xy : vx_ui_ui.Type_align = vx_ui_ui.Class_align()
 
 
+  /**
+   * Constant: flip-y
+   * Logical Flip Vertically
+   * {align}
+   */
   class Const_flip_y {
     constructor() {}
     companion object {
@@ -6907,6 +7085,10 @@ object vx_ui_ui {
   val c_flip_y : vx_ui_ui.Type_align = vx_ui_ui.Class_align()
 
 
+  /**
+   * Constant: layout-app
+   * {layout}
+   */
   class Const_layout_app {
     constructor() {}
     companion object {
@@ -6941,6 +7123,10 @@ object vx_ui_ui {
   val c_layout_app : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-background
+   * {layout}
+   */
   class Const_layout_background {
     constructor() {}
     companion object {
@@ -6975,6 +7161,10 @@ object vx_ui_ui {
   val c_layout_background : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-button
+   * {layout}
+   */
   class Const_layout_button {
     constructor() {}
     companion object {
@@ -7009,6 +7199,10 @@ object vx_ui_ui {
   val c_layout_button : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-combobox
+   * {layout}
+   */
   class Const_layout_combobox {
     constructor() {}
     companion object {
@@ -7043,6 +7237,10 @@ object vx_ui_ui {
   val c_layout_combobox : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-else
+   * {layout}
+   */
   class Const_layout_else {
     constructor() {}
     companion object {
@@ -7077,6 +7275,10 @@ object vx_ui_ui {
   val c_layout_else : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-flow-columns
+   * {layout}
+   */
   class Const_layout_flow_columns {
     constructor() {}
     companion object {
@@ -7111,6 +7313,10 @@ object vx_ui_ui {
   val c_layout_flow_columns : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-flow-item
+   * {layout}
+   */
   class Const_layout_flow_item {
     constructor() {}
     companion object {
@@ -7145,6 +7351,10 @@ object vx_ui_ui {
   val c_layout_flow_item : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-flow-rows
+   * {layout}
+   */
   class Const_layout_flow_rows {
     constructor() {}
     companion object {
@@ -7179,6 +7389,10 @@ object vx_ui_ui {
   val c_layout_flow_rows : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-image
+   * {layout}
+   */
   class Const_layout_image {
     constructor() {}
     companion object {
@@ -7213,6 +7427,10 @@ object vx_ui_ui {
   val c_layout_image : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-label
+   * {layout}
+   */
   class Const_layout_label {
     constructor() {}
     companion object {
@@ -7247,6 +7465,10 @@ object vx_ui_ui {
   val c_layout_label : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-main
+   * {layout}
+   */
   class Const_layout_main {
     constructor() {}
     companion object {
@@ -7281,6 +7503,10 @@ object vx_ui_ui {
   val c_layout_main : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-maxpanel
+   * {layout}
+   */
   class Const_layout_maxpanel {
     constructor() {}
     companion object {
@@ -7315,6 +7541,10 @@ object vx_ui_ui {
   val c_layout_maxpanel : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-menubar
+   * {layout}
+   */
   class Const_layout_menubar {
     constructor() {}
     companion object {
@@ -7349,6 +7579,10 @@ object vx_ui_ui {
   val c_layout_menubar : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-menudrawer
+   * {layout}
+   */
   class Const_layout_menudrawer {
     constructor() {}
     companion object {
@@ -7383,6 +7617,10 @@ object vx_ui_ui {
   val c_layout_menudrawer : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-msgbox
+   * {layout}
+   */
   class Const_layout_msgbox {
     constructor() {}
     companion object {
@@ -7417,6 +7655,10 @@ object vx_ui_ui {
   val c_layout_msgbox : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-navbar
+   * {layout}
+   */
   class Const_layout_navbar {
     constructor() {}
     companion object {
@@ -7451,6 +7693,10 @@ object vx_ui_ui {
   val c_layout_navbar : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-navdrawer
+   * {layout}
+   */
   class Const_layout_navdrawer {
     constructor() {}
     companion object {
@@ -7485,6 +7731,10 @@ object vx_ui_ui {
   val c_layout_navdrawer : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-panel
+   * {layout}
+   */
   class Const_layout_panel {
     constructor() {}
     companion object {
@@ -7519,6 +7769,10 @@ object vx_ui_ui {
   val c_layout_panel : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-parallax
+   * {layout}
+   */
   class Const_layout_parallax {
     constructor() {}
     companion object {
@@ -7553,6 +7807,10 @@ object vx_ui_ui {
   val c_layout_parallax : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-statusbar
+   * {layout}
+   */
   class Const_layout_statusbar {
     constructor() {}
     companion object {
@@ -7587,6 +7845,10 @@ object vx_ui_ui {
   val c_layout_statusbar : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-statusdrawer
+   * {layout}
+   */
   class Const_layout_statusdrawer {
     constructor() {}
     companion object {
@@ -7621,6 +7883,10 @@ object vx_ui_ui {
   val c_layout_statusdrawer : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-text
+   * {layout}
+   */
   class Const_layout_text {
     constructor() {}
     companion object {
@@ -7655,6 +7921,10 @@ object vx_ui_ui {
   val c_layout_text : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-textentry
+   * {layout}
+   */
   class Const_layout_textentry {
     constructor() {}
     companion object {
@@ -7689,6 +7959,10 @@ object vx_ui_ui {
   val c_layout_textentry : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: layout-titlebar
+   * {layout}
+   */
   class Const_layout_titlebar {
     constructor() {}
     companion object {
@@ -7723,6 +7997,10 @@ object vx_ui_ui {
   val c_layout_titlebar : vx_ui_ui.Type_layout = vx_ui_ui.Class_layout()
 
 
+  /**
+   * Constant: pin-bottom
+   * {pin}
+   */
   class Const_pin_bottom {
     constructor() {}
     companion object {
@@ -7747,6 +8025,10 @@ object vx_ui_ui {
   val c_pin_bottom : vx_ui_ui.Type_pin = vx_ui_ui.Class_pin()
 
 
+  /**
+   * Constant: pin-center
+   * {pin}
+   */
   class Const_pin_center {
     constructor() {}
     companion object {
@@ -7771,6 +8053,10 @@ object vx_ui_ui {
   val c_pin_center : vx_ui_ui.Type_pin = vx_ui_ui.Class_pin()
 
 
+  /**
+   * Constant: pin-center-h
+   * {pin}
+   */
   class Const_pin_center_h {
     constructor() {}
     companion object {
@@ -7795,6 +8081,10 @@ object vx_ui_ui {
   val c_pin_center_h : vx_ui_ui.Type_pin = vx_ui_ui.Class_pin()
 
 
+  /**
+   * Constant: pin-center-v
+   * {pin}
+   */
   class Const_pin_center_v {
     constructor() {}
     companion object {
@@ -7819,6 +8109,10 @@ object vx_ui_ui {
   val c_pin_center_v : vx_ui_ui.Type_pin = vx_ui_ui.Class_pin()
 
 
+  /**
+   * Constant: pin-expand
+   * {pin}
+   */
   class Const_pin_expand {
     constructor() {}
     companion object {
@@ -7843,6 +8137,10 @@ object vx_ui_ui {
   val c_pin_expand : vx_ui_ui.Type_pin = vx_ui_ui.Class_pin()
 
 
+  /**
+   * Constant: pin-left
+   * {pin}
+   */
   class Const_pin_left {
     constructor() {}
     companion object {
@@ -7867,6 +8165,10 @@ object vx_ui_ui {
   val c_pin_left : vx_ui_ui.Type_pin = vx_ui_ui.Class_pin()
 
 
+  /**
+   * Constant: pin-right
+   * {pin}
+   */
   class Const_pin_right {
     constructor() {}
     companion object {
@@ -7891,6 +8193,10 @@ object vx_ui_ui {
   val c_pin_right : vx_ui_ui.Type_pin = vx_ui_ui.Class_pin()
 
 
+  /**
+   * Constant: pin-top
+   * {pin}
+   */
   class Const_pin_top {
     constructor() {}
     companion object {
@@ -7915,6 +8221,10 @@ object vx_ui_ui {
   val c_pin_top : vx_ui_ui.Type_pin = vx_ui_ui.Class_pin()
 
 
+  /**
+   * Constant: point-center
+   * {point}
+   */
   class Const_point_center {
     constructor() {}
     companion object {
@@ -7939,6 +8249,10 @@ object vx_ui_ui {
   val c_point_center : vx_ui_ui.Type_point = vx_ui_ui.Class_point()
 
 
+  /**
+   * Constant: point-lefttop
+   * {point}
+   */
   class Const_point_lefttop {
     constructor() {}
     companion object {
@@ -7963,6 +8277,10 @@ object vx_ui_ui {
   val c_point_lefttop : vx_ui_ui.Type_point = vx_ui_ui.Class_point()
 
 
+  /**
+   * Constant: point-rightbottom
+   * {point}
+   */
   class Const_point_rightbottom {
     constructor() {}
     companion object {
@@ -7987,6 +8305,10 @@ object vx_ui_ui {
   val c_point_rightbottom : vx_ui_ui.Type_point = vx_ui_ui.Class_point()
 
 
+  /**
+   * Constant: pointtype-absolute
+   * {pointtype}
+   */
   class Const_pointtype_absolute {
     constructor() {}
     companion object {
@@ -8011,6 +8333,10 @@ object vx_ui_ui {
   val c_pointtype_absolute : vx_ui_ui.Type_pointtype = vx_ui_ui.Class_pointtype()
 
 
+  /**
+   * Constant: pointtype-percent
+   * {pointtype}
+   */
   class Const_pointtype_percent {
     constructor() {}
     companion object {
@@ -8035,6 +8361,10 @@ object vx_ui_ui {
   val c_pointtype_percent : vx_ui_ui.Type_pointtype = vx_ui_ui.Class_pointtype()
 
 
+  /**
+   * Constant: pointtype-relative
+   * {pointtype}
+   */
   class Const_pointtype_relative {
     constructor() {}
     companion object {
@@ -8059,6 +8389,10 @@ object vx_ui_ui {
   val c_pointtype_relative : vx_ui_ui.Type_pointtype = vx_ui_ui.Class_pointtype()
 
 
+  /**
+   * Constant: styletype-custom
+   * {styletype}
+   */
   class Const_styletype_custom {
     constructor() {}
     companion object {
@@ -8083,6 +8417,10 @@ object vx_ui_ui {
   val c_styletype_custom : vx_ui_ui.Type_styletype = vx_ui_ui.Class_styletype()
 
 
+  /**
+   * Constant: styletype-shared
+   * {styletype}
+   */
   class Const_styletype_shared {
     constructor() {}
     companion object {
@@ -8107,6 +8445,10 @@ object vx_ui_ui {
   val c_styletype_shared : vx_ui_ui.Type_styletype = vx_ui_ui.Class_styletype()
 
 
+  /**
+   * Constant: styletype-system
+   * {styletype}
+   */
   class Const_styletype_system {
     constructor() {}
     companion object {
@@ -8130,7 +8472,15 @@ object vx_ui_ui {
 
   val c_styletype_system : vx_ui_ui.Type_styletype = vx_ui_ui.Class_styletype()
 
-
+  /**
+   * @function boolean_layout_from_ui_parent_selected
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @param  {boolean} selected
+   * @return {boolean}
+   * (func boolean-layout<-ui-parent-selected)
+   */
   interface Func_boolean_layout_from_ui_parent_selected : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_layout_from_ui_parent_selected(context : vx_core.Type_context, ui : vx_ui_ui.Type_ui, parent : vx_ui_ui.Type_ui, selected : vx_core.Type_boolean) : vx_core.Type_boolean
   }
@@ -8238,7 +8588,15 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_layout_from_ui_parent_visible
+   * Writes to an html node adding or removing the hidden class.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @param  {boolean} visible
+   * @return {boolean}
+   * (func boolean-layout<-ui-parent-visible)
+   */
   interface Func_boolean_layout_from_ui_parent_visible : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_layout_from_ui_parent_visible(context : vx_core.Type_context, ui : vx_ui_ui.Type_ui, parent : vx_ui_ui.Type_ui, visible : vx_core.Type_boolean) : vx_core.Type_boolean
   }
@@ -8348,7 +8706,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_layoutaddchild_from_ui_parent
+   * Writes a new ui on an existing parent.
+   * @param  {ui} uiarg
+   * @param  {ui} parent
+   * @return {boolean}
+   * (func boolean-layoutaddchild<-ui-parent)
+   */
   interface Func_boolean_layoutaddchild_from_ui_parent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_layoutaddchild_from_ui_parent(context : vx_core.Type_context, uiarg : vx_ui_ui.Type_ui, parent : vx_ui_ui.Type_ui) : vx_core.Type_boolean
   }
@@ -8450,7 +8815,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_layoutremove_from_ui
+   * Removes html node with a given ui.
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-layoutremove<-ui)
+   */
   interface Func_boolean_layoutremove_from_ui : vx_core.Func_any_from_any {
     fun vx_boolean_layoutremove_from_ui(ui : vx_ui_ui.Type_ui) : vx_core.Type_boolean
   }
@@ -8540,7 +8911,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_layoutremove_from_ui_keys
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @param  {stringlist} keys
+   * @return {boolean}
+   * (func boolean-layoutremove<-ui-keys)
+   */
   interface Func_boolean_layoutremove_from_ui_keys : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_layoutremove_from_ui_keys(context : vx_core.Type_context, ui : vx_ui_ui.Type_ui, keys : vx_core.Type_stringlist) : vx_core.Type_boolean
   }
@@ -8654,7 +9032,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_layoutremove_from_ui_parent
+   * Removes an html node given a ui.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @return {boolean}
+   * (func boolean-layoutremove<-ui-parent)
+   */
   interface Func_boolean_layoutremove_from_ui_parent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_layoutremove_from_ui_parent(context : vx_core.Type_context, ui : vx_ui_ui.Type_ui, parent : vx_ui_ui.Type_ui) : vx_core.Type_boolean
   }
@@ -8754,7 +9139,15 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_layoutremove_from_ui_start_end
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @param  {int} start
+   * @param  {int} end
+   * @return {boolean}
+   * (func boolean-layoutremove<-ui-start-end)
+   */
   interface Func_boolean_layoutremove_from_ui_start_end : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_layoutremove_from_ui_start_end(context : vx_core.Type_context, ui : vx_ui_ui.Type_ui, start : vx_core.Type_int, end : vx_core.Type_int) : vx_core.Type_boolean
   }
@@ -8856,7 +9249,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_layoutselected_from_ui
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-layoutselected<-ui)
+   */
   interface Func_boolean_layoutselected_from_ui : vx_core.Func_any_from_any {
     fun vx_boolean_layoutselected_from_ui(ui : vx_ui_ui.Type_ui) : vx_core.Type_boolean
   }
@@ -8946,7 +9345,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_layoutselected_from_ui_parent
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @return {boolean}
+   * (func boolean-layoutselected<-ui-parent)
+   */
   interface Func_boolean_layoutselected_from_ui_parent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_layoutselected_from_ui_parent(context : vx_core.Type_context, ui : vx_ui_ui.Type_ui, parent : vx_ui_ui.Type_ui) : vx_core.Type_boolean
   }
@@ -9045,7 +9451,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_layoutselected_from_ui_selected
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @param  {int} selected
+   * @return {boolean}
+   * (func boolean-layoutselected<-ui-selected)
+   */
   interface Func_boolean_layoutselected_from_ui_selected : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_layoutselected_from_ui_selected(ui : vx_ui_ui.Type_ui, selected : vx_core.Type_int) : vx_core.Type_boolean
   }
@@ -9124,7 +9537,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_layoutvisible_from_ui
+   * Writes to an html node adding or removing the hidden class.
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-layoutvisible<-ui)
+   */
   interface Func_boolean_layoutvisible_from_ui : vx_core.Func_any_from_any {
     fun vx_boolean_layoutvisible_from_ui(ui : vx_ui_ui.Type_ui) : vx_core.Type_boolean
   }
@@ -9214,7 +9633,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_print
+   * Create a print ready version of ui
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-print)
+   */
   interface Func_boolean_print : vx_core.Func_any_from_any_context {
     fun vx_boolean_print(context : vx_core.Type_context, ui : vx_ui_ui.Type_ui) : vx_core.Type_boolean
   }
@@ -9321,7 +9746,12 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_removestate_uiapp
+   * Returns true if uiapp was successfully removed from state.
+   * @return {boolean}
+   * (func boolean-removestate-uiapp)
+   */
   interface Func_boolean_removestate_uiapp : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_removestate_uiapp(context : vx_core.Type_context) : vx_core.Type_boolean
   }
@@ -9403,7 +9833,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_write_from_ui_parent
+   * Returns true if the given ui was added to parent uimap
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @return {boolean}
+   * (func boolean-write<-ui-parent)
+   */
   interface Func_boolean_write_from_ui_parent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_write_from_ui_parent(ui : vx_ui_ui.Type_ui, parent : vx_ui_ui.Type_ui) : vx_core.Type_boolean
   }
@@ -9495,7 +9932,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_writeremove_from_ui_uid
+   * Returns true if the given uid was removed from ui uimap
+   * @param  {ui} uiarg
+   * @param  {string} uid
+   * @return {boolean}
+   * (func boolean-writeremove<-ui-uid)
+   */
   interface Func_boolean_writeremove_from_ui_uid : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_writeremove_from_ui_uid(uiarg : vx_ui_ui.Type_ui, uid : vx_core.Type_string) : vx_core.Type_boolean
   }
@@ -9588,7 +10032,12 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_writestate_from_ui
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-writestate<-ui)
+   */
   interface Func_boolean_writestate_from_ui : vx_core.Func_any_from_any_context {
     fun vx_boolean_writestate_from_ui(context : vx_core.Type_context, ui : vx_ui_ui.Type_ui) : vx_core.Type_boolean
   }
@@ -9743,7 +10192,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_writestate_from_uiapp
+   * Returns true if successful write to :uiapp state
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-writestate<-uiapp)
+   */
   interface Func_boolean_writestate_from_uiapp : vx_core.Func_any_from_any_context {
     fun vx_boolean_writestate_from_uiapp(context : vx_core.Type_context, ui : vx_ui_ui.Type_ui) : vx_core.Type_boolean
   }
@@ -9839,7 +10294,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function boolean_writestate_from_uiengine
+   * Writes the uiengine to state
+   * @param  {uiengine} uiengine
+   * @return {boolean}
+   * (func boolean-writestate<-uiengine)
+   */
   interface Func_boolean_writestate_from_uiengine : vx_core.Func_any_from_any_context {
     fun vx_boolean_writestate_from_uiengine(context : vx_core.Type_context, uiengine : vx_ui_ui.Type_uiengine) : vx_core.Type_boolean
   }
@@ -9935,7 +10396,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function fontfacemap_from_fontfacelist
+   * Returns a fontfacemap from a fontfacelist
+   * @param  {fontfacelist} fontfacelist
+   * @return {fontfacemap}
+   * (func fontfacemap<-fontfacelist)
+   */
   interface Func_fontfacemap_from_fontfacelist : vx_core.Func_any_from_any {
     fun vx_fontfacemap_from_fontfacelist(fontfacelist : vx_ui_ui.Type_fontfacelist) : vx_ui_ui.Type_fontfacemap
   }
@@ -10034,7 +10501,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function int_child_from_ui_uid
+   * Returns the position of the currently selected subui
+   * @param  {ui} ui
+   * @param  {string} uid
+   * @return {int}
+   * (func int-child<-ui-uid)
+   */
   interface Func_int_child_from_ui_uid : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_int_child_from_ui_uid(ui : vx_ui_ui.Type_ui, uid : vx_core.Type_string) : vx_core.Type_int
   }
@@ -10124,7 +10598,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function int_selected_from_ui
+   * Returns the position of the currently selected subui
+   * @param  {ui} ui
+   * @return {int}
+   * (func int-selected<-ui)
+   */
   interface Func_int_selected_from_ui : vx_core.Func_any_from_any {
     fun vx_int_selected_from_ui(ui : vx_ui_ui.Type_ui) : vx_core.Type_int
   }
@@ -10230,7 +10710,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function int_visible_from_ui
+   * Returns the position of the currently visible subui
+   * @param  {ui} ui
+   * @return {int}
+   * (func int-visible<-ui)
+   */
   interface Func_int_visible_from_ui : vx_core.Func_any_from_any {
     fun vx_int_visible_from_ui(ui : vx_ui_ui.Type_ui) : vx_core.Type_int
   }
@@ -10333,7 +10819,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function intlist_visible_from_ui
+   * Return a uilist of the ui with selected=true
+   * @param  {ui} uiarg
+   * @return {intlist}
+   * (func intlist-visible<-ui)
+   */
   interface Func_intlist_visible_from_ui : vx_core.Func_any_from_any {
     fun vx_intlist_visible_from_ui(uiarg : vx_ui_ui.Type_ui) : vx_core.Type_intlist
   }
@@ -10469,7 +10961,12 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function layout_from_style
+   * @param  {style} style
+   * @return {layout}
+   * (func layout<-style)
+   */
   interface Func_layout_from_style : vx_core.Func_any_from_any {
     fun vx_layout_from_style(style : vx_ui_ui.Type_style) : vx_ui_ui.Type_layout
   }
@@ -10560,7 +11057,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function layout_from_ui
+   * Returns the layout from layoutengine that matches the ui
+   * @param  {ui} ui
+   * @return {layout}
+   * (func layout<-ui)
+   */
   interface Func_layout_from_ui : vx_core.Func_any_from_any_context {
     fun vx_layout_from_ui(context : vx_core.Type_context, ui : vx_ui_ui.Type_ui) : vx_ui_ui.Type_layout
   }
@@ -10664,7 +11167,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function layout_from_ui_layoutengine
+   * Returns the layout from layoutengine that matches the ui
+   * @param  {ui} ui
+   * @param  {layoutengine} layoutengine
+   * @return {layout}
+   * (func layout<-ui-layoutengine)
+   */
   interface Func_layout_from_ui_layoutengine : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_layout_from_ui_layoutengine(ui : vx_ui_ui.Type_ui, layoutengine : vx_ui_ui.Type_layoutengine) : vx_ui_ui.Type_layout
   }
@@ -10756,7 +11266,15 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function layout_from_ui_layoutmap_else
+   * Returns a layout from a given ui, layoutmap, and layoutelse
+   * @param  {ui} ui
+   * @param  {layoutmap} layoutmap
+   * @param  {layout} layoutelse
+   * @return {layout}
+   * (func layout<-ui-layoutmap-else)
+   */
   interface Func_layout_from_ui_layoutmap_else : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_layout_from_ui_layoutmap_else(ui : vx_ui_ui.Type_ui, layoutmap : vx_ui_ui.Type_layoutmap, layoutelse : vx_ui_ui.Type_layout) : vx_ui_ui.Type_layout
   }
@@ -10861,7 +11379,12 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function layoutengine_readstate
+   * Returns the current layoutengine from state
+   * @return {layoutengine}
+   * (func layoutengine-readstate)
+   */
   interface Func_layoutengine_readstate : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_layoutengine_readstate(context : vx_core.Type_context) : vx_ui_ui.Type_layoutengine
   }
@@ -10949,7 +11472,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function layoutmap_from_layoutlist
+   * Returns an layoutmap from an layoutlist
+   * @param  {layoutlist} layoutlist
+   * @return {layoutmap}
+   * (func layoutmap<-layoutlist)
+   */
   interface Func_layoutmap_from_layoutlist : vx_core.Func_any_from_any {
     fun vx_layoutmap_from_layoutlist(layoutlist : vx_ui_ui.Type_layoutlist) : vx_ui_ui.Type_layoutmap
   }
@@ -11048,7 +11577,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function string_parentuid_from_uid
+   * Returns the parent uid of a given uid
+   * @param  {string} uid
+   * @return {string}
+   * (func string-parentuid<-uid)
+   */
   interface Func_string_parentuid_from_uid : vx_core.Func_any_from_any {
     fun vx_string_parentuid_from_uid(uid : vx_core.Type_string) : vx_core.Type_string
   }
@@ -11173,7 +11708,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function string_selected_from_ui
+   * Return the uid of the ui with selected=true
+   * @param  {ui} ui
+   * @return {string}
+   * (func string-selected<-ui)
+   */
   interface Func_string_selected_from_ui : vx_core.Func_any_from_any {
     fun vx_string_selected_from_ui(ui : vx_ui_ui.Type_ui) : vx_core.Type_string
   }
@@ -11273,7 +11814,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function stringlist_selected_from_ui
+   * Return a list of uid of the ui with selected=true
+   * @param  {ui} ui
+   * @return {stringlist}
+   * (func stringlist-selected<-ui)
+   */
   interface Func_stringlist_selected_from_ui : vx_core.Func_any_from_any {
     fun vx_stringlist_selected_from_ui(ui : vx_ui_ui.Type_ui) : vx_core.Type_stringlist
   }
@@ -11387,7 +11934,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function stringlist_from_ui
+   * Return a list of uid of the ui
+   * @param  {ui} ui
+   * @return {stringlist}
+   * (func stringlist<-ui)
+   */
   interface Func_stringlist_from_ui : vx_core.Func_any_from_any {
     fun vx_stringlist_from_ui(ui : vx_ui_ui.Type_ui) : vx_core.Type_stringlist
   }
@@ -11487,7 +12040,12 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function stylemap_from_stylelist
+   * @param  {stylelist} stylelist
+   * @return {stylemap}
+   * (func stylemap<-stylelist)
+   */
   interface Func_stylemap_from_stylelist : vx_core.Func_any_from_any {
     fun vx_stylemap_from_stylelist(stylelist : vx_ui_ui.Type_stylelist) : vx_ui_ui.Type_stylemap
   }
@@ -11586,7 +12144,12 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function stylesheet_readstate
+   * Returns the current uiengine from state
+   * @return {stylesheet}
+   * (func stylesheet-readstate)
+   */
   interface Func_stylesheet_readstate : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_stylesheet_readstate(context : vx_core.Type_context) : vx_ui_ui.Type_stylesheet
   }
@@ -11674,7 +12237,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function stylesheet_render
+   * Template for rendering stylesheet
+   * @param  {stylesheet} stylesheetui
+   * @return {stylesheet}
+   * (func stylesheet-render)
+   */
   interface Func_stylesheet_render : vx_core.Func_any_from_any {
     fun vx_stylesheet_render(stylesheetui : vx_ui_ui.Type_stylesheet) : vx_ui_ui.Type_stylesheet
   }
@@ -11764,7 +12333,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_addlayout_from_ui
+   * Returns a ui with a layout added to each ui.
+   * @param  {ui} ui
+   * @return {ui}
+   * (func ui-addlayout<-ui)
+   */
   interface Func_ui_addlayout_from_ui : vx_core.Func_any_from_any_context {
     fun vx_ui_addlayout_from_ui(context : vx_core.Type_context, ui : vx_ui_ui.Type_ui) : vx_ui_ui.Type_ui
   }
@@ -11868,7 +12443,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_addlayout_from_ui_layoutengine
+   * Returns a ui with a layout added to each ui.
+   * @param  {ui} ui
+   * @param  {layoutengine} layoutengine
+   * @return {ui}
+   * (func ui-addlayout<-ui-layoutengine)
+   */
   interface Func_ui_addlayout_from_ui_layoutengine : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_addlayout_from_ui_layoutengine(ui : vx_ui_ui.Type_ui, layoutengine : vx_ui_ui.Type_layoutengine) : vx_ui_ui.Type_ui
   }
@@ -11960,7 +12542,15 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_addlayout_from_ui_layoutmap_else
+   * Returns a ui with a layout added to each ui.
+   * @param  {ui} ui
+   * @param  {layoutmap} layoutmap
+   * @param  {layout} layoutelse
+   * @return {ui}
+   * (func ui-addlayout<-ui-layoutmap-else)
+   */
   interface Func_ui_addlayout_from_ui_layoutmap_else : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_addlayout_from_ui_layoutmap_else(ui : vx_ui_ui.Type_ui, layoutmap : vx_ui_ui.Type_layoutmap, layoutelse : vx_ui_ui.Type_layout) : vx_ui_ui.Type_ui
   }
@@ -12067,7 +12657,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_addlayout_from_ui_uiengine
+   * Returns a ui with a layout added to each ui.
+   * @param  {ui} ui
+   * @param  {uiengine} uiengine
+   * @return {ui}
+   * (func ui-addlayout<-ui-uiengine)
+   */
   interface Func_ui_addlayout_from_ui_uiengine : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_addlayout_from_ui_uiengine(ui : vx_ui_ui.Type_ui, uiengine : vx_ui_ui.Type_uiengine) : vx_ui_ui.Type_ui
   }
@@ -12157,7 +12754,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_child_from_ui_pos
+   * Returns then named child from a ui.
+   * @param  {ui} ui
+   * @param  {int} pos
+   * @return {ui}
+   * (func ui-child<-ui-pos)
+   */
   interface Func_ui_child_from_ui_pos : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_child_from_ui_pos(ui : vx_ui_ui.Type_ui, pos : vx_core.Type_int) : vx_ui_ui.Type_ui
   }
@@ -12248,7 +12852,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_child_from_ui_uid
+   * Returns then named child from a ui.
+   * @param  {ui} ui
+   * @param  {string} uid
+   * @return {ui}
+   * (func ui-child<-ui-uid)
+   */
   interface Func_ui_child_from_ui_uid : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_child_from_ui_uid(ui : vx_ui_ui.Type_ui, uid : vx_core.Type_string) : vx_ui_ui.Type_ui
   }
@@ -12339,7 +12950,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_from_from_event
+   * Returns (:from evt) cast as ui
+   * @param  {event} evt
+   * @return {ui}
+   * (func ui-from<-event)
+   */
   interface Func_ui_from_from_event : vx_core.Func_any_from_any_context {
     fun vx_ui_from_from_event(context : vx_core.Type_context, evt : vx_event.Type_event) : vx_ui_ui.Type_ui
   }
@@ -12441,7 +13058,12 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_layout
+   * @param  {ui} uiarg
+   * @return {ui}
+   * (func ui-layout)
+   */
   interface Func_ui_layout : vx_core.Func_any_from_any {
     fun vx_ui_layout(uiarg : vx_ui_ui.Type_ui) : vx_ui_ui.Type_ui
   }
@@ -12540,7 +13162,16 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_layout_from_fn_layout_ui_orig_parent
+   * Returns a rendered ui
+   * @param  {ui-layout<-ui-orig-parent} fn-layout
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {ui}
+   * (func ui-layout<-fn-layout-ui-orig-parent)
+   */
   interface Func_ui_layout_from_fn_layout_ui_orig_parent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_layout_from_fn_layout_ui_orig_parent(fn_layout : vx_ui_ui.Func_ui_layout_from_ui_orig_parent, ui : vx_ui_ui.Type_ui, orig : vx_ui_ui.Type_ui, parent : vx_ui_ui.Type_ui) : vx_ui_ui.Type_ui
   }
@@ -12628,7 +13259,15 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_layout_from_ui_orig_parent
+   * Returns a rendered object from a UI Element.
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {ui}
+   * (func ui-layout<-ui-orig-parent)
+   */
   interface Func_ui_layout_from_ui_orig_parent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_layout_from_ui_orig_parent(ui : vx_ui_ui.Type_ui, orig : vx_ui_ui.Type_ui, parent : vx_ui_ui.Type_ui) : vx_ui_ui.Type_ui
   }
@@ -12747,7 +13386,15 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_layout_from_ui_parent_selected
+   * Return a ui after changing selected item and rendering it.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @param  {int} selected
+   * @return {ui}
+   * (func ui-layout<-ui-parent-selected)
+   */
   interface Func_ui_layout_from_ui_parent_selected : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_layout_from_ui_parent_selected(ui : vx_ui_ui.Type_ui, parent : vx_ui_ui.Type_ui, selected : vx_core.Type_int) : vx_ui_ui.Type_ui
   }
@@ -12846,7 +13493,15 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_layout_from_ui_parent_visible
+   * Return a ui after changing visible item and rendering it.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @param  {int} visible
+   * @return {ui}
+   * (func ui-layout<-ui-parent-visible)
+   */
   interface Func_ui_layout_from_ui_parent_visible : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_layout_from_ui_parent_visible(ui : vx_ui_ui.Type_ui, parent : vx_ui_ui.Type_ui, visible : vx_core.Type_int) : vx_ui_ui.Type_ui
   }
@@ -12941,7 +13596,12 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_readstate_uiapp
+   * Returns the top level uiapp from state
+   * @return {ui}
+   * (func ui-readstate-uiapp)
+   */
   interface Func_ui_readstate_uiapp : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_readstate_uiapp(context : vx_core.Type_context) : vx_ui_ui.Type_ui
   }
@@ -13024,7 +13684,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_readstate_from_uid
+   * Returns the named ui from state
+   * @param  {string} uid
+   * @return {ui}
+   * (func ui-readstate<-uid)
+   */
   interface Func_ui_readstate_from_uid : vx_core.Func_any_from_any_context {
     fun vx_ui_readstate_from_uid(context : vx_core.Type_context, uid : vx_core.Type_string) : vx_ui_ui.Type_ui
   }
@@ -13128,7 +13794,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_selected_from_ui
+   * Returns the first child of ui with selected=true
+   * @param  {ui} ui
+   * @return {ui}
+   * (func ui-selected<-ui)
+   */
   interface Func_ui_selected_from_ui : vx_core.Func_any_from_any {
     fun vx_ui_selected_from_ui(ui : vx_ui_ui.Type_ui) : vx_ui_ui.Type_ui
   }
@@ -13231,7 +13903,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_visible_from_ui
+   * Returns the first child of ui with hidden=false
+   * @param  {ui} ui
+   * @return {ui}
+   * (func ui-visible<-ui)
+   */
   interface Func_ui_visible_from_ui : vx_core.Func_any_from_any {
     fun vx_ui_visible_from_ui(ui : vx_ui_ui.Type_ui) : vx_ui_ui.Type_ui
   }
@@ -13334,7 +14012,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_write_from_ui_child
+   * Returns the given ui with the child added to uimap
+   * @param  {ui} ui
+   * @param  {ui} child
+   * @return {ui}
+   * (func ui-write<-ui-child)
+   */
   interface Func_ui_write_from_ui_child : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_write_from_ui_child(ui : vx_ui_ui.Type_ui, child : vx_ui_ui.Type_ui) : vx_ui_ui.Type_ui
   }
@@ -13427,7 +14112,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_write_from_ui_childmap
+   * Returns the given ui with the members of childmap added to uimap
+   * @param  {ui} ui
+   * @param  {uimap} childmap
+   * @return {ui}
+   * (func ui-write<-ui-childmap)
+   */
   interface Func_ui_write_from_ui_childmap : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_write_from_ui_childmap(ui : vx_ui_ui.Type_ui, childmap : vx_ui_ui.Type_uimap) : vx_ui_ui.Type_ui
   }
@@ -13526,7 +14218,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_write_from_ui_visible
+   * Return a ui after changing hidden to all but one child.
+   * @param  {ui} ui
+   * @param  {int} visible
+   * @return {ui}
+   * (func ui-write<-ui-visible)
+   */
   interface Func_ui_write_from_ui_visible : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_write_from_ui_visible(ui : vx_ui_ui.Type_ui, visible : vx_core.Type_int) : vx_ui_ui.Type_ui
   }
@@ -13694,7 +14393,15 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_from_layout_ui_orig_parent
+   * @param  {layout} layout
+   * @param  {ui} uiarg
+   * @param  {ui} uiorig
+   * @param  {ui} parent
+   * @return {ui}
+   * (func ui<-layout-ui-orig-parent)
+   */
   interface Func_ui_from_layout_ui_orig_parent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_from_layout_ui_orig_parent(layout : vx_ui_ui.Type_layout, uiarg : vx_ui_ui.Type_ui, uiorig : vx_ui_ui.Type_ui, parent : vx_ui_ui.Type_ui) : vx_ui_ui.Type_ui
   }
@@ -13791,7 +14498,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_from_ui_find
+   * Returns a ui given a ui and a find uid.
+   * @param  {ui} uiarg
+   * @param  {string} find
+   * @return {ui}
+   * (func ui<-ui-find)
+   */
   interface Func_ui_from_ui_find : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_from_ui_find(uiarg : vx_ui_ui.Type_ui, find : vx_core.Type_string) : vx_ui_ui.Type_ui
   }
@@ -14040,7 +14754,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function ui_from_ui_selected
+   * Return a ui after changing selected only one child.
+   * @param  {ui} ui
+   * @param  {int} selected
+   * @return {ui}
+   * (func ui<-ui-selected)
+   */
   interface Func_ui_from_ui_selected : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ui_from_ui_selected(ui : vx_ui_ui.Type_ui, selected : vx_core.Type_int) : vx_ui_ui.Type_ui
   }
@@ -14212,7 +14933,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function uid_selected_from_ui
+   * Returns the uid of the first ui with selected=true
+   * @param  {ui} ui
+   * @return {string}
+   * (func uid-selected<-ui)
+   */
   interface Func_uid_selected_from_ui : vx_core.Func_any_from_any {
     fun vx_uid_selected_from_ui(ui : vx_ui_ui.Type_ui) : vx_core.Type_string
   }
@@ -14315,7 +15042,12 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function uiengine_readstate
+   * Returns the current uiengine from state
+   * @return {uiengine}
+   * (func uiengine-readstate)
+   */
   interface Func_uiengine_readstate : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_uiengine_readstate(context : vx_core.Type_context) : vx_ui_ui.Type_uiengine
   }
@@ -14398,7 +15130,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function uiengine_render
+   * Returns a fully rendered ui for a given engine.
+   * @param  {uiengine} uiengine
+   * @return {uiengine}
+   * (func uiengine-render)
+   */
   interface Func_uiengine_render : vx_core.Func_any_from_any_context {
     fun vx_uiengine_render(context : vx_core.Type_context, uiengine : vx_ui_ui.Type_uiengine) : vx_ui_ui.Type_uiengine
   }
@@ -14527,7 +15265,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function uilist_selected_from_ui
+   * Return a uilist of the ui with selected=true
+   * @param  {ui} uiarg
+   * @return {uilist}
+   * (func uilist-selected<-ui)
+   */
   interface Func_uilist_selected_from_ui : vx_core.Func_any_from_any {
     fun vx_uilist_selected_from_ui(uiarg : vx_ui_ui.Type_ui) : vx_ui_ui.Type_uilist
   }
@@ -14640,7 +15384,13 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function uilist_visible_from_ui
+   * Return a uilist of the ui with hidden=false
+   * @param  {ui} uiarg
+   * @return {uilist}
+   * (func uilist-visible<-ui)
+   */
   interface Func_uilist_visible_from_ui : vx_core.Func_any_from_any {
     fun vx_uilist_visible_from_ui(uiarg : vx_ui_ui.Type_ui) : vx_ui_ui.Type_uilist
   }
@@ -14755,7 +15505,12 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function uilist_from_uimap
+   * @param  {uimap} uimap
+   * @return {uilist}
+   * (func uilist<-uimap)
+   */
   interface Func_uilist_from_uimap : vx_core.Func_any_from_any {
     fun vx_uilist_from_uimap(uimap : vx_ui_ui.Type_uimap) : vx_ui_ui.Type_uilist
   }
@@ -14855,7 +15610,15 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function uimap_addlayout_from_uimap_layoutmap_else
+   * Returns a uimap with a layout added to each ui.
+   * @param  {uimap} uimap
+   * @param  {layoutmap} layoutmap
+   * @param  {layout} layoutelse
+   * @return {uimap}
+   * (func uimap-addlayout<-uimap-layoutmap-else)
+   */
   interface Func_uimap_addlayout_from_uimap_layoutmap_else : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_uimap_addlayout_from_uimap_layoutmap_else(uimap : vx_ui_ui.Type_uimap, layoutmap : vx_ui_ui.Type_layoutmap, layoutelse : vx_ui_ui.Type_layout) : vx_ui_ui.Type_uimap
   }
@@ -14949,7 +15712,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function uimap_layout_from_uimap_parent
+   * Renders a uimap and returns a rendered uimap.
+   * @param  {uimap} uimap
+   * @param  {ui} parent
+   * @return {uimap}
+   * (func uimap-layout<-uimap-parent)
+   */
   interface Func_uimap_layout_from_uimap_parent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_uimap_layout_from_uimap_parent(uimap : vx_ui_ui.Type_uimap, parent : vx_ui_ui.Type_ui) : vx_ui_ui.Type_uimap
   }
@@ -15044,7 +15814,12 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function uimap_from_uilist
+   * @param  {uilist} uilist
+   * @return {uimap}
+   * (func uimap<-uilist)
+   */
   interface Func_uimap_from_uilist : vx_core.Func_any_from_any {
     fun vx_uimap_from_uilist(uilist : vx_ui_ui.Type_uilist) : vx_ui_ui.Type_uimap
   }
@@ -15143,7 +15918,14 @@ object vx_ui_ui {
     return output
   }
 
-
+  /**
+   * @function uimap_from_uimap_data
+   * Template for creating uimap dynamically
+   * @param  {uimap} uimap
+   * @param  {any} data
+   * @return {uimap}
+   * (func uimap<-uimap-data)
+   */
   interface Func_uimap_from_uimap_data : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_uimap_from_uimap_data(uimap : vx_ui_ui.Type_uimap, data : vx_core.Type_any) : vx_ui_ui.Type_uimap
   }

@@ -104,9 +104,9 @@ object vx_core {
     return output
   }
 
-  fun arrayany_from_anylist(
+  fun vx_arrayany_from_anylist(
     list : vx_core.Type_anylist) : Array<vx_core.Type_any> {
-    val listany : List<vx_core.Type_any> = list.vx_list()
+    var listany : List<vx_core.Type_any> = list.vx_list()
     val output : Array<vx_core.Type_any> = listany.toTypedArray()
     return output
   }
@@ -267,7 +267,7 @@ object vx_core {
     var output : T = vx_core.f_empty(generic_any_1)
     var skey : String = key.vx_string()
     if (skey.startsWith(":")) {
-      skey = skey.substring(1);
+      skey = skey.substring(1)
     }
     val value : vx_core.Type_any = valuemap.vx_map().getOrDefault(
       skey, output
@@ -800,14 +800,42 @@ object vx_core {
     return output
   }
 
+  // vx_msgblock_from_any(any)
+  fun vx_msgblock_from_any(
+    value : vx_core.Type_any) : vx_core.Type_msgblock {
+    val output : vx_core.Type_msgblock = value.vx_msgblock()
+    return output
+  }
+
   // vx_msgblock_from_copy_arrayval(msgblock, any...)
   fun vx_msgblock_from_copy_arrayval(
     copy : vx_core.Type_any,
-    vararg vals : Any) : vx_core.Type_msgblock {
+    values : Array<out Any>) : vx_core.Type_msgblock {
     var output : vx_core.Type_msgblock = vx_core.e_msgblock
-    val copymsgblock : vx_core.Type_msgblock = copy.vx_msgblock()
-    if (copymsgblock != vx_core.e_msgblock) {
-      output = copymsgblock
+    val listmsgblock : MutableList<vx_core.Type_msgblock> = mutableListOf()
+    val msgblock : vx_core.Type_msgblock = copy.vx_msgblock()
+    if (msgblock != vx_core.e_msgblock) {
+      listmsgblock.add(msgblock)
+    }
+    for (subobj : Any in values) {
+      if (subobj is vx_core.Type_any) {
+        val subval : vx_core.Type_any = subobj as vx_core.Type_any
+        val submsgblock : vx_core.Type_msgblock = subval.vx_msgblock()
+        if (submsgblock != vx_core.e_msgblock) {
+          listmsgblock.add(submsgblock)
+        }
+      }
+    }
+    val size : Int = listmsgblock.size
+    if (size == 0) {
+    } else if (size == 1) {
+      output = listmsgblock.get(0)
+    } else {
+      val msgblocks : vx_core.Class_msgblocklist = vx_core.Class_msgblocklist()
+      msgblocks.vx_p_list = listmsgblock.toList()
+      val outputclass : vx_core.Class_msgblock = vx_core.Class_msgblock()
+      outputclass.vx_p_msgblocks = msgblocks
+      output = outputclass
     }
     return output
   }
@@ -1039,7 +1067,7 @@ object vx_core {
         generic_map_1, mapnew
       )
     }
-    return output;
+    return output
   }
 
   fun vx_new_boolean(
@@ -1109,14 +1137,16 @@ object vx_core {
   }
 
   fun vx_string_from_any(
-    value : vx_core.Type_any) : String {
+    value : vx_core.Type_any
+  ) : String {
     return vx_string_from_any_indent(value, 0, false)
   }
 
   fun vx_string_from_any_indent(
     value : vx_core.Type_any,
     indent : Int,
-    linefeed : Boolean) : String {
+    linefeed : Boolean
+  ) : String {
     val indenttext : String = " ".repeat(indent)
     var output : String = ""
     if (indent > 50) {
@@ -1132,18 +1162,33 @@ object vx_core {
         val typedef : vx_core.Type_typedef = value.vx_typedef()
         output = typedef.pkgname().vx_string() + "/" + typedef.name().vx_string()
       }
+    } else if (value.vx_constdef() != vx_core.e_constdef) {
+      val constdef : vx_core.Type_constdef = value.vx_constdef()
+      val constpkg : String = constdef.pkgname().vx_string()
+      val constname : String = constdef.name().vx_string()
+      if (constpkg.equals("vx/core")) {
+        output = constname
+      } else {
+        output = constpkg + "/" + constname
+      }
     } else if (value is vx_core.Type_boolean) {
-      val valbool : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, value)
+      val valbool : vx_core.Type_boolean = vx_core.f_any_from_any(
+        vx_core.t_boolean, value
+      )
       if (valbool.vx_boolean() == true) {
         output = "true"
       } else {
         output = "false"
       }
     } else if (value is vx_core.Type_decimal) {
-      val valdec : vx_core.Type_decimal = vx_core.f_any_from_any(vx_core.t_decimal, value)
+      val valdec : vx_core.Type_decimal = vx_core.f_any_from_any(
+        vx_core.t_decimal, value
+      )
       output = valdec.vx_string()
     } else if (value is vx_core.Type_float) {
-      val valfloat : vx_core.Type_float = vx_core.f_any_from_any(vx_core.t_float, value)
+      val valfloat : vx_core.Type_float = vx_core.f_any_from_any(
+        vx_core.t_float, value
+      )
       output = valfloat.vx_float().toString()
       if (output.endsWith(".0")) {
         output = output.substring(0, output.length - 2)
@@ -1156,11 +1201,15 @@ object vx_core {
       } else if (value == vx_core.c_neginfinity) {
         output = "neginfinity"
       } else {
-        val valint : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, value)
+        val valint : vx_core.Type_int = vx_core.f_any_from_any(
+          vx_core.t_int, value
+        )
         output = Integer.toString(valint.vx_int())
       }
     } else if (value is vx_core.Type_string) {
-      val valstring : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, value)
+      val valstring : vx_core.Type_string = vx_core.f_any_from_any(
+        vx_core.t_string, value
+      )
       var sval : String = valstring.vx_string()
       if (sval.indexOf("\"") < 0) {
         sval = "\"" + sval + "\""
@@ -1177,37 +1226,35 @@ object vx_core {
       } else {
         output = sval
       }
-    } else if (value.vx_constdef() != vx_core.e_constdef) {
-      val constdef : vx_core.Type_constdef = value.vx_constdef()
-      val constpkg : String = constdef.pkgname().vx_string()
-      val constname : String = constdef.name().vx_string()
-      if (constpkg.equals("vx/core")) {
-        output = constname
-      } else {
-        output = constpkg + "/" + constname
-      }
     } else if (value is vx_core.Type_list) {
-      val vallist : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, value)
+      val vallist : vx_core.Type_list = vx_core.f_any_from_any(
+        vx_core.t_list, value
+      )
       val typedef : vx_core.Type_typedef = vallist.vx_typedef()
       val typedefname : vx_core.Type_string = typedef.name()
-      var indentint : Int = indent
-      indentint += 1
+      val indentint : Int = indent + 1
       val listval : List<vx_core.Type_any> = vallist.vx_list()
       for (valsub : vx_core.Type_any in listval) {
-        val valtext : String = vx_core.vx_string_from_any_indent(valsub, indentint, linefeed)
+        val valtext : String = vx_core.vx_string_from_any_indent(
+          valsub, indentint, linefeed
+        )
         output += "\n " + indenttext + valtext
       }
       if (vallist.vx_msgblock() != vx_core.e_msgblock) {
-        val msgtext : String = vx_core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed)
+        val msgtext : String = vx_core.vx_string_from_any_indent(
+          vallist.vx_msgblock(), indentint + 1, linefeed
+        )
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext
       }
       output = "(" + typedefname.vx_string() + output + ")"
     } else if (value is vx_core.Type_map) {
-      val valmap : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, value)
+      val valmap : vx_core.Type_map = vx_core.f_any_from_any(
+        vx_core.t_map, value
+      )
       val typedef : vx_core.Type_typedef = valmap.vx_typedef()
       val typedefname : vx_core.Type_string = typedef.name()
-      var indentint : Int = indent
-      indentint += 2
+      val stypedefname : String = typedefname.vx_string()
+      val indentint : Int = indent + 2
       val mapval : Map<String, vx_core.Type_any> = valmap.vx_map()
       val keys : Set<String> = mapval.keys
       for (skey : String in keys) {
@@ -1228,7 +1275,9 @@ object vx_core {
         }
         output += "\n" + indenttext + " " + key + strval
       }
-      if (valmap.vx_msgblock() != vx_core.e_msgblock) {
+      if (stypedefname == "msg") {
+      } else if (stypedefname == "msgblock") {
+      } else if (valmap.vx_msgblock() != vx_core.e_msgblock) {
         val msgtext : String = vx_core.vx_string_from_any_indent(
           valmap.vx_msgblock(), indentint, linefeed
         )
@@ -1295,7 +1344,8 @@ object vx_core {
   fun vx_string_from_any_indent(
     value : vx_core.Type_any,
     indent : vx_core.Type_int,
-    linefeed : vx_core.Type_boolean) : vx_core.Type_string {
+    linefeed : vx_core.Type_boolean
+  ) : vx_core.Type_string {
     val soutput : String = vx_core.vx_string_from_any_indent(
       value,
       indent.vx_int(),
@@ -1308,7 +1358,8 @@ object vx_core {
   fun vx_string_from_string_find_replace(
     text : String,
     find : String,
-    replace : String) : String {
+    replace : String
+  ) : String {
     val output : String = text.replace(find, replace)
     return output
   }
@@ -1317,7 +1368,8 @@ object vx_core {
   fun vx_string_from_string_find_replace(
     text : vx_core.Type_string,
     find : vx_core.Type_string,
-    replace : vx_core.Type_string) : vx_core.Type_string {
+    replace : vx_core.Type_string
+  ) : vx_core.Type_string {
     val stext : String = vx_core.vx_string_from_string_find_replace(
       text.vx_string(), find.vx_string(), replace.vx_string()
     )
@@ -1462,6 +1514,11 @@ object vx_core {
     return output
   }
 
+  /**
+   * type: any
+   * Any Value for Variant Type
+   * (type any)
+   */
   interface Type_any {
     fun vx_new(vararg vals : Any) : vx_core.Type_any
     fun vx_copy(vararg vals : Any) : vx_core.Type_any
@@ -1540,6 +1597,11 @@ object vx_core {
   val e_any : vx_core.Type_any = vx_core.Class_any()
   val t_any : vx_core.Type_any = vx_core.Class_any()
 
+  /**
+   * type: any-async<-func
+   * A sync or async function that returns one value.
+   * (type any-async<-func)
+   */
   interface Type_any_async_from_func : vx_core.Type_any {
   }
 
@@ -1601,6 +1663,11 @@ object vx_core {
   val e_any_async_from_func : vx_core.Type_any_async_from_func = vx_core.Class_any_async_from_func()
   val t_any_async_from_func : vx_core.Type_any_async_from_func = vx_core.Class_any_async_from_func()
 
+  /**
+   * type: any<-anylist
+   * List of any<-any
+   * (type any<-anylist)
+   */
   interface Type_any_from_anylist : vx_core.Type_list {
     fun vx_listany_from_any() : List<vx_core.Func_any_from_any>
     fun vx_any_from_any(index : vx_core.Type_int) : vx_core.Func_any_from_any
@@ -1731,6 +1798,11 @@ object vx_core {
   val e_any_from_anylist : vx_core.Type_any_from_anylist = vx_core.Class_any_from_anylist()
   val t_any_from_anylist : vx_core.Type_any_from_anylist = vx_core.Class_any_from_anylist()
 
+  /**
+   * type: anylist
+   * A list of any
+   * (type anylist)
+   */
   interface Type_anylist : vx_core.Type_list {
   }
 
@@ -1775,10 +1847,7 @@ object vx_core {
       var listval : MutableList<vx_core.Type_any> = ArrayList<vx_core.Type_any>(value.vx_list())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
-        if (valsub is vx_core.Type_msgblock) {
-          msgblock = vx_core.vx_copy(msgblock, valsub)
-        } else if (valsub is vx_core.Type_msg) {
-          msgblock = vx_core.vx_copy(msgblock, valsub)
+        if (false) {
         } else if (valsub is vx_core.Type_anylist) {
           var multi : vx_core.Type_anylist = valsub as vx_core.Type_anylist
           ischanged = true
@@ -1849,6 +1918,11 @@ object vx_core {
   val e_anylist : vx_core.Type_anylist = vx_core.Class_anylist()
   val t_anylist : vx_core.Type_anylist = vx_core.Class_anylist()
 
+  /**
+   * type: anymap
+   * A map of any
+   * (type anymap)
+   */
   interface Type_anymap : vx_core.Type_map {
   }
 
@@ -2032,6 +2106,11 @@ object vx_core {
   val e_anymap : vx_core.Type_anymap = vx_core.Class_anymap()
   val t_anymap : vx_core.Type_anymap = vx_core.Class_anymap()
 
+  /**
+   * type: anytype
+   * Any Type that allows any Type as a Value
+   * (type anytype)
+   */
   interface Type_anytype : vx_core.Type_any {
   }
 
@@ -2093,6 +2172,11 @@ object vx_core {
   val e_anytype : vx_core.Type_anytype = vx_core.Class_anytype()
   val t_anytype : vx_core.Type_anytype = vx_core.Class_anytype()
 
+  /**
+   * type: arg
+   * A function argument
+   * (type arg)
+   */
   interface Type_arg : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun argtype() : vx_core.Type_any
@@ -2151,13 +2235,13 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":argtype")) {
+      } else if ((skey == ":argtype")) {
         output = this.argtype()
-      } else if ((skey==":fn-any")) {
+      } else if ((skey == ":fn-any")) {
         output = this.fn_any()
-      } else if ((skey==":doc")) {
+      } else if ((skey == ":doc")) {
         output = this.doc()
       }
       return output
@@ -2241,7 +2325,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2265,7 +2349,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/arg", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":argtype")) {
+          } else if ((key == ":argtype")) {
             if (valsub == vx_p_argtype) {
             } else if (valsub is vx_core.Type_any) {
               var valargtype : vx_core.Type_any = valsub as vx_core.Type_any
@@ -2286,7 +2370,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/arg", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":fn-any")) {
+          } else if ((key == ":fn-any")) {
             if (valsub == vx_p_fn_any) {
             } else if (valsub is vx_core.Func_any_from_func) {
               var valfn_any : vx_core.Func_any_from_func = valsub as vx_core.Func_any_from_func
@@ -2307,7 +2391,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/arg", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":doc")) {
+          } else if ((key == ":doc")) {
             if (valsub == vx_p_doc) {
             } else if (valsub is vx_core.Type_string) {
               var valdoc : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2385,6 +2469,11 @@ object vx_core {
   val e_arg : vx_core.Type_arg = vx_core.Class_arg()
   val t_arg : vx_core.Type_arg = vx_core.Class_arg()
 
+  /**
+   * type: arglist
+   * A list of arg
+   * (type arglist)
+   */
   interface Type_arglist : vx_core.Type_list {
     fun vx_listarg() : List<vx_core.Type_arg>
     fun vx_arg(index : vx_core.Type_int) : vx_core.Type_arg
@@ -2454,8 +2543,9 @@ object vx_core {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_core.Type_arg) {
+          var subitem : vx_core.Type_arg = valsub as vx_core.Type_arg
           ischanged = true
-          listval.add(valsub as vx_core.Type_arg)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -2518,6 +2608,11 @@ object vx_core {
   val e_arglist : vx_core.Type_arglist = vx_core.Class_arglist()
   val t_arglist : vx_core.Type_arglist = vx_core.Class_arglist()
 
+  /**
+   * type: argmap
+   * A map of arg
+   * (type argmap)
+   */
   interface Type_argmap : vx_core.Type_map {
     fun vx_maparg() : Map<String, vx_core.Type_arg>
     fun vx_arg(key : vx_core.Type_string) : vx_core.Type_arg
@@ -2714,6 +2809,11 @@ object vx_core {
   val e_argmap : vx_core.Type_argmap = vx_core.Class_argmap()
   val t_argmap : vx_core.Type_argmap = vx_core.Class_argmap()
 
+  /**
+   * type: boolean
+   * Standard Boolean Type
+   * (type boolean)
+   */
   interface Type_boolean : vx_core.Type_any {
     fun vx_boolean() : Boolean
   }
@@ -2801,6 +2901,10 @@ object vx_core {
 
   val t_boolean : vx_core.Type_boolean = vx_core.Class_boolean()
 
+  /**
+   * type: booleanlist
+   * (type booleanlist)
+   */
   interface Type_booleanlist : vx_core.Type_list {
     fun vx_listboolean() : List<vx_core.Type_boolean>
     fun vx_boolean(index : vx_core.Type_int) : vx_core.Type_boolean
@@ -2870,8 +2974,9 @@ object vx_core {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is Boolean) {
+          var subitem : vx_core.Type_boolean = vx_core.vx_new(vx_core.t_boolean, valsub)
           ischanged = true
-          listval.add(vx_core.vx_new(vx_core.t_boolean, valsub))
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -2934,6 +3039,10 @@ object vx_core {
   val e_booleanlist : vx_core.Type_booleanlist = vx_core.Class_booleanlist()
   val t_booleanlist : vx_core.Type_booleanlist = vx_core.Class_booleanlist()
 
+  /**
+   * type: collection
+   * (type collection)
+   */
   interface Type_collection : vx_core.Type_any {
   }
 
@@ -2995,6 +3104,10 @@ object vx_core {
   val e_collection : vx_core.Type_collection = vx_core.Class_collection()
   val t_collection : vx_core.Type_collection = vx_core.Class_collection()
 
+  /**
+   * type: compilelanguages
+   * (type compilelanguages)
+   */
   interface Type_compilelanguages : vx_core.Type_any {
   }
 
@@ -3056,6 +3169,11 @@ object vx_core {
   val e_compilelanguages : vx_core.Type_compilelanguages = vx_core.Class_compilelanguages()
   val t_compilelanguages : vx_core.Type_compilelanguages = vx_core.Class_compilelanguages()
 
+  /**
+   * type: connect
+   * General connect trait
+   * (type connect)
+   */
   interface Type_connect : vx_core.Type_any {
   }
 
@@ -3117,6 +3235,11 @@ object vx_core {
   val e_connect : vx_core.Type_connect = vx_core.Class_connect()
   val t_connect : vx_core.Type_connect = vx_core.Class_connect()
 
+  /**
+   * type: connectlist
+   * List of connect
+   * (type connectlist)
+   */
   interface Type_connectlist : vx_core.Type_list {
     fun vx_listconnect() : List<vx_core.Type_connect>
     fun vx_connect(index : vx_core.Type_int) : vx_core.Type_connect
@@ -3186,8 +3309,9 @@ object vx_core {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_core.Type_connect) {
+          var subitem : vx_core.Type_connect = valsub as vx_core.Type_connect
           ischanged = true
-          listval.add(valsub as vx_core.Type_connect)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -3250,6 +3374,11 @@ object vx_core {
   val e_connectlist : vx_core.Type_connectlist = vx_core.Class_connectlist()
   val t_connectlist : vx_core.Type_connectlist = vx_core.Class_connectlist()
 
+  /**
+   * type: connectmap
+   * Map of connect
+   * (type connectmap)
+   */
   interface Type_connectmap : vx_core.Type_map {
     fun vx_mapconnect() : Map<String, vx_core.Type_connect>
     fun vx_connect(key : vx_core.Type_string) : vx_core.Type_connect
@@ -3446,6 +3575,11 @@ object vx_core {
   val e_connectmap : vx_core.Type_connectmap = vx_core.Class_connectmap()
   val t_connectmap : vx_core.Type_connectmap = vx_core.Class_connectmap()
 
+  /**
+   * type: const
+   * Original Constant Class.
+   * (type const)
+   */
   interface Type_const : vx_core.Type_any {
   }
 
@@ -3507,6 +3641,11 @@ object vx_core {
   val e_const : vx_core.Type_const = vx_core.Class_const()
   val t_const : vx_core.Type_const = vx_core.Class_const()
 
+  /**
+   * type: constdef
+   * Const Definition Class for inspecting properties.
+   * (type constdef)
+   */
   interface Type_constdef : vx_core.Type_struct {
     fun pkgname() : vx_core.Type_string
     fun name() : vx_core.Type_string
@@ -3553,11 +3692,11 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":pkgname")) {
+      } else if ((skey == ":pkgname")) {
         output = this.pkgname()
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":type")) {
+      } else if ((skey == ":type")) {
         output = this.type()
       }
       return output
@@ -3638,7 +3777,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":pkgname")) {
+          } else if ((key == ":pkgname")) {
             if (valsub == vx_p_pkgname) {
             } else if (valsub is vx_core.Type_string) {
               var valpkgname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -3662,7 +3801,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/constdef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -3686,7 +3825,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/constdef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":type")) {
+          } else if ((key == ":type")) {
             if (valsub == vx_p_type) {
             } else if (valsub is vx_core.Type_any) {
               var valtype : vx_core.Type_any = valsub as vx_core.Type_any
@@ -3760,6 +3899,11 @@ object vx_core {
   val e_constdef : vx_core.Type_constdef = vx_core.Class_constdef()
   val t_constdef : vx_core.Type_constdef = vx_core.Class_constdef()
 
+  /**
+   * type: constlist
+   * List of Const.
+   * (type constlist)
+   */
   interface Type_constlist : vx_core.Type_list {
   }
 
@@ -3878,6 +4022,11 @@ object vx_core {
   val e_constlist : vx_core.Type_constlist = vx_core.Class_constlist()
   val t_constlist : vx_core.Type_constlist = vx_core.Class_constlist()
 
+  /**
+   * type: constmap
+   * Map of Const.
+   * (type constmap)
+   */
   interface Type_constmap : vx_core.Type_map {
   }
 
@@ -4061,6 +4210,11 @@ object vx_core {
   val e_constmap : vx_core.Type_constmap = vx_core.Class_constmap()
   val t_constmap : vx_core.Type_constmap = vx_core.Class_constmap()
 
+  /**
+   * type: context
+   * Context
+   * (type context)
+   */
   interface Type_context : vx_core.Type_struct {
     fun code() : vx_core.Type_string
     fun session() : vx_core.Type_session
@@ -4119,13 +4273,13 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":code")) {
+      } else if ((skey == ":code")) {
         output = this.code()
-      } else if ((skey==":session")) {
+      } else if ((skey == ":session")) {
         output = this.session()
-      } else if ((skey==":setting")) {
+      } else if ((skey == ":setting")) {
         output = this.setting()
-      } else if ((skey==":state")) {
+      } else if ((skey == ":state")) {
         output = this.state()
       }
       return output
@@ -4209,7 +4363,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":code")) {
+          } else if ((key == ":code")) {
             if (valsub == vx_p_code) {
             } else if (valsub is vx_core.Type_string) {
               var valcode : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4233,7 +4387,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/context", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":session")) {
+          } else if ((key == ":session")) {
             if (valsub == vx_p_session) {
             } else if (valsub is vx_core.Type_session) {
               var valsession : vx_core.Type_session = valsub as vx_core.Type_session
@@ -4254,7 +4408,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/context", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":setting")) {
+          } else if ((key == ":setting")) {
             if (valsub == vx_p_setting) {
             } else if (valsub is vx_core.Type_setting) {
               var valsetting : vx_core.Type_setting = valsub as vx_core.Type_setting
@@ -4275,7 +4429,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/context", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":state")) {
+          } else if ((key == ":state")) {
             if (valsub == vx_p_state) {
             } else if (valsub is vx_core.Type_state) {
               var valstate : vx_core.Type_state = valsub as vx_core.Type_state
@@ -4350,6 +4504,11 @@ object vx_core {
   val e_context : vx_core.Type_context = vx_core.Class_context()
   val t_context : vx_core.Type_context = vx_core.Class_context()
 
+  /**
+   * type: date
+   * A simple UTC date.
+   * (type date)
+   */
   interface Type_date : vx_core.Type_any {
   }
 
@@ -4411,6 +4570,11 @@ object vx_core {
   val e_date : vx_core.Type_date = vx_core.Class_date()
   val t_date : vx_core.Type_date = vx_core.Class_date()
 
+  /**
+   * type: decimal
+   * A clean version of float like Java BigDecimal.
+   * (type decimal)
+   */
   interface Type_decimal : vx_core.Type_number {
     fun vx_float() : Float
     fun vx_string() : String
@@ -4503,6 +4667,11 @@ object vx_core {
   val e_decimal : vx_core.Type_decimal = vx_core.Class_decimal()
   val t_decimal : vx_core.Type_decimal = vx_core.Class_decimal()
 
+  /**
+   * type: error
+   * Error Type
+   * (type error)
+   */
   interface Type_error : vx_core.Type_any {
   }
 
@@ -4564,6 +4733,11 @@ object vx_core {
   val e_error : vx_core.Type_error = vx_core.Class_error()
   val t_error : vx_core.Type_error = vx_core.Class_error()
 
+  /**
+   * type: float
+   * Standard Floating Point Number
+   * (type float)
+   */
   interface Type_float : vx_core.Type_number {
     fun vx_float() : Float
   }
@@ -4670,6 +4844,11 @@ object vx_core {
   val e_float : vx_core.Type_float = vx_core.Class_float()
   val t_float : vx_core.Type_float = vx_core.Class_float()
 
+  /**
+   * type: func
+   * Original Function Class.
+   * (type func)
+   */
   interface Type_func : vx_core.Type_any {
     fun vx_funcdef() : vx_core.Type_funcdef
   }
@@ -4737,6 +4916,11 @@ object vx_core {
   val e_func : vx_core.Type_func = vx_core.Class_func()
   val t_func : vx_core.Type_func = vx_core.Class_func()
 
+  /**
+   * type: funcdef
+   * Func Definition Class for inspecting properties.
+   * (type funcdef)
+   */
   interface Type_funcdef : vx_core.Type_struct {
     fun pkgname() : vx_core.Type_string
     fun name() : vx_core.Type_string
@@ -4807,15 +4991,15 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":pkgname")) {
+      } else if ((skey == ":pkgname")) {
         output = this.pkgname()
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":idx")) {
+      } else if ((skey == ":idx")) {
         output = this.idx()
-      } else if ((skey==":type")) {
+      } else if ((skey == ":type")) {
         output = this.type()
-      } else if ((skey==":async")) {
+      } else if ((skey == ":async")) {
         output = this.async()
       }
       return output
@@ -4902,7 +5086,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":pkgname")) {
+          } else if ((key == ":pkgname")) {
             if (valsub == vx_p_pkgname) {
             } else if (valsub is vx_core.Type_string) {
               var valpkgname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4926,7 +5110,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/funcdef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4950,7 +5134,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/funcdef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":idx")) {
+          } else if ((key == ":idx")) {
             if (valsub == vx_p_idx) {
             } else if (valsub is vx_core.Type_int) {
               var validx : vx_core.Type_int = valsub as vx_core.Type_int
@@ -4974,7 +5158,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/funcdef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":type")) {
+          } else if ((key == ":type")) {
             if (valsub == vx_p_type) {
             } else if (valsub is vx_core.Type_any) {
               var valtype : vx_core.Type_any = valsub as vx_core.Type_any
@@ -4995,7 +5179,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/funcdef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":async")) {
+          } else if ((key == ":async")) {
             if (valsub == vx_p_async) {
             } else if (valsub is vx_core.Type_boolean) {
               var valasync : vx_core.Type_boolean = valsub as vx_core.Type_boolean
@@ -5074,6 +5258,11 @@ object vx_core {
   val e_funcdef : vx_core.Type_funcdef = vx_core.Class_funcdef()
   val t_funcdef : vx_core.Type_funcdef = vx_core.Class_funcdef()
 
+  /**
+   * type: funclist
+   * List of Func.
+   * (type funclist)
+   */
   interface Type_funclist : vx_core.Type_list {
     fun vx_listfunc() : List<vx_core.Type_func>
     fun vx_func(index : vx_core.Type_int) : vx_core.Type_func
@@ -5143,8 +5332,9 @@ object vx_core {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_core.Type_func) {
+          var subitem : vx_core.Type_func = valsub as vx_core.Type_func
           ischanged = true
-          listval.add(valsub as vx_core.Type_func)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -5207,6 +5397,11 @@ object vx_core {
   val e_funclist : vx_core.Type_funclist = vx_core.Class_funclist()
   val t_funclist : vx_core.Type_funclist = vx_core.Class_funclist()
 
+  /**
+   * type: funcmap
+   * Map of Func.
+   * (type funcmap)
+   */
   interface Type_funcmap : vx_core.Type_map {
     fun vx_mapfunc() : Map<String, vx_core.Type_func>
     fun vx_func(key : vx_core.Type_string) : vx_core.Type_func
@@ -5403,6 +5598,11 @@ object vx_core {
   val e_funcmap : vx_core.Type_funcmap = vx_core.Class_funcmap()
   val t_funcmap : vx_core.Type_funcmap = vx_core.Class_funcmap()
 
+  /**
+   * type: int
+   * A simple integer.
+   * (type int)
+   */
   interface Type_int : vx_core.Type_number {
     fun vx_int() : Int
   }
@@ -5493,6 +5693,11 @@ object vx_core {
   val e_int : vx_core.Type_int = vx_core.Class_int()
   val t_int : vx_core.Type_int = vx_core.Class_int()
 
+  /**
+   * type: intlist
+   * A list of int.
+   * (type intlist)
+   */
   interface Type_intlist : vx_core.Type_list {
     fun vx_listint() : List<vx_core.Type_int>
     fun vx_int(index : vx_core.Type_int) : vx_core.Type_int
@@ -5562,8 +5767,9 @@ object vx_core {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is Int) {
+          var subitem : vx_core.Type_int = vx_core.vx_new(vx_core.t_int, valsub)
           ischanged = true
-          listval.add(vx_core.vx_new(vx_core.t_int, valsub))
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -5626,6 +5832,11 @@ object vx_core {
   val e_intlist : vx_core.Type_intlist = vx_core.Class_intlist()
   val t_intlist : vx_core.Type_intlist = vx_core.Class_intlist()
 
+  /**
+   * type: intmap
+   * A map of int.
+   * (type intmap)
+   */
   interface Type_intmap : vx_core.Type_map {
     fun vx_mapint() : Map<String, vx_core.Type_int>
     fun vx_int(key : vx_core.Type_string) : vx_core.Type_int
@@ -5822,6 +6033,11 @@ object vx_core {
   val e_intmap : vx_core.Type_intmap = vx_core.Class_intmap()
   val t_intmap : vx_core.Type_intmap = vx_core.Class_intmap()
 
+  /**
+   * type: list
+   * A simple untyped list.
+   * (type list)
+   */
   interface Type_list : vx_core.Type_any {
     fun vx_list() : List<vx_core.Type_any>
     fun vx_any(index : vx_core.Type_int) : vx_core.Type_any
@@ -5942,6 +6158,11 @@ object vx_core {
   val e_list : vx_core.Type_list = vx_core.Class_list()
   val t_list : vx_core.Type_list = vx_core.Class_list()
 
+  /**
+   * type: listtype
+   * A generic type that extends :list.
+   * (type listtype)
+   */
   interface Type_listtype : vx_core.Type_any {
   }
 
@@ -6003,6 +6224,11 @@ object vx_core {
   val e_listtype : vx_core.Type_listtype = vx_core.Class_listtype()
   val t_listtype : vx_core.Type_listtype = vx_core.Class_listtype()
 
+  /**
+   * type: locale
+   * Localization data.
+   * (type locale)
+   */
   interface Type_locale : vx_core.Type_struct {
   }
 
@@ -6075,6 +6301,11 @@ object vx_core {
   val e_locale : vx_core.Type_locale = vx_core.Class_locale()
   val t_locale : vx_core.Type_locale = vx_core.Class_locale()
 
+  /**
+   * type: map
+   * A simple untyped map.
+   * (type map)
+   */
   interface Type_map : vx_core.Type_any {
     fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map
     fun vx_any(key : vx_core.Type_string) : vx_core.Type_any
@@ -6262,6 +6493,11 @@ object vx_core {
   val e_map : vx_core.Type_map = vx_core.Class_map()
   val t_map : vx_core.Type_map = vx_core.Class_map()
 
+  /**
+   * type: maptype
+   * A generic type that extends :map.
+   * (type maptype)
+   */
   interface Type_maptype : vx_core.Type_any {
   }
 
@@ -6323,6 +6559,11 @@ object vx_core {
   val e_maptype : vx_core.Type_maptype = vx_core.Class_maptype()
   val t_maptype : vx_core.Type_maptype = vx_core.Class_maptype()
 
+  /**
+   * type: mempool
+   * Memory Pool
+   * (type mempool)
+   */
   interface Type_mempool : vx_core.Type_struct {
     fun valuepool() : vx_core.Type_value
   }
@@ -6345,7 +6586,7 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":valuepool")) {
+      } else if ((skey == ":valuepool")) {
         output = this.valuepool()
       }
       return output
@@ -6420,7 +6661,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":valuepool")) {
+          } else if ((key == ":valuepool")) {
             if (valsub == vx_p_valuepool) {
             } else if (valsub is vx_core.Type_value) {
               var valvaluepool : vx_core.Type_value = valsub as vx_core.Type_value
@@ -6492,6 +6733,11 @@ object vx_core {
   val e_mempool : vx_core.Type_mempool = vx_core.Class_mempool()
   val t_mempool : vx_core.Type_mempool = vx_core.Class_mempool()
 
+  /**
+   * type: msg
+   * Message Type for error handling
+   * (type msg)
+   */
   interface Type_msg : vx_core.Type_struct {
     fun code() : vx_core.Type_string
     fun detail() : vx_core.Type_any
@@ -6564,15 +6810,15 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":code")) {
+      } else if ((skey == ":code")) {
         output = this.code()
-      } else if ((skey==":detail")) {
+      } else if ((skey == ":detail")) {
         output = this.detail()
-      } else if ((skey==":path")) {
+      } else if ((skey == ":path")) {
         output = this.path()
-      } else if ((skey==":severity")) {
+      } else if ((skey == ":severity")) {
         output = this.severity()
-      } else if ((skey==":text")) {
+      } else if ((skey == ":text")) {
         output = this.text()
       }
       return output
@@ -6619,7 +6865,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":code")) {
+          } else if ((key == ":code")) {
             if (valsub == vx_p_code) {
             } else if (valsub is vx_core.Type_string) {
               var valcode : vx_core.Type_string = valsub as vx_core.Type_string
@@ -6629,14 +6875,14 @@ object vx_core {
               ischanged = true
               vx_p_code = vx_core.vx_new(vx_core.t_string, valsub)
             }
-          } else if ((key==":detail")) {
+          } else if ((key == ":detail")) {
             if (valsub == vx_p_detail) {
             } else if (valsub is vx_core.Type_any) {
               var valdetail : vx_core.Type_any = valsub as vx_core.Type_any
               ischanged = true
               vx_p_detail = valdetail
             }
-          } else if ((key==":path")) {
+          } else if ((key == ":path")) {
             if (valsub == vx_p_path) {
             } else if (valsub is vx_core.Type_string) {
               var valpath : vx_core.Type_string = valsub as vx_core.Type_string
@@ -6646,7 +6892,7 @@ object vx_core {
               ischanged = true
               vx_p_path = vx_core.vx_new(vx_core.t_string, valsub)
             }
-          } else if ((key==":severity")) {
+          } else if ((key == ":severity")) {
             if (valsub == vx_p_severity) {
             } else if (valsub is vx_core.Type_int) {
               var valseverity : vx_core.Type_int = valsub as vx_core.Type_int
@@ -6656,7 +6902,7 @@ object vx_core {
               ischanged = true
               vx_p_severity = vx_core.vx_new(vx_core.t_int, valsub)
             }
-          } else if ((key==":text")) {
+          } else if ((key == ":text")) {
             if (valsub == vx_p_text) {
             } else if (valsub is vx_core.Type_string) {
               var valtext : vx_core.Type_string = valsub as vx_core.Type_string
@@ -6714,6 +6960,11 @@ object vx_core {
   val e_msg : vx_core.Type_msg = vx_core.Class_msg()
   val t_msg : vx_core.Type_msg = vx_core.Class_msg()
 
+  /**
+   * type: msgblock
+   * Block of Messages. Note: Identical msgblocks are suppressed.
+   * (type msgblock)
+   */
   interface Type_msgblock : vx_core.Type_struct {
     fun msgs() : vx_core.Type_msglist
     fun msgblocks() : vx_core.Type_msgblocklist
@@ -6748,9 +6999,9 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":msgs")) {
+      } else if ((skey == ":msgs")) {
         output = this.msgs()
-      } else if ((skey==":msgblocks")) {
+      } else if ((skey == ":msgblocks")) {
         output = this.msgblocks()
       }
       return output
@@ -6784,24 +7035,22 @@ object vx_core {
       var msgval : vx_core.Type_any = vx_core.e_any
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
-          if (valsub != vx_core.e_msgblock) {
+          if (valsub == vx_core.e_msgblock) {
+          } else if (valsub == msgblock) {
+          } else {
             vx_p_msgblocks = vx_core.vx_copy(vx_p_msgblocks, valsub)
-            ischanged = true
           }
         } else if (valsub is vx_core.Type_msgblocklist) {
           if (valsub != vx_core.e_msgblocklist) {
             vx_p_msgblocks = vx_core.vx_copy(vx_p_msgblocks, valsub)
-            ischanged = true
           }
         } else if (valsub is vx_core.Type_msg) {
           if (valsub != vx_core.e_msg) {
             vx_p_msgs = vx_core.vx_copy(vx_p_msgs, valsub)
-            ischanged = true
           }
         } else if (valsub is vx_core.Type_msglist) {
           if (valsub != vx_core.e_msglist) {
             vx_p_msgs = vx_core.vx_copy(vx_p_msgs, valsub)
-            ischanged = true
           }
         } else if (key.equals("")) {
           if (false) {
@@ -6814,7 +7063,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":msgs")) {
+          } else if ((key == ":msgs")) {
             if (valsub == vx_p_msgs) {
             } else if (valsub is vx_core.Type_msglist) {
               var valmsgs : vx_core.Type_msglist = valsub as vx_core.Type_msglist
@@ -6835,7 +7084,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/msgblock", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":msgblocks")) {
+          } else if ((key == ":msgblocks")) {
             if (valsub == vx_p_msgblocks) {
             } else if (valsub is vx_core.Type_msgblocklist) {
               var valmsgblocks : vx_core.Type_msgblocklist = valsub as vx_core.Type_msgblocklist
@@ -6860,8 +7109,11 @@ object vx_core {
           key = ""
         }
       }
+      var ischangemsgs : Boolean = vx_p_msgs != value.msgs()
+      var ischangemsgblocks : Boolean = vx_p_msgblocks != value.msgblocks()
+      ischanged = ischangemsgs || ischangemsgblocks
       if (ischanged) {
-        if ((vx_p_msgs.vx_list().size == 0) && (vx_p_msgblocks.vx_list().size == 1)) {
+        if ((vx_p_msgs == vx_core.e_msglist) && (vx_p_msgblocks.vx_list().size == 1)) {
           output = vx_p_msgblocks.vx_listmsgblock().get(0)
         } else {
           var work : vx_core.Class_msgblock = vx_core.Class_msgblock()
@@ -6905,6 +7157,11 @@ object vx_core {
   val e_msgblock : vx_core.Type_msgblock = vx_core.Class_msgblock()
   val t_msgblock : vx_core.Type_msgblock = vx_core.Class_msgblock()
 
+  /**
+   * type: msgblocklist
+   * List of Message Blocks. Note: Identical msgblocks are suppressed.
+   * (type msgblocklist)
+   */
   interface Type_msgblocklist : vx_core.Type_list {
     fun vx_listmsgblock() : List<vx_core.Type_msgblock>
     fun vx_msgblock(index : vx_core.Type_int) : vx_core.Type_msgblock
@@ -6968,8 +7225,11 @@ object vx_core {
           ischanged = true
           listval.addAll(multi.vx_listmsgblock())
         } else if (valsub is vx_core.Type_msgblock) {
-          ischanged = true
-          listval.add(valsub as vx_core.Type_msgblock)
+          var subitem : vx_core.Type_msgblock = valsub as vx_core.Type_msgblock
+          if (!listval.contains(subitem)) {
+            ischanged = true
+            listval.add(subitem)
+          }
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -7032,6 +7292,11 @@ object vx_core {
   val e_msgblocklist : vx_core.Type_msgblocklist = vx_core.Class_msgblocklist()
   val t_msgblocklist : vx_core.Type_msgblocklist = vx_core.Class_msgblocklist()
 
+  /**
+   * type: msglist
+   * List of Messages. Note: Identical msgs are suppressed.
+   * (type msglist)
+   */
   interface Type_msglist : vx_core.Type_list {
     fun vx_listmsg() : List<vx_core.Type_msg>
     fun vx_msg(index : vx_core.Type_int) : vx_core.Type_msg
@@ -7095,8 +7360,11 @@ object vx_core {
           ischanged = true
           listval.addAll(multi.vx_listmsg())
         } else if (valsub is vx_core.Type_msg) {
-          ischanged = true
-          listval.add(valsub as vx_core.Type_msg)
+          var subitem : vx_core.Type_msg = valsub as vx_core.Type_msg
+          if (!listval.contains(subitem)) {
+            ischanged = true
+            listval.add(subitem)
+          }
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -7159,6 +7427,11 @@ object vx_core {
   val e_msglist : vx_core.Type_msglist = vx_core.Class_msglist()
   val t_msglist : vx_core.Type_msglist = vx_core.Class_msglist()
 
+  /**
+   * type: none
+   * No Type. No type is returned at all. e.g. Void
+   * (type none)
+   */
   interface Type_none : vx_core.Type_any {
   }
 
@@ -7220,6 +7493,11 @@ object vx_core {
   val e_none : vx_core.Type_none = vx_core.Class_none()
   val t_none : vx_core.Type_none = vx_core.Class_none()
 
+  /**
+   * type: notype
+   * No Type that allows no Types as a Value
+   * (type notype)
+   */
   interface Type_notype : vx_core.Type_any {
   }
 
@@ -7281,6 +7559,11 @@ object vx_core {
   val e_notype : vx_core.Type_notype = vx_core.Class_notype()
   val t_notype : vx_core.Type_notype = vx_core.Class_notype()
 
+  /**
+   * type: number
+   * A generic number that could be int, float, or decimal.
+   * (type number)
+   */
   interface Type_number : vx_core.Type_any {
   }
 
@@ -7342,6 +7625,11 @@ object vx_core {
   val e_number : vx_core.Type_number = vx_core.Class_number()
   val t_number : vx_core.Type_number = vx_core.Class_number()
 
+  /**
+   * type: numberlist
+   * A list of number.
+   * (type numberlist)
+   */
   interface Type_numberlist : vx_core.Type_list {
     fun vx_listnumber() : List<vx_core.Type_number>
     fun vx_number(index : vx_core.Type_int) : vx_core.Type_number
@@ -7411,8 +7699,9 @@ object vx_core {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_core.Type_number) {
+          var subitem : vx_core.Type_number = valsub as vx_core.Type_number
           ischanged = true
-          listval.add(valsub as vx_core.Type_number)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -7475,6 +7764,11 @@ object vx_core {
   val e_numberlist : vx_core.Type_numberlist = vx_core.Class_numberlist()
   val t_numberlist : vx_core.Type_numberlist = vx_core.Class_numberlist()
 
+  /**
+   * type: numbermap
+   * A map of number.
+   * (type numbermap)
+   */
   interface Type_numbermap : vx_core.Type_map {
     fun vx_mapnumber() : Map<String, vx_core.Type_number>
     fun vx_number(key : vx_core.Type_string) : vx_core.Type_number
@@ -7671,6 +7965,11 @@ object vx_core {
   val e_numbermap : vx_core.Type_numbermap = vx_core.Class_numbermap()
   val t_numbermap : vx_core.Type_numbermap = vx_core.Class_numbermap()
 
+  /**
+   * type: package
+   * A package that store types, consts and funcs.
+   * (type package)
+   */
   interface Type_package : vx_core.Type_struct {
     fun pkgname() : vx_core.Type_string
     fun constmap() : vx_core.Type_constmap
@@ -7741,15 +8040,15 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":pkgname")) {
+      } else if ((skey == ":pkgname")) {
         output = this.pkgname()
-      } else if ((skey==":constmap")) {
+      } else if ((skey == ":constmap")) {
         output = this.constmap()
-      } else if ((skey==":funcmap")) {
+      } else if ((skey == ":funcmap")) {
         output = this.funcmap()
-      } else if ((skey==":typemap")) {
+      } else if ((skey == ":typemap")) {
         output = this.typemap()
-      } else if ((skey==":emptymap")) {
+      } else if ((skey == ":emptymap")) {
         output = this.emptymap()
       }
       return output
@@ -7836,7 +8135,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":pkgname")) {
+          } else if ((key == ":pkgname")) {
             if (valsub == vx_p_pkgname) {
             } else if (valsub is vx_core.Type_string) {
               var valpkgname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -7860,7 +8159,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/package", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":constmap")) {
+          } else if ((key == ":constmap")) {
             if (valsub == vx_p_constmap) {
             } else if (valsub is vx_core.Type_constmap) {
               var valconstmap : vx_core.Type_constmap = valsub as vx_core.Type_constmap
@@ -7881,7 +8180,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/package", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":funcmap")) {
+          } else if ((key == ":funcmap")) {
             if (valsub == vx_p_funcmap) {
             } else if (valsub is vx_core.Type_funcmap) {
               var valfuncmap : vx_core.Type_funcmap = valsub as vx_core.Type_funcmap
@@ -7902,7 +8201,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/package", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":typemap")) {
+          } else if ((key == ":typemap")) {
             if (valsub == vx_p_typemap) {
             } else if (valsub is vx_core.Type_typemap) {
               var valtypemap : vx_core.Type_typemap = valsub as vx_core.Type_typemap
@@ -7923,7 +8222,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/package", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":emptymap")) {
+          } else if ((key == ":emptymap")) {
             if (valsub == vx_p_emptymap) {
             } else if (valsub is vx_core.Type_map) {
               var valemptymap : vx_core.Type_map = valsub as vx_core.Type_map
@@ -7999,6 +8298,10 @@ object vx_core {
   val e_package : vx_core.Type_package = vx_core.Class_package()
   val t_package : vx_core.Type_package = vx_core.Class_package()
 
+  /**
+   * type: packagemap
+   * (type packagemap)
+   */
   interface Type_packagemap : vx_core.Type_map {
     fun vx_mappackage() : Map<String, vx_core.Type_package>
     fun vx_package(key : vx_core.Type_string) : vx_core.Type_package
@@ -8195,6 +8498,11 @@ object vx_core {
   val e_packagemap : vx_core.Type_packagemap = vx_core.Class_packagemap()
   val t_packagemap : vx_core.Type_packagemap = vx_core.Class_packagemap()
 
+  /**
+   * type: permission
+   * Permission
+   * (type permission)
+   */
   interface Type_permission : vx_core.Type_struct {
     fun id() : vx_core.Type_string
   }
@@ -8217,7 +8525,7 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
       }
       return output
@@ -8292,7 +8600,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -8367,6 +8675,11 @@ object vx_core {
   val e_permission : vx_core.Type_permission = vx_core.Class_permission()
   val t_permission : vx_core.Type_permission = vx_core.Class_permission()
 
+  /**
+   * type: permissionlist
+   * List of Permission
+   * (type permissionlist)
+   */
   interface Type_permissionlist : vx_core.Type_list {
     fun vx_listpermission() : List<vx_core.Type_permission>
     fun vx_permission(index : vx_core.Type_int) : vx_core.Type_permission
@@ -8436,8 +8749,9 @@ object vx_core {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_core.Type_permission) {
+          var subitem : vx_core.Type_permission = valsub as vx_core.Type_permission
           ischanged = true
-          listval.add(valsub as vx_core.Type_permission)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -8500,6 +8814,11 @@ object vx_core {
   val e_permissionlist : vx_core.Type_permissionlist = vx_core.Class_permissionlist()
   val t_permissionlist : vx_core.Type_permissionlist = vx_core.Class_permissionlist()
 
+  /**
+   * type: permissionmap
+   * Map of Permission
+   * (type permissionmap)
+   */
   interface Type_permissionmap : vx_core.Type_map {
     fun vx_mappermission() : Map<String, vx_core.Type_permission>
     fun vx_permission(key : vx_core.Type_string) : vx_core.Type_permission
@@ -8696,6 +9015,11 @@ object vx_core {
   val e_permissionmap : vx_core.Type_permissionmap = vx_core.Class_permissionmap()
   val t_permissionmap : vx_core.Type_permissionmap = vx_core.Class_permissionmap()
 
+  /**
+   * type: project
+   * A project.
+   * (type project)
+   */
   interface Type_project : vx_core.Type_struct {
     fun packagemap() : vx_core.Type_packagemap
   }
@@ -8718,7 +9042,7 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":packagemap")) {
+      } else if ((skey == ":packagemap")) {
         output = this.packagemap()
       }
       return output
@@ -8793,7 +9117,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":packagemap")) {
+          } else if ((key == ":packagemap")) {
             if (valsub == vx_p_packagemap) {
             } else if (valsub is vx_core.Type_packagemap) {
               var valpackagemap : vx_core.Type_packagemap = valsub as vx_core.Type_packagemap
@@ -8865,6 +9189,11 @@ object vx_core {
   val e_project : vx_core.Type_project = vx_core.Class_project()
   val t_project : vx_core.Type_project = vx_core.Class_project()
 
+  /**
+   * type: security
+   * Security rules
+   * (type security)
+   */
   interface Type_security : vx_core.Type_struct {
     fun allowfuncs() : vx_core.Type_funclist
     fun permissions() : vx_core.Type_permissionlist
@@ -8911,11 +9240,11 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":allowfuncs")) {
+      } else if ((skey == ":allowfuncs")) {
         output = this.allowfuncs()
-      } else if ((skey==":permissions")) {
+      } else if ((skey == ":permissions")) {
         output = this.permissions()
-      } else if ((skey==":permissionmap")) {
+      } else if ((skey == ":permissionmap")) {
         output = this.permissionmap()
       }
       return output
@@ -8996,7 +9325,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":allowfuncs")) {
+          } else if ((key == ":allowfuncs")) {
             if (valsub == vx_p_allowfuncs) {
             } else if (valsub is vx_core.Type_funclist) {
               var valallowfuncs : vx_core.Type_funclist = valsub as vx_core.Type_funclist
@@ -9017,7 +9346,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/security", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":permissions")) {
+          } else if ((key == ":permissions")) {
             if (valsub == vx_p_permissions) {
             } else if (valsub is vx_core.Type_permissionlist) {
               var valpermissions : vx_core.Type_permissionlist = valsub as vx_core.Type_permissionlist
@@ -9038,7 +9367,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/security", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":permissionmap")) {
+          } else if ((key == ":permissionmap")) {
             if (valsub == vx_p_permissionmap) {
             } else if (valsub is vx_core.Type_permissionmap) {
               var valpermissionmap : vx_core.Type_permissionmap = valsub as vx_core.Type_permissionmap
@@ -9112,6 +9441,11 @@ object vx_core {
   val e_security : vx_core.Type_security = vx_core.Class_security()
   val t_security : vx_core.Type_security = vx_core.Class_security()
 
+  /**
+   * type: session
+   * Session
+   * (type session)
+   */
   interface Type_session : vx_core.Type_struct {
     fun user() : vx_core.Type_user
     fun connectlist() : vx_core.Type_connectlist
@@ -9194,17 +9528,17 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":user")) {
+      } else if ((skey == ":user")) {
         output = this.user()
-      } else if ((skey==":connectlist")) {
+      } else if ((skey == ":connectlist")) {
         output = this.connectlist()
-      } else if ((skey==":connectmap")) {
+      } else if ((skey == ":connectmap")) {
         output = this.connectmap()
-      } else if ((skey==":locale")) {
+      } else if ((skey == ":locale")) {
         output = this.locale()
-      } else if ((skey==":translation")) {
+      } else if ((skey == ":translation")) {
         output = this.translation()
-      } else if ((skey==":translationmap")) {
+      } else if ((skey == ":translationmap")) {
         output = this.translationmap()
       }
       return output
@@ -9294,7 +9628,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":user")) {
+          } else if ((key == ":user")) {
             if (valsub == vx_p_user) {
             } else if (valsub is vx_core.Type_user) {
               var valuser : vx_core.Type_user = valsub as vx_core.Type_user
@@ -9315,7 +9649,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/session", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":connectlist")) {
+          } else if ((key == ":connectlist")) {
             if (valsub == vx_p_connectlist) {
             } else if (valsub is vx_core.Type_connectlist) {
               var valconnectlist : vx_core.Type_connectlist = valsub as vx_core.Type_connectlist
@@ -9336,7 +9670,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/session", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":connectmap")) {
+          } else if ((key == ":connectmap")) {
             if (valsub == vx_p_connectmap) {
             } else if (valsub is vx_core.Type_connectmap) {
               var valconnectmap : vx_core.Type_connectmap = valsub as vx_core.Type_connectmap
@@ -9357,7 +9691,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/session", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":locale")) {
+          } else if ((key == ":locale")) {
             if (valsub == vx_p_locale) {
             } else if (valsub is vx_core.Type_locale) {
               var vallocale : vx_core.Type_locale = valsub as vx_core.Type_locale
@@ -9378,7 +9712,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/session", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":translation")) {
+          } else if ((key == ":translation")) {
             if (valsub == vx_p_translation) {
             } else if (valsub is vx_core.Type_translation) {
               var valtranslation : vx_core.Type_translation = valsub as vx_core.Type_translation
@@ -9399,7 +9733,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/session", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":translationmap")) {
+          } else if ((key == ":translationmap")) {
             if (valsub == vx_p_translationmap) {
             } else if (valsub is vx_core.Type_translationmap) {
               var valtranslationmap : vx_core.Type_translationmap = valsub as vx_core.Type_translationmap
@@ -9476,6 +9810,11 @@ object vx_core {
   val e_session : vx_core.Type_session = vx_core.Class_session()
   val t_session : vx_core.Type_session = vx_core.Class_session()
 
+  /**
+   * type: setting
+   * Settings
+   * (type setting)
+   */
   interface Type_setting : vx_core.Type_struct {
     fun pathmap() : vx_core.Type_stringmap
   }
@@ -9498,7 +9837,7 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":pathmap")) {
+      } else if ((skey == ":pathmap")) {
         output = this.pathmap()
       }
       return output
@@ -9573,7 +9912,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":pathmap")) {
+          } else if ((key == ":pathmap")) {
             if (valsub == vx_p_pathmap) {
             } else if (valsub is vx_core.Type_stringmap) {
               var valpathmap : vx_core.Type_stringmap = valsub as vx_core.Type_stringmap
@@ -9645,6 +9984,11 @@ object vx_core {
   val e_setting : vx_core.Type_setting = vx_core.Class_setting()
   val t_setting : vx_core.Type_setting = vx_core.Class_setting()
 
+  /**
+   * type: state
+   * State. Note that this type is has mutable values.
+   * (type state)
+   */
   interface Type_state : vx_core.Type_struct {
     fun statelistenermap() : vx_core.Type_statelistenermap
   }
@@ -9667,7 +10011,7 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":statelistenermap")) {
+      } else if ((skey == ":statelistenermap")) {
         output = this.statelistenermap()
       }
       return output
@@ -9742,7 +10086,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":statelistenermap")) {
+          } else if ((key == ":statelistenermap")) {
             if (valsub == vx_p_statelistenermap) {
             } else if (valsub is vx_core.Type_statelistenermap) {
               var valstatelistenermap : vx_core.Type_statelistenermap = valsub as vx_core.Type_statelistenermap
@@ -9814,6 +10158,11 @@ object vx_core {
   val e_state : vx_core.Type_state = vx_core.Class_state()
   val t_state : vx_core.Type_state = vx_core.Class_state()
 
+  /**
+   * type: statelistener
+   * A listener to trigger functions on state change.
+   * (type statelistener)
+   */
   interface Type_statelistener : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun value() : vx_core.Type_any
@@ -9860,11 +10209,11 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":value")) {
+      } else if ((skey == ":value")) {
         output = this.value()
-      } else if ((skey==":fn-boolean")) {
+      } else if ((skey == ":fn-boolean")) {
         output = this.fn_boolean()
       }
       return output
@@ -9945,7 +10294,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -9969,7 +10318,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/statelistener", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":value")) {
+          } else if ((key == ":value")) {
             if (valsub == vx_p_value) {
             } else if (valsub is vx_core.Type_any) {
               var valvalue : vx_core.Type_any = valsub as vx_core.Type_any
@@ -9990,7 +10339,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/statelistener", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":fn-boolean")) {
+          } else if ((key == ":fn-boolean")) {
             if (valsub == vx_p_fn_boolean) {
             } else if (valsub is vx_core.Func_boolean_from_none) {
               var valfn_boolean : vx_core.Func_boolean_from_none = valsub as vx_core.Func_boolean_from_none
@@ -10064,6 +10413,11 @@ object vx_core {
   val e_statelistener : vx_core.Type_statelistener = vx_core.Class_statelistener()
   val t_statelistener : vx_core.Type_statelistener = vx_core.Class_statelistener()
 
+  /**
+   * type: statelistenermap
+   * Mutable map of statelisteners
+   * (type statelistenermap)
+   */
   interface Type_statelistenermap : vx_core.Type_map {
     fun vx_mapstatelistener() : Map<String, vx_core.Type_statelistener>
     fun vx_statelistener(key : vx_core.Type_string) : vx_core.Type_statelistener
@@ -10260,6 +10614,11 @@ object vx_core {
   val e_statelistenermap : vx_core.Type_statelistenermap = vx_core.Class_statelistenermap()
   val t_statelistenermap : vx_core.Type_statelistenermap = vx_core.Class_statelistenermap()
 
+  /**
+   * type: string
+   * A simple string.
+   * (type string)
+   */
   interface Type_string : vx_core.Type_any {
     fun vx_string() : String
   }
@@ -10382,6 +10741,11 @@ object vx_core {
   val e_string : vx_core.Type_string = vx_core.Class_string()
   val t_string : vx_core.Type_string = vx_core.Class_string()
 
+  /**
+   * type: stringlist
+   * A list of string.
+   * (type stringlist)
+   */
   interface Type_stringlist : vx_core.Type_list {
     fun vx_liststring() : List<vx_core.Type_string>
     fun vx_string(index : vx_core.Type_int) : vx_core.Type_string
@@ -10451,8 +10815,9 @@ object vx_core {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is String) {
+          var subitem : vx_core.Type_string = vx_core.vx_new(vx_core.t_string, valsub)
           ischanged = true
-          listval.add(vx_core.vx_new(vx_core.t_string, valsub))
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -10515,6 +10880,11 @@ object vx_core {
   val e_stringlist : vx_core.Type_stringlist = vx_core.Class_stringlist()
   val t_stringlist : vx_core.Type_stringlist = vx_core.Class_stringlist()
 
+  /**
+   * type: stringlistlist
+   * A list of stringlist.
+   * (type stringlistlist)
+   */
   interface Type_stringlistlist : vx_core.Type_list {
     fun vx_liststringlist() : List<vx_core.Type_stringlist>
     fun vx_stringlist(index : vx_core.Type_int) : vx_core.Type_stringlist
@@ -10584,8 +10954,9 @@ object vx_core {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_core.Type_stringlist) {
+          var subitem : vx_core.Type_stringlist = valsub as vx_core.Type_stringlist
           ischanged = true
-          listval.add(valsub as vx_core.Type_stringlist)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -10648,6 +11019,11 @@ object vx_core {
   val e_stringlistlist : vx_core.Type_stringlistlist = vx_core.Class_stringlistlist()
   val t_stringlistlist : vx_core.Type_stringlistlist = vx_core.Class_stringlistlist()
 
+  /**
+   * type: stringmap
+   * A map of string.
+   * (type stringmap)
+   */
   interface Type_stringmap : vx_core.Type_map {
     fun vx_mapstring() : Map<String, vx_core.Type_string>
     fun vx_string(key : vx_core.Type_string) : vx_core.Type_string
@@ -10844,6 +11220,11 @@ object vx_core {
   val e_stringmap : vx_core.Type_stringmap = vx_core.Class_stringmap()
   val t_stringmap : vx_core.Type_stringmap = vx_core.Class_stringmap()
 
+  /**
+   * type: stringmutablemap
+   * A mutable map of string. Note: Mutables are dangerous.
+   * (type stringmutablemap)
+   */
   interface Type_stringmutablemap : vx_core.Type_map {
     fun vx_mapstring() : Map<String, vx_core.Type_string>
     fun vx_string(key : vx_core.Type_string) : vx_core.Type_string
@@ -11040,6 +11421,11 @@ object vx_core {
   val e_stringmutablemap : vx_core.Type_stringmutablemap = vx_core.Class_stringmutablemap()
   val t_stringmutablemap : vx_core.Type_stringmutablemap = vx_core.Class_stringmutablemap()
 
+  /**
+   * type: struct
+   * Struct is the type of all structures/objects with properties.
+   * (type struct)
+   */
   interface Type_struct : vx_core.Type_any {
     fun vx_any(key : vx_core.Type_string) : vx_core.Type_any
     fun vx_map() : Map<String, vx_core.Type_any>
@@ -11114,6 +11500,11 @@ object vx_core {
   val e_struct : vx_core.Type_struct = vx_core.Class_struct()
   val t_struct : vx_core.Type_struct = vx_core.Class_struct()
 
+  /**
+   * type: thenelse
+   * An object used in if and switch functions.
+   * (type thenelse)
+   */
   interface Type_thenelse : vx_core.Type_struct {
     fun code() : vx_core.Type_string
     fun value() : vx_core.Type_any
@@ -11184,15 +11575,15 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":code")) {
+      } else if ((skey == ":code")) {
         output = this.code()
-      } else if ((skey==":value")) {
+      } else if ((skey == ":value")) {
         output = this.value()
-      } else if ((skey==":values")) {
+      } else if ((skey == ":values")) {
         output = this.values()
-      } else if ((skey==":fn-cond")) {
+      } else if ((skey == ":fn-cond")) {
         output = this.fn_cond()
-      } else if ((skey==":fn-any")) {
+      } else if ((skey == ":fn-any")) {
         output = this.fn_any()
       }
       return output
@@ -11279,7 +11670,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":code")) {
+          } else if ((key == ":code")) {
             if (valsub == vx_p_code) {
             } else if (valsub is vx_core.Type_string) {
               var valcode : vx_core.Type_string = valsub as vx_core.Type_string
@@ -11303,7 +11694,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/thenelse", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":value")) {
+          } else if ((key == ":value")) {
             if (valsub == vx_p_value) {
             } else if (valsub is vx_core.Type_any) {
               var valvalue : vx_core.Type_any = valsub as vx_core.Type_any
@@ -11324,7 +11715,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/thenelse", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":values")) {
+          } else if ((key == ":values")) {
             if (valsub == vx_p_values) {
             } else if (valsub is vx_core.Type_list) {
               var valvalues : vx_core.Type_list = valsub as vx_core.Type_list
@@ -11345,7 +11736,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/thenelse", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":fn-cond")) {
+          } else if ((key == ":fn-cond")) {
             if (valsub == vx_p_fn_cond) {
             } else if (valsub is vx_core.Func_boolean_from_func) {
               var valfn_cond : vx_core.Func_boolean_from_func = valsub as vx_core.Func_boolean_from_func
@@ -11366,7 +11757,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/thenelse", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":fn-any")) {
+          } else if ((key == ":fn-any")) {
             if (valsub == vx_p_fn_any) {
             } else if (valsub is vx_core.Func_any_from_func) {
               var valfn_any : vx_core.Func_any_from_func = valsub as vx_core.Func_any_from_func
@@ -11442,6 +11833,11 @@ object vx_core {
   val e_thenelse : vx_core.Type_thenelse = vx_core.Class_thenelse()
   val t_thenelse : vx_core.Type_thenelse = vx_core.Class_thenelse()
 
+  /**
+   * type: thenelselist
+   * A list of thenelse.
+   * (type thenelselist)
+   */
   interface Type_thenelselist : vx_core.Type_list {
     fun vx_listthenelse() : List<vx_core.Type_thenelse>
     fun vx_thenelse(index : vx_core.Type_int) : vx_core.Type_thenelse
@@ -11511,8 +11907,9 @@ object vx_core {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_core.Type_thenelse) {
+          var subitem : vx_core.Type_thenelse = valsub as vx_core.Type_thenelse
           ischanged = true
-          listval.add(valsub as vx_core.Type_thenelse)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -11575,6 +11972,11 @@ object vx_core {
   val e_thenelselist : vx_core.Type_thenelselist = vx_core.Class_thenelselist()
   val t_thenelselist : vx_core.Type_thenelselist = vx_core.Class_thenelselist()
 
+  /**
+   * type: translation
+   * i18 language translation.
+   * (type translation)
+   */
   interface Type_translation : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun wordmap() : vx_core.Type_stringmap
@@ -11609,9 +12011,9 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":wordmap")) {
+      } else if ((skey == ":wordmap")) {
         output = this.wordmap()
       }
       return output
@@ -11689,7 +12091,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -11713,7 +12115,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/translation", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":wordmap")) {
+          } else if ((key == ":wordmap")) {
             if (valsub == vx_p_wordmap) {
             } else if (valsub is vx_core.Type_stringmap) {
               var valwordmap : vx_core.Type_stringmap = valsub as vx_core.Type_stringmap
@@ -11786,6 +12188,11 @@ object vx_core {
   val e_translation : vx_core.Type_translation = vx_core.Class_translation()
   val t_translation : vx_core.Type_translation = vx_core.Class_translation()
 
+  /**
+   * type: translationlist
+   * i18 language translation list.
+   * (type translationlist)
+   */
   interface Type_translationlist : vx_core.Type_list {
     fun vx_listtranslation() : List<vx_core.Type_translation>
     fun vx_translation(index : vx_core.Type_int) : vx_core.Type_translation
@@ -11855,8 +12262,9 @@ object vx_core {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_core.Type_translation) {
+          var subitem : vx_core.Type_translation = valsub as vx_core.Type_translation
           ischanged = true
-          listval.add(valsub as vx_core.Type_translation)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -11919,6 +12327,11 @@ object vx_core {
   val e_translationlist : vx_core.Type_translationlist = vx_core.Class_translationlist()
   val t_translationlist : vx_core.Type_translationlist = vx_core.Class_translationlist()
 
+  /**
+   * type: translationmap
+   * i18 language translation map.
+   * (type translationmap)
+   */
   interface Type_translationmap : vx_core.Type_map {
     fun vx_maptranslation() : Map<String, vx_core.Type_translation>
     fun vx_translation(key : vx_core.Type_string) : vx_core.Type_translation
@@ -12115,6 +12528,11 @@ object vx_core {
   val e_translationmap : vx_core.Type_translationmap = vx_core.Class_translationmap()
   val t_translationmap : vx_core.Type_translationmap = vx_core.Class_translationmap()
 
+  /**
+   * type: type
+   * Original Type Class
+   * (type type)
+   */
   interface Type_type : vx_core.Type_any {
   }
 
@@ -12176,6 +12594,11 @@ object vx_core {
   val e_type : vx_core.Type_type = vx_core.Class_type()
   val t_type : vx_core.Type_type = vx_core.Class_type()
 
+  /**
+   * type: typedef
+   * Type Definition Class for inspecting Type properties.
+   * (type typedef)
+   */
   interface Type_typedef : vx_core.Type_struct {
     fun pkgname() : vx_core.Type_string
     fun name() : vx_core.Type_string
@@ -12330,29 +12753,29 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":pkgname")) {
+      } else if ((skey == ":pkgname")) {
         output = this.pkgname()
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":extends")) {
+      } else if ((skey == ":extends")) {
         output = this.extend()
-      } else if ((skey==":allowfuncs")) {
+      } else if ((skey == ":allowfuncs")) {
         output = this.allowfuncs()
-      } else if ((skey==":allowtypes")) {
+      } else if ((skey == ":allowtypes")) {
         output = this.allowtypes()
-      } else if ((skey==":allowvalues")) {
+      } else if ((skey == ":allowvalues")) {
         output = this.allowvalues()
-      } else if ((skey==":disallowfuncs")) {
+      } else if ((skey == ":disallowfuncs")) {
         output = this.disallowfuncs()
-      } else if ((skey==":disallowtypes")) {
+      } else if ((skey == ":disallowtypes")) {
         output = this.disallowtypes()
-      } else if ((skey==":disallowvalues")) {
+      } else if ((skey == ":disallowvalues")) {
         output = this.disallowvalues()
-      } else if ((skey==":properties")) {
+      } else if ((skey == ":properties")) {
         output = this.properties()
-      } else if ((skey==":proplast")) {
+      } else if ((skey == ":proplast")) {
         output = this.proplast()
-      } else if ((skey==":traits")) {
+      } else if ((skey == ":traits")) {
         output = this.traits()
       }
       return output
@@ -12460,7 +12883,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":pkgname")) {
+          } else if ((key == ":pkgname")) {
             if (valsub == vx_p_pkgname) {
             } else if (valsub is vx_core.Type_string) {
               var valpkgname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -12484,7 +12907,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -12508,7 +12931,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":extends")) {
+          } else if ((key == ":extends")) {
             if (valsub == vx_p_extend) {
             } else if (valsub is vx_core.Type_string) {
               var valextend : vx_core.Type_string = valsub as vx_core.Type_string
@@ -12532,7 +12955,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":allowfuncs")) {
+          } else if ((key == ":allowfuncs")) {
             if (valsub == vx_p_allowfuncs) {
             } else if (valsub is vx_core.Type_funclist) {
               var valallowfuncs : vx_core.Type_funclist = valsub as vx_core.Type_funclist
@@ -12553,7 +12976,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":allowtypes")) {
+          } else if ((key == ":allowtypes")) {
             if (valsub == vx_p_allowtypes) {
             } else if (valsub is vx_core.Type_typelist) {
               var valallowtypes : vx_core.Type_typelist = valsub as vx_core.Type_typelist
@@ -12574,7 +12997,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":allowvalues")) {
+          } else if ((key == ":allowvalues")) {
             if (valsub == vx_p_allowvalues) {
             } else if (valsub is vx_core.Type_anylist) {
               var valallowvalues : vx_core.Type_anylist = valsub as vx_core.Type_anylist
@@ -12595,7 +13018,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":disallowfuncs")) {
+          } else if ((key == ":disallowfuncs")) {
             if (valsub == vx_p_disallowfuncs) {
             } else if (valsub is vx_core.Type_funclist) {
               var valdisallowfuncs : vx_core.Type_funclist = valsub as vx_core.Type_funclist
@@ -12616,7 +13039,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":disallowtypes")) {
+          } else if ((key == ":disallowtypes")) {
             if (valsub == vx_p_disallowtypes) {
             } else if (valsub is vx_core.Type_typelist) {
               var valdisallowtypes : vx_core.Type_typelist = valsub as vx_core.Type_typelist
@@ -12637,7 +13060,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":disallowvalues")) {
+          } else if ((key == ":disallowvalues")) {
             if (valsub == vx_p_disallowvalues) {
             } else if (valsub is vx_core.Type_anylist) {
               var valdisallowvalues : vx_core.Type_anylist = valsub as vx_core.Type_anylist
@@ -12658,7 +13081,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":properties")) {
+          } else if ((key == ":properties")) {
             if (valsub == vx_p_properties) {
             } else if (valsub is vx_core.Type_argmap) {
               var valproperties : vx_core.Type_argmap = valsub as vx_core.Type_argmap
@@ -12679,7 +13102,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":proplast")) {
+          } else if ((key == ":proplast")) {
             if (valsub == vx_p_proplast) {
             } else if (valsub is vx_core.Type_arg) {
               var valproplast : vx_core.Type_arg = valsub as vx_core.Type_arg
@@ -12700,7 +13123,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":traits")) {
+          } else if ((key == ":traits")) {
             if (valsub == vx_p_traits) {
             } else if (valsub is vx_core.Type_typelist) {
               var valtraits : vx_core.Type_typelist = valsub as vx_core.Type_typelist
@@ -12783,6 +13206,11 @@ object vx_core {
   val e_typedef : vx_core.Type_typedef = vx_core.Class_typedef()
   val t_typedef : vx_core.Type_typedef = vx_core.Class_typedef()
 
+  /**
+   * type: typelist
+   * List of Types
+   * (type typelist)
+   */
   interface Type_typelist : vx_core.Type_list {
   }
 
@@ -12901,6 +13329,11 @@ object vx_core {
   val e_typelist : vx_core.Type_typelist = vx_core.Class_typelist()
   val t_typelist : vx_core.Type_typelist = vx_core.Class_typelist()
 
+  /**
+   * type: typemap
+   * Map of Any Type Class
+   * (type typemap)
+   */
   interface Type_typemap : vx_core.Type_map {
   }
 
@@ -13084,6 +13517,11 @@ object vx_core {
   val e_typemap : vx_core.Type_typemap = vx_core.Class_typemap()
   val t_typemap : vx_core.Type_typemap = vx_core.Class_typemap()
 
+  /**
+   * type: user
+   * User Type
+   * (type user)
+   */
   interface Type_user : vx_core.Type_struct {
     fun security() : vx_core.Type_security
     fun username() : vx_core.Type_string
@@ -13130,11 +13568,11 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":security")) {
+      } else if ((skey == ":security")) {
         output = this.security()
-      } else if ((skey==":username")) {
+      } else if ((skey == ":username")) {
         output = this.username()
-      } else if ((skey==":token")) {
+      } else if ((skey == ":token")) {
         output = this.token()
       }
       return output
@@ -13215,7 +13653,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":security")) {
+          } else if ((key == ":security")) {
             if (valsub == vx_p_security) {
             } else if (valsub is vx_core.Type_security) {
               var valsecurity : vx_core.Type_security = valsub as vx_core.Type_security
@@ -13236,7 +13674,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/user", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":username")) {
+          } else if ((key == ":username")) {
             if (valsub == vx_p_username) {
             } else if (valsub is vx_core.Type_string) {
               var valusername : vx_core.Type_string = valsub as vx_core.Type_string
@@ -13260,7 +13698,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/user", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":token")) {
+          } else if ((key == ":token")) {
             if (valsub == vx_p_token) {
             } else if (valsub is vx_core.Type_string) {
               var valtoken : vx_core.Type_string = valsub as vx_core.Type_string
@@ -13337,6 +13775,10 @@ object vx_core {
   val e_user : vx_core.Type_user = vx_core.Class_user()
   val t_user : vx_core.Type_user = vx_core.Class_user()
 
+  /**
+   * type: value
+   * (type value)
+   */
   interface Type_value : vx_core.Type_struct {
     fun next() : vx_core.Type_any
     fun refs() : vx_core.Type_int
@@ -13371,9 +13813,9 @@ object vx_core {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":next")) {
+      } else if ((skey == ":next")) {
         output = this.next()
-      } else if ((skey==":refs")) {
+      } else if ((skey == ":refs")) {
         output = this.refs()
       }
       return output
@@ -13451,7 +13893,7 @@ object vx_core {
           }
         } else {
           if (false) {
-          } else if ((key==":next")) {
+          } else if ((key == ":next")) {
             if (valsub == vx_p_next) {
             } else if (valsub is vx_core.Type_any) {
               var valnext : vx_core.Type_any = valsub as vx_core.Type_any
@@ -13472,7 +13914,7 @@ object vx_core {
               msg = vx_core.vx_msg_from_error("vx/core/value", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":refs")) {
+          } else if ((key == ":refs")) {
             if (valsub == vx_p_refs) {
             } else if (valsub is vx_core.Type_int) {
               var valrefs : vx_core.Type_int = valsub as vx_core.Type_int
@@ -13548,6 +13990,10 @@ object vx_core {
   val e_value : vx_core.Type_value = vx_core.Class_value()
   val t_value : vx_core.Type_value = vx_core.Class_value()
 
+  /**
+   * Constant: false
+   * {boolean}
+   */
   class Const_false {
     constructor() {}
     companion object {
@@ -13574,6 +14020,11 @@ object vx_core {
 
   val e_boolean : vx_core.Type_boolean = vx_core.c_false
 
+  /**
+   * Constant: global
+   * Global variable for project data.
+   * {project}
+   */
   class Const_global {
     constructor() {}
     companion object {
@@ -13598,6 +14049,11 @@ object vx_core {
   val c_global : vx_core.Type_project = vx_core.Class_project()
 
 
+  /**
+   * Constant: infinity
+   * Infinity. Returned during unusual calculations.
+   * {int}
+   */
   class Const_infinity {
     constructor() {}
     companion object {
@@ -13623,6 +14079,11 @@ object vx_core {
   val c_infinity : vx_core.Type_int = vx_core.Class_int()
 
 
+  /**
+   * Constant: mempool-active
+   * Active Value Memory Pool
+   * {mempool}
+   */
   class Const_mempool_active {
     constructor() {}
     companion object {
@@ -13647,6 +14108,11 @@ object vx_core {
   val c_mempool_active : vx_core.Type_mempool = vx_core.Class_mempool()
 
 
+  /**
+   * Constant: msg-error
+   * Message is an Error
+   * {int}
+   */
   class Const_msg_error {
     constructor() {}
     companion object {
@@ -13672,6 +14138,11 @@ object vx_core {
   val c_msg_error : vx_core.Type_int = vx_core.Class_int()
 
 
+  /**
+   * Constant: msg-info
+   * Message is just information
+   * {int}
+   */
   class Const_msg_info {
     constructor() {}
     companion object {
@@ -13697,6 +14168,11 @@ object vx_core {
   val c_msg_info : vx_core.Type_int = vx_core.Class_int()
 
 
+  /**
+   * Constant: msg-severe
+   * Message is a Severe Error
+   * {int}
+   */
   class Const_msg_severe {
     constructor() {}
     companion object {
@@ -13722,6 +14198,11 @@ object vx_core {
   val c_msg_severe : vx_core.Type_int = vx_core.Class_int()
 
 
+  /**
+   * Constant: msg-warning
+   * Message is a Warning
+   * {int}
+   */
   class Const_msg_warning {
     constructor() {}
     companion object {
@@ -13747,6 +14228,11 @@ object vx_core {
   val c_msg_warning : vx_core.Type_int = vx_core.Class_int()
 
 
+  /**
+   * Constant: neginfinity
+   * Negative Infinity. Returned during unusual calculations.
+   * {int}
+   */
   class Const_neginfinity {
     constructor() {}
     companion object {
@@ -13772,6 +14258,11 @@ object vx_core {
   val c_neginfinity : vx_core.Type_int = vx_core.Class_int()
 
 
+  /**
+   * Constant: newline
+   * New line constant
+   * {string}
+   */
   class Const_newline {
     constructor() {}
     companion object {
@@ -13797,6 +14288,11 @@ object vx_core {
   val c_newline : vx_core.Type_string = vx_core.Class_string()
 
 
+  /**
+   * Constant: notanumber
+   * Not a number. Returned during invalid calculations.
+   * {int}
+   */
   class Const_notanumber {
     constructor() {}
     companion object {
@@ -13822,6 +14318,11 @@ object vx_core {
   val c_notanumber : vx_core.Type_int = vx_core.Class_int()
 
 
+  /**
+   * Constant: nothing
+   * Nothing Value. Opposite of every other value. e.g. Nil, Null
+   * {string}
+   */
   class Const_nothing {
     constructor() {}
     companion object {
@@ -13847,6 +14348,11 @@ object vx_core {
   val c_nothing : vx_core.Type_string = vx_core.Class_string()
 
 
+  /**
+   * Constant: path-test-resources
+   * The test path from project file
+   * {string}
+   */
   class Const_path_test_resources {
     constructor() {}
     companion object {
@@ -13872,6 +14378,11 @@ object vx_core {
   val c_path_test_resources : vx_core.Type_string = vx_core.Class_string()
 
 
+  /**
+   * Constant: quote
+   * Quotation mark constant
+   * {string}
+   */
   class Const_quote {
     constructor() {}
     companion object {
@@ -13897,6 +14408,10 @@ object vx_core {
   val c_quote : vx_core.Type_string = vx_core.Class_string()
 
 
+  /**
+   * Constant: true
+   * {boolean}
+   */
   class Const_true {
     constructor() {}
     companion object {
@@ -13921,7 +14436,13 @@ object vx_core {
 
   val c_true : vx_core.Type_boolean = vx_core.Class_boolean()
 
-
+  /**
+   * @function not
+   * Boolean not
+   * @param  {boolean} value Thing to not
+   * @return {boolean}
+   * (func !)
+   */
   interface Func_not : vx_core.Func_any_from_any {
     fun vx_not(value : vx_core.Type_boolean) : vx_core.Type_boolean
   }
@@ -14012,7 +14533,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function notempty
+   * Returns true if text is not empty.
+   * @param  {string} text
+   * @return {boolean}
+   * (func !-empty)
+   */
   interface Func_notempty : vx_core.Func_any_from_any {
     fun vx_notempty(text : vx_core.Type_string) : vx_core.Type_boolean
   }
@@ -14107,7 +14634,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function notempty 1
+   * Returns true if value is not empty.
+   * @param  {any} value
+   * @return {boolean}
+   * (func !-empty)
+   */
   interface Func_notempty_1 : vx_core.Func_any_from_any {
     fun vx_notempty_1(value : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -14202,7 +14735,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function ne
+   * Returns true if the first arg is not equal to any of the other arg.
+   * @param  {any} val1
+   * @param  {any} val2
+   * @return {boolean}
+   * (func !=)
+   */
   interface Func_ne : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ne(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -14287,7 +14827,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function neqeq
+   * Returns true if the first arg is not strictly equal to any of the other arg.
+   * @param  {any} val1
+   * @param  {any} val2
+   * @return {boolean}
+   * (func !==)
+   */
   interface Func_neqeq : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_neqeq(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -14372,7 +14919,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function multiply
+   * Math int multiply
+   * @param  {int} num1
+   * @param  {int} num2
+   * @return {int}
+   * (func *)
+   */
   interface Func_multiply : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_multiply(num1 : vx_core.Type_int, num2 : vx_core.Type_int) : vx_core.Type_int
   }
@@ -14453,7 +15007,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function multiply 1
+   * Math multipy
+   * @param  {number} num1
+   * @param  {number} num2
+   * @return {number}
+   * (func *)
+   */
   interface Func_multiply_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_multiply_1(num1 : vx_core.Type_number, num2 : vx_core.Type_number) : vx_core.Type_number
   }
@@ -14534,7 +15095,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function multiply 2
+   * Math multiply
+   * @param  {intlist} nums
+   * @return {int}
+   * (func *)
+   */
   interface Func_multiply_2 : vx_core.Func_any_from_any {
     fun vx_multiply_2(nums : vx_core.Type_intlist) : vx_core.Type_int
   }
@@ -14638,7 +15205,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function multiply 3
+   * Math multiply
+   * @param  {numberlist} nums
+   * @return {number}
+   * (func *)
+   */
   interface Func_multiply_3 : vx_core.Func_any_from_any {
     fun vx_multiply_3(nums : vx_core.Type_numberlist) : vx_core.Type_number
   }
@@ -14742,7 +15315,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function plus
+   * Math int plus
+   * @param  {int} num1
+   * @param  {int} num2
+   * @return {int}
+   * (func +)
+   */
   interface Func_plus : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_plus(num1 : vx_core.Type_int, num2 : vx_core.Type_int) : vx_core.Type_int
   }
@@ -14823,7 +15403,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function plus 1
+   * Math number plus
+   * @param  {number} num1
+   * @param  {number} num2
+   * @return {number}
+   * (func +)
+   */
   interface Func_plus_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_plus_1(num1 : vx_core.Type_number, num2 : vx_core.Type_number) : vx_core.Type_number
   }
@@ -14904,7 +15491,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function plus 2
+   * Math int plus
+   * @param  {intlist} nums
+   * @return {int}
+   * (func +)
+   */
   interface Func_plus_2 : vx_core.Func_any_from_any {
     fun vx_plus_2(nums : vx_core.Type_intlist) : vx_core.Type_int
   }
@@ -15008,7 +15601,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function plus 3
+   * Math number plus
+   * @param  {numberlist} nums
+   * @return {number}
+   * (func +)
+   */
   interface Func_plus_3 : vx_core.Func_any_from_any {
     fun vx_plus_3(nums : vx_core.Type_numberlist) : vx_core.Type_number
   }
@@ -15112,7 +15711,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function plus1
+   * Math int plus 1
+   * @param  {int} num
+   * @return {int}
+   * (func +1)
+   */
   interface Func_plus1 : vx_core.Func_any_from_any {
     fun vx_plus1(num : vx_core.Type_int) : vx_core.Type_int
   }
@@ -15206,7 +15811,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function minus
+   * Math int minus
+   * @param  {int} num1
+   * @param  {int} num2
+   * @return {int}
+   * (func -)
+   */
   interface Func_minus : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_minus(num1 : vx_core.Type_int, num2 : vx_core.Type_int) : vx_core.Type_int
   }
@@ -15287,7 +15899,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function minus 1
+   * Math number minus
+   * @param  {number} num1
+   * @param  {number} num2
+   * @return {number}
+   * (func -)
+   */
   interface Func_minus_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_minus_1(num1 : vx_core.Type_number, num2 : vx_core.Type_number) : vx_core.Type_number
   }
@@ -15368,7 +15987,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function minus 2
+   * Math integer minus
+   * @param  {intlist} nums
+   * @return {int}
+   * (func -)
+   */
   interface Func_minus_2 : vx_core.Func_any_from_any {
     fun vx_minus_2(nums : vx_core.Type_intlist) : vx_core.Type_int
   }
@@ -15472,7 +16097,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function minus 3
+   * Math number minus
+   * @param  {numberlist} nums
+   * @return {number}
+   * (func -)
+   */
   interface Func_minus_3 : vx_core.Func_any_from_any {
     fun vx_minus_3(nums : vx_core.Type_numberlist) : vx_core.Type_number
   }
@@ -15576,7 +16207,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function minus1
+   * Math int minus 1
+   * @param  {int} num
+   * @return {int}
+   * (func -1)
+   */
   interface Func_minus1 : vx_core.Func_any_from_any {
     fun vx_minus1(num : vx_core.Type_int) : vx_core.Type_int
   }
@@ -15670,7 +16307,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function dotmethod
+   * Not Recommened: Support for Object Oriented dot notation. e.g. (this.foo 'a') = this.foo('a')
+   * @param  {any} target
+   * @param  {string} method
+   * @param  {anylist} parameters
+   * @return {any}
+   * (func .)
+   */
   interface Func_dotmethod : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_dotmethod(target : vx_core.Type_any, method : vx_core.Type_string, parameters : vx_core.Type_anylist) : vx_core.Type_any
   }
@@ -15750,7 +16395,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function divide
+   * Math divide
+   * @param  {number} num1
+   * @param  {number} num2
+   * @return {number}
+   * (func /)
+   */
   interface Func_divide : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_divide(num1 : vx_core.Type_number, num2 : vx_core.Type_number) : vx_core.Type_number
   }
@@ -15838,7 +16490,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function lt
+   * Returns true if the first arg is less than all of the other args
+   * @param  {any} val1
+   * @param  {any} val2
+   * @return {boolean}
+   * (func <)
+   */
   interface Func_lt : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_lt(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -15940,7 +16599,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function lt 1
+   * Returns true if the first arg is less than all of the other args
+   * @param  {anylist} values
+   * @return {boolean}
+   * (func <)
+   */
   interface Func_lt_1 : vx_core.Func_any_from_any {
     fun vx_lt_1(values : vx_core.Type_anylist) : vx_core.Type_boolean
   }
@@ -16048,7 +16713,16 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function chainfirst
+   * This is a special function that applies a value as the first argument for the first function.
+   * The result is then used as the first argument on the next function, etc. Sometimes this
+   * improves readability.
+   * @param  {any-1} value
+   * @param  {any<-anylist} fnlist
+   * @return {any-1}
+   * (func <-)
+   */
   interface Func_chainfirst : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any> vx_chainfirst(generic_any_1 : T, value : T, fnlist : vx_core.Type_any_from_anylist) : T
   }
@@ -16128,7 +16802,16 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function chainlast
+   * This is a special function that applies a value as the last argument for the first function.
+   * The result is then used as the last argument on the next function, etc. Sometimes this
+   * improves readability.
+   * @param  {any-1} value
+   * @param  {any<-anylist} fnlist
+   * @return {any-1}
+   * (func <<-)
+   */
   interface Func_chainlast : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any> vx_chainlast(generic_any_1 : T, value : T, fnlist : vx_core.Type_any_from_anylist) : T
   }
@@ -16208,7 +16891,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function le
+   * Returns true if the first arg is less or equal than all of the other args
+   * @param  {any} val1
+   * @param  {any} val2
+   * @return {boolean}
+   * (func <=)
+   */
   interface Func_le : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_le(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -16293,7 +16983,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function le 1
+   * Returns true if the first arg is less or equal than all of the other args
+   * @param  {anylist} args
+   * @return {boolean}
+   * (func <=)
+   */
   interface Func_le_1 : vx_core.Func_any_from_any {
     fun vx_le_1(args : vx_core.Type_anylist) : vx_core.Type_boolean
   }
@@ -16388,7 +17084,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function eq
+   * Boolean equal/equivalent
+   * @param  {any} val1
+   * @param  {any} val2
+   * @return {boolean}
+   * (func =)
+   */
   interface Func_eq : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_eq(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -16478,7 +17181,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function eq 1
+   * Boolean equal/equivalent
+   * @param  {anylist} values
+   * @return {boolean}
+   * (func =)
+   */
   interface Func_eq_1 : vx_core.Func_any_from_any {
     fun vx_eq_1(values : vx_core.Type_anylist) : vx_core.Type_boolean
   }
@@ -16586,7 +17295,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function eqeq
+   * Strict equality check. Note that all non-empty, non-constants will not be equal.
+   * @param  {any} val1
+   * @param  {any} val2
+   * @return {boolean}
+   * (func ==)
+   */
   interface Func_eqeq : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_eqeq(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -16667,7 +17383,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function gt
+   * Returns true if the first arg is greater than all of the other args
+   * @param  {any} val1
+   * @param  {any} val2
+   * @return {boolean}
+   * (func >)
+   */
   interface Func_gt : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_gt(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -16769,7 +17492,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function gt 1
+   * Returns true if the first arg is greater than all of the other args
+   * @param  {anylist} values
+   * @return {boolean}
+   * (func >)
+   */
   interface Func_gt_1 : vx_core.Func_any_from_any {
     fun vx_gt_1(values : vx_core.Type_anylist) : vx_core.Type_boolean
   }
@@ -16877,7 +17606,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function ge
+   * Returns true if val1 is greater or equal to val2
+   * @param  {any} val1
+   * @param  {any} val2
+   * @return {boolean}
+   * (func >=)
+   */
   interface Func_ge : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_ge(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -16962,7 +17698,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function ge 1
+   * Returns true if the first arg is greater or equal than all of the other args
+   * @param  {anylist} args
+   * @return {boolean}
+   * (func >=)
+   */
   interface Func_ge_1 : vx_core.Func_any_from_any {
     fun vx_ge_1(args : vx_core.Type_anylist) : vx_core.Type_boolean
   }
@@ -17057,7 +17799,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function allowfuncs_from_security
+   * Returns allowfuncs from a given security.
+   * @param  {security} security
+   * @return {funclist}
+   * (func allowfuncs<-security)
+   */
   interface Func_allowfuncs_from_security : vx_core.Func_any_from_any {
     fun vx_allowfuncs_from_security(security : vx_core.Type_security) : vx_core.Type_funclist
   }
@@ -17148,7 +17896,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function allowtypenames_from_typedef
+   * Return allow name list from type
+   * @param  {typedef} vtypedef
+   * @return {stringlist}
+   * (func allowtypenames<-typedef)
+   */
   interface Func_allowtypenames_from_typedef : vx_core.Func_any_from_any {
     fun vx_allowtypenames_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_stringlist
   }
@@ -17243,7 +17997,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function allowtypes_from_typedef
+   * Return allow type list from type
+   * @param  {typedef} vtypedef
+   * @return {typelist}
+   * (func allowtypes<-typedef)
+   */
   interface Func_allowtypes_from_typedef : vx_core.Func_any_from_any {
     fun vx_allowtypes_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_typelist
   }
@@ -17334,7 +18094,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function and
+   * Returns true if all values are true
+   * @param  {boolean} val1
+   * @param  {boolean} val2
+   * @return {boolean}
+   * (func and)
+   */
   interface Func_and : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_and(val1 : vx_core.Type_boolean, val2 : vx_core.Type_boolean) : vx_core.Type_boolean
   }
@@ -17418,7 +18185,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function and 1
+   * Returns true if all values are true
+   * @param  {booleanlist} values
+   * @return {boolean}
+   * (func and)
+   */
   interface Func_and_1 : vx_core.Func_any_from_any {
     fun vx_and_1(values : vx_core.Type_booleanlist) : vx_core.Type_boolean
   }
@@ -17558,7 +18331,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_any
+   * Function Type taking any value any-2 and returning generic any-1
+   * @param  {any-2} value
+   * @return {any-1}
+   * (func any<-any)
+   */
   interface Func_any_from_any : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T
     fun vx_fn_new(fn : Class_any_from_any.IFn) : vx_core.Func_any_from_any
@@ -17657,7 +18436,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function any_from_any_async
+   * Function Type taking any value any-2 and returning generic any-1
+   * @param  {any-2} value
+   * @return {any-1}
+   * (func any<-any-async)
+   */
   interface Func_any_from_any_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_async(generic_any_1 : T, value : U) : CompletableFuture<T>
     fun vx_fn_new(fn : Class_any_from_any_async.IFn) : vx_core.Func_any_from_any_async
@@ -17757,7 +18544,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_any_context
+   * Function Type taking any value any-2 and returning generic any-1 using context
+   * @param  {any-2} value
+   * @return {any-1}
+   * (func any<-any-context)
+   */
   interface Func_any_from_any_context : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_context(generic_any_1 : T, context : vx_core.Type_context, value : U) : T
     fun vx_fn_new(fn : Class_any_from_any_context.IFn) : vx_core.Func_any_from_any_context
@@ -17857,7 +18650,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function any_from_any_context_async
+   * Generic Function taking any value any-2 and returning generic any-1
+   * @param  {any-2} value
+   * @return {any-1}
+   * (func any<-any-context-async)
+   */
   interface Func_any_from_any_context_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_context_async(generic_any_1 : T, context : vx_core.Type_context, value : U) : CompletableFuture<T>
     fun vx_fn_new(fn : Class_any_from_any_context_async.IFn) : vx_core.Func_any_from_any_context_async
@@ -17958,7 +18759,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_any_key_value
+   * Generic Function returning Generic any-1 from a any-1, a key, and a value.
+   * @param  {any-1} current
+   * @param  {string} key
+   * @param  {any-2} value
+   * @return {any-1}
+   * (func any<-any-key-value)
+   */
   interface Func_any_from_any_key_value : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_key_value(generic_any_1 : T, current : T, key : vx_core.Type_string, value : U) : T
     fun vx_fn_new(fn : Class_any_from_any_key_value.IFn) : vx_core.Func_any_from_any_key_value
@@ -18057,7 +18866,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_func
+   * Generic Function returning Generic any-1 with any parameters
+   * @return {any-1}
+   * (func any<-func)
+   */
   interface Func_any_from_func : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any> vx_any_from_func(generic_any_1 : T) : T
     fun vx_fn_new(fn : Class_any_from_func.IFn) : vx_core.Func_any_from_func
@@ -18153,7 +18967,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function any_from_func_async
+   * Generic Function returning Generic any-1 with any parameters
+   * @return {any-1}
+   * (func any<-func-async)
+   */
   interface Func_any_from_func_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     fun <T : vx_core.Type_any> vx_any_from_func_async(generic_any_1 : T) : CompletableFuture<T>
     fun vx_fn_new(fn : Class_any_from_func_async.IFn) : vx_core.Func_any_from_func_async
@@ -18252,7 +19073,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_int
+   * Generic Function returning Generic any-1 from an int
+   * @param  {int} value
+   * @return {any-1}
+   * (func any<-int)
+   */
   interface Func_any_from_int : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any> vx_any_from_int(generic_any_1 : T, value : vx_core.Type_int) : T
     fun vx_fn_new(fn : Class_any_from_int.IFn) : vx_core.Func_any_from_int
@@ -18349,7 +19176,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_int_any
+   * Generic Function returning Generic any-1 from an int and a value
+   * @param  {int} num
+   * @param  {any-2} value
+   * @return {any-1}
+   * (func any<-int-any)
+   */
   interface Func_any_from_int_any : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_int_any(generic_any_1 : T, num : vx_core.Type_int, value : U) : T
     fun vx_fn_new(fn : Class_any_from_int_any.IFn) : vx_core.Func_any_from_int_any
@@ -18447,7 +19281,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_key_value
+   * Generic Function returning Generic any-1 from a key and a value
+   * @param  {string} key
+   * @param  {any-2} value
+   * @return {any-1}
+   * (func any<-key-value)
+   */
   interface Func_any_from_key_value : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_key_value(generic_any_1 : T, key : vx_core.Type_string, value : U) : T
     fun vx_fn_new(fn : Class_any_from_key_value.IFn) : vx_core.Func_any_from_key_value
@@ -18545,7 +19386,16 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function any_from_key_value_async
+   * Generic Function returning Asynchronous Generic any-1 from a key and a value
+   * @param  {string} key
+   * @param  {any-2} value
+   * @return {any-1}
+   * (func any<-key-value-async)
+   */
   interface Func_any_from_key_value_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_key_value_async(generic_any_1 : T, key : vx_core.Type_string, value : U) : CompletableFuture<T>
     fun vx_fn_new(fn : Class_any_from_key_value_async.IFn) : vx_core.Func_any_from_key_value_async
@@ -18646,7 +19496,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_list
+   * Returns nth value from a list or none if out of bounds
+   * @param  {list-1} values
+   * @param  {int} index
+   * @return {any-1}
+   * (func any<-list)
+   */
   interface Func_any_from_list : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any, X : vx_core.Type_list> vx_any_from_list(generic_any_1 : T, values : X, index : vx_core.Type_int) : T
   }
@@ -18733,7 +19590,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_list_start_reduce
+   * Returns a val from a list reduce operation
+   * @param  {list-2} list
+   * @param  {any-1} valstart
+   * @param  {any<-reduce} fn-reduce
+   * @return {any-1}
+   * (func any<-list-start-reduce)
+   */
   interface Func_any_from_list_start_reduce : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any, Y : vx_core.Type_list> vx_any_from_list_start_reduce(generic_any_1 : T, list : Y, valstart : T, fn_reduce : vx_core.Func_any_from_reduce) : T
   }
@@ -18815,7 +19680,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_list_start_reduce_next
+   * Returns a val from a list reduce operation
+   * @param  {list-2} list
+   * @param  {any-1} valstart
+   * @param  {any<-reduce-next} fn-reduce-next
+   * @return {any-1}
+   * (func any<-list-start-reduce-next)
+   */
   interface Func_any_from_list_start_reduce_next : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any, Y : vx_core.Type_list> vx_any_from_list_start_reduce_next(generic_any_1 : T, list : Y, valstart : T, fn_reduce_next : vx_core.Func_any_from_reduce_next) : T
   }
@@ -18897,7 +19770,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_map
+   * Returns value from a map or empty if not found
+   * @param  {map-1} valuemap
+   * @param  {string} key
+   * @return {any-1}
+   * (func any<-map)
+   */
   interface Func_any_from_map : vx_core.Type_func, vx_core.Type_replfunc {
     fun <N : vx_core.Type_map, T : vx_core.Type_any> vx_any_from_map(generic_any_1 : T, valuemap : N, key : vx_core.Type_string) : T
   }
@@ -18978,7 +19858,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_map_start_reduce
+   * Returns a value by reducing each element of a map.
+   * @param  {map-1} map
+   * @param  {any-1} start
+   * @param  {any<-any-key-value} fn-reduce
+   * @return {any-1}
+   * (func any<-map-start-reduce)
+   */
   interface Func_any_from_map_start_reduce : vx_core.Type_func, vx_core.Type_replfunc {
     fun <N : vx_core.Type_map, T : vx_core.Type_any> vx_any_from_map_start_reduce(generic_any_1 : T, map : N, start : T, fn_reduce : vx_core.Func_any_from_any_key_value) : T
   }
@@ -19060,7 +19948,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_none
+   * Function Type returning Generic any-1 with no parameters
+   * @return {any-1}
+   * (func any<-none)
+   */
   interface Func_any_from_none : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any> vx_any_from_none(generic_any_1 : T) : T
     fun vx_fn_new(fn : Class_any_from_none.IFn) : vx_core.Func_any_from_none
@@ -19156,7 +20049,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function any_from_none_async
+   * Function Type returning Generic any-1 with no parameters
+   * @return {any-1}
+   * (func any<-none-async)
+   */
   interface Func_any_from_none_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     fun <T : vx_core.Type_any> vx_any_from_none_async(generic_any_1 : T) : CompletableFuture<T>
     fun vx_fn_new(fn : Class_any_from_none_async.IFn) : vx_core.Func_any_from_none_async
@@ -19255,7 +20155,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_reduce
+   * @param  {any-1} result
+   * @param  {any-2} item
+   * @return {any-1}
+   * (func any<-reduce)
+   */
   interface Func_any_from_reduce : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_reduce(generic_any_1 : T, result : T, item : U) : T
     fun vx_fn_new(fn : Class_any_from_reduce.IFn) : vx_core.Func_any_from_reduce
@@ -19353,7 +20259,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function any_from_reduce_async
+   * @param  {any-1} result
+   * @param  {any-2} item
+   * @return {any-1}
+   * (func any<-reduce-async)
+   */
   interface Func_any_from_reduce_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_reduce_async(generic_any_1 : T, result : T, item : U) : CompletableFuture<T>
     fun vx_fn_new(fn : Class_any_from_reduce_async.IFn) : vx_core.Func_any_from_reduce_async
@@ -19454,7 +20368,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_reduce_next
+   * @param  {any-1} result
+   * @param  {any-2} current
+   * @param  {any-2} next
+   * @return {any-1}
+   * (func any<-reduce-next)
+   */
   interface Func_any_from_reduce_next : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_reduce_next(generic_any_1 : T, result : T, current : U, next : U) : T
     fun vx_fn_new(fn : Class_any_from_reduce_next.IFn) : vx_core.Func_any_from_reduce_next
@@ -19553,7 +20474,16 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function any_from_reduce_next_async
+   * @param  {any-1} result
+   * @param  {any-2} current
+   * @param  {any-2} next
+   * @return {any-1}
+   * (func any<-reduce-next-async)
+   */
   interface Func_any_from_reduce_next_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_reduce_next_async(generic_any_1 : T, result : T, current : U, next : U) : CompletableFuture<T>
     fun vx_fn_new(fn : Class_any_from_reduce_next_async.IFn) : vx_core.Func_any_from_reduce_next_async
@@ -19655,7 +20585,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function any_from_struct
+   * Returns value from a struct
+   * @param  {struct-2} vstruct
+   * @param  {string} key
+   * @return {any-1}
+   * (func any<-struct)
+   */
   interface Func_any_from_struct : vx_core.Type_func, vx_core.Type_replfunc {
     fun <R : vx_core.Type_struct, T : vx_core.Type_any> vx_any_from_struct(generic_any_1 : T, vstruct : R, key : vx_core.Type_string) : T
   }
@@ -19737,7 +20674,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function async
+   * Returns an asynchonous version value. This exists mostly for type-casting.
+   * @param  {any-1} value
+   * @return {any-1}
+   * (func async)
+   */
   interface Func_async : vx_core.Func_any_from_any_async {
     fun <T : vx_core.Type_any> vx_async(generic_any_1 : T, value : T) : CompletableFuture<T>
   }
@@ -19828,7 +20773,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function boolean_permission_from_func
+   * Returns true if the given func has permission.
+   * @param  {func} func
+   * @return {boolean}
+   * (func boolean-permission<-func)
+   */
   interface Func_boolean_permission_from_func : vx_core.Func_any_from_any_context {
     fun vx_boolean_permission_from_func(context : vx_core.Type_context, func : vx_core.Type_func) : vx_core.Type_boolean
   }
@@ -19927,7 +20878,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function boolean_write_from_map_name_value
+   * Returns true if it alters a mutable map false if it fails.
+   * @param  {map-1} valuemap
+   * @param  {string} name
+   * @param  {any-1} value
+   * @return {boolean}
+   * (func boolean-write<-map-name-value)
+   */
   interface Func_boolean_write_from_map_name_value : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_write_from_map_name_value(valuemap : vx_core.Type_map, name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -20008,7 +20967,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function boolean_from_any
+   * Function Type taking generic any-1 and returning boolean
+   * @param  {any-1} value
+   * @return {boolean}
+   * (func boolean<-any)
+   */
   interface Func_boolean_from_any : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_from_any(value : vx_core.Type_any) : vx_core.Type_boolean
     fun vx_fn_new(fn : Class_boolean_from_any.IFn) : vx_core.Func_boolean_from_any
@@ -20104,7 +21069,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function boolean_from_func
+   * Function Type returning boolean with any parameters
+   * @return {boolean}
+   * (func boolean<-func)
+   */
   interface Func_boolean_from_func : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_from_func() : vx_core.Type_boolean
     fun vx_fn_new(fn : Class_any_from_func.IFn) : vx_core.Func_boolean_from_func
@@ -20199,7 +21169,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function boolean_from_none
+   * Function Type returning boolean with no parameters
+   * @return {boolean}
+   * (func boolean<-none)
+   */
   interface Func_boolean_from_none : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_boolean_from_none() : vx_core.Type_boolean
     fun vx_fn_new(fn : Class_any_from_func.IFn) : vx_core.Func_boolean_from_none
@@ -20294,7 +21269,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function case
+   * @param  {list-1} values
+   * @param  {any<-func} fn-any
+   * @return {thenelse}
+   * (func case)
+   */
   interface Func_case : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_case(values : vx_core.Type_list, fn_any : vx_core.Func_any_from_func) : vx_core.Type_thenelse
   }
@@ -20385,7 +21366,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function case 1
+   * @param  {any-1} value
+   * @param  {any<-func} fn-any
+   * @return {thenelse}
+   * (func case)
+   */
   interface Func_case_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_case_1(value : vx_core.Type_any, fn_any : vx_core.Func_any_from_func) : vx_core.Type_thenelse
   }
@@ -20476,7 +21463,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function compare
+   * Returns 0 if vals are equal, 1 if val1 > val2, -1 if val1 < val2
+   * @param  {any} val1
+   * @param  {any} val2
+   * @return {int}
+   * (func compare)
+   */
   interface Func_compare : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_compare(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_int
   }
@@ -20556,7 +21550,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function constdef_from_any
+   * Returns a constdef, or empty, from any if the value is a constant.
+   * @param  {any} value
+   * @return {constdef}
+   * (func constdef<-any)
+   */
   interface Func_constdef_from_any : vx_core.Func_any_from_any {
     fun vx_constdef_from_any(value : vx_core.Type_any) : vx_core.Type_constdef
   }
@@ -20647,7 +21647,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function constname_from_any
+   * Returns the full name of a constant or blank if not a constant.
+   * @param  {any} value
+   * @return {string}
+   * (func constname<-any)
+   */
   interface Func_constname_from_any : vx_core.Func_any_from_any {
     fun vx_constname_from_any(value : vx_core.Type_any) : vx_core.Type_string
   }
@@ -20778,7 +21784,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function contains
+   * Returns true if the given list contains the given value.
+   * @param  {string} text
+   * @param  {string} find
+   * @return {boolean}
+   * (func contains)
+   */
   interface Func_contains : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_contains(text : vx_core.Type_string, find : vx_core.Type_string) : vx_core.Type_boolean
   }
@@ -20861,7 +21874,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function contains 1
+   * Returns true if the given list contains the given value.
+   * @param  {list-2} values Any list
+   * @param  {any} find Any value
+   * @return {boolean}
+   * (func contains)
+   */
   interface Func_contains_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_contains_1(values : vx_core.Type_list, find : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -20941,7 +21961,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function context_main
+   * Returns the default context for app main execution. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {context}
+   * (func context-main)
+   */
   interface Func_context_main : vx_core.Func_any_from_any {
     fun vx_context_main(args : vx_core.Type_anylist) : vx_core.Type_context
   }
@@ -21034,7 +22060,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function copy
+   * Returns a copy of a given value with the given values added or updated.
+   * @param  {any-1} value
+   * @param  {anylist} values
+   * @return {any-1}
+   * (func copy)
+   */
   interface Func_copy : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any> vx_copy(value : T, values : vx_core.Type_anylist) : T
   }
@@ -21109,7 +22142,7 @@ object vx_core {
   val t_copy : vx_core.Func_copy = vx_core.Class_copy()
 
   fun <T : vx_core.Type_any> f_copy(value : T, values : vx_core.Type_anylist) : T {
-    val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(
+    val arrayany : Array<vx_core.Type_any> = vx_core.vx_arrayany_from_anylist(
       values
     )
     val valuecopy : vx_core.Type_any = value.vx_copy(*arrayany)
@@ -21117,7 +22150,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function else
+   * @param  {any<-func} fn-any
+   * @return {thenelse}
+   * (func else)
+   */
   interface Func_else : vx_core.Func_any_from_any {
     fun vx_else(fn_any : vx_core.Func_any_from_func) : vx_core.Type_thenelse
   }
@@ -21217,7 +22255,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function empty
+   * Returns the empty value for a given type. Can be called using (empty type) or simply (type)
+   * @param  {any-1} type
+   * @return {any-1}
+   * (func empty)
+   */
   interface Func_empty : vx_core.Func_any_from_any {
     fun <T : vx_core.Type_any> vx_empty(type : T) : T
   }
@@ -21307,7 +22351,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function extends_from_any
+   * @param  {any-1} value
+   * @return {string}
+   * (func extends<-any)
+   */
   interface Func_extends_from_any : vx_core.Func_any_from_any {
     fun vx_extends_from_any(value : vx_core.Type_any) : vx_core.Type_string
   }
@@ -21402,7 +22451,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function extends_from_typedef
+   * Get the basetype of a given type
+   * @param  {typedef} vtypedef
+   * @return {string}
+   * (func extends<-typedef)
+   */
   interface Func_extends_from_typedef : vx_core.Func_any_from_any {
     fun vx_extends_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_string
   }
@@ -21493,7 +22548,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function first_from_list
+   * Returns first value
+   * @param  {list-1} values
+   * @return {any-1}
+   * (func first<-list)
+   */
   interface Func_first_from_list : vx_core.Func_any_from_any {
     fun <T : vx_core.Type_any, X : vx_core.Type_list> vx_first_from_list(generic_any_1 : T, values : X) : T
   }
@@ -21589,7 +22650,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function first_from_list_any_from_any
+   * Returns first value that is not nothing
+   * @param  {list-1} values
+   * @param  {any<-any} fn-any<-any
+   * @return {any-1}
+   * (func first<-list-any<-any)
+   */
   interface Func_first_from_list_any_from_any : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any, X : vx_core.Type_list> vx_first_from_list_any_from_any(generic_any_1 : T, values : X, fn_any_from_any : vx_core.Func_any_from_any) : T
   }
@@ -21676,7 +22744,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function float_from_string
+   * Returns float from a given string.
+   * @param  {string} text
+   * @return {float}
+   * (func float<-string)
+   */
   interface Func_float_from_string : vx_core.Func_any_from_any {
     fun vx_float_from_string(text : vx_core.Type_string) : vx_core.Type_float
   }
@@ -21768,7 +22842,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function fn
+   * Shell for lambda function calls
+   * @param  {arglist} parameters
+   * @param  {any<-func} fn-any
+   * @return {any-1}
+   * (func fn)
+   */
   interface Func_fn : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any> vx_fn(generic_any_1 : T, parameters : vx_core.Type_arglist, fn_any : vx_core.Func_any_from_func) : T
   }
@@ -21848,7 +22929,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function funcdef_from_func
+   * Returns the definition of a function
+   * @param  {func} value
+   * @return {funcdef}
+   * (func funcdef<-func)
+   */
   interface Func_funcdef_from_func : vx_core.Func_any_from_any {
     fun vx_funcdef_from_func(value : vx_core.Type_func) : vx_core.Type_funcdef
   }
@@ -21939,7 +23026,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function funcname_from_funcdef
+   * Get the name of a given funcdef
+   * @param  {funcdef} funcdef
+   * @return {string}
+   * (func funcname<-funcdef)
+   */
   interface Func_funcname_from_funcdef : vx_core.Func_any_from_any {
     fun vx_funcname_from_funcdef(funcdef : vx_core.Type_funcdef) : vx_core.Type_string
   }
@@ -22038,7 +23131,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function if
+   * Logical If function
+   * @param  {boolean} clause
+   * @param  {any-1} then
+   * @return {any-1}
+   * (func if)
+   */
   interface Func_if : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any> vx_if(generic_any_1 : T, clause : vx_core.Type_boolean, then : T) : T
   }
@@ -22121,7 +23221,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function if 1
+   * Logical If function
+   * @param  {boolean} clause
+   * @param  {any-1} thenval
+   * @param  {any-1} elseval
+   * @return {any-1}
+   * (func if)
+   */
   interface Func_if_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any> vx_if_1(generic_any_1 : T, clause : vx_core.Type_boolean, thenval : T, elseval : T) : T
   }
@@ -22207,7 +23315,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function if 2
+   * Logical lazy If function with (then) (else) clauses
+   * @param  {thenelselist} thenelselist
+   * @return {any-1}
+   * (func if)
+   */
   interface Func_if_2 : vx_core.Func_any_from_any {
     fun <T : vx_core.Type_any> vx_if_2(generic_any_1 : T, thenelselist : vx_core.Type_thenelselist) : T
   }
@@ -22299,7 +23413,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function int_from_func
+   * Function Type returning int with any parameters
+   * @return {int}
+   * (func int<-func)
+   */
   interface Func_int_from_func : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_int_from_func() : vx_core.Type_int
     fun vx_fn_new(fn : Class_any_from_func.IFn) : vx_core.Func_int_from_func
@@ -22385,7 +23504,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function int_from_string
+   * Function Type converting string to int
+   * @param  {string} value
+   * @return {int}
+   * (func int<-string)
+   */
   interface Func_int_from_string : vx_core.Func_any_from_any {
     fun vx_int_from_string(value : vx_core.Type_string) : vx_core.Type_int
   }
@@ -22517,7 +23642,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function is_empty
+   * Returns true if text is empty.
+   * @param  {string} text
+   * @return {boolean}
+   * (func is-empty)
+   */
   interface Func_is_empty : vx_core.Func_any_from_any {
     fun vx_is_empty(text : vx_core.Type_string) : vx_core.Type_boolean
   }
@@ -22610,7 +23741,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function is_empty 1
+   * Returns true if an value is empty
+   * @param  {any} value
+   * @return {boolean}
+   * (func is-empty)
+   */
   interface Func_is_empty_1 : vx_core.Func_any_from_any {
     fun vx_is_empty_1(value : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -22705,7 +23842,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function is_endswith
+   * Returns true if text ends with find.
+   * @param  {string} text
+   * @param  {string} find
+   * @return {boolean}
+   * (func is-endswith)
+   */
   interface Func_is_endswith : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_is_endswith(text : vx_core.Type_string, find : vx_core.Type_string) : vx_core.Type_boolean
   }
@@ -22789,7 +23933,136 @@ object vx_core {
     return output
   }
 
+  /**
+   * @function is_error
+   * Returns true if value has an error.
+   * @param  {any-1} value
+   * @return {boolean}
+   * (func is-error)
+   */
+  interface Func_is_error : vx_core.Func_any_from_any {
+    fun vx_is_error(value : vx_core.Type_any) : vx_core.Type_boolean
+  }
 
+  class Class_is_error : vx_core.Class_base, Func_is_error {
+    constructor() {}
+
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
+      val output : vx_core.Class_is_error = vx_core.Class_is_error()
+      return output
+    }
+
+    override fun vx_copy(vararg vals : Any) : vx_core.Type_any {
+      val output : vx_core.Class_is_error = vx_core.Class_is_error()
+      return output
+    }
+
+    override fun vx_typedef() : vx_core.Type_typedef {
+      var output : vx_core.Type_typedef = vx_core.t_func.vx_typedef()
+      return output
+    }
+
+    override fun vx_funcdef() : vx_core.Type_funcdef {
+      var output : vx_core.Type_funcdef = vx_core.funcdef_new(
+        "vx/core", // pkgname
+        "is-error", // name
+        0, // idx
+        false, // async
+        vx_core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          vx_core.e_typelist, // traits
+          vx_core.e_typelist, // allowtypes
+          vx_core.e_typelist, // disallowtypes
+          vx_core.e_funclist, // allowfuncs
+          vx_core.e_funclist, // disallowfuncs
+          vx_core.e_anylist, // allowvalues
+          vx_core.e_anylist, // disallowvalues
+          vx_core.e_argmap // properties
+        ) // typedef
+      )
+      return output
+    }
+
+    override fun vx_empty() : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.e_is_error
+      return output
+    }
+
+    override fun vx_type() : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.t_is_error
+      return output
+    }
+
+    override fun vx_fn_new(fn : vx_core.Class_any_from_any.IFn) : vx_core.Func_any_from_any {
+      return vx_core.e_any_from_any
+    }
+
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+      var output : T = vx_core.f_empty(generic_any_1)
+      var inputval : vx_core.Type_any = value as vx_core.Type_any
+      var outputval : vx_core.Type_any = vx_core.f_is_error(inputval)
+      output = vx_core.f_any_from_any(generic_any_1, outputval)
+      return output
+    }
+
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.e_any
+      var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_core.f_is_error(value)
+      return output
+    }
+
+    override fun vx_is_error(value : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_is_error(value)
+      return output
+    }
+
+  }
+
+  val e_is_error : vx_core.Func_is_error = vx_core.Class_is_error()
+  val t_is_error : vx_core.Func_is_error = vx_core.Class_is_error()
+
+  fun f_is_error(value : vx_core.Type_any) : vx_core.Type_boolean {
+    var output : vx_core.Type_boolean = vx_core.e_boolean
+    output = vx_core.f_let(
+      vx_core.t_boolean,
+      vx_core.t_any_from_func.vx_fn_new({ ->
+        var msgblock : vx_core.Type_msgblock = vx_core.f_msgblock_from_any(
+          value
+        )
+        var output_1 : vx_core.Type_any = vx_core.f_if_2(
+          vx_core.t_boolean,
+          vx_core.vx_new(
+            vx_core.t_thenelselist,
+            vx_core.f_then(
+              vx_core.t_boolean_from_func.vx_fn_new({ ->
+                var output_2 : vx_core.Type_any = vx_core.f_notempty_1(
+                  msgblock
+                )
+                output_2
+              }),
+              vx_core.t_any_from_func.vx_fn_new({ ->
+                var output_3 : vx_core.Type_any = vx_core.vx_new_boolean(true)
+                output_3
+              })
+            )
+          )
+        )
+        output_1
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function is_float
+   * Returns true if the value is a float.
+   * @param  {any} value
+   * @return {boolean}
+   * (func is-float)
+   */
   interface Func_is_float : vx_core.Func_any_from_any {
     fun vx_is_float(value : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -22881,7 +24154,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function is_func
+   * Returns true if value is a function.
+   * @param  {any} value
+   * @return {boolean}
+   * (func is-func)
+   */
   interface Func_is_func : vx_core.Func_any_from_any {
     fun vx_is_func(value : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -22974,7 +24253,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function is_int
+   * Returns true if the value is an integer.
+   * @param  {any} value
+   * @return {boolean}
+   * (func is-int)
+   */
   interface Func_is_int : vx_core.Func_any_from_any {
     fun vx_is_int(value : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -23066,7 +24351,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function is_number
+   * Return true if value is a number
+   * @param  {any} value
+   * @return {boolean}
+   * (func is-number)
+   */
   interface Func_is_number : vx_core.Func_any_from_any {
     fun vx_is_number(value : vx_core.Type_any) : vx_core.Type_boolean
   }
@@ -23187,7 +24478,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function is_pass_from_permission
+   * Returns true if permission passes.
+   * @param  {permission} permission
+   * @return {boolean}
+   * (func is-pass<-permission)
+   */
   interface Func_is_pass_from_permission : vx_core.Func_any_from_any_context {
     fun vx_is_pass_from_permission(context : vx_core.Type_context, permission : vx_core.Type_permission) : vx_core.Type_boolean
   }
@@ -23293,7 +24590,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function last_from_list
+   * Returns last value
+   * @param  {list-1} values
+   * @return {any-1}
+   * (func last<-list)
+   */
   interface Func_last_from_list : vx_core.Func_any_from_any {
     fun <T : vx_core.Type_any, X : vx_core.Type_list> vx_last_from_list(generic_any_1 : T, values : X) : T
   }
@@ -23398,7 +24701,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function length
+   * Returns length of a string.
+   * @param  {string} text
+   * @return {int}
+   * (func length)
+   */
   interface Func_length : vx_core.Func_any_from_any {
     fun vx_length(text : vx_core.Type_string) : vx_core.Type_int
   }
@@ -23490,7 +24799,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function length 1
+   * Returns the currently used size/length of a list
+   * @param  {list-1} values
+   * @return {int}
+   * (func length)
+   */
   interface Func_length_1 : vx_core.Func_any_from_any {
     fun vx_length_1(values : vx_core.Type_list) : vx_core.Type_int
   }
@@ -23582,7 +24897,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function length 2
+   * Returns the length of the given map.
+   * @param  {map-1} valuemap
+   * @return {int}
+   * (func length)
+   */
   interface Func_length_2 : vx_core.Func_any_from_any {
     fun vx_length_2(valuemap : vx_core.Type_map) : vx_core.Type_int
   }
@@ -23677,7 +24998,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function let
+   * @param  {arglist} args
+   * @param  {any<-func} fn-any
+   * @return {any-1}
+   * (func let)
+   */
   interface Func_let : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any> vx_let(generic_any_1 : T, fn_any : vx_core.Func_any_from_func) : T
   }
@@ -23757,7 +25084,16 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function let_async
+   * Same as normal let but returns async values.
+   * @param  {arglist} args
+   * @param  {any<-func-async} fn-any-async
+   * @return {any-1}
+   * (func let-async)
+   */
   interface Func_let_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     fun <T : vx_core.Type_any> vx_let_async(generic_any_1 : T, fn_any_async : vx_core.Func_any_from_func_async) : CompletableFuture<T>
   }
@@ -23838,7 +25174,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function list_from_list
+   * Return a list with allowed values from another list
+   * @param  {list-2} values
+   * @return {list-1}
+   * (func list<-list)
+   */
   interface Func_list_from_list : vx_core.Func_any_from_any {
     fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_from_list(generic_list_1 : X, values : Y) : X
   }
@@ -23938,7 +25280,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function list_from_list 1
+   * Returns a list of processed items from another list
+   * @param  {list-2} values
+   * @param  {any<-any} fn-any<-any
+   * @return {list-1}
+   * (func list<-list)
+   */
   interface Func_list_from_list_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_from_list_1(generic_list_1 : X, values : Y, fn_any_from_any : vx_core.Func_any_from_any) : X
   }
@@ -24019,7 +25368,16 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function list_from_list_async
+   * Returns an asynchronous list of the processed asynchronous items from another list
+   * @param  {list-2} values
+   * @param  {any<-any-async} fn-any<-any-async
+   * @return {list-1}
+   * (func list<-list-async)
+   */
   interface Func_list_from_list_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_from_list_async(generic_list_1 : X, values : Y, fn_any_from_any_async : vx_core.Func_any_from_any_async) : CompletableFuture<X>
   }
@@ -24101,7 +25459,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function list_from_list_intany
+   * Returns a list of processed items from another list
+   * @param  {list-2} values
+   * @param  {any<-int-any} fn-any<-int-any
+   * @return {list-1}
+   * (func list<-list-intany)
+   */
   interface Func_list_from_list_intany : vx_core.Type_func, vx_core.Type_replfunc {
     fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_from_list_intany(generic_list_1 : X, values : Y, fn_any_from_int_any : vx_core.Func_any_from_int_any) : X
   }
@@ -24182,7 +25547,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function list_from_map
+   * Returns a list of allowed values from a map.
+   * @param  {map-2} valuemap
+   * @return {list-1}
+   * (func list<-map)
+   */
   interface Func_list_from_map : vx_core.Func_any_from_any {
     fun <O : vx_core.Type_map, X : vx_core.Type_list> vx_list_from_map(generic_list_1 : X, valuemap : O) : X
   }
@@ -24283,7 +25654,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function list_from_map 1
+   * Returns a list from a map by applying a function to each key value.
+   * @param  {map-2} valuemap
+   * @param  {any<-key-value} fn-any<-key-value
+   * @return {list-1}
+   * (func list<-map)
+   */
   interface Func_list_from_map_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun <O : vx_core.Type_map, X : vx_core.Type_list> vx_list_from_map_1(generic_list_1 : X, valuemap : O, fn_any_from_key_value : vx_core.Func_any_from_key_value) : X
   }
@@ -24364,7 +25742,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function list_from_map_async
+   * @param  {map-2} valuemap
+   * @param  {any<-key-value-async} fn-any<-key-value-async
+   * @return {list-1}
+   * (func list<-map-async)
+   */
   interface Func_list_from_map_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     fun <O : vx_core.Type_map, X : vx_core.Type_list> vx_list_from_map_async(generic_list_1 : X, valuemap : O, fn_any_from_key_value_async : vx_core.Func_any_from_key_value_async) : CompletableFuture<X>
   }
@@ -24445,7 +25831,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function list_from_type
+   * Create an empty list from a type. Used internally for default lists
+   * @param  {any} type
+   * @return {any}
+   * (func list<-type)
+   */
   interface Func_list_from_type : vx_core.Func_any_from_any {
     fun vx_list_from_type(type : vx_core.Type_any) : vx_core.Type_any
   }
@@ -24535,7 +25927,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function log
+   * Writes a value to the console.
+   * @param  {any} value
+   * @return {any}
+   * (func log)
+   */
   interface Func_log : vx_core.Func_any_from_any {
     fun vx_log(value : vx_core.Type_any) : vx_core.Type_any
   }
@@ -24627,7 +26025,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function log 1
+   * Writes a string and a value to the console.
+   * @param  {string} text
+   * @param  {any-1} value
+   * @return {any-1}
+   * (func log)
+   */
   interface Func_log_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any> vx_log_1(generic_any_1 : T, text : vx_core.Type_string, value : T) : T
   }
@@ -24710,7 +26115,136 @@ object vx_core {
     return output
   }
 
+  /**
+   * @function log_error
+   * Write a value if it has an error.
+   * @param  {any-1} value
+   * @return {any-1}
+   * (func log-error)
+   */
+  interface Func_log_error : vx_core.Func_any_from_any {
+    fun <T : vx_core.Type_any> vx_log_error(generic_any_1 : T, value : T) : T
+  }
 
+  class Class_log_error : vx_core.Class_base, Func_log_error {
+    constructor() {}
+
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
+      val output : vx_core.Class_log_error = vx_core.Class_log_error()
+      return output
+    }
+
+    override fun vx_copy(vararg vals : Any) : vx_core.Type_any {
+      val output : vx_core.Class_log_error = vx_core.Class_log_error()
+      return output
+    }
+
+    override fun vx_typedef() : vx_core.Type_typedef {
+      var output : vx_core.Type_typedef = vx_core.t_func.vx_typedef()
+      return output
+    }
+
+    override fun vx_funcdef() : vx_core.Type_funcdef {
+      var output : vx_core.Type_funcdef = vx_core.funcdef_new(
+        "vx/core", // pkgname
+        "log-error", // name
+        0, // idx
+        false, // async
+        vx_core.typedef_new(
+          "vx/core", // pkgname
+          "any-1", // name
+          "", // extends
+          vx_core.e_typelist, // traits
+          vx_core.e_typelist, // allowtypes
+          vx_core.e_typelist, // disallowtypes
+          vx_core.e_funclist, // allowfuncs
+          vx_core.e_funclist, // disallowfuncs
+          vx_core.e_anylist, // allowvalues
+          vx_core.e_anylist, // disallowvalues
+          vx_core.e_argmap // properties
+        ) // typedef
+      )
+      return output
+    }
+
+    override fun vx_empty() : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.e_log_error
+      return output
+    }
+
+    override fun vx_type() : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.t_log_error
+      return output
+    }
+
+    override fun vx_fn_new(fn : vx_core.Class_any_from_any.IFn) : vx_core.Func_any_from_any {
+      return vx_core.e_any_from_any
+    }
+
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+      var output : T = vx_core.f_empty(generic_any_1)
+      var inputval : vx_core.Type_any = value as vx_core.Type_any
+      var outputval : vx_core.Type_any = vx_core.f_log_error(vx_core.t_any, inputval)
+      output = vx_core.f_any_from_any(generic_any_1, outputval)
+      return output
+    }
+
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.e_any
+      var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
+      var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_core.f_log_error(generic_any_1, value)
+      return output
+    }
+
+    override fun <T : vx_core.Type_any> vx_log_error(generic_any_1 : T, value : T) : T {
+      var output : T = vx_core.f_log_error(generic_any_1, value)
+      return output
+    }
+
+  }
+
+  val e_log_error : vx_core.Func_log_error = vx_core.Class_log_error()
+  val t_log_error : vx_core.Func_log_error = vx_core.Class_log_error()
+
+  fun <T : vx_core.Type_any> f_log_error(generic_any_1 : T, value : T) : T {
+    var output : T = vx_core.f_empty(generic_any_1)
+    output = vx_core.f_if_2(
+      generic_any_1,
+      vx_core.vx_new(
+        vx_core.t_thenelselist,
+        vx_core.f_then(
+          vx_core.t_boolean_from_func.vx_fn_new({ ->
+            var output_1 : vx_core.Type_any = vx_core.f_is_error(
+              value
+            )
+            output_1
+          }),
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_2 : vx_core.Type_any = vx_core.f_log(
+              value
+            )
+            output_2
+          })
+        ),
+        vx_core.f_else(
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_3 : vx_core.Type_any = value
+            output_3
+          })
+        )
+      )
+    )
+    return output
+  }
+
+  /**
+   * @function main
+   * The default function for app main execution. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {string}
+   * (func main)
+   */
   interface Func_main : vx_core.Func_any_from_any {
     fun vx_main(args : vx_core.Type_anylist) : vx_core.Type_string
   }
@@ -24804,7 +26338,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function map_from_list
+   * Returns a map from a list by applying a function to generate a key for each value.
+   * @param  {list-2} vallist
+   * @param  {any<-any} fn-any<-any
+   * @return {map-1}
+   * (func map<-list)
+   */
   interface Func_map_from_list : vx_core.Type_func, vx_core.Type_replfunc {
     fun <N : vx_core.Type_map, Y : vx_core.Type_list> vx_map_from_list(generic_map_1 : N, vallist : Y, fn_any_from_any : vx_core.Func_any_from_any) : N
   }
@@ -24885,7 +26426,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function map_from_map
+   * Return a map with allowed values from another map
+   * @param  {map-2} valuemap
+   * @return {map-1}
+   * (func map<-map)
+   */
   interface Func_map_from_map : vx_core.Func_any_from_any {
     fun <N : vx_core.Type_map, O : vx_core.Type_map> vx_map_from_map(generic_map_1 : N, valuemap : O) : N
   }
@@ -24986,7 +26533,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function map_from_map 1
+   * Returns a map from a map by applying a function to each key value.
+   * @param  {map-2} valuemap
+   * @param  {any<-key-value} fn-any<-key-value
+   * @return {map-1}
+   * (func map<-map)
+   */
   interface Func_map_from_map_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun <N : vx_core.Type_map, O : vx_core.Type_map> vx_map_from_map_1(generic_map_1 : N, valuemap : O, fn_any_from_key_value : vx_core.Func_any_from_key_value) : N
   }
@@ -25070,7 +26624,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function msg_from_error
+   * Returns a msg from error string
+   * @param  {string} error
+   * @return {msg}
+   * (func msg<-error)
+   */
   interface Func_msg_from_error : vx_core.Func_any_from_any {
     fun vx_msg_from_error(error : vx_core.Type_string) : vx_core.Type_msg
   }
@@ -25170,7 +26730,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function msg_from_error 1
+   * Returns a msg from error code and detail
+   * @param  {string} code
+   * @param  {any} detail
+   * @return {msg}
+   * (func msg<-error)
+   */
   interface Func_msg_from_error_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_msg_from_error_1(code : vx_core.Type_string, detail : vx_core.Type_any) : vx_core.Type_msg
   }
@@ -25261,7 +26828,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function msg_from_error 2
+   * Returns a msg from error path code and detail
+   * @param  {string} path
+   * @param  {string} code
+   * @param  {any} detail
+   * @return {msg}
+   * (func msg<-error)
+   */
   interface Func_msg_from_error_2 : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_msg_from_error_2(path : vx_core.Type_string, code : vx_core.Type_string, detail : vx_core.Type_any) : vx_core.Type_msg
   }
@@ -25355,7 +26930,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function msg_from_warning
+   * Returns a msg from a warning string
+   * @param  {string} warning
+   * @return {msg}
+   * (func msg<-warning)
+   */
   interface Func_msg_from_warning : vx_core.Func_any_from_any {
     fun vx_msg_from_warning(warning : vx_core.Type_string) : vx_core.Type_msg
   }
@@ -25455,7 +27036,111 @@ object vx_core {
     return output
   }
 
+  /**
+   * @function msgblock_from_any
+   * Returns a msgblock from any
+   * @param  {any} value
+   * @return {msgblock}
+   * (func msgblock<-any)
+   */
+  interface Func_msgblock_from_any : vx_core.Func_any_from_any {
+    fun vx_msgblock_from_any(value : vx_core.Type_any) : vx_core.Type_msgblock
+  }
 
+  class Class_msgblock_from_any : vx_core.Class_base, Func_msgblock_from_any {
+    constructor() {}
+
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
+      val output : vx_core.Class_msgblock_from_any = vx_core.Class_msgblock_from_any()
+      return output
+    }
+
+    override fun vx_copy(vararg vals : Any) : vx_core.Type_any {
+      val output : vx_core.Class_msgblock_from_any = vx_core.Class_msgblock_from_any()
+      return output
+    }
+
+    override fun vx_typedef() : vx_core.Type_typedef {
+      var output : vx_core.Type_typedef = vx_core.t_func.vx_typedef()
+      return output
+    }
+
+    override fun vx_funcdef() : vx_core.Type_funcdef {
+      var output : vx_core.Type_funcdef = vx_core.funcdef_new(
+        "vx/core", // pkgname
+        "msgblock<-any", // name
+        0, // idx
+        false, // async
+        vx_core.typedef_new(
+          "vx/core", // pkgname
+          "msgblock", // name
+          ":struct", // extends
+          vx_core.e_typelist, // traits
+          vx_core.e_typelist, // allowtypes
+          vx_core.e_typelist, // disallowtypes
+          vx_core.e_funclist, // allowfuncs
+          vx_core.e_funclist, // disallowfuncs
+          vx_core.e_anylist, // allowvalues
+          vx_core.e_anylist, // disallowvalues
+          vx_core.e_argmap // properties
+        ) // typedef
+      )
+      return output
+    }
+
+    override fun vx_empty() : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.e_msgblock_from_any
+      return output
+    }
+
+    override fun vx_type() : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.t_msgblock_from_any
+      return output
+    }
+
+    override fun vx_fn_new(fn : vx_core.Class_any_from_any.IFn) : vx_core.Func_any_from_any {
+      return vx_core.e_any_from_any
+    }
+
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+      var output : T = vx_core.f_empty(generic_any_1)
+      var inputval : vx_core.Type_any = value as vx_core.Type_any
+      var outputval : vx_core.Type_any = vx_core.f_msgblock_from_any(inputval)
+      output = vx_core.f_any_from_any(generic_any_1, outputval)
+      return output
+    }
+
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.e_any
+      var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_core.f_msgblock_from_any(value)
+      return output
+    }
+
+    override fun vx_msgblock_from_any(value : vx_core.Type_any) : vx_core.Type_msgblock {
+      var output : vx_core.Type_msgblock = vx_core.f_msgblock_from_any(value)
+      return output
+    }
+
+  }
+
+  val e_msgblock_from_any : vx_core.Func_msgblock_from_any = vx_core.Class_msgblock_from_any()
+  val t_msgblock_from_any : vx_core.Func_msgblock_from_any = vx_core.Class_msgblock_from_any()
+
+  fun f_msgblock_from_any(value : vx_core.Type_any) : vx_core.Type_msgblock {
+    var output : vx_core.Type_msgblock = vx_core.e_msgblock
+    output = vx_core.vx_msgblock_from_any(value)
+    return output
+  }
+
+  /**
+   * @function msgblock_from_msgblock_msg
+   * Return a new Msgblock with the added msg
+   * @param  {msgblock} origblock
+   * @param  {msg} addmsg
+   * @return {msgblock}
+   * (func msgblock<-msgblock-msg)
+   */
   interface Func_msgblock_from_msgblock_msg : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_msgblock_from_msgblock_msg(origblock : vx_core.Type_msgblock, addmsg : vx_core.Type_msg) : vx_core.Type_msgblock
   }
@@ -25541,7 +27226,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function msgblock_from_msgblock_msgblock
+   * Return a new Msgblock with the added block
+   * @param  {msgblock} origblock
+   * @param  {msgblock} addblock
+   * @return {msgblock}
+   * (func msgblock<-msgblock-msgblock)
+   */
   interface Func_msgblock_from_msgblock_msgblock : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_msgblock_from_msgblock_msgblock(origblock : vx_core.Type_msgblock, addblock : vx_core.Type_msgblock) : vx_core.Type_msgblock
   }
@@ -25628,7 +27320,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function name_from_typedef
+   * Returns the name from a typedef.
+   * @param  {typedef} vtypedef
+   * @return {string}
+   * (func name<-typedef)
+   */
   interface Func_name_from_typedef : vx_core.Func_any_from_any {
     fun vx_name_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_string
   }
@@ -25719,7 +27417,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function native
+   * Native Function Call
+   * @param  {anylist} clauses
+   * @return {any-1}
+   * (func native)
+   */
   interface Func_native : vx_core.Func_any_from_any {
     fun <T : vx_core.Type_any> vx_native(generic_any_1 : T, clauses : vx_core.Type_anylist) : T
   }
@@ -25810,7 +27514,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function native_from_any
+   * Returns native value of value object
+   * @param  {any-1} value
+   * @return {any}
+   * (func native<-any)
+   */
   interface Func_native_from_any : vx_core.Func_any_from_any {
     fun vx_native_from_any(value : vx_core.Type_any) : vx_core.Type_any
   }
@@ -25900,7 +27610,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function new
+   * Create a new Value of Type A
+   * @param  {anylist} values
+   * @return {any-1}
+   * (func new)
+   */
   interface Func_new : vx_core.Func_any_from_any {
     fun <T : vx_core.Type_any> vx_new(generic_any_1 : T, values : vx_core.Type_anylist) : T
   }
@@ -25988,7 +27704,7 @@ object vx_core {
 
   fun <T : vx_core.Type_any> f_new(generic_any_1 : T, values : vx_core.Type_anylist) : T {
     var output : T = vx_core.f_empty(generic_any_1)
-    val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(
+    val arrayany : Array<vx_core.Type_any> = vx_core.vx_arrayany_from_anylist(
       values
     )
     val anyvalue : vx_core.Type_any = generic_any_1.vx_new(*arrayany)
@@ -25996,7 +27712,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function new_from_type
+   * Create a new Value of Type A
+   * @param  {any-1} type
+   * @param  {anylist} values
+   * @return {any-1}
+   * (func new<-type)
+   */
   interface Func_new_from_type : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any> vx_new_from_type(type : T, values : vx_core.Type_anylist) : T
   }
@@ -26071,7 +27794,7 @@ object vx_core {
   val t_new_from_type : vx_core.Func_new_from_type = vx_core.Class_new_from_type()
 
   fun <T : vx_core.Type_any> f_new_from_type(type : T, values : vx_core.Type_anylist) : T {
-    val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(
+    val arrayany : Array<vx_core.Type_any> = vx_core.vx_arrayany_from_anylist(
       values
     )
     val anyvalue : vx_core.Type_any = type.vx_new(*arrayany)
@@ -26079,7 +27802,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function number_from_func
+   * Function Type returning number with any parameters
+   * @return {number}
+   * (func number<-func)
+   */
   interface Func_number_from_func : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_number_from_func() : vx_core.Type_number
   }
@@ -26156,7 +27884,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function or
+   * Returns true if any value is true
+   * @param  {boolean} val1
+   * @param  {boolean} val2
+   * @return {boolean}
+   * (func or)
+   */
   interface Func_or : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_or(val1 : vx_core.Type_boolean, val2 : vx_core.Type_boolean) : vx_core.Type_boolean
   }
@@ -26240,7 +27975,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function or 1
+   * Returns true if any value is true
+   * @param  {booleanlist} values
+   * @return {boolean}
+   * (func or)
+   */
   interface Func_or_1 : vx_core.Func_any_from_any {
     fun vx_or_1(values : vx_core.Type_booleanlist) : vx_core.Type_boolean
   }
@@ -26348,7 +28089,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function package_global_from_name
+   * Returns a package from global with the given name.
+   * @param  {string} name
+   * @return {package}
+   * (func package-global<-name)
+   */
   interface Func_package_global_from_name : vx_core.Func_any_from_any {
     fun vx_package_global_from_name(name : vx_core.Type_string) : vx_core.Type_package
   }
@@ -26443,7 +28190,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function packagename_from_typedef
+   * Returns the package name from a typedef.
+   * @param  {typedef} vtypedef
+   * @return {string}
+   * (func packagename<-typedef)
+   */
   interface Func_packagename_from_typedef : vx_core.Func_any_from_any {
     fun vx_packagename_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_string
   }
@@ -26534,7 +28287,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function path_from_context_path
+   * Returns a path from a context
+   * @param  {string} path
+   * @return {string}
+   * (func path<-context-path)
+   */
   interface Func_path_from_context_path : vx_core.Func_any_from_any_context {
     fun vx_path_from_context_path(context : vx_core.Type_context, path : vx_core.Type_string) : vx_core.Type_string
   }
@@ -26631,7 +28390,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function path_from_setting_path
+   * Returns a path from a setting
+   * @param  {setting} session
+   * @param  {string} path
+   * @return {string}
+   * (func path<-setting-path)
+   */
   interface Func_path_from_setting_path : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_path_from_setting_path(session : vx_core.Type_setting, path : vx_core.Type_string) : vx_core.Type_string
   }
@@ -26710,7 +28476,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function permission_from_id_context
+   * Return a permission from context by id
+   * @param  {string} id
+   * @return {permission}
+   * (func permission<-id-context)
+   */
   interface Func_permission_from_id_context : vx_core.Func_any_from_any_context {
     fun vx_permission_from_id_context(context : vx_core.Type_context, id : vx_core.Type_string) : vx_core.Type_permission
   }
@@ -26817,7 +28589,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function properties_from_typedef
+   * Return property map from typedef
+   * @param  {typedef} vtypedef
+   * @return {argmap}
+   * (func properties<-typedef)
+   */
   interface Func_properties_from_typedef : vx_core.Func_any_from_any {
     fun vx_properties_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_argmap
   }
@@ -26908,7 +28686,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function proplast_from_typedef
+   * Return last property from typedef
+   * @param  {typedef} vtypedef
+   * @return {arg}
+   * (func proplast<-typedef)
+   */
   interface Func_proplast_from_typedef : vx_core.Func_any_from_any {
     fun vx_proplast_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_arg
   }
@@ -26999,7 +28783,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function resolve
+   * @param  {any-1} value
+   * @return {any-1}
+   * (func resolve)
+   */
   interface Func_resolve : vx_core.Func_any_from_any {
     fun <T : vx_core.Type_any> vx_resolve(generic_any_1 : T, value : T) : T
   }
@@ -27091,7 +28880,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function resolve 1
+   * @param  {any<-func} fn-any
+   * @return {any-1}
+   * (func resolve)
+   */
   interface Func_resolve_1 : vx_core.Func_any_from_any {
     fun <T : vx_core.Type_any> vx_resolve_1(generic_any_1 : T, fn_any : vx_core.Func_any_from_func) : T
   }
@@ -27187,7 +28981,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function resolve_async
+   * @param  {any<-func-async} fn-any
+   * @return {any-1}
+   * (func resolve-async)
+   */
   interface Func_resolve_async : vx_core.Func_any_from_any_async {
     fun <T : vx_core.Type_any> vx_resolve_async(generic_any_1 : T, fn_any : vx_core.Func_any_from_func_async) : CompletableFuture<T>
   }
@@ -27282,7 +29083,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function resolve_first
+   * Returns the first value that is not nothing
+   * @param  {list-1} clauses
+   * @return {any-1}
+   * (func resolve-first)
+   */
   interface Func_resolve_first : vx_core.Func_any_from_any {
     fun <T : vx_core.Type_any, X : vx_core.Type_list> vx_resolve_first(generic_any_1 : T, clauses : X) : T
   }
@@ -27378,7 +29185,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function resolve_list
+   * @param  {list-1} clauses
+   * @return {list-1}
+   * (func resolve-list)
+   */
   interface Func_resolve_list : vx_core.Func_any_from_any {
     fun <X : vx_core.Type_list> vx_resolve_list(generic_list_1 : X, clauses : X) : X
   }
@@ -27474,7 +29286,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function security_from_context
+   * Return security from the given context.
+   * @return {security}
+   * (func security<-context)
+   */
   interface Func_security_from_context : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_security_from_context(context : vx_core.Type_context) : vx_core.Type_security
   }
@@ -27557,7 +29374,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function security_from_user
+   * Return security from the given user.
+   * @param  {user} user
+   * @return {security}
+   * (func security<-user)
+   */
   interface Func_security_from_user : vx_core.Func_any_from_any {
     fun vx_security_from_user(user : vx_core.Type_user) : vx_core.Type_security
   }
@@ -27648,7 +29471,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function session_from_context
+   * Returns session from a context
+   * @return {session}
+   * (func session<-context)
+   */
   interface Func_session_from_context : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_session_from_context(context : vx_core.Type_context) : vx_core.Type_session
   }
@@ -27727,7 +29555,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function setting_from_context
+   * Returns setting from a context
+   * @return {setting}
+   * (func setting<-context)
+   */
   interface Func_setting_from_context : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_setting_from_context(context : vx_core.Type_context) : vx_core.Type_setting
   }
@@ -27806,7 +29639,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function string_repeat
+   * @param  {string} text
+   * @param  {int} repeat
+   * @return {string}
+   * (func string-repeat)
+   */
   interface Func_string_repeat : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_repeat(text : vx_core.Type_string, repeat : vx_core.Type_int) : vx_core.Type_string
   }
@@ -27886,7 +29725,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function string_from_any
+   * Return a string representation of a value
+   * @param  {any} value
+   * @return {string}
+   * (func string<-any)
+   */
   interface Func_string_from_any : vx_core.Func_any_from_any {
     fun vx_string_from_any(value : vx_core.Type_any) : vx_core.Type_string
   }
@@ -27981,7 +29826,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function string_from_any_indent
+   * Return a string representation of a value
+   * @param  {any} value
+   * @param  {int} indent
+   * @param  {boolean} linefeed
+   * @return {string}
+   * (func string<-any-indent)
+   */
   interface Func_string_from_any_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_any_indent(value : vx_core.Type_any, indent : vx_core.Type_int, linefeed : vx_core.Type_boolean) : vx_core.Type_string
   }
@@ -28062,7 +29915,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function string_from_func
+   * Function Type returning string with any parameters
+   * @return {string}
+   * (func string<-func)
+   */
   interface Func_string_from_func : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_func() : vx_core.Type_string
     fun vx_fn_new(fn : Class_any_from_func.IFn) : vx_core.Func_string_from_func
@@ -28148,7 +30006,15 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function string_from_string_find_replace
+   * Returns a string with all instances of find replaced by replace.
+   * @param  {string} text
+   * @param  {string} find
+   * @param  {string} replace
+   * @return {string}
+   * (func string<-string-find-replace)
+   */
   interface Func_string_from_string_find_replace : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_string_find_replace(text : vx_core.Type_string, find : vx_core.Type_string, replace : vx_core.Type_string) : vx_core.Type_string
   }
@@ -28229,7 +30095,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function stringlist_from_map
+   * Returns a stringlist of keys from any map in entry order.
+   * @param  {map-1} map
+   * @return {stringlist}
+   * (func stringlist<-map)
+   */
   interface Func_stringlist_from_map : vx_core.Func_any_from_any {
     fun vx_stringlist_from_map(map : vx_core.Type_map) : vx_core.Type_stringlist
   }
@@ -28329,7 +30201,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function switch
+   * Returns a value based on a logical switch
+   * @param  {any-2} value
+   * @param  {thenelselist} thenelselist
+   * @return {any-1}
+   * (func switch)
+   */
   interface Func_switch : vx_core.Type_func, vx_core.Type_replfunc {
     fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_switch(generic_any_1 : T, value : U, thenelselist : vx_core.Type_thenelselist) : T
   }
@@ -28410,7 +30289,14 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function then
+   * Returns a thenelse struct from a given condition function and value function
+   * @param  {boolean<-func} fn-cond
+   * @param  {any<-func} fn-any
+   * @return {thenelse}
+   * (func then)
+   */
   interface Func_then : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_then(fn_cond : vx_core.Func_boolean_from_func, fn_any : vx_core.Func_any_from_func) : vx_core.Type_thenelse
   }
@@ -28501,7 +30387,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function traits_from_typedef
+   * Get the traits of a given typedef
+   * @param  {typedef} vtypedef
+   * @return {typelist}
+   * (func traits<-typedef)
+   */
   interface Func_traits_from_typedef : vx_core.Func_any_from_any {
     fun vx_traits_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_typelist
   }
@@ -28592,7 +30484,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function type_from_any
+   * Gets the Type of a given Value
+   * @param  {any-1} value
+   * @return {any}
+   * (func type<-any)
+   */
   interface Func_type_from_any : vx_core.Func_any_from_any {
     fun vx_type_from_any(value : vx_core.Type_any) : vx_core.Type_any
   }
@@ -28683,7 +30581,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function typedef_from_any
+   * Gets the typedef of a given value
+   * @param  {any} value
+   * @return {typedef}
+   * (func typedef<-any)
+   */
   interface Func_typedef_from_any : vx_core.Func_any_from_any {
     fun vx_typedef_from_any(value : vx_core.Type_any) : vx_core.Type_typedef
   }
@@ -28778,7 +30682,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function typedef_from_type
+   * Gets the typedef of a given type
+   * @param  {any} value
+   * @return {typedef}
+   * (func typedef<-type)
+   */
   interface Func_typedef_from_type : vx_core.Func_any_from_any {
     fun vx_typedef_from_type(value : vx_core.Type_any) : vx_core.Type_typedef
   }
@@ -28869,7 +30779,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function typename_from_any
+   * Gets the typename of a given value
+   * @param  {any-2} value
+   * @return {string}
+   * (func typename<-any)
+   */
   interface Func_typename_from_any : vx_core.Func_any_from_any {
     fun vx_typename_from_any(value : vx_core.Type_any) : vx_core.Type_string
   }
@@ -28964,7 +30880,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function typename_from_type
+   * Get the name of a given type
+   * @param  {any} type
+   * @return {string}
+   * (func typename<-type)
+   */
   interface Func_typename_from_type : vx_core.Func_any_from_any {
     fun vx_typename_from_type(type : vx_core.Type_any) : vx_core.Type_string
   }
@@ -29059,7 +30981,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function typename_from_typedef
+   * Get the name of a given type
+   * @param  {typedef} vtypedef
+   * @return {string}
+   * (func typename<-typedef)
+   */
   interface Func_typename_from_typedef : vx_core.Func_any_from_any {
     fun vx_typename_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_string
   }
@@ -29158,7 +31086,13 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function typenames_from_typelist
+   * Get the names from a type list
+   * @param  {typelist} typelist
+   * @return {stringlist}
+   * (func typenames<-typelist)
+   */
   interface Func_typenames_from_typelist : vx_core.Func_any_from_any {
     fun vx_typenames_from_typelist(typelist : vx_core.Type_typelist) : vx_core.Type_stringlist
   }
@@ -29259,7 +31193,12 @@ object vx_core {
     return output
   }
 
-
+  /**
+   * @function user_from_context
+   * Returns the current user from context.
+   * @return {user}
+   * (func user<-context)
+   */
   interface Func_user_from_context : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_user_from_context(context : vx_core.Type_context) : vx_core.Type_user
   }
@@ -29546,6 +31485,7 @@ object vx_core {
     mapfunc.put("is-empty", vx_core.t_is_empty)
     mapfunc.put("is-empty_1", vx_core.t_is_empty_1)
     mapfunc.put("is-endswith", vx_core.t_is_endswith)
+    mapfunc.put("is-error", vx_core.t_is_error)
     mapfunc.put("is-float", vx_core.t_is_float)
     mapfunc.put("is-func", vx_core.t_is_func)
     mapfunc.put("is-int", vx_core.t_is_int)
@@ -29567,6 +31507,7 @@ object vx_core {
     mapfunc.put("list<-type", vx_core.t_list_from_type)
     mapfunc.put("log", vx_core.t_log)
     mapfunc.put("log_1", vx_core.t_log_1)
+    mapfunc.put("log-error", vx_core.t_log_error)
     mapfunc.put("main", vx_core.t_main)
     mapfunc.put("map<-list", vx_core.t_map_from_list)
     mapfunc.put("map<-map", vx_core.t_map_from_map)
@@ -29575,6 +31516,7 @@ object vx_core {
     mapfunc.put("msg<-error_1", vx_core.t_msg_from_error_1)
     mapfunc.put("msg<-error_2", vx_core.t_msg_from_error_2)
     mapfunc.put("msg<-warning", vx_core.t_msg_from_warning)
+    mapfunc.put("msgblock<-any", vx_core.t_msgblock_from_any)
     mapfunc.put("msgblock<-msgblock-msg", vx_core.t_msgblock_from_msgblock_msg)
     mapfunc.put("msgblock<-msgblock-msgblock", vx_core.t_msgblock_from_msgblock_msgblock)
     mapfunc.put("name<-typedef", vx_core.t_name_from_typedef)

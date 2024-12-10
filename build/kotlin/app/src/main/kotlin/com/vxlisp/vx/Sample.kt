@@ -3,6 +3,10 @@ package com.vxlisp.vx
 object vx_sample {
 
 
+  /**
+   * type: mytype
+   * (type mytype)
+   */
   interface Type_mytype : vx_core.Type_struct {
     fun mynum() : vx_core.Type_int
     fun mystr() : vx_core.Type_string
@@ -37,9 +41,9 @@ object vx_sample {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":mynum")) {
+      } else if ((skey == ":mynum")) {
         output = this.mynum()
-      } else if ((skey==":mystr")) {
+      } else if ((skey == ":mystr")) {
         output = this.mystr()
       }
       return output
@@ -117,7 +121,7 @@ object vx_sample {
           }
         } else {
           if (false) {
-          } else if ((key==":mynum")) {
+          } else if ((key == ":mynum")) {
             if (valsub == vx_p_mynum) {
             } else if (valsub is vx_core.Type_int) {
               var valmynum : vx_core.Type_int = valsub as vx_core.Type_int
@@ -141,7 +145,7 @@ object vx_sample {
               msg = vx_core.vx_msg_from_error("vx/sample/mytype", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":mystr")) {
+          } else if ((key == ":mystr")) {
             if (valsub == vx_p_mystr) {
             } else if (valsub is vx_core.Type_string) {
               var valmystr : vx_core.Type_string = valsub as vx_core.Type_string
@@ -217,6 +221,11 @@ object vx_sample {
   val e_mytype : vx_sample.Type_mytype = vx_sample.Class_mytype()
   val t_mytype : vx_sample.Type_mytype = vx_sample.Class_mytype()
 
+  /**
+   * Constant: myconst
+   * My Constant
+   * {int}
+   */
   class Const_myconst {
     constructor() {}
     companion object {
@@ -241,7 +250,11 @@ object vx_sample {
 
   val c_myconst : vx_core.Type_int = vx_core.Class_int()
 
-
+  /**
+   * @function main
+   * @return {none}
+   * (func main)
+   */
   interface Func_main : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_main() : vx_core.Type_none
   }
@@ -321,7 +334,13 @@ object vx_sample {
     return output
   }
 
-
+  /**
+   * @function myfunc
+   * My Function
+   * @param  {int} myarg My Arg
+   * @return {int}
+   * (func myfunc)
+   */
   interface Func_myfunc : vx_core.Func_any_from_any {
     fun vx_myfunc(myarg : vx_core.Type_int) : vx_core.Type_int
   }

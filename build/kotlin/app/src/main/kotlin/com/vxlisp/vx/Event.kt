@@ -5,6 +5,11 @@ import java.util.concurrent.CompletableFuture
 object vx_event {
 
 
+  /**
+   * type: event
+   * Generic Event
+   * (type event)
+   */
   interface Type_event : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun from() : vx_core.Type_string
@@ -87,17 +92,17 @@ object vx_event {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":from")) {
+      } else if ((skey == ":from")) {
         output = this.from()
-      } else if ((skey==":to")) {
+      } else if ((skey == ":to")) {
         output = this.to()
-      } else if ((skey==":datamap")) {
+      } else if ((skey == ":datamap")) {
         output = this.datamap()
-      } else if ((skey==":event<-event")) {
+      } else if ((skey == ":event<-event")) {
         output = this.event_from_event()
-      } else if ((skey==":event<-event-async")) {
+      } else if ((skey == ":event<-event-async")) {
         output = this.event_from_event_async()
       }
       return output
@@ -187,7 +192,7 @@ object vx_event {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -211,7 +216,7 @@ object vx_event {
               msg = vx_core.vx_msg_from_error("vx/event/event", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":from")) {
+          } else if ((key == ":from")) {
             if (valsub == vx_p_from) {
             } else if (valsub is vx_core.Type_string) {
               var valfrom : vx_core.Type_string = valsub as vx_core.Type_string
@@ -235,7 +240,7 @@ object vx_event {
               msg = vx_core.vx_msg_from_error("vx/event/event", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":to")) {
+          } else if ((key == ":to")) {
             if (valsub == vx_p_to) {
             } else if (valsub is vx_core.Type_string) {
               var valto : vx_core.Type_string = valsub as vx_core.Type_string
@@ -259,7 +264,7 @@ object vx_event {
               msg = vx_core.vx_msg_from_error("vx/event/event", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":datamap")) {
+          } else if ((key == ":datamap")) {
             if (valsub == vx_p_datamap) {
             } else if (valsub is vx_core.Type_anymap) {
               var valdatamap : vx_core.Type_anymap = valsub as vx_core.Type_anymap
@@ -280,7 +285,7 @@ object vx_event {
               msg = vx_core.vx_msg_from_error("vx/event/event", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":event<-event")) {
+          } else if ((key == ":event<-event")) {
             if (valsub == vx_p_event_from_event) {
             } else if (valsub is vx_event.Func_event_from_event) {
               var valevent_from_event : vx_event.Func_event_from_event = valsub as vx_event.Func_event_from_event
@@ -301,7 +306,7 @@ object vx_event {
               msg = vx_core.vx_msg_from_error("vx/event/event", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":event<-event-async")) {
+          } else if ((key == ":event<-event-async")) {
             if (valsub == vx_p_event_from_event_async) {
             } else if (valsub is vx_event.Func_event_from_event_async) {
               var valevent_from_event_async : vx_event.Func_event_from_event_async = valsub as vx_event.Func_event_from_event_async
@@ -378,6 +383,11 @@ object vx_event {
   val e_event : vx_event.Type_event = vx_event.Class_event()
   val t_event : vx_event.Type_event = vx_event.Class_event()
 
+  /**
+   * type: eventlist
+   * Map of event
+   * (type eventlist)
+   */
   interface Type_eventlist : vx_core.Type_list {
     fun vx_listevent() : List<vx_event.Type_event>
     fun vx_event(index : vx_core.Type_int) : vx_event.Type_event
@@ -447,8 +457,9 @@ object vx_event {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_event.Type_event) {
+          var subitem : vx_event.Type_event = valsub as vx_event.Type_event
           ischanged = true
-          listval.add(valsub as vx_event.Type_event)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -511,6 +522,11 @@ object vx_event {
   val e_eventlist : vx_event.Type_eventlist = vx_event.Class_eventlist()
   val t_eventlist : vx_event.Type_eventlist = vx_event.Class_eventlist()
 
+  /**
+   * type: eventmap
+   * Map of event
+   * (type eventmap)
+   */
   interface Type_eventmap : vx_core.Type_map {
     fun vx_mapevent() : Map<String, vx_event.Type_event>
     fun vx_event(key : vx_core.Type_string) : vx_event.Type_event
@@ -707,6 +723,11 @@ object vx_event {
   val e_eventmap : vx_event.Type_eventmap = vx_event.Class_eventmap()
   val t_eventmap : vx_event.Type_eventmap = vx_event.Class_eventmap()
 
+  /**
+   * Constant: event-change
+   * Change Event
+   * {event}
+   */
   class Const_event_change {
     constructor() {}
     companion object {
@@ -745,6 +766,11 @@ object vx_event {
   val c_event_change : vx_event.Type_event = vx_event.Class_event()
 
 
+  /**
+   * Constant: event-click
+   * Click Event
+   * {event}
+   */
   class Const_event_click {
     constructor() {}
     companion object {
@@ -783,6 +809,11 @@ object vx_event {
   val c_event_click : vx_event.Type_event = vx_event.Class_event()
 
 
+  /**
+   * Constant: event-move
+   * Move Event
+   * {event}
+   */
   class Const_event_move {
     constructor() {}
     companion object {
@@ -821,6 +852,11 @@ object vx_event {
   val c_event_move : vx_event.Type_event = vx_event.Class_event()
 
 
+  /**
+   * Constant: event-select
+   * Move Event
+   * {event}
+   */
   class Const_event_select {
     constructor() {}
     companion object {
@@ -858,7 +894,12 @@ object vx_event {
 
   val c_event_select : vx_event.Type_event = vx_event.Class_event()
 
-
+  /**
+   * @function any_from_from_event
+   * @param  {event} evt
+   * @return {any-1}
+   * (func any-from<-event)
+   */
   interface Func_any_from_from_event : vx_core.Func_any_from_any {
     fun <T : vx_core.Type_any> vx_any_from_from_event(generic_any_1 : T, evt : vx_event.Type_event) : T
   }
@@ -960,7 +1001,13 @@ object vx_event {
     return output
   }
 
-
+  /**
+   * @function event_from_event
+   * Template for triggering ui events
+   * @param  {event} evt
+   * @return {event}
+   * (func event<-event)
+   */
   interface Func_event_from_event : vx_core.Func_any_from_any_context {
     fun vx_event_from_event(context : vx_core.Type_context, evt : vx_event.Type_event) : vx_event.Type_event
   }
@@ -1052,7 +1099,15 @@ object vx_event {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function event_from_event_async
+   * Template for triggering ui asynchronous events
+   * @param  {event} evt
+   * @return {event}
+   * (func event<-event-async)
+   */
   interface Func_event_from_event_async : vx_core.Func_any_from_any_context_async {
     fun vx_event_from_event_async(context : vx_core.Type_context, evt : vx_event.Type_event) : CompletableFuture<vx_event.Type_event>
   }
@@ -1143,7 +1198,13 @@ object vx_event {
     return output
   }
 
-
+  /**
+   * @function eventmap_from_eventlist
+   * Returns an eventmap from an eventlist
+   * @param  {eventlist} eventlist
+   * @return {eventmap}
+   * (func eventmap<-eventlist)
+   */
   interface Func_eventmap_from_eventlist : vx_core.Func_any_from_any {
     fun vx_eventmap_from_eventlist(eventlist : vx_event.Type_eventlist) : vx_event.Type_eventmap
   }

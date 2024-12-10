@@ -5,6 +5,11 @@ import com.vxlisp.vx.*
 object vx_data_textblock {
 
 
+  /**
+   * type: delim
+   * A delimiter type supporting start and end delimiters and positions.
+   * (type delim)
+   */
   interface Type_delim : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun starttext() : vx_core.Type_string
@@ -75,15 +80,15 @@ object vx_data_textblock {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":starttext")) {
+      } else if ((skey == ":starttext")) {
         output = this.starttext()
-      } else if ((skey==":endtext")) {
+      } else if ((skey == ":endtext")) {
         output = this.endtext()
-      } else if ((skey==":pos")) {
+      } else if ((skey == ":pos")) {
         output = this.pos()
-      } else if ((skey==":delimlist")) {
+      } else if ((skey == ":delimlist")) {
         output = this.delimlist()
       }
       return output
@@ -170,7 +175,7 @@ object vx_data_textblock {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -194,7 +199,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":starttext")) {
+          } else if ((key == ":starttext")) {
             if (valsub == vx_p_starttext) {
             } else if (valsub is vx_core.Type_string) {
               var valstarttext : vx_core.Type_string = valsub as vx_core.Type_string
@@ -218,7 +223,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":endtext")) {
+          } else if ((key == ":endtext")) {
             if (valsub == vx_p_endtext) {
             } else if (valsub is vx_core.Type_string) {
               var valendtext : vx_core.Type_string = valsub as vx_core.Type_string
@@ -242,7 +247,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":pos")) {
+          } else if ((key == ":pos")) {
             if (valsub == vx_p_pos) {
             } else if (valsub is vx_core.Type_int) {
               var valpos : vx_core.Type_int = valsub as vx_core.Type_int
@@ -266,7 +271,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":delimlist")) {
+          } else if ((key == ":delimlist")) {
             if (valsub == vx_p_delimlist) {
             } else if (valsub is vx_data_textblock.Type_delimlist) {
               var valdelimlist : vx_data_textblock.Type_delimlist = valsub as vx_data_textblock.Type_delimlist
@@ -342,6 +347,11 @@ object vx_data_textblock {
   val e_delim : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
   val t_delim : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
+  /**
+   * type: delimlist
+   * A list of delim.
+   * (type delimlist)
+   */
   interface Type_delimlist : vx_core.Type_list {
     fun vx_listdelim() : List<vx_data_textblock.Type_delim>
     fun vx_delim(index : vx_core.Type_int) : vx_data_textblock.Type_delim
@@ -411,8 +421,9 @@ object vx_data_textblock {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_data_textblock.Type_delim) {
+          var subitem : vx_data_textblock.Type_delim = valsub as vx_data_textblock.Type_delim
           ischanged = true
-          listval.add(valsub as vx_data_textblock.Type_delim)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -475,6 +486,11 @@ object vx_data_textblock {
   val e_delimlist : vx_data_textblock.Type_delimlist = vx_data_textblock.Class_delimlist()
   val t_delimlist : vx_data_textblock.Type_delimlist = vx_data_textblock.Class_delimlist()
 
+  /**
+   * type: textblock
+   * A textblock is a tree of text used for parsing by delimter.
+   * (type textblock)
+   */
   interface Type_textblock : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun text() : vx_core.Type_string
@@ -617,27 +633,27 @@ object vx_data_textblock {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":text")) {
+      } else if ((skey == ":text")) {
         output = this.text()
-      } else if ((skey==":startpos")) {
+      } else if ((skey == ":startpos")) {
         output = this.startpos()
-      } else if ((skey==":endpos")) {
+      } else if ((skey == ":endpos")) {
         output = this.endpos()
-      } else if ((skey==":curpos")) {
+      } else if ((skey == ":curpos")) {
         output = this.curpos()
-      } else if ((skey==":line")) {
+      } else if ((skey == ":line")) {
         output = this.line()
-      } else if ((skey==":column")) {
+      } else if ((skey == ":column")) {
         output = this.column()
-      } else if ((skey==":delim")) {
+      } else if ((skey == ":delim")) {
         output = this.delim()
-      } else if ((skey==":close")) {
+      } else if ((skey == ":close")) {
         output = this.close()
-      } else if ((skey==":parent")) {
+      } else if ((skey == ":parent")) {
         output = this.parent()
-      } else if ((skey==":children")) {
+      } else if ((skey == ":children")) {
         output = this.children()
       }
       return output
@@ -742,7 +758,7 @@ object vx_data_textblock {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -766,7 +782,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":text")) {
+          } else if ((key == ":text")) {
             if (valsub == vx_p_text) {
             } else if (valsub is vx_core.Type_string) {
               var valtext : vx_core.Type_string = valsub as vx_core.Type_string
@@ -790,7 +806,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":startpos")) {
+          } else if ((key == ":startpos")) {
             if (valsub == vx_p_startpos) {
             } else if (valsub is vx_core.Type_int) {
               var valstartpos : vx_core.Type_int = valsub as vx_core.Type_int
@@ -814,7 +830,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":endpos")) {
+          } else if ((key == ":endpos")) {
             if (valsub == vx_p_endpos) {
             } else if (valsub is vx_core.Type_int) {
               var valendpos : vx_core.Type_int = valsub as vx_core.Type_int
@@ -838,7 +854,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":curpos")) {
+          } else if ((key == ":curpos")) {
             if (valsub == vx_p_curpos) {
             } else if (valsub is vx_core.Type_int) {
               var valcurpos : vx_core.Type_int = valsub as vx_core.Type_int
@@ -862,7 +878,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":line")) {
+          } else if ((key == ":line")) {
             if (valsub == vx_p_line) {
             } else if (valsub is vx_core.Type_int) {
               var valline : vx_core.Type_int = valsub as vx_core.Type_int
@@ -886,7 +902,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":column")) {
+          } else if ((key == ":column")) {
             if (valsub == vx_p_column) {
             } else if (valsub is vx_core.Type_int) {
               var valcolumn : vx_core.Type_int = valsub as vx_core.Type_int
@@ -910,7 +926,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":delim")) {
+          } else if ((key == ":delim")) {
             if (valsub == vx_p_delim) {
             } else if (valsub is vx_data_textblock.Type_delim) {
               var valdelim : vx_data_textblock.Type_delim = valsub as vx_data_textblock.Type_delim
@@ -931,7 +947,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":close")) {
+          } else if ((key == ":close")) {
             if (valsub == vx_p_close) {
             } else if (valsub is vx_data_textblock.Type_delim) {
               var valclose : vx_data_textblock.Type_delim = valsub as vx_data_textblock.Type_delim
@@ -952,7 +968,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":parent")) {
+          } else if ((key == ":parent")) {
             if (valsub == vx_p_parent) {
             } else if (valsub is vx_data_textblock.Type_textblock) {
               var valparent : vx_data_textblock.Type_textblock = valsub as vx_data_textblock.Type_textblock
@@ -973,7 +989,7 @@ object vx_data_textblock {
               msg = vx_core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":children")) {
+          } else if ((key == ":children")) {
             if (valsub == vx_p_children) {
             } else if (valsub is vx_data_textblock.Type_textblocklist) {
               var valchildren : vx_data_textblock.Type_textblocklist = valsub as vx_data_textblock.Type_textblocklist
@@ -1055,6 +1071,11 @@ object vx_data_textblock {
   val e_textblock : vx_data_textblock.Type_textblock = vx_data_textblock.Class_textblock()
   val t_textblock : vx_data_textblock.Type_textblock = vx_data_textblock.Class_textblock()
 
+  /**
+   * type: textblocklist
+   * A list of textblock.
+   * (type textblocklist)
+   */
   interface Type_textblocklist : vx_core.Type_list {
     fun vx_listtextblock() : List<vx_data_textblock.Type_textblock>
     fun vx_textblock(index : vx_core.Type_int) : vx_data_textblock.Type_textblock
@@ -1124,8 +1145,9 @@ object vx_data_textblock {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_data_textblock.Type_textblock) {
+          var subitem : vx_data_textblock.Type_textblock = valsub as vx_data_textblock.Type_textblock
           ischanged = true
-          listval.add(valsub as vx_data_textblock.Type_textblock)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -1188,6 +1210,11 @@ object vx_data_textblock {
   val e_textblocklist : vx_data_textblock.Type_textblocklist = vx_data_textblock.Class_textblocklist()
   val t_textblocklist : vx_data_textblock.Type_textblocklist = vx_data_textblock.Class_textblocklist()
 
+  /**
+   * Constant: delimbracketangle
+   * Angle Bracket Delimiter
+   * {delim}
+   */
   class Const_delimbracketangle {
     constructor() {}
     companion object {
@@ -1229,6 +1256,11 @@ object vx_data_textblock {
   val c_delimbracketangle : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimbracketcurly
+   * Curly Bracket Delimiter
+   * {delim}
+   */
   class Const_delimbracketcurly {
     constructor() {}
     companion object {
@@ -1270,6 +1302,11 @@ object vx_data_textblock {
   val c_delimbracketcurly : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimbracketsquare
+   * Square Bracket Delimiter
+   * {delim}
+   */
   class Const_delimbracketsquare {
     constructor() {}
     companion object {
@@ -1311,6 +1348,11 @@ object vx_data_textblock {
   val c_delimbracketsquare : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimclose
+   * A placeholder delimiter used to mark the close of whatever is the current delimiter.
+   * {delim}
+   */
   class Const_delimclose {
     constructor() {}
     companion object {
@@ -1348,6 +1390,11 @@ object vx_data_textblock {
   val c_delimclose : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimclosing
+   * A placeholder delimiter used to mark the closing of whatever is the current delimiter.
+   * {delim}
+   */
   class Const_delimclosing {
     constructor() {}
     companion object {
@@ -1385,6 +1432,11 @@ object vx_data_textblock {
   val c_delimclosing : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimcomma
+   * Comma Delimiter
+   * {delim}
+   */
   class Const_delimcomma {
     constructor() {}
     companion object {
@@ -1424,6 +1476,11 @@ object vx_data_textblock {
   val c_delimcomma : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimcomment
+   * Comment Delimiter
+   * {delim}
+   */
   class Const_delimcomment {
     constructor() {}
     companion object {
@@ -1465,6 +1522,11 @@ object vx_data_textblock {
   val c_delimcomment : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimcommentblock
+   * Block Comment Delimiter
+   * {delim}
+   */
   class Const_delimcommentblock {
     constructor() {}
     companion object {
@@ -1506,6 +1568,11 @@ object vx_data_textblock {
   val c_delimcommentblock : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimline
+   * New Line Delimiter
+   * {delim}
+   */
   class Const_delimline {
     constructor() {}
     companion object {
@@ -1545,6 +1612,11 @@ object vx_data_textblock {
   val c_delimline : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimlisttest1
+   * A delimiter used for test suite
+   * {delimlist}
+   */
   class Const_delimlisttest1 {
     constructor() {}
     companion object {
@@ -1577,6 +1649,11 @@ object vx_data_textblock {
   val c_delimlisttest1 : vx_data_textblock.Type_delimlist = vx_data_textblock.Class_delimlist()
 
 
+  /**
+   * Constant: delimlisttest2
+   * A delimiter used for test suite
+   * {delimlist}
+   */
   class Const_delimlisttest2 {
     constructor() {}
     companion object {
@@ -1610,6 +1687,11 @@ object vx_data_textblock {
   val c_delimlisttest2 : vx_data_textblock.Type_delimlist = vx_data_textblock.Class_delimlist()
 
 
+  /**
+   * Constant: delimlisttest3
+   * A delimiter used for test suite
+   * {delimlist}
+   */
   class Const_delimlisttest3 {
     constructor() {}
     companion object {
@@ -1643,6 +1725,11 @@ object vx_data_textblock {
   val c_delimlisttest3 : vx_data_textblock.Type_delimlist = vx_data_textblock.Class_delimlist()
 
 
+  /**
+   * Constant: delimnonwhitespace
+   * Placeholder for delimited non-whitespace
+   * {delim}
+   */
   class Const_delimnonwhitespace {
     constructor() {}
     companion object {
@@ -1684,6 +1771,11 @@ object vx_data_textblock {
   val c_delimnonwhitespace : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimparen
+   * Parenthesis Delimiter
+   * {delim}
+   */
   class Const_delimparen {
     constructor() {}
     companion object {
@@ -1725,6 +1817,11 @@ object vx_data_textblock {
   val c_delimparen : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimquote
+   * Quote Delimiter
+   * {delim}
+   */
   class Const_delimquote {
     constructor() {}
     companion object {
@@ -1766,6 +1863,11 @@ object vx_data_textblock {
   val c_delimquote : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimquoteblock
+   * Block Quote Delimiter
+   * {delim}
+   */
   class Const_delimquoteblock {
     constructor() {}
     companion object {
@@ -1807,6 +1909,11 @@ object vx_data_textblock {
   val c_delimquoteblock : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimspace
+   * Space Delimiter
+   * {delim}
+   */
   class Const_delimspace {
     constructor() {}
     companion object {
@@ -1848,6 +1955,11 @@ object vx_data_textblock {
   val c_delimspace : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimtest1
+   * A delimiter used for test suite
+   * {delim}
+   */
   class Const_delimtest1 {
     constructor() {}
     companion object {
@@ -1885,6 +1997,11 @@ object vx_data_textblock {
   val c_delimtest1 : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimtest2
+   * A delimiter used for test suite
+   * {delim}
+   */
   class Const_delimtest2 {
     constructor() {}
     companion object {
@@ -1922,6 +2039,11 @@ object vx_data_textblock {
   val c_delimtest2 : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimtest3
+   * A delimiter used for test suite
+   * {delim}
+   */
   class Const_delimtest3 {
     constructor() {}
     companion object {
@@ -1959,6 +2081,11 @@ object vx_data_textblock {
   val c_delimtest3 : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimtext
+   * Placeholder for delimited text
+   * {delim}
+   */
   class Const_delimtext {
     constructor() {}
     companion object {
@@ -1996,6 +2123,11 @@ object vx_data_textblock {
   val c_delimtext : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
 
+  /**
+   * Constant: delimwhitespace
+   * Placeholder for delimited whitespace
+   * {delim}
+   */
   class Const_delimwhitespace {
     constructor() {}
     companion object {
@@ -2034,7 +2166,13 @@ object vx_data_textblock {
 
   val c_delimwhitespace : vx_data_textblock.Type_delim = vx_data_textblock.Class_delim()
 
-
+  /**
+   * @function children_from_textblock
+   * Returns the child textblocks from a given textblock.
+   * @param  {textblock} textblock
+   * @return {textblocklist}
+   * (func children<-textblock)
+   */
   interface Func_children_from_textblock : vx_core.Func_any_from_any {
     fun vx_children_from_textblock(textblock : vx_data_textblock.Type_textblock) : vx_data_textblock.Type_textblocklist
   }
@@ -2125,7 +2263,14 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function delim_first_from_delim_delim
+   * Returns non-empty delim with lowest, non-negative startpos found in string.
+   * @param  {delim} delim1
+   * @param  {delim} delim2
+   * @return {delim}
+   * (func delim-first<-delim-delim)
+   */
   interface Func_delim_first_from_delim_delim : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_delim_first_from_delim_delim(delim1 : vx_data_textblock.Type_delim, delim2 : vx_data_textblock.Type_delim) : vx_data_textblock.Type_delim
   }
@@ -2287,7 +2432,14 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function delim_first_from_string_delimlist
+   * Returns delim with lowest startpos found in string.
+   * @param  {string} text
+   * @param  {delimlist} delimlist
+   * @return {delim}
+   * (func delim-first<-string-delimlist)
+   */
   interface Func_delim_first_from_string_delimlist : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_delim_first_from_string_delimlist(text : vx_core.Type_string, delimlist : vx_data_textblock.Type_delimlist) : vx_data_textblock.Type_delim
   }
@@ -2414,7 +2566,14 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function delim_pos_from_string_delim
+   * Return a delim with istart updated to position of first starttext.
+   * @param  {string} text
+   * @param  {delim} delim
+   * @return {delim}
+   * (func delim-pos<-string-delim)
+   */
   interface Func_delim_pos_from_string_delim : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_delim_pos_from_string_delim(text : vx_core.Type_string, delim : vx_data_textblock.Type_delim) : vx_data_textblock.Type_delim
   }
@@ -2536,7 +2695,14 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function delimlist_pos_from_string_delimlist
+   * Returns a delimlist with each delim updated to position of first starttext.
+   * @param  {string} text
+   * @param  {delimlist} delimlist
+   * @return {delimlist}
+   * (func delimlist-pos<-string-delimlist)
+   */
   interface Func_delimlist_pos_from_string_delimlist : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_delimlist_pos_from_string_delimlist(text : vx_core.Type_string, delimlist : vx_data_textblock.Type_delimlist) : vx_data_textblock.Type_delimlist
   }
@@ -2627,7 +2793,13 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function is_close
+   * Return true if the given delim is a close delim.
+   * @param  {delim} delimarg
+   * @return {boolean}
+   * (func is-close)
+   */
   interface Func_is_close : vx_core.Func_any_from_any {
     fun vx_is_close(delimarg : vx_data_textblock.Type_delim) : vx_core.Type_boolean
   }
@@ -2721,7 +2893,13 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function is_single
+   * Return true if the given delim is a single text delim.
+   * @param  {delim} delimarg
+   * @return {boolean}
+   * (func is-single)
+   */
   interface Func_is_single : vx_core.Func_any_from_any {
     fun vx_is_single(delimarg : vx_data_textblock.Type_delim) : vx_core.Type_boolean
   }
@@ -2821,7 +2999,13 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function stringlist_from_textblocklist
+   * Returns a stringlist from each (:text textblock).
+   * @param  {textblocklist} textblocklist
+   * @return {stringlist}
+   * (func stringlist<-textblocklist)
+   */
   interface Func_stringlist_from_textblocklist : vx_core.Func_any_from_any {
     fun vx_stringlist_from_textblocklist(textblocklist : vx_data_textblock.Type_textblocklist) : vx_core.Type_stringlist
   }
@@ -2916,7 +3100,13 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function text_from_textblock
+   * Returns the text from a given textblock.
+   * @param  {textblock} block
+   * @return {string}
+   * (func text<-textblock)
+   */
   interface Func_text_from_textblock : vx_core.Func_any_from_any {
     fun vx_text_from_textblock(block : vx_data_textblock.Type_textblock) : vx_core.Type_string
   }
@@ -3007,7 +3197,15 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_addchild_from_textblock_find_child
+   * Add the child to the given parent textblock.
+   * @param  {textblock} textblockarg
+   * @param  {textblock} find
+   * @param  {textblock} child
+   * @return {textblock}
+   * (func textblock-addchild<-textblock-find-child)
+   */
   interface Func_textblock_addchild_from_textblock_find_child : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_textblock_addchild_from_textblock_find_child(textblockarg : vx_data_textblock.Type_textblock, find : vx_data_textblock.Type_textblock, child : vx_data_textblock.Type_textblock) : vx_data_textblock.Type_textblock
   }
@@ -3155,7 +3353,13 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_delimnotfound
+   * Returns a textblock when a delim is not found.
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock-delimnotfound)
+   */
   interface Func_textblock_delimnotfound : vx_core.Func_any_from_any {
     fun vx_textblock_delimnotfound(textblockarg : vx_data_textblock.Type_textblock) : vx_data_textblock.Type_textblock
   }
@@ -3587,7 +3791,13 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_findparent_from_textblock
+   * Find a parent that accepts a child.
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock-findparent<-textblock)
+   */
   interface Func_textblock_findparent_from_textblock : vx_core.Func_any_from_any {
     fun vx_textblock_findparent_from_textblock(textblockarg : vx_data_textblock.Type_textblock) : vx_data_textblock.Type_textblock
   }
@@ -3740,7 +3950,13 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_init
+   * Returns a textblock ready for parsing.
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock-init)
+   */
   interface Func_textblock_init : vx_core.Func_any_from_any {
     fun vx_textblock_init(textblockarg : vx_data_textblock.Type_textblock) : vx_data_textblock.Type_textblock
   }
@@ -3882,7 +4098,13 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_parse
+   * Returns a fully parsed textblock from an initialized textblock.
+   * @param  {textblock} textblock
+   * @return {textblock}
+   * (func textblock-parse)
+   */
   interface Func_textblock_parse : vx_core.Func_any_from_any {
     fun vx_textblock_parse(textblock : vx_data_textblock.Type_textblock) : vx_data_textblock.Type_textblock
   }
@@ -3991,7 +4213,13 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_parse_one
+   * Returns a textblock that has been parse a single level.
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock-parse-one)
+   */
   interface Func_textblock_parse_one : vx_core.Func_any_from_any {
     fun vx_textblock_parse_one(textblockarg : vx_data_textblock.Type_textblock) : vx_data_textblock.Type_textblock
   }
@@ -4243,7 +4471,14 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_parse_from_string_delim
+   * Returns a fully parsed textblock from a string and delim.
+   * @param  {string} text
+   * @param  {delim} delim
+   * @return {textblock}
+   * (func textblock-parse<-string-delim)
+   */
   interface Func_textblock_parse_from_string_delim : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_textblock_parse_from_string_delim(text : vx_core.Type_string, delim : vx_data_textblock.Type_delim) : vx_data_textblock.Type_textblock
   }
@@ -4335,7 +4570,15 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_replace_from_textblock_find_replace
+   * Replace the given parent textblock.
+   * @param  {textblock} textblockarg
+   * @param  {textblock} find
+   * @param  {textblock} replace
+   * @return {textblock}
+   * (func textblock-replace<-textblock-find-replace)
+   */
   interface Func_textblock_replace_from_textblock_find_replace : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_textblock_replace_from_textblock_find_replace(textblockarg : vx_data_textblock.Type_textblock, find : vx_data_textblock.Type_textblock, replace : vx_data_textblock.Type_textblock) : vx_data_textblock.Type_textblock
   }
@@ -4470,7 +4713,15 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_startleft_from_string_delim_offset
+   * Returns a textblock constructed from the text before the current delimiter start.
+   * @param  {string} text
+   * @param  {delim} delim
+   * @param  {int} offset
+   * @return {textblock}
+   * (func textblock-startleft<-string-delim-offset)
+   */
   interface Func_textblock_startleft_from_string_delim_offset : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_textblock_startleft_from_string_delim_offset(text : vx_core.Type_string, delim : vx_data_textblock.Type_delim, offset : vx_core.Type_int) : vx_data_textblock.Type_textblock
   }
@@ -4627,7 +4878,15 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_startright_from_string_delim_offset
+   * Returns a textblock constructed from the text after the current delimiter start.
+   * @param  {string} text
+   * @param  {delim} delimin
+   * @param  {int} offset
+   * @return {textblock}
+   * (func textblock-startright<-string-delim-offset)
+   */
   interface Func_textblock_startright_from_string_delim_offset : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_textblock_startright_from_string_delim_offset(text : vx_core.Type_string, delimin : vx_data_textblock.Type_delim, offset : vx_core.Type_int) : vx_data_textblock.Type_textblock
   }
@@ -4844,7 +5103,14 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_from_close_textblock
+   * Returns a textblock after a close delim found.
+   * @param  {delim} close
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock<-close-textblock)
+   */
   interface Func_textblock_from_close_textblock : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_textblock_from_close_textblock(close : vx_data_textblock.Type_delim, textblockarg : vx_data_textblock.Type_textblock) : vx_data_textblock.Type_textblock
   }
@@ -5092,7 +5358,14 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_from_empty_textblock
+   * Returns a textblock after an empty delim found.
+   * @param  {delim} empty
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock<-empty-textblock)
+   */
   interface Func_textblock_from_empty_textblock : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_textblock_from_empty_textblock(empty : vx_data_textblock.Type_delim, textblockarg : vx_data_textblock.Type_textblock) : vx_data_textblock.Type_textblock
   }
@@ -5171,7 +5444,14 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_from_open_textblock
+   * Returns a textblock after a close delim found.
+   * @param  {delim} open
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock<-open-textblock)
+   */
   interface Func_textblock_from_open_textblock : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_textblock_from_open_textblock(open : vx_data_textblock.Type_delim, textblockarg : vx_data_textblock.Type_textblock) : vx_data_textblock.Type_textblock
   }
@@ -5476,7 +5756,14 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_from_single_textblock
+   * Returns a textblock after a single value delim found.
+   * @param  {delim} single
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock<-single-textblock)
+   */
   interface Func_textblock_from_single_textblock : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_textblock_from_single_textblock(single : vx_data_textblock.Type_delim, textblockarg : vx_data_textblock.Type_textblock) : vx_data_textblock.Type_textblock
   }
@@ -5776,7 +6063,14 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_from_string_delim
+   * Returns a textblock from a string and delim.
+   * @param  {string} text
+   * @param  {delim} delim
+   * @return {textblock}
+   * (func textblock<-string-delim)
+   */
   interface Func_textblock_from_string_delim : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_textblock_from_string_delim(text : vx_core.Type_string, delim : vx_data_textblock.Type_delim) : vx_data_textblock.Type_textblock
   }
@@ -5871,7 +6165,14 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblock_from_textblock_delim
+   * Returns a parsed textblock from an unparsed one.
+   * @param  {textblock} textblock
+   * @param  {delim} delim
+   * @return {textblock}
+   * (func textblock<-textblock-delim)
+   */
   interface Func_textblock_from_textblock_delim : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_textblock_from_textblock_delim(textblock : vx_data_textblock.Type_textblock, delim : vx_data_textblock.Type_delim) : vx_data_textblock.Type_textblock
   }
@@ -5950,7 +6251,14 @@ object vx_data_textblock {
     return output
   }
 
-
+  /**
+   * @function textblocklist_from_textblocklist_remove
+   * Return a textblocklist with all removedelims removed.
+   * @param  {textblocklist} tblist
+   * @param  {delim} remove
+   * @return {textblocklist}
+   * (func textblocklist<-textblocklist-remove)
+   */
   interface Func_textblocklist_from_textblocklist_remove : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_textblocklist_from_textblocklist_remove(tblist : vx_data_textblock.Type_textblocklist, remove : vx_data_textblock.Type_delim) : vx_data_textblock.Type_textblocklist
   }

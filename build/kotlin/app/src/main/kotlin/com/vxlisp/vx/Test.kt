@@ -7,6 +7,11 @@ import com.vxlisp.vx.web.*
 object vx_test {
 
 
+  /**
+   * type: testcase
+   * Structure to describe a test case
+   * (type testcase)
+   */
   interface Type_testcase : vx_core.Type_struct {
     fun passfail() : vx_core.Type_boolean
     fun testpkg() : vx_core.Type_string
@@ -65,13 +70,13 @@ object vx_test {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":passfail")) {
+      } else if ((skey == ":passfail")) {
         output = this.passfail()
-      } else if ((skey==":testpkg")) {
+      } else if ((skey == ":testpkg")) {
         output = this.testpkg()
-      } else if ((skey==":casename")) {
+      } else if ((skey == ":casename")) {
         output = this.casename()
-      } else if ((skey==":describelist")) {
+      } else if ((skey == ":describelist")) {
         output = this.describelist()
       }
       return output
@@ -155,7 +160,7 @@ object vx_test {
           }
         } else {
           if (false) {
-          } else if ((key==":passfail")) {
+          } else if ((key == ":passfail")) {
             if (valsub == vx_p_passfail) {
             } else if (valsub is vx_core.Type_boolean) {
               var valpassfail : vx_core.Type_boolean = valsub as vx_core.Type_boolean
@@ -179,7 +184,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":testpkg")) {
+          } else if ((key == ":testpkg")) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub is vx_core.Type_string) {
               var valtestpkg : vx_core.Type_string = valsub as vx_core.Type_string
@@ -203,7 +208,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":casename")) {
+          } else if ((key == ":casename")) {
             if (valsub == vx_p_casename) {
             } else if (valsub is vx_core.Type_string) {
               var valcasename : vx_core.Type_string = valsub as vx_core.Type_string
@@ -227,7 +232,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":describelist")) {
+          } else if ((key == ":describelist")) {
             if (valsub == vx_p_describelist) {
             } else if (valsub is vx_test.Type_testdescribelist) {
               var valdescribelist : vx_test.Type_testdescribelist = valsub as vx_test.Type_testdescribelist
@@ -302,6 +307,11 @@ object vx_test {
   val e_testcase : vx_test.Type_testcase = vx_test.Class_testcase()
   val t_testcase : vx_test.Type_testcase = vx_test.Class_testcase()
 
+  /**
+   * type: testcaselist
+   * List of test cases
+   * (type testcaselist)
+   */
   interface Type_testcaselist : vx_core.Type_list {
     fun vx_listtestcase() : List<vx_test.Type_testcase>
     fun vx_testcase(index : vx_core.Type_int) : vx_test.Type_testcase
@@ -371,8 +381,9 @@ object vx_test {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_test.Type_testcase) {
+          var subitem : vx_test.Type_testcase = valsub as vx_test.Type_testcase
           ischanged = true
-          listval.add(valsub as vx_test.Type_testcase)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -435,6 +446,11 @@ object vx_test {
   val e_testcaselist : vx_test.Type_testcaselist = vx_test.Class_testcaselist()
   val t_testcaselist : vx_test.Type_testcaselist = vx_test.Class_testcaselist()
 
+  /**
+   * type: testcoveragedetail
+   * Structure to describe a test coverage detail
+   * (type testcoveragedetail)
+   */
   interface Type_testcoveragedetail : vx_core.Type_struct {
     fun constmap() : vx_core.Type_intmap
     fun funcmap() : vx_core.Type_intmap
@@ -493,13 +509,13 @@ object vx_test {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":constmap")) {
+      } else if ((skey == ":constmap")) {
         output = this.constmap()
-      } else if ((skey==":funcmap")) {
+      } else if ((skey == ":funcmap")) {
         output = this.funcmap()
-      } else if ((skey==":testpkg")) {
+      } else if ((skey == ":testpkg")) {
         output = this.testpkg()
-      } else if ((skey==":typemap")) {
+      } else if ((skey == ":typemap")) {
         output = this.typemap()
       }
       return output
@@ -583,7 +599,7 @@ object vx_test {
           }
         } else {
           if (false) {
-          } else if ((key==":constmap")) {
+          } else if ((key == ":constmap")) {
             if (valsub == vx_p_constmap) {
             } else if (valsub is vx_core.Type_intmap) {
               var valconstmap : vx_core.Type_intmap = valsub as vx_core.Type_intmap
@@ -604,7 +620,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":funcmap")) {
+          } else if ((key == ":funcmap")) {
             if (valsub == vx_p_funcmap) {
             } else if (valsub is vx_core.Type_intmap) {
               var valfuncmap : vx_core.Type_intmap = valsub as vx_core.Type_intmap
@@ -625,7 +641,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":testpkg")) {
+          } else if ((key == ":testpkg")) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub is vx_core.Type_string) {
               var valtestpkg : vx_core.Type_string = valsub as vx_core.Type_string
@@ -649,7 +665,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":typemap")) {
+          } else if ((key == ":typemap")) {
             if (valsub == vx_p_typemap) {
             } else if (valsub is vx_core.Type_intmap) {
               var valtypemap : vx_core.Type_intmap = valsub as vx_core.Type_intmap
@@ -724,6 +740,11 @@ object vx_test {
   val e_testcoveragedetail : vx_test.Type_testcoveragedetail = vx_test.Class_testcoveragedetail()
   val t_testcoveragedetail : vx_test.Type_testcoveragedetail = vx_test.Class_testcoveragedetail()
 
+  /**
+   * type: testcoveragenums
+   * Structure to describe a test coverage summary
+   * (type testcoveragenums)
+   */
   interface Type_testcoveragenums : vx_core.Type_struct {
     fun pct() : vx_core.Type_int
     fun testpkg() : vx_core.Type_string
@@ -782,13 +803,13 @@ object vx_test {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":pct")) {
+      } else if ((skey == ":pct")) {
         output = this.pct()
-      } else if ((skey==":testpkg")) {
+      } else if ((skey == ":testpkg")) {
         output = this.testpkg()
-      } else if ((skey==":tests")) {
+      } else if ((skey == ":tests")) {
         output = this.tests()
-      } else if ((skey==":total")) {
+      } else if ((skey == ":total")) {
         output = this.total()
       }
       return output
@@ -872,7 +893,7 @@ object vx_test {
           }
         } else {
           if (false) {
-          } else if ((key==":pct")) {
+          } else if ((key == ":pct")) {
             if (valsub == vx_p_pct) {
             } else if (valsub is vx_core.Type_int) {
               var valpct : vx_core.Type_int = valsub as vx_core.Type_int
@@ -896,7 +917,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":testpkg")) {
+          } else if ((key == ":testpkg")) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub is vx_core.Type_string) {
               var valtestpkg : vx_core.Type_string = valsub as vx_core.Type_string
@@ -920,7 +941,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":tests")) {
+          } else if ((key == ":tests")) {
             if (valsub == vx_p_tests) {
             } else if (valsub is vx_core.Type_int) {
               var valtests : vx_core.Type_int = valsub as vx_core.Type_int
@@ -944,7 +965,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":total")) {
+          } else if ((key == ":total")) {
             if (valsub == vx_p_total) {
             } else if (valsub is vx_core.Type_int) {
               var valtotal : vx_core.Type_int = valsub as vx_core.Type_int
@@ -1022,6 +1043,11 @@ object vx_test {
   val e_testcoveragenums : vx_test.Type_testcoveragenums = vx_test.Class_testcoveragenums()
   val t_testcoveragenums : vx_test.Type_testcoveragenums = vx_test.Class_testcoveragenums()
 
+  /**
+   * type: testcoveragesummary
+   * Structure to describe a test coverage summary
+   * (type testcoveragesummary)
+   */
   interface Type_testcoveragesummary : vx_core.Type_struct {
     fun bigospacenums() : vx_test.Type_testcoveragenums
     fun bigotimenums() : vx_test.Type_testcoveragenums
@@ -1128,21 +1154,21 @@ object vx_test {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":bigospacenums")) {
+      } else if ((skey == ":bigospacenums")) {
         output = this.bigospacenums()
-      } else if ((skey==":bigotimenums")) {
+      } else if ((skey == ":bigotimenums")) {
         output = this.bigotimenums()
-      } else if ((skey==":constnums")) {
+      } else if ((skey == ":constnums")) {
         output = this.constnums()
-      } else if ((skey==":docnums")) {
+      } else if ((skey == ":docnums")) {
         output = this.docnums()
-      } else if ((skey==":funcnums")) {
+      } else if ((skey == ":funcnums")) {
         output = this.funcnums()
-      } else if ((skey==":testpkg")) {
+      } else if ((skey == ":testpkg")) {
         output = this.testpkg()
-      } else if ((skey==":totalnums")) {
+      } else if ((skey == ":totalnums")) {
         output = this.totalnums()
-      } else if ((skey==":typenums")) {
+      } else if ((skey == ":typenums")) {
         output = this.typenums()
       }
       return output
@@ -1238,7 +1264,7 @@ object vx_test {
           }
         } else {
           if (false) {
-          } else if ((key==":bigospacenums")) {
+          } else if ((key == ":bigospacenums")) {
             if (valsub == vx_p_bigospacenums) {
             } else if (valsub is vx_test.Type_testcoveragenums) {
               var valbigospacenums : vx_test.Type_testcoveragenums = valsub as vx_test.Type_testcoveragenums
@@ -1259,7 +1285,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":bigotimenums")) {
+          } else if ((key == ":bigotimenums")) {
             if (valsub == vx_p_bigotimenums) {
             } else if (valsub is vx_test.Type_testcoveragenums) {
               var valbigotimenums : vx_test.Type_testcoveragenums = valsub as vx_test.Type_testcoveragenums
@@ -1280,7 +1306,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":constnums")) {
+          } else if ((key == ":constnums")) {
             if (valsub == vx_p_constnums) {
             } else if (valsub is vx_test.Type_testcoveragenums) {
               var valconstnums : vx_test.Type_testcoveragenums = valsub as vx_test.Type_testcoveragenums
@@ -1301,7 +1327,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":docnums")) {
+          } else if ((key == ":docnums")) {
             if (valsub == vx_p_docnums) {
             } else if (valsub is vx_test.Type_testcoveragenums) {
               var valdocnums : vx_test.Type_testcoveragenums = valsub as vx_test.Type_testcoveragenums
@@ -1322,7 +1348,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":funcnums")) {
+          } else if ((key == ":funcnums")) {
             if (valsub == vx_p_funcnums) {
             } else if (valsub is vx_test.Type_testcoveragenums) {
               var valfuncnums : vx_test.Type_testcoveragenums = valsub as vx_test.Type_testcoveragenums
@@ -1343,7 +1369,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":testpkg")) {
+          } else if ((key == ":testpkg")) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub is vx_core.Type_string) {
               var valtestpkg : vx_core.Type_string = valsub as vx_core.Type_string
@@ -1367,7 +1393,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":totalnums")) {
+          } else if ((key == ":totalnums")) {
             if (valsub == vx_p_totalnums) {
             } else if (valsub is vx_test.Type_testcoveragenums) {
               var valtotalnums : vx_test.Type_testcoveragenums = valsub as vx_test.Type_testcoveragenums
@@ -1388,7 +1414,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":typenums")) {
+          } else if ((key == ":typenums")) {
             if (valsub == vx_p_typenums) {
             } else if (valsub is vx_test.Type_testcoveragenums) {
               var valtypenums : vx_test.Type_testcoveragenums = valsub as vx_test.Type_testcoveragenums
@@ -1467,6 +1493,11 @@ object vx_test {
   val e_testcoveragesummary : vx_test.Type_testcoveragesummary = vx_test.Class_testcoveragesummary()
   val t_testcoveragesummary : vx_test.Type_testcoveragesummary = vx_test.Class_testcoveragesummary()
 
+  /**
+   * type: testdescribe
+   * Structure to describe test results
+   * (type testdescribe)
+   */
   interface Type_testdescribe : vx_core.Type_struct {
     fun describename() : vx_core.Type_string
     fun testpkg() : vx_core.Type_string
@@ -1513,11 +1544,11 @@ object vx_test {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":describename")) {
+      } else if ((skey == ":describename")) {
         output = this.describename()
-      } else if ((skey==":testpkg")) {
+      } else if ((skey == ":testpkg")) {
         output = this.testpkg()
-      } else if ((skey==":testresult")) {
+      } else if ((skey == ":testresult")) {
         output = this.testresult()
       }
       return output
@@ -1598,7 +1629,7 @@ object vx_test {
           }
         } else {
           if (false) {
-          } else if ((key==":describename")) {
+          } else if ((key == ":describename")) {
             if (valsub == vx_p_describename) {
             } else if (valsub is vx_core.Type_string) {
               var valdescribename : vx_core.Type_string = valsub as vx_core.Type_string
@@ -1622,7 +1653,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":testpkg")) {
+          } else if ((key == ":testpkg")) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub is vx_core.Type_string) {
               var valtestpkg : vx_core.Type_string = valsub as vx_core.Type_string
@@ -1646,7 +1677,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":testresult")) {
+          } else if ((key == ":testresult")) {
             if (valsub == vx_p_testresult) {
             } else if (valsub is vx_test.Type_testresult) {
               var valtestresult : vx_test.Type_testresult = valsub as vx_test.Type_testresult
@@ -1720,6 +1751,11 @@ object vx_test {
   val e_testdescribe : vx_test.Type_testdescribe = vx_test.Class_testdescribe()
   val t_testdescribe : vx_test.Type_testdescribe = vx_test.Class_testdescribe()
 
+  /**
+   * type: testdescribelist
+   * List of testdescribe
+   * (type testdescribelist)
+   */
   interface Type_testdescribelist : vx_core.Type_list {
     fun vx_listtestdescribe() : List<vx_test.Type_testdescribe>
     fun vx_testdescribe(index : vx_core.Type_int) : vx_test.Type_testdescribe
@@ -1789,8 +1825,9 @@ object vx_test {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_test.Type_testdescribe) {
+          var subitem : vx_test.Type_testdescribe = valsub as vx_test.Type_testdescribe
           ischanged = true
-          listval.add(valsub as vx_test.Type_testdescribe)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -1853,6 +1890,11 @@ object vx_test {
   val e_testdescribelist : vx_test.Type_testdescribelist = vx_test.Class_testdescribelist()
   val t_testdescribelist : vx_test.Type_testdescribelist = vx_test.Class_testdescribelist()
 
+  /**
+   * type: testpackage
+   * Structure to hold all tests for a package
+   * (type testpackage)
+   */
   interface Type_testpackage : vx_core.Type_struct {
     fun caselist() : vx_test.Type_testcaselist
     fun coveragedetail() : vx_test.Type_testcoveragedetail
@@ -1923,15 +1965,15 @@ object vx_test {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":caselist")) {
+      } else if ((skey == ":caselist")) {
         output = this.caselist()
-      } else if ((skey==":coveragedetail")) {
+      } else if ((skey == ":coveragedetail")) {
         output = this.coveragedetail()
-      } else if ((skey==":coveragesummary")) {
+      } else if ((skey == ":coveragesummary")) {
         output = this.coveragesummary()
-      } else if ((skey==":passfail")) {
+      } else if ((skey == ":passfail")) {
         output = this.passfail()
-      } else if ((skey==":testpkg")) {
+      } else if ((skey == ":testpkg")) {
         output = this.testpkg()
       }
       return output
@@ -2018,7 +2060,7 @@ object vx_test {
           }
         } else {
           if (false) {
-          } else if ((key==":caselist")) {
+          } else if ((key == ":caselist")) {
             if (valsub == vx_p_caselist) {
             } else if (valsub is vx_test.Type_testcaselist) {
               var valcaselist : vx_test.Type_testcaselist = valsub as vx_test.Type_testcaselist
@@ -2039,7 +2081,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":coveragedetail")) {
+          } else if ((key == ":coveragedetail")) {
             if (valsub == vx_p_coveragedetail) {
             } else if (valsub is vx_test.Type_testcoveragedetail) {
               var valcoveragedetail : vx_test.Type_testcoveragedetail = valsub as vx_test.Type_testcoveragedetail
@@ -2060,7 +2102,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":coveragesummary")) {
+          } else if ((key == ":coveragesummary")) {
             if (valsub == vx_p_coveragesummary) {
             } else if (valsub is vx_test.Type_testcoveragesummary) {
               var valcoveragesummary : vx_test.Type_testcoveragesummary = valsub as vx_test.Type_testcoveragesummary
@@ -2081,7 +2123,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":passfail")) {
+          } else if ((key == ":passfail")) {
             if (valsub == vx_p_passfail) {
             } else if (valsub is vx_core.Type_boolean) {
               var valpassfail : vx_core.Type_boolean = valsub as vx_core.Type_boolean
@@ -2105,7 +2147,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":testpkg")) {
+          } else if ((key == ":testpkg")) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub is vx_core.Type_string) {
               var valtestpkg : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2184,6 +2226,11 @@ object vx_test {
   val e_testpackage : vx_test.Type_testpackage = vx_test.Class_testpackage()
   val t_testpackage : vx_test.Type_testpackage = vx_test.Class_testpackage()
 
+  /**
+   * type: testpackagelist
+   * List of testpackage
+   * (type testpackagelist)
+   */
   interface Type_testpackagelist : vx_core.Type_list {
     fun vx_listtestpackage() : List<vx_test.Type_testpackage>
     fun vx_testpackage(index : vx_core.Type_int) : vx_test.Type_testpackage
@@ -2253,8 +2300,9 @@ object vx_test {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_test.Type_testpackage) {
+          var subitem : vx_test.Type_testpackage = valsub as vx_test.Type_testpackage
           ischanged = true
-          listval.add(valsub as vx_test.Type_testpackage)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -2317,6 +2365,11 @@ object vx_test {
   val e_testpackagelist : vx_test.Type_testpackagelist = vx_test.Class_testpackagelist()
   val t_testpackagelist : vx_test.Type_testpackagelist = vx_test.Class_testpackagelist()
 
+  /**
+   * type: testresult
+   * Structure to hold test results
+   * (type testresult)
+   */
   interface Type_testresult : vx_core.Type_struct {
     fun code() : vx_core.Type_string
     fun passfail() : vx_core.Type_boolean
@@ -2387,15 +2440,15 @@ object vx_test {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":code")) {
+      } else if ((skey == ":code")) {
         output = this.code()
-      } else if ((skey==":passfail")) {
+      } else if ((skey == ":passfail")) {
         output = this.passfail()
-      } else if ((skey==":expected")) {
+      } else if ((skey == ":expected")) {
         output = this.expected()
-      } else if ((skey==":actual")) {
+      } else if ((skey == ":actual")) {
         output = this.actual()
-      } else if ((skey==":fn-actual")) {
+      } else if ((skey == ":fn-actual")) {
         output = this.fn_actual()
       }
       return output
@@ -2482,7 +2535,7 @@ object vx_test {
           }
         } else {
           if (false) {
-          } else if ((key==":code")) {
+          } else if ((key == ":code")) {
             if (valsub == vx_p_code) {
             } else if (valsub is vx_core.Type_string) {
               var valcode : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2506,7 +2559,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":passfail")) {
+          } else if ((key == ":passfail")) {
             if (valsub == vx_p_passfail) {
             } else if (valsub is vx_core.Type_boolean) {
               var valpassfail : vx_core.Type_boolean = valsub as vx_core.Type_boolean
@@ -2530,7 +2583,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":expected")) {
+          } else if ((key == ":expected")) {
             if (valsub == vx_p_expected) {
             } else if (valsub is vx_core.Type_any) {
               var valexpected : vx_core.Type_any = valsub as vx_core.Type_any
@@ -2551,7 +2604,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":actual")) {
+          } else if ((key == ":actual")) {
             if (valsub == vx_p_actual) {
             } else if (valsub is vx_core.Type_any) {
               var valactual : vx_core.Type_any = valsub as vx_core.Type_any
@@ -2572,7 +2625,7 @@ object vx_test {
               msg = vx_core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":fn-actual")) {
+          } else if ((key == ":fn-actual")) {
             if (valsub == vx_p_fn_actual) {
             } else if (valsub is vx_core.Func_any_from_func_async) {
               var valfn_actual : vx_core.Func_any_from_func_async = valsub as vx_core.Func_any_from_func_async
@@ -2648,6 +2701,11 @@ object vx_test {
   val e_testresult : vx_test.Type_testresult = vx_test.Class_testresult()
   val t_testresult : vx_test.Type_testresult = vx_test.Class_testresult()
 
+  /**
+   * type: testresultlist
+   * List of test results
+   * (type testresultlist)
+   */
   interface Type_testresultlist : vx_core.Type_list {
     fun vx_listtestresult() : List<vx_test.Type_testresult>
     fun vx_testresult(index : vx_core.Type_int) : vx_test.Type_testresult
@@ -2717,8 +2775,9 @@ object vx_test {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_test.Type_testresult) {
+          var subitem : vx_test.Type_testresult = valsub as vx_test.Type_testresult
           ischanged = true
-          listval.add(valsub as vx_test.Type_testresult)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -2781,6 +2840,11 @@ object vx_test {
   val e_testresultlist : vx_test.Type_testresultlist = vx_test.Class_testresultlist()
   val t_testresultlist : vx_test.Type_testresultlist = vx_test.Class_testresultlist()
 
+  /**
+   * Constant: stylesheet-test
+   * The default Test Stylesheet
+   * {stylesheet}
+   */
   class Const_stylesheet_test {
     constructor() {}
     companion object {
@@ -3195,7 +3259,13 @@ object vx_test {
 
   val c_stylesheet_test : vx_web_html.Type_stylesheet = vx_web_html.Class_stylesheet()
 
-
+  /**
+   * @function context_test
+   * Returns the default context for test case execution. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {context}
+   * (func context-test)
+   */
   interface Func_context_test : vx_core.Func_any_from_any {
     fun vx_context_test(args : vx_core.Type_anylist) : vx_core.Type_context
   }
@@ -3307,7 +3377,12 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function div_from_testcaselist
+   * @param  {testcaselist} testcaselist
+   * @return {div}
+   * (func div<-testcaselist)
+   */
   interface Func_div_from_testcaselist : vx_core.Func_any_from_any {
     fun vx_div_from_testcaselist(testcaselist : vx_test.Type_testcaselist) : vx_web_html.Type_div
   }
@@ -3502,7 +3577,13 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function div_from_testpackage
+   * Retuns a div from a test package
+   * @param  {testpackage} testpackage
+   * @return {div}
+   * (func div<-testpackage)
+   */
   interface Func_div_from_testpackage : vx_core.Func_any_from_any {
     fun vx_div_from_testpackage(testpackage : vx_test.Type_testpackage) : vx_web_html.Type_div
   }
@@ -3682,7 +3763,12 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function div_from_testpackagelist
+   * @param  {testpackagelist} testpackagelist
+   * @return {div}
+   * (func div<-testpackagelist)
+   */
   interface Func_div_from_testpackagelist : vx_core.Func_any_from_any {
     fun vx_div_from_testpackagelist(testpackagelist : vx_test.Type_testpackagelist) : vx_web_html.Type_div
   }
@@ -3907,7 +3993,13 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function divchildlist_from_testpackagelist
+   * Returns a divlist from a testpackagelist.
+   * @param  {testpackagelist} testpackagelist
+   * @return {divchildlist}
+   * (func divchildlist<-testpackagelist)
+   */
   interface Func_divchildlist_from_testpackagelist : vx_core.Func_any_from_any {
     fun vx_divchildlist_from_testpackagelist(testpackagelist : vx_test.Type_testpackagelist) : vx_web_html.Type_divchildlist
   }
@@ -4002,7 +4094,12 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function file_test
+   * Default file location for testsuite.vxlisp
+   * @return {file}
+   * (func file-test)
+   */
   interface Func_file_test : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_file_test() : vx_data_file.Type_file
   }
@@ -4089,7 +4186,12 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function file_testhtml
+   * Default file location for testsuite.html
+   * @return {file}
+   * (func file-testhtml)
+   */
   interface Func_file_testhtml : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_file_testhtml() : vx_data_file.Type_file
   }
@@ -4176,7 +4278,12 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function file_testnode
+   * Default file location for testsuitenode.vxlisp
+   * @return {file}
+   * (func file-testnode)
+   */
   interface Func_file_testnode : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_file_testnode() : vx_data_file.Type_file
   }
@@ -4263,7 +4370,13 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function html_from_divtest
+   * Returns html from test div
+   * @param  {div} divtest
+   * @return {html}
+   * (func html<-divtest)
+   */
   interface Func_html_from_divtest : vx_core.Func_any_from_any {
     fun vx_html_from_divtest(divtest : vx_web_html.Type_div) : vx_web_html.Type_html
   }
@@ -4416,7 +4529,13 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function p_from_passfail
+   * Returns a <p> tag from a passfail boolean value
+   * @param  {boolean} passfail
+   * @return {p}
+   * (func p<-passfail)
+   */
   interface Func_p_from_passfail : vx_core.Func_any_from_any {
     fun vx_p_from_passfail(passfail : vx_core.Type_boolean) : vx_web_html.Type_p
   }
@@ -4538,7 +4657,13 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function p_from_testcoveragenums
+   * Returns <p>tests / total (pct%)</p> from testcoveragenums
+   * @param  {testcoveragenums} nums
+   * @return {p}
+   * (func p<-testcoveragenums)
+   */
   interface Func_p_from_testcoveragenums : vx_core.Func_any_from_any {
     fun vx_p_from_testcoveragenums(nums : vx_test.Type_testcoveragenums) : vx_web_html.Type_p
   }
@@ -4651,7 +4776,15 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function resolve_testcase
+   * Resolves a testcase
+   * @param  {testcase} testcase
+   * @return {testcase}
+   * (func resolve-testcase)
+   */
   interface Func_resolve_testcase : vx_core.Func_any_from_any_async {
     fun vx_resolve_testcase(testcase : vx_test.Type_testcase) : CompletableFuture<vx_test.Type_testcase>
   }
@@ -4783,7 +4916,15 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function resolve_testcaselist
+   * Resolves a testcaselist
+   * @param  {testcaselist} testcaselist
+   * @return {testcaselist}
+   * (func resolve-testcaselist)
+   */
   interface Func_resolve_testcaselist : vx_core.Func_any_from_any_async {
     fun vx_resolve_testcaselist(testcaselist : vx_test.Type_testcaselist) : CompletableFuture<vx_test.Type_testcaselist>
   }
@@ -4878,7 +5019,15 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function resolve_testdescribe
+   * Resolves a testdescribe
+   * @param  {testdescribe} testdescribe
+   * @return {testdescribe}
+   * (func resolve-testdescribe)
+   */
   interface Func_resolve_testdescribe : vx_core.Func_any_from_any_async {
     fun vx_resolve_testdescribe(testdescribe : vx_test.Type_testdescribe) : CompletableFuture<vx_test.Type_testdescribe>
   }
@@ -4989,7 +5138,15 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function resolve_testdescribelist
+   * Resolves a testdescribelist
+   * @param  {testdescribelist} testdescribelist
+   * @return {testdescribelist}
+   * (func resolve-testdescribelist)
+   */
   interface Func_resolve_testdescribelist : vx_core.Func_any_from_any_async {
     fun vx_resolve_testdescribelist(testdescribelist : vx_test.Type_testdescribelist) : CompletableFuture<vx_test.Type_testdescribelist>
   }
@@ -5084,7 +5241,15 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function resolve_testpackage
+   * Resolves a testpackage
+   * @param  {testpackage} testpackage
+   * @return {testpackage}
+   * (func resolve-testpackage)
+   */
   interface Func_resolve_testpackage : vx_core.Func_any_from_any_async {
     fun vx_resolve_testpackage(testpackage : vx_test.Type_testpackage) : CompletableFuture<vx_test.Type_testpackage>
   }
@@ -5209,7 +5374,15 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function resolve_testpackagelist
+   * Resolves a testpackagelist
+   * @param  {testpackagelist} testpackagelist
+   * @return {testpackagelist}
+   * (func resolve-testpackagelist)
+   */
   interface Func_resolve_testpackagelist : vx_core.Func_any_from_any_async {
     fun vx_resolve_testpackagelist(testpackagelist : vx_test.Type_testpackagelist) : CompletableFuture<vx_test.Type_testpackagelist>
   }
@@ -5304,7 +5477,15 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * 
+   * @async
+   * @function resolve_testresult
+   * Resolves a testresult
+   * @param  {testresult} testresult
+   * @return {testresult}
+   * (func resolve-testresult)
+   */
   interface Func_resolve_testresult : vx_core.Func_any_from_any_async {
     fun vx_resolve_testresult(testresult : vx_test.Type_testresult) : CompletableFuture<vx_test.Type_testresult>
   }
@@ -5452,7 +5633,12 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function security_test
+   * Returns the default security for test case execution. Arguments come from the command line.
+   * @return {security}
+   * (func security-test)
+   */
   interface Func_security_test : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_security_test() : vx_core.Type_security
   }
@@ -5546,7 +5732,14 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function test
+   * Test expected equal actual
+   * @param  {any-1} expected
+   * @param  {any-2} actual
+   * @return {testresult}
+   * (func test)
+   */
   interface Func_test : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_test(context : vx_core.Type_context, expected : vx_core.Type_any, actual : vx_core.Type_any) : vx_test.Type_testresult
   }
@@ -5648,7 +5841,14 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function test 1
+   * Async Test expected equal actual
+   * @param  {any} expected
+   * @param  {any<-func-async} fn-actual
+   * @return {testresult}
+   * (func test)
+   */
   interface Func_test_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_test_1(context : vx_core.Type_context, expected : vx_core.Type_any, fn_actual : vx_core.Func_any_from_func_async) : vx_test.Type_testresult
   }
@@ -5745,7 +5945,13 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function test_false
+   * Test expected to be false
+   * @param  {any} actual
+   * @return {testresult}
+   * (func test-false)
+   */
   interface Func_test_false : vx_core.Func_any_from_any_context {
     fun vx_test_false(context : vx_core.Type_context, actual : vx_core.Type_any) : vx_test.Type_testresult
   }
@@ -5858,7 +6064,13 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function test_false 1
+   * Async Test expected to be false
+   * @param  {any<-func-async} fn-actual
+   * @return {testresult}
+   * (func test-false)
+   */
   interface Func_test_false_1 : vx_core.Func_any_from_any_context {
     fun vx_test_false_1(context : vx_core.Type_context, fn_actual : vx_core.Func_any_from_func_async) : vx_test.Type_testresult
   }
@@ -5966,7 +6178,14 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function test_gt
+   * Test expected greater than actual
+   * @param  {any} expected
+   * @param  {any} actual
+   * @return {testresult}
+   * (func test-gt)
+   */
   interface Func_test_gt : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_test_gt(context : vx_core.Type_context, expected : vx_core.Type_any, actual : vx_core.Type_any) : vx_test.Type_testresult
   }
@@ -6068,7 +6287,14 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function test_gt 1
+   * Async Test expected greater than actual
+   * @param  {any} expected
+   * @param  {any<-func-async} fn-actual
+   * @return {testresult}
+   * (func test-gt)
+   */
   interface Func_test_gt_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_test_gt_1(context : vx_core.Type_context, expected : vx_core.Type_any, fn_actual : vx_core.Func_any_from_func_async) : vx_test.Type_testresult
   }
@@ -6165,7 +6391,14 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function test_ne
+   * Test expected not equal actual
+   * @param  {any} expected
+   * @param  {any} actual
+   * @return {testresult}
+   * (func test-ne)
+   */
   interface Func_test_ne : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_test_ne(context : vx_core.Type_context, expected : vx_core.Type_any, actual : vx_core.Type_any) : vx_test.Type_testresult
   }
@@ -6267,7 +6500,14 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function test_ne 1
+   * Async Test expected not equal actual
+   * @param  {any} expected
+   * @param  {any<-func-async} fn-actual
+   * @return {testresult}
+   * (func test-ne)
+   */
   interface Func_test_ne_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_test_ne_1(context : vx_core.Type_context, expected : vx_core.Type_any, fn_actual : vx_core.Func_any_from_func_async) : vx_test.Type_testresult
   }
@@ -6364,7 +6604,14 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function test_string
+   * Test that the string version of expected equal actual
+   * @param  {any} expected
+   * @param  {any} actual
+   * @return {testresult}
+   * (func test-string)
+   */
   interface Func_test_string : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_test_string(context : vx_core.Type_context, expected : vx_core.Type_any, actual : vx_core.Type_any) : vx_test.Type_testresult
   }
@@ -6468,7 +6715,14 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function test_string 1
+   * Async Test that the string version of expected equal actual
+   * @param  {any} expected
+   * @param  {any<-func-async} fn-actual
+   * @return {testresult}
+   * (func test-string)
+   */
   interface Func_test_string_1 : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_test_string_1(context : vx_core.Type_context, expected : vx_core.Type_any, fn_actual : vx_core.Func_any_from_func_async) : vx_test.Type_testresult
   }
@@ -6565,7 +6819,13 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function test_true
+   * Test expected to be true
+   * @param  {any} actual
+   * @return {testresult}
+   * (func test-true)
+   */
   interface Func_test_true : vx_core.Func_any_from_any_context {
     fun vx_test_true(context : vx_core.Type_context, actual : vx_core.Type_any) : vx_test.Type_testresult
   }
@@ -6678,7 +6938,13 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function test_true 1
+   * Async Test expected to be true
+   * @param  {any<-func-async} fn-actual
+   * @return {testresult}
+   * (func test-true)
+   */
   interface Func_test_true_1 : vx_core.Func_any_from_any_context {
     fun vx_test_true_1(context : vx_core.Type_context, fn_actual : vx_core.Func_any_from_func_async) : vx_test.Type_testresult
   }
@@ -6786,7 +7052,14 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function tr_from_testdescribe_casename
+   * Returns tr from a testdescribe
+   * @param  {testdescribe} testdescribe
+   * @param  {string} casename
+   * @return {tr}
+   * (func tr<-testdescribe-casename)
+   */
   interface Func_tr_from_testdescribe_casename : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_tr_from_testdescribe_casename(testdescribe : vx_test.Type_testdescribe, casename : vx_core.Type_string) : vx_web_html.Type_tr
   }
@@ -6963,7 +7236,12 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function trlist_from_testcase
+   * @param  {testcase} testcase
+   * @return {trlist}
+   * (func trlist<-testcase)
+   */
   interface Func_trlist_from_testcase : vx_core.Func_any_from_any {
     fun vx_trlist_from_testcase(testcase : vx_test.Type_testcase) : vx_web_html.Type_trlist
   }
@@ -7073,7 +7351,13 @@ object vx_test {
     return output
   }
 
-
+  /**
+   * @function trlist_from_testcaselist
+   * Returns a trlist from a testcaselist.
+   * @param  {testcaselist} testcaselist
+   * @return {trlist}
+   * (func trlist<-testcaselist)
+   */
   interface Func_trlist_from_testcaselist : vx_core.Func_any_from_any {
     fun vx_trlist_from_testcaselist(testcaselist : vx_test.Type_testcaselist) : vx_web_html.Type_trlist
   }

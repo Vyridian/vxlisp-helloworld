@@ -15,6 +15,11 @@ object vx_web_html {
     return output
   }
 
+  /**
+   * type: body
+   * Body Tag
+   * (type body)
+   */
   interface Type_body : vx_core.Type_struct {
     fun nodes() : vx_web_html.Type_divchildlist
   }
@@ -37,7 +42,7 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":nodes")) {
+      } else if ((skey == ":nodes")) {
         output = this.nodes()
       }
       return output
@@ -126,7 +131,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":nodes")) {
+          } else if ((key == ":nodes")) {
             if (valsub == vx_p_nodes) {
             } else if (valsub is vx_web_html.Type_divchildlist) {
               var valnodes : vx_web_html.Type_divchildlist = valsub as vx_web_html.Type_divchildlist
@@ -198,6 +203,11 @@ object vx_web_html {
   val e_body : vx_web_html.Type_body = vx_web_html.Class_body()
   val t_body : vx_web_html.Type_body = vx_web_html.Class_body()
 
+  /**
+   * type: details
+   * Details Tag
+   * (type details)
+   */
   interface Type_details : vx_core.Type_struct, vx_web_html.Type_node, vx_web_html.Type_divchild {
     fun summary() : vx_web_html.Type_divchildlist
     fun nodes() : vx_web_html.Type_divchildlist
@@ -287,19 +297,19 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":summary")) {
+      } else if ((skey == ":summary")) {
         output = this.summary()
-      } else if ((skey==":nodes")) {
+      } else if ((skey == ":nodes")) {
         output = this.nodes()
       }
       return output
@@ -392,7 +402,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -416,7 +426,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/details", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -437,7 +447,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/details", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -458,7 +468,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/details", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -479,7 +489,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/details", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -500,7 +510,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/details", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":summary")) {
+          } else if ((key == ":summary")) {
             if (valsub == vx_p_summary) {
             } else if (valsub is vx_web_html.Type_divchildlist) {
               var valsummary : vx_web_html.Type_divchildlist = valsub as vx_web_html.Type_divchildlist
@@ -521,7 +531,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/details", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":nodes")) {
+          } else if ((key == ":nodes")) {
             if (valsub == vx_p_nodes) {
             } else if (valsub is vx_web_html.Type_divchildlist) {
               var valnodes : vx_web_html.Type_divchildlist = valsub as vx_web_html.Type_divchildlist
@@ -599,6 +609,11 @@ object vx_web_html {
   val e_details : vx_web_html.Type_details = vx_web_html.Class_details()
   val t_details : vx_web_html.Type_details = vx_web_html.Class_details()
 
+  /**
+   * type: div
+   * Div Tag
+   * (type div)
+   */
   interface Type_div : vx_core.Type_struct, vx_web_html.Type_node, vx_web_html.Type_divchild {
     fun nodes() : vx_web_html.Type_divchildlist
   }
@@ -676,17 +691,17 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":nodes")) {
+      } else if ((skey == ":nodes")) {
         output = this.nodes()
       }
       return output
@@ -790,7 +805,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -814,7 +829,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/div", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -835,7 +850,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/div", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -856,7 +871,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/div", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -877,7 +892,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/div", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -898,7 +913,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/div", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":nodes")) {
+          } else if ((key == ":nodes")) {
             if (valsub == vx_p_nodes) {
             } else if (valsub is vx_web_html.Type_divchildlist) {
               var valnodes : vx_web_html.Type_divchildlist = valsub as vx_web_html.Type_divchildlist
@@ -975,6 +990,11 @@ object vx_web_html {
   val e_div : vx_web_html.Type_div = vx_web_html.Class_div()
   val t_div : vx_web_html.Type_div = vx_web_html.Class_div()
 
+  /**
+   * type: divchild
+   * Div Child Trait
+   * (type divchild)
+   */
   interface Type_divchild : vx_core.Type_struct {
   }
 
@@ -1047,6 +1067,11 @@ object vx_web_html {
   val e_divchild : vx_web_html.Type_divchild = vx_web_html.Class_divchild()
   val t_divchild : vx_web_html.Type_divchild = vx_web_html.Class_divchild()
 
+  /**
+   * type: divchildlist
+   * List of divchild
+   * (type divchildlist)
+   */
   interface Type_divchildlist : vx_core.Type_list {
     fun vx_listdivchild() : List<vx_web_html.Type_divchild>
     fun vx_divchild(index : vx_core.Type_int) : vx_web_html.Type_divchild
@@ -1116,8 +1141,9 @@ object vx_web_html {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_web_html.Type_divchild) {
+          var subitem : vx_web_html.Type_divchild = valsub as vx_web_html.Type_divchild
           ischanged = true
-          listval.add(valsub as vx_web_html.Type_divchild)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -1180,6 +1206,11 @@ object vx_web_html {
   val e_divchildlist : vx_web_html.Type_divchildlist = vx_web_html.Class_divchildlist()
   val t_divchildlist : vx_web_html.Type_divchildlist = vx_web_html.Class_divchildlist()
 
+  /**
+   * type: divlist
+   * List of div
+   * (type divlist)
+   */
   interface Type_divlist : vx_core.Type_list {
     fun vx_listdiv() : List<vx_web_html.Type_div>
     fun vx_div(index : vx_core.Type_int) : vx_web_html.Type_div
@@ -1249,8 +1280,9 @@ object vx_web_html {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_web_html.Type_div) {
+          var subitem : vx_web_html.Type_div = valsub as vx_web_html.Type_div
           ischanged = true
-          listval.add(valsub as vx_web_html.Type_div)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -1313,6 +1345,11 @@ object vx_web_html {
   val e_divlist : vx_web_html.Type_divlist = vx_web_html.Class_divlist()
   val t_divlist : vx_web_html.Type_divlist = vx_web_html.Class_divlist()
 
+  /**
+   * type: footer
+   * Body Tag
+   * (type footer)
+   */
   interface Type_footer : vx_core.Type_struct {
     fun nodes() : vx_web_html.Type_divchildlist
   }
@@ -1335,7 +1372,7 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":nodes")) {
+      } else if ((skey == ":nodes")) {
         output = this.nodes()
       }
       return output
@@ -1424,7 +1461,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":nodes")) {
+          } else if ((key == ":nodes")) {
             if (valsub == vx_p_nodes) {
             } else if (valsub is vx_web_html.Type_divchildlist) {
               var valnodes : vx_web_html.Type_divchildlist = valsub as vx_web_html.Type_divchildlist
@@ -1496,6 +1533,11 @@ object vx_web_html {
   val e_footer : vx_web_html.Type_footer = vx_web_html.Class_footer()
   val t_footer : vx_web_html.Type_footer = vx_web_html.Class_footer()
 
+  /**
+   * type: h1
+   * Header 1 Tag
+   * (type h1)
+   */
   interface Type_h1 : vx_core.Type_struct, vx_web_html.Type_node, vx_web_html.Type_divchild {
     fun text() : vx_core.Type_string
   }
@@ -1573,17 +1615,17 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":text")) {
+      } else if ((skey == ":text")) {
         output = this.text()
       }
       return output
@@ -1683,7 +1725,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -1707,7 +1749,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h1", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -1728,7 +1770,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h1", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -1749,7 +1791,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h1", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -1770,7 +1812,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h1", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -1791,7 +1833,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h1", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":text")) {
+          } else if ((key == ":text")) {
             if (valsub == vx_p_text) {
             } else if (valsub is vx_core.Type_string) {
               var valtext : vx_core.Type_string = valsub as vx_core.Type_string
@@ -1871,6 +1913,11 @@ object vx_web_html {
   val e_h1 : vx_web_html.Type_h1 = vx_web_html.Class_h1()
   val t_h1 : vx_web_html.Type_h1 = vx_web_html.Class_h1()
 
+  /**
+   * type: h2
+   * Header 2 Tag
+   * (type h2)
+   */
   interface Type_h2 : vx_core.Type_struct, vx_web_html.Type_node, vx_web_html.Type_divchild {
     fun text() : vx_core.Type_string
   }
@@ -1948,17 +1995,17 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":text")) {
+      } else if ((skey == ":text")) {
         output = this.text()
       }
       return output
@@ -2058,7 +2105,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2082,7 +2129,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h2", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -2103,7 +2150,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h2", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -2124,7 +2171,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h2", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -2145,7 +2192,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h2", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -2166,7 +2213,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h2", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":text")) {
+          } else if ((key == ":text")) {
             if (valsub == vx_p_text) {
             } else if (valsub is vx_core.Type_string) {
               var valtext : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2246,6 +2293,11 @@ object vx_web_html {
   val e_h2 : vx_web_html.Type_h2 = vx_web_html.Class_h2()
   val t_h2 : vx_web_html.Type_h2 = vx_web_html.Class_h2()
 
+  /**
+   * type: h3
+   * Header 3 Tag
+   * (type h3)
+   */
   interface Type_h3 : vx_core.Type_struct, vx_web_html.Type_node, vx_web_html.Type_divchild {
     fun text() : vx_core.Type_string
   }
@@ -2323,17 +2375,17 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":text")) {
+      } else if ((skey == ":text")) {
         output = this.text()
       }
       return output
@@ -2433,7 +2485,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2457,7 +2509,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h3", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -2478,7 +2530,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h3", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -2499,7 +2551,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h3", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -2520,7 +2572,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h3", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -2541,7 +2593,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/h3", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":text")) {
+          } else if ((key == ":text")) {
             if (valsub == vx_p_text) {
             } else if (valsub is vx_core.Type_string) {
               var valtext : vx_core.Type_string = valsub as vx_core.Type_string
@@ -2621,6 +2673,11 @@ object vx_web_html {
   val e_h3 : vx_web_html.Type_h3 = vx_web_html.Class_h3()
   val t_h3 : vx_web_html.Type_h3 = vx_web_html.Class_h3()
 
+  /**
+   * type: head
+   * Head Tag
+   * (type head)
+   */
   interface Type_head : vx_core.Type_struct {
     fun nodes() : vx_web_html.Type_headchildlist
   }
@@ -2643,7 +2700,7 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":nodes")) {
+      } else if ((skey == ":nodes")) {
         output = this.nodes()
       }
       return output
@@ -2732,7 +2789,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":nodes")) {
+          } else if ((key == ":nodes")) {
             if (valsub == vx_p_nodes) {
             } else if (valsub is vx_web_html.Type_headchildlist) {
               var valnodes : vx_web_html.Type_headchildlist = valsub as vx_web_html.Type_headchildlist
@@ -2804,6 +2861,11 @@ object vx_web_html {
   val e_head : vx_web_html.Type_head = vx_web_html.Class_head()
   val t_head : vx_web_html.Type_head = vx_web_html.Class_head()
 
+  /**
+   * type: headchild
+   * Head Child Trait
+   * (type headchild)
+   */
   interface Type_headchild : vx_core.Type_struct {
   }
 
@@ -2876,6 +2938,11 @@ object vx_web_html {
   val e_headchild : vx_web_html.Type_headchild = vx_web_html.Class_headchild()
   val t_headchild : vx_web_html.Type_headchild = vx_web_html.Class_headchild()
 
+  /**
+   * type: headchildlist
+   * List of headchild
+   * (type headchildlist)
+   */
   interface Type_headchildlist : vx_core.Type_list {
     fun vx_listheadchild() : List<vx_web_html.Type_headchild>
     fun vx_headchild(index : vx_core.Type_int) : vx_web_html.Type_headchild
@@ -2945,8 +3012,9 @@ object vx_web_html {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_web_html.Type_headchild) {
+          var subitem : vx_web_html.Type_headchild = valsub as vx_web_html.Type_headchild
           ischanged = true
-          listval.add(valsub as vx_web_html.Type_headchild)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -3009,6 +3077,11 @@ object vx_web_html {
   val e_headchildlist : vx_web_html.Type_headchildlist = vx_web_html.Class_headchildlist()
   val t_headchildlist : vx_web_html.Type_headchildlist = vx_web_html.Class_headchildlist()
 
+  /**
+   * type: html
+   * Html Tag
+   * (type html)
+   */
   interface Type_html : vx_core.Type_struct {
     fun lang() : vx_core.Type_string
     fun head() : vx_web_html.Type_head
@@ -3067,13 +3140,13 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":lang")) {
+      } else if ((skey == ":lang")) {
         output = this.lang()
-      } else if ((skey==":head")) {
+      } else if ((skey == ":head")) {
         output = this.head()
-      } else if ((skey==":body")) {
+      } else if ((skey == ":body")) {
         output = this.body()
-      } else if ((skey==":footer")) {
+      } else if ((skey == ":footer")) {
         output = this.footer()
       }
       return output
@@ -3157,7 +3230,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":lang")) {
+          } else if ((key == ":lang")) {
             if (valsub == vx_p_lang) {
             } else if (valsub is vx_core.Type_string) {
               var vallang : vx_core.Type_string = valsub as vx_core.Type_string
@@ -3181,7 +3254,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/html", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":head")) {
+          } else if ((key == ":head")) {
             if (valsub == vx_p_head) {
             } else if (valsub is vx_web_html.Type_head) {
               var valhead : vx_web_html.Type_head = valsub as vx_web_html.Type_head
@@ -3202,7 +3275,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/html", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":body")) {
+          } else if ((key == ":body")) {
             if (valsub == vx_p_body) {
             } else if (valsub is vx_web_html.Type_body) {
               var valbody : vx_web_html.Type_body = valsub as vx_web_html.Type_body
@@ -3223,7 +3296,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/html", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":footer")) {
+          } else if ((key == ":footer")) {
             if (valsub == vx_p_footer) {
             } else if (valsub is vx_web_html.Type_footer) {
               var valfooter : vx_web_html.Type_footer = valsub as vx_web_html.Type_footer
@@ -3298,6 +3371,11 @@ object vx_web_html {
   val e_html : vx_web_html.Type_html = vx_web_html.Class_html()
   val t_html : vx_web_html.Type_html = vx_web_html.Class_html()
 
+  /**
+   * type: img
+   * Image Tag
+   * (type img)
+   */
   interface Type_img : vx_core.Type_struct, vx_web_html.Type_node, vx_web_html.Type_divchild {
     fun src() : vx_core.Type_string
   }
@@ -3375,17 +3453,17 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":src")) {
+      } else if ((skey == ":src")) {
         output = this.src()
       }
       return output
@@ -3485,7 +3563,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -3509,7 +3587,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/img", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -3530,7 +3608,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/img", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -3551,7 +3629,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/img", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -3572,7 +3650,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/img", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -3593,7 +3671,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/img", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":src")) {
+          } else if ((key == ":src")) {
             if (valsub == vx_p_src) {
             } else if (valsub is vx_core.Type_string) {
               var valsrc : vx_core.Type_string = valsub as vx_core.Type_string
@@ -3673,6 +3751,11 @@ object vx_web_html {
   val e_img : vx_web_html.Type_img = vx_web_html.Class_img()
   val t_img : vx_web_html.Type_img = vx_web_html.Class_img()
 
+  /**
+   * type: meta
+   * Meta Tag
+   * (type meta)
+   */
   interface Type_meta : vx_core.Type_struct, vx_web_html.Type_node, vx_web_html.Type_headchild {
     fun charset() : vx_core.Type_string
     fun name() : vx_core.Type_string
@@ -3774,21 +3857,21 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":charset")) {
+      } else if ((skey == ":charset")) {
         output = this.charset()
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":content")) {
+      } else if ((skey == ":content")) {
         output = this.content()
       }
       return output
@@ -3884,7 +3967,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -3908,7 +3991,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -3929,7 +4012,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -3950,7 +4033,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -3971,7 +4054,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -3992,7 +4075,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":charset")) {
+          } else if ((key == ":charset")) {
             if (valsub == vx_p_charset) {
             } else if (valsub is vx_core.Type_string) {
               var valcharset : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4016,7 +4099,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4040,7 +4123,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":content")) {
+          } else if ((key == ":content")) {
             if (valsub == vx_p_content) {
             } else if (valsub is vx_core.Type_string) {
               var valcontent : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4122,6 +4205,11 @@ object vx_web_html {
   val e_meta : vx_web_html.Type_meta = vx_web_html.Class_meta()
   val t_meta : vx_web_html.Type_meta = vx_web_html.Class_meta()
 
+  /**
+   * type: node
+   * Common Html Node Trait
+   * (type node)
+   */
   interface Type_node : vx_core.Type_struct {
     fun id() : vx_core.Type_string
     fun eventmap() : vx_event.Type_eventmap
@@ -4192,15 +4280,15 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
       }
       return output
@@ -4287,7 +4375,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4311,7 +4399,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/node", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -4332,7 +4420,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/node", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -4353,7 +4441,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/node", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -4374,7 +4462,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/node", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -4450,6 +4538,11 @@ object vx_web_html {
   val e_node : vx_web_html.Type_node = vx_web_html.Class_node()
   val t_node : vx_web_html.Type_node = vx_web_html.Class_node()
 
+  /**
+   * type: nodelist
+   * List of node
+   * (type nodelist)
+   */
   interface Type_nodelist : vx_core.Type_list {
     fun vx_listnode() : List<vx_web_html.Type_node>
     fun vx_node(index : vx_core.Type_int) : vx_web_html.Type_node
@@ -4519,8 +4612,9 @@ object vx_web_html {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_web_html.Type_node) {
+          var subitem : vx_web_html.Type_node = valsub as vx_web_html.Type_node
           ischanged = true
-          listval.add(valsub as vx_web_html.Type_node)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -4583,6 +4677,11 @@ object vx_web_html {
   val e_nodelist : vx_web_html.Type_nodelist = vx_web_html.Class_nodelist()
   val t_nodelist : vx_web_html.Type_nodelist = vx_web_html.Class_nodelist()
 
+  /**
+   * type: p
+   * Paragraph Tag
+   * (type p)
+   */
   interface Type_p : vx_core.Type_struct, vx_web_html.Type_node, vx_web_html.Type_divchild {
     fun text() : vx_core.Type_string
   }
@@ -4660,17 +4759,17 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":text")) {
+      } else if ((skey == ":text")) {
         output = this.text()
       }
       return output
@@ -4770,7 +4869,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4794,7 +4893,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/p", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -4815,7 +4914,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/p", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -4836,7 +4935,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/p", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -4857,7 +4956,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/p", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -4878,7 +4977,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/p", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":text")) {
+          } else if ((key == ":text")) {
             if (valsub == vx_p_text) {
             } else if (valsub is vx_core.Type_string) {
               var valtext : vx_core.Type_string = valsub as vx_core.Type_string
@@ -4958,6 +5057,11 @@ object vx_web_html {
   val e_p : vx_web_html.Type_p = vx_web_html.Class_p()
   val t_p : vx_web_html.Type_p = vx_web_html.Class_p()
 
+  /**
+   * type: propmap
+   * Map of props
+   * (type propmap)
+   */
   interface Type_propmap : vx_core.Type_map {
     fun vx_mapstring() : Map<String, vx_core.Type_string>
     fun vx_string(key : vx_core.Type_string) : vx_core.Type_string
@@ -5154,6 +5258,11 @@ object vx_web_html {
   val e_propmap : vx_web_html.Type_propmap = vx_web_html.Class_propmap()
   val t_propmap : vx_web_html.Type_propmap = vx_web_html.Class_propmap()
 
+  /**
+   * type: style
+   * Programmable Cascading Style
+   * (type style)
+   */
   interface Type_style : vx_core.Type_struct {
     fun name() : vx_core.Type_string
     fun props() : vx_web_html.Type_propmap
@@ -5200,11 +5309,11 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":props")) {
+      } else if ((skey == ":props")) {
         output = this.props()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
       }
       return output
@@ -5285,7 +5394,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -5309,7 +5418,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":props")) {
+          } else if ((key == ":props")) {
             if (valsub == vx_p_props) {
             } else if (valsub is vx_web_html.Type_propmap) {
               var valprops : vx_web_html.Type_propmap = valsub as vx_web_html.Type_propmap
@@ -5330,7 +5439,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/style", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -5404,6 +5513,11 @@ object vx_web_html {
   val e_style : vx_web_html.Type_style = vx_web_html.Class_style()
   val t_style : vx_web_html.Type_style = vx_web_html.Class_style()
 
+  /**
+   * type: stylelist
+   * List of style
+   * (type stylelist)
+   */
   interface Type_stylelist : vx_core.Type_list {
     fun vx_liststyle() : List<vx_web_html.Type_style>
     fun vx_style(index : vx_core.Type_int) : vx_web_html.Type_style
@@ -5473,8 +5587,9 @@ object vx_web_html {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_web_html.Type_style) {
+          var subitem : vx_web_html.Type_style = valsub as vx_web_html.Type_style
           ischanged = true
-          listval.add(valsub as vx_web_html.Type_style)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -5537,6 +5652,11 @@ object vx_web_html {
   val e_stylelist : vx_web_html.Type_stylelist = vx_web_html.Class_stylelist()
   val t_stylelist : vx_web_html.Type_stylelist = vx_web_html.Class_stylelist()
 
+  /**
+   * type: stylemap
+   * Map of style
+   * (type stylemap)
+   */
   interface Type_stylemap : vx_core.Type_map {
     fun vx_mapstyle() : Map<String, vx_web_html.Type_style>
     fun vx_style(key : vx_core.Type_string) : vx_web_html.Type_style
@@ -5733,6 +5853,11 @@ object vx_web_html {
   val e_stylemap : vx_web_html.Type_stylemap = vx_web_html.Class_stylemap()
   val t_stylemap : vx_web_html.Type_stylemap = vx_web_html.Class_stylemap()
 
+  /**
+   * type: stylesheet
+   * Programmable Cascading Style Sheet CSS type
+   * (type stylesheet)
+   */
   interface Type_stylesheet : vx_core.Type_struct, vx_web_html.Type_node, vx_web_html.Type_headchild {
     fun name() : vx_core.Type_string
     fun styles() : vx_web_html.Type_stylelist
@@ -5834,21 +5959,21 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":styles")) {
+      } else if ((skey == ":styles")) {
         output = this.styles()
-      } else if ((skey==":stylemap")) {
+      } else if ((skey == ":stylemap")) {
         output = this.stylemap()
       }
       return output
@@ -5944,7 +6069,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -5968,7 +6093,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/stylesheet", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -5989,7 +6114,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/stylesheet", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -6010,7 +6135,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/stylesheet", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -6031,7 +6156,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/stylesheet", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -6052,7 +6177,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/stylesheet", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -6076,7 +6201,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/stylesheet", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":styles")) {
+          } else if ((key == ":styles")) {
             if (valsub == vx_p_styles) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstyles : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -6097,7 +6222,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/stylesheet", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylemap")) {
+          } else if ((key == ":stylemap")) {
             if (valsub == vx_p_stylemap) {
             } else if (valsub is vx_web_html.Type_stylemap) {
               var valstylemap : vx_web_html.Type_stylemap = valsub as vx_web_html.Type_stylemap
@@ -6176,6 +6301,11 @@ object vx_web_html {
   val e_stylesheet : vx_web_html.Type_stylesheet = vx_web_html.Class_stylesheet()
   val t_stylesheet : vx_web_html.Type_stylesheet = vx_web_html.Class_stylesheet()
 
+  /**
+   * type: table
+   * <table> Tag
+   * (type table)
+   */
   interface Type_table : vx_core.Type_struct, vx_web_html.Type_node, vx_web_html.Type_divchild {
     fun tbody() : vx_web_html.Type_tbody
     fun thead() : vx_web_html.Type_thead
@@ -6265,19 +6395,19 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":tbody")) {
+      } else if ((skey == ":tbody")) {
         output = this.tbody()
-      } else if ((skey==":thead")) {
+      } else if ((skey == ":thead")) {
         output = this.thead()
       }
       return output
@@ -6370,7 +6500,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -6394,7 +6524,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/table", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -6415,7 +6545,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/table", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -6436,7 +6566,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/table", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -6457,7 +6587,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/table", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -6478,7 +6608,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/table", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":tbody")) {
+          } else if ((key == ":tbody")) {
             if (valsub == vx_p_tbody) {
             } else if (valsub is vx_web_html.Type_tbody) {
               var valtbody : vx_web_html.Type_tbody = valsub as vx_web_html.Type_tbody
@@ -6499,7 +6629,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/table", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":thead")) {
+          } else if ((key == ":thead")) {
             if (valsub == vx_p_thead) {
             } else if (valsub is vx_web_html.Type_thead) {
               var valthead : vx_web_html.Type_thead = valsub as vx_web_html.Type_thead
@@ -6577,6 +6707,11 @@ object vx_web_html {
   val e_table : vx_web_html.Type_table = vx_web_html.Class_table()
   val t_table : vx_web_html.Type_table = vx_web_html.Class_table()
 
+  /**
+   * type: tbody
+   * <tbody> Tag
+   * (type tbody)
+   */
   interface Type_tbody : vx_core.Type_struct, vx_web_html.Type_node {
     fun nodes() : vx_web_html.Type_trlist
   }
@@ -6654,17 +6789,17 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":nodes")) {
+      } else if ((skey == ":nodes")) {
         output = this.nodes()
       }
       return output
@@ -6768,7 +6903,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -6792,7 +6927,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/tbody", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -6813,7 +6948,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/tbody", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -6834,7 +6969,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/tbody", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -6855,7 +6990,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/tbody", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -6876,7 +7011,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/tbody", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":nodes")) {
+          } else if ((key == ":nodes")) {
             if (valsub == vx_p_nodes) {
             } else if (valsub is vx_web_html.Type_trlist) {
               var valnodes : vx_web_html.Type_trlist = valsub as vx_web_html.Type_trlist
@@ -6953,6 +7088,11 @@ object vx_web_html {
   val e_tbody : vx_web_html.Type_tbody = vx_web_html.Class_tbody()
   val t_tbody : vx_web_html.Type_tbody = vx_web_html.Class_tbody()
 
+  /**
+   * type: td
+   * <tr> Tag
+   * (type td)
+   */
   interface Type_td : vx_core.Type_struct, vx_web_html.Type_node {
     fun nodes() : vx_web_html.Type_divchildlist
   }
@@ -7030,17 +7170,17 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":nodes")) {
+      } else if ((skey == ":nodes")) {
         output = this.nodes()
       }
       return output
@@ -7144,7 +7284,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -7168,7 +7308,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/td", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -7189,7 +7329,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/td", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -7210,7 +7350,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/td", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -7231,7 +7371,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/td", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -7252,7 +7392,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/td", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":nodes")) {
+          } else if ((key == ":nodes")) {
             if (valsub == vx_p_nodes) {
             } else if (valsub is vx_web_html.Type_divchildlist) {
               var valnodes : vx_web_html.Type_divchildlist = valsub as vx_web_html.Type_divchildlist
@@ -7329,6 +7469,11 @@ object vx_web_html {
   val e_td : vx_web_html.Type_td = vx_web_html.Class_td()
   val t_td : vx_web_html.Type_td = vx_web_html.Class_td()
 
+  /**
+   * type: tdlist
+   * List of td
+   * (type tdlist)
+   */
   interface Type_tdlist : vx_core.Type_list {
     fun vx_listtd() : List<vx_web_html.Type_td>
     fun vx_td(index : vx_core.Type_int) : vx_web_html.Type_td
@@ -7398,8 +7543,9 @@ object vx_web_html {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_web_html.Type_td) {
+          var subitem : vx_web_html.Type_td = valsub as vx_web_html.Type_td
           ischanged = true
-          listval.add(valsub as vx_web_html.Type_td)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -7462,6 +7608,11 @@ object vx_web_html {
   val e_tdlist : vx_web_html.Type_tdlist = vx_web_html.Class_tdlist()
   val t_tdlist : vx_web_html.Type_tdlist = vx_web_html.Class_tdlist()
 
+  /**
+   * type: thead
+   * <thead> Tag
+   * (type thead)
+   */
   interface Type_thead : vx_core.Type_struct, vx_web_html.Type_node {
     fun nodes() : vx_web_html.Type_trlist
   }
@@ -7539,17 +7690,17 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":nodes")) {
+      } else if ((skey == ":nodes")) {
         output = this.nodes()
       }
       return output
@@ -7653,7 +7804,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -7677,7 +7828,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/thead", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -7698,7 +7849,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/thead", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -7719,7 +7870,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/thead", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -7740,7 +7891,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/thead", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -7761,7 +7912,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/thead", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":nodes")) {
+          } else if ((key == ":nodes")) {
             if (valsub == vx_p_nodes) {
             } else if (valsub is vx_web_html.Type_trlist) {
               var valnodes : vx_web_html.Type_trlist = valsub as vx_web_html.Type_trlist
@@ -7838,6 +7989,11 @@ object vx_web_html {
   val e_thead : vx_web_html.Type_thead = vx_web_html.Class_thead()
   val t_thead : vx_web_html.Type_thead = vx_web_html.Class_thead()
 
+  /**
+   * type: title
+   * Title Tag
+   * (type title)
+   */
   interface Type_title : vx_core.Type_struct, vx_web_html.Type_node, vx_web_html.Type_headchild {
     fun text() : vx_core.Type_string
   }
@@ -7915,17 +8071,17 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":text")) {
+      } else if ((skey == ":text")) {
         output = this.text()
       }
       return output
@@ -8015,7 +8171,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -8039,7 +8195,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/title", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -8060,7 +8216,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/title", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -8081,7 +8237,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/title", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -8102,7 +8258,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/title", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -8123,7 +8279,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/title", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":text")) {
+          } else if ((key == ":text")) {
             if (valsub == vx_p_text) {
             } else if (valsub is vx_core.Type_string) {
               var valtext : vx_core.Type_string = valsub as vx_core.Type_string
@@ -8203,6 +8359,11 @@ object vx_web_html {
   val e_title : vx_web_html.Type_title = vx_web_html.Class_title()
   val t_title : vx_web_html.Type_title = vx_web_html.Class_title()
 
+  /**
+   * type: tr
+   * <tr> Tag
+   * (type tr)
+   */
   interface Type_tr : vx_core.Type_struct, vx_web_html.Type_node {
     fun nodes() : vx_web_html.Type_tdlist
   }
@@ -8280,17 +8441,17 @@ object vx_web_html {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":eventmap")) {
+      } else if ((skey == ":eventmap")) {
         output = this.eventmap()
-      } else if ((skey==":style")) {
+      } else if ((skey == ":style")) {
         output = this.style()
-      } else if ((skey==":style-unique")) {
+      } else if ((skey == ":style-unique")) {
         output = this.style_unique()
-      } else if ((skey==":stylelist")) {
+      } else if ((skey == ":stylelist")) {
         output = this.stylelist()
-      } else if ((skey==":nodes")) {
+      } else if ((skey == ":nodes")) {
         output = this.nodes()
       }
       return output
@@ -8394,7 +8555,7 @@ object vx_web_html {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -8418,7 +8579,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/tr", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":eventmap")) {
+          } else if ((key == ":eventmap")) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub is vx_event.Type_eventmap) {
               var valeventmap : vx_event.Type_eventmap = valsub as vx_event.Type_eventmap
@@ -8439,7 +8600,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/tr", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style")) {
+          } else if ((key == ":style")) {
             if (valsub == vx_p_style) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -8460,7 +8621,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/tr", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":style-unique")) {
+          } else if ((key == ":style-unique")) {
             if (valsub == vx_p_style_unique) {
             } else if (valsub is vx_web_html.Type_style) {
               var valstyle_unique : vx_web_html.Type_style = valsub as vx_web_html.Type_style
@@ -8481,7 +8642,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/tr", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":stylelist")) {
+          } else if ((key == ":stylelist")) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub is vx_web_html.Type_stylelist) {
               var valstylelist : vx_web_html.Type_stylelist = valsub as vx_web_html.Type_stylelist
@@ -8502,7 +8663,7 @@ object vx_web_html {
               msg = vx_core.vx_msg_from_error("vx/web/html/tr", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":nodes")) {
+          } else if ((key == ":nodes")) {
             if (valsub == vx_p_nodes) {
             } else if (valsub is vx_web_html.Type_tdlist) {
               var valnodes : vx_web_html.Type_tdlist = valsub as vx_web_html.Type_tdlist
@@ -8579,6 +8740,11 @@ object vx_web_html {
   val e_tr : vx_web_html.Type_tr = vx_web_html.Class_tr()
   val t_tr : vx_web_html.Type_tr = vx_web_html.Class_tr()
 
+  /**
+   * type: trlist
+   * List of tr
+   * (type trlist)
+   */
   interface Type_trlist : vx_core.Type_list {
     fun vx_listtr() : List<vx_web_html.Type_tr>
     fun vx_tr(index : vx_core.Type_int) : vx_web_html.Type_tr
@@ -8648,8 +8814,9 @@ object vx_web_html {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_web_html.Type_tr) {
+          var subitem : vx_web_html.Type_tr = valsub as vx_web_html.Type_tr
           ischanged = true
-          listval.add(valsub as vx_web_html.Type_tr)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -8711,7 +8878,13 @@ object vx_web_html {
 
   val e_trlist : vx_web_html.Type_trlist = vx_web_html.Class_trlist()
   val t_trlist : vx_web_html.Type_trlist = vx_web_html.Class_trlist()
-
+  /**
+   * @function htmlstring_from_string
+   * Convert text to HTML string
+   * @param  {string} text
+   * @return {string}
+   * (func htmlstring<-string)
+   */
   interface Func_htmlstring_from_string : vx_core.Func_any_from_any {
     fun vx_htmlstring_from_string(text : vx_core.Type_string) : vx_core.Type_string
   }
@@ -8802,7 +8975,12 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_indent
+   * @param  {int} indent
+   * @return {string}
+   * (func string-indent)
+   */
   interface Func_string_indent : vx_core.Func_any_from_any {
     fun vx_string_indent(indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -8896,7 +9074,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_body_indent
+   * Returns string from body
+   * @param  {body} body
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-body-indent)
+   */
   interface Func_string_from_body_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_body_indent(body : vx_web_html.Type_body, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -8988,7 +9173,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_details_indent
+   * Returns string from details
+   * @param  {details} details
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-details-indent)
+   */
   interface Func_string_from_details_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_details_indent(details : vx_web_html.Type_details, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -9108,7 +9300,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_div_indent
+   * Returns string from div
+   * @param  {div} div
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-div-indent)
+   */
   interface Func_string_from_div_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_div_indent(div : vx_web_html.Type_div, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -9219,7 +9418,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_footer_indent
+   * Returns string from footer
+   * @param  {footer} footer
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-footer-indent)
+   */
   interface Func_string_from_footer_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_footer_indent(footer : vx_web_html.Type_footer, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -9311,7 +9517,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_h1_indent
+   * Returns string from h1
+   * @param  {h1} h1
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-h1-indent)
+   */
   interface Func_string_from_h1_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_h1_indent(h1 : vx_web_html.Type_h1, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -9416,7 +9629,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_h2_indent
+   * Returns string from h2
+   * @param  {h2} h2
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-h2-indent)
+   */
   interface Func_string_from_h2_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_h2_indent(h2 : vx_web_html.Type_h2, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -9521,7 +9741,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_h3_indent
+   * Returns string from h3
+   * @param  {h3} h3
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-h3-indent)
+   */
   interface Func_string_from_h3_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_h3_indent(h3 : vx_web_html.Type_h3, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -9626,7 +9853,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_head_indent
+   * Returns string from head
+   * @param  {head} head
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-head-indent)
+   */
   interface Func_string_from_head_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_head_indent(head : vx_web_html.Type_head, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -9718,7 +9952,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_html
+   * Returns string from html
+   * @param  {html} html
+   * @return {string}
+   * (func string<-html)
+   */
   interface Func_string_from_html : vx_core.Func_any_from_any {
     fun vx_string_from_html(html : vx_web_html.Type_html) : vx_core.Type_string
   }
@@ -9849,7 +10089,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_img_indent
+   * Returns string from img
+   * @param  {img} img
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-img-indent)
+   */
   interface Func_string_from_img_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_img_indent(img : vx_web_html.Type_img, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -9965,7 +10212,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_indent
+   * Returns a string to do indentation for a given indent count.
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-indent)
+   */
   interface Func_string_from_indent : vx_core.Func_any_from_any {
     fun vx_string_from_indent(indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -10073,7 +10326,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_meta_indent
+   * Returns string from head
+   * @param  {meta} meta
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-meta-indent)
+   */
   interface Func_string_from_meta_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_meta_indent(meta : vx_web_html.Type_meta, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -10242,7 +10502,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_node
+   * Returns a string from any node
+   * @param  {any-1} node
+   * @return {string}
+   * (func string<-node)
+   */
   interface Func_string_from_node : vx_core.Func_any_from_any {
     fun vx_string_from_node(node : vx_core.Type_any) : vx_core.Type_string
   }
@@ -10336,7 +10602,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_node_indent
+   * Returns a string from any node
+   * @param  {any-1} node
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-node-indent)
+   */
   interface Func_string_from_node_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_node_indent(node : vx_core.Type_any, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -10658,7 +10931,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_nodelist_indent
+   * Returns a string from any node
+   * @param  {list-1} nodelist
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-nodelist-indent)
+   */
   interface Func_string_from_nodelist_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_nodelist_indent(nodelist : vx_core.Type_list, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -10759,7 +11039,16 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_nodelist_tag_prop_indent
+   * Returns string from generic nodelist
+   * @param  {list-1} nodes
+   * @param  {string} tag
+   * @param  {string} prop
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-nodelist-tag-prop-indent)
+   */
   interface Func_string_from_nodelist_tag_prop_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_nodelist_tag_prop_indent(nodes : vx_core.Type_list, tag : vx_core.Type_string, prop : vx_core.Type_string, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -10907,7 +11196,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_p_indent
+   * Returns string from p
+   * @param  {p} p
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-p-indent)
+   */
   interface Func_string_from_p_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_p_indent(p : vx_web_html.Type_p, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -11023,7 +11319,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_propname_val
+   * Returns ' key=\"value\"' if value is not blank.
+   * @param  {string} key
+   * @param  {string} value
+   * @return {string}
+   * (func string<-propname-val)
+   */
   interface Func_string_from_propname_val : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_propname_val(key : vx_core.Type_string, value : vx_core.Type_string) : vx_core.Type_string
   }
@@ -11120,7 +11423,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_propstyle
+   * Returns ' class=\"style.name\"' if style is not empty.
+   * @param  {style} style
+   * @return {string}
+   * (func string<-propstyle)
+   */
   interface Func_string_from_propstyle : vx_core.Func_any_from_any {
     fun vx_string_from_propstyle(style : vx_web_html.Type_style) : vx_core.Type_string
   }
@@ -11240,7 +11549,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_propstyle_stylelist
+   * Returns ' class=\"style.name\"' if style is not empty.
+   * @param  {style} style
+   * @param  {stylelist} stylelist
+   * @return {string}
+   * (func string<-propstyle-stylelist)
+   */
   interface Func_string_from_propstyle_stylelist : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_propstyle_stylelist(style : vx_web_html.Type_style, stylelist : vx_web_html.Type_stylelist) : vx_core.Type_string
   }
@@ -11353,7 +11669,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_propstylelist
+   * Returns ' class=\"style1.name style2.name\"' if stylelist is not empty.
+   * @param  {stylelist} stylelist
+   * @return {string}
+   * (func string<-propstylelist)
+   */
   interface Func_string_from_propstylelist : vx_core.Func_any_from_any {
     fun vx_string_from_propstylelist(stylelist : vx_web_html.Type_stylelist) : vx_core.Type_string
   }
@@ -11486,7 +11808,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_propstyleunique
+   * Returns ' style=\"{style.propmap}\"' if style is not empty.
+   * @param  {style} style
+   * @return {string}
+   * (func string<-propstyleunique)
+   */
   interface Func_string_from_propstyleunique : vx_core.Func_any_from_any {
     fun vx_string_from_propstyleunique(style : vx_web_html.Type_style) : vx_core.Type_string
   }
@@ -11631,7 +11959,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_style_indent
+   * Returns indent'name {key: val;}' for each style.
+   * @param  {style} style
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-style-indent)
+   */
   interface Func_string_from_style_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_style_indent(style : vx_web_html.Type_style, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -11747,7 +12082,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_stylelist
+   * Returns classnames separated by spaces for each style.
+   * @param  {stylelist} stylelist
+   * @return {string}
+   * (func string<-stylelist)
+   */
   interface Func_string_from_stylelist : vx_core.Func_any_from_any {
     fun vx_string_from_stylelist(stylelist : vx_web_html.Type_stylelist) : vx_core.Type_string
   }
@@ -11859,7 +12200,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_stylelist_indent
+   * Return a string from a stylelist
+   * @param  {stylelist} stylelist
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-stylelist-indent)
+   */
   interface Func_string_from_stylelist_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_stylelist_indent(stylelist : vx_web_html.Type_stylelist, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -11960,7 +12308,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_stylepropmap_indent
+   * Returns indent'key: value;' for each prop.
+   * @param  {propmap} propmap
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-stylepropmap-indent)
+   */
   interface Func_string_from_stylepropmap_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_stylepropmap_indent(propmap : vx_web_html.Type_propmap, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -12072,7 +12427,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_stylesheet_indent
+   * Returns string representation of given stylesheet.
+   * @param  {stylesheet} stylesheet
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-stylesheet-indent)
+   */
   interface Func_string_from_stylesheet_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_stylesheet_indent(stylesheet : vx_web_html.Type_stylesheet, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -12185,7 +12547,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_table_indent
+   * Returns string from table
+   * @param  {table} table
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-table-indent)
+   */
   interface Func_string_from_table_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_table_indent(table : vx_web_html.Type_table, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -12305,7 +12674,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_tbody_indent
+   * Returns string from tbody
+   * @param  {tbody} tbody
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-tbody-indent)
+   */
   interface Func_string_from_tbody_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_tbody_indent(tbody : vx_web_html.Type_tbody, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -12397,7 +12773,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_td_indent
+   * Returns string from td
+   * @param  {td} td
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-td-indent)
+   */
   interface Func_string_from_td_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_td_indent(td : vx_web_html.Type_td, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -12489,7 +12872,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_thead_indent
+   * Returns string from thead
+   * @param  {thead} thead
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-thead-indent)
+   */
   interface Func_string_from_thead_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_thead_indent(thead : vx_web_html.Type_thead, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -12581,7 +12971,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_title_indent
+   * Returns string from h2
+   * @param  {title} title
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-title-indent)
+   */
   interface Func_string_from_title_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_title_indent(title : vx_web_html.Type_title, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -12680,7 +13077,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_tr_indent
+   * Returns string from tr
+   * @param  {tr} tr
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-tr-indent)
+   */
   interface Func_string_from_tr_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_tr_indent(tr : vx_web_html.Type_tr, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -12772,7 +13176,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function string_from_uri
+   * Decode a URI string
+   * @param  {string} uri
+   * @return {string}
+   * (func string<-uri)
+   */
   interface Func_string_from_uri : vx_core.Func_any_from_any {
     fun vx_string_from_uri(uri : vx_core.Type_string) : vx_core.Type_string
   }
@@ -12862,7 +13272,14 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function style_from_stylesheet_name
+   * Return style from stylesheet.stylemap
+   * @param  {stylesheet} stylesheet
+   * @param  {string} name
+   * @return {style}
+   * (func style<-stylesheet-name)
+   */
   interface Func_style_from_stylesheet_name : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_style_from_stylesheet_name(stylesheet : vx_web_html.Type_stylesheet, name : vx_core.Type_string) : vx_web_html.Type_style
   }
@@ -12948,7 +13365,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function stylemap_from_stylelist
+   * Returns a stylemap from a given stylelist
+   * @param  {stylelist} stylelist
+   * @return {stylemap}
+   * (func stylemap<-stylelist)
+   */
   interface Func_stylemap_from_stylelist : vx_core.Func_any_from_any {
     fun vx_stylemap_from_stylelist(stylelist : vx_web_html.Type_stylelist) : vx_web_html.Type_stylemap
   }
@@ -13047,7 +13470,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function stylemap_from_stylesheet
+   * Return stylemap from stylesheet
+   * @param  {stylesheet} stylesheet
+   * @return {stylemap}
+   * (func stylemap<-stylesheet)
+   */
   interface Func_stylemap_from_stylesheet : vx_core.Func_any_from_any {
     fun vx_stylemap_from_stylesheet(stylesheet : vx_web_html.Type_stylesheet) : vx_web_html.Type_stylemap
   }
@@ -13138,7 +13567,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function styles_from_stylesheet
+   * Return style from stylesheet.stylemap
+   * @param  {stylesheet} stylesheet
+   * @return {stylelist}
+   * (func styles<-stylesheet)
+   */
   interface Func_styles_from_stylesheet : vx_core.Func_any_from_any {
     fun vx_styles_from_stylesheet(stylesheet : vx_web_html.Type_stylesheet) : vx_web_html.Type_stylelist
   }
@@ -13229,7 +13664,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function stylesheet_loadmap
+   * Decode a URI string
+   * @param  {stylesheet} stylesheet
+   * @return {stylesheet}
+   * (func stylesheet-loadmap)
+   */
   interface Func_stylesheet_loadmap : vx_core.Func_any_from_any {
     fun vx_stylesheet_loadmap(stylesheet : vx_web_html.Type_stylesheet) : vx_web_html.Type_stylesheet
   }
@@ -13329,7 +13770,13 @@ object vx_web_html {
     return output
   }
 
-
+  /**
+   * @function uri_from_string
+   * Encode a URI string
+   * @param  {string} text
+   * @return {string}
+   * (func uri<-string)
+   */
   interface Func_uri_from_string : vx_core.Func_any_from_any {
     fun vx_uri_from_string(text : vx_core.Type_string) : vx_core.Type_string
   }

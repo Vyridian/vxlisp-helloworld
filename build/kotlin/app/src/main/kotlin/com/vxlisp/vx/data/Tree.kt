@@ -5,6 +5,10 @@ import com.vxlisp.vx.*
 object vx_data_tree {
 
 
+  /**
+   * type: branch
+   * (type branch)
+   */
   interface Type_branch : vx_core.Type_struct {
     fun id() : vx_core.Type_string
     fun brancharrow() : vx_data_tree.Type_brancharrow
@@ -87,17 +91,17 @@ object vx_data_tree {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":brancharrow")) {
+      } else if ((skey == ":brancharrow")) {
         output = this.brancharrow()
-      } else if ((skey==":branchlist")) {
+      } else if ((skey == ":branchlist")) {
         output = this.branchlist()
-      } else if ((skey==":leaflist")) {
+      } else if ((skey == ":leaflist")) {
         output = this.leaflist()
-      } else if ((skey==":parentbranch")) {
+      } else if ((skey == ":parentbranch")) {
         output = this.parentbranch()
-      } else if ((skey==":tree")) {
+      } else if ((skey == ":tree")) {
         output = this.tree()
       }
       return output
@@ -187,7 +191,7 @@ object vx_data_tree {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -211,7 +215,7 @@ object vx_data_tree {
               msg = vx_core.vx_msg_from_error("vx/data/tree/branch", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":brancharrow")) {
+          } else if ((key == ":brancharrow")) {
             if (valsub == vx_p_brancharrow) {
             } else if (valsub is vx_data_tree.Type_brancharrow) {
               var valbrancharrow : vx_data_tree.Type_brancharrow = valsub as vx_data_tree.Type_brancharrow
@@ -232,7 +236,7 @@ object vx_data_tree {
               msg = vx_core.vx_msg_from_error("vx/data/tree/branch", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":branchlist")) {
+          } else if ((key == ":branchlist")) {
             if (valsub == vx_p_branchlist) {
             } else if (valsub is vx_data_tree.Type_branchlist) {
               var valbranchlist : vx_data_tree.Type_branchlist = valsub as vx_data_tree.Type_branchlist
@@ -253,7 +257,7 @@ object vx_data_tree {
               msg = vx_core.vx_msg_from_error("vx/data/tree/branch", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":leaflist")) {
+          } else if ((key == ":leaflist")) {
             if (valsub == vx_p_leaflist) {
             } else if (valsub is vx_data_tree.Type_leaflist) {
               var valleaflist : vx_data_tree.Type_leaflist = valsub as vx_data_tree.Type_leaflist
@@ -274,7 +278,7 @@ object vx_data_tree {
               msg = vx_core.vx_msg_from_error("vx/data/tree/branch", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":parentbranch")) {
+          } else if ((key == ":parentbranch")) {
             if (valsub == vx_p_parentbranch) {
             } else if (valsub is vx_data_tree.Type_branch) {
               var valparentbranch : vx_data_tree.Type_branch = valsub as vx_data_tree.Type_branch
@@ -295,7 +299,7 @@ object vx_data_tree {
               msg = vx_core.vx_msg_from_error("vx/data/tree/branch", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":tree")) {
+          } else if ((key == ":tree")) {
             if (valsub == vx_p_tree) {
             } else if (valsub is vx_data_tree.Type_tree) {
               var valtree : vx_data_tree.Type_tree = valsub as vx_data_tree.Type_tree
@@ -372,6 +376,10 @@ object vx_data_tree {
   val e_branch : vx_data_tree.Type_branch = vx_data_tree.Class_branch()
   val t_branch : vx_data_tree.Type_branch = vx_data_tree.Class_branch()
 
+  /**
+   * type: brancharrow
+   * (type brancharrow)
+   */
   interface Type_brancharrow : vx_core.Type_any {
   }
 
@@ -433,6 +441,10 @@ object vx_data_tree {
   val e_brancharrow : vx_data_tree.Type_brancharrow = vx_data_tree.Class_brancharrow()
   val t_brancharrow : vx_data_tree.Type_brancharrow = vx_data_tree.Class_brancharrow()
 
+  /**
+   * type: branchlist
+   * (type branchlist)
+   */
   interface Type_branchlist : vx_core.Type_list {
     fun vx_listbranch() : List<vx_data_tree.Type_branch>
     fun vx_branch(index : vx_core.Type_int) : vx_data_tree.Type_branch
@@ -502,8 +514,9 @@ object vx_data_tree {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_data_tree.Type_branch) {
+          var subitem : vx_data_tree.Type_branch = valsub as vx_data_tree.Type_branch
           ischanged = true
-          listval.add(valsub as vx_data_tree.Type_branch)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -566,6 +579,10 @@ object vx_data_tree {
   val e_branchlist : vx_data_tree.Type_branchlist = vx_data_tree.Class_branchlist()
   val t_branchlist : vx_data_tree.Type_branchlist = vx_data_tree.Class_branchlist()
 
+  /**
+   * type: leaf
+   * (type leaf)
+   */
   interface Type_leaf : vx_core.Type_struct {
     fun id() : vx_core.Type_string
     fun name() : vx_core.Type_string
@@ -612,11 +629,11 @@ object vx_data_tree {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":value")) {
+      } else if ((skey == ":value")) {
         output = this.value()
       }
       return output
@@ -697,7 +714,7 @@ object vx_data_tree {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -721,7 +738,7 @@ object vx_data_tree {
               msg = vx_core.vx_msg_from_error("vx/data/tree/leaf", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -745,7 +762,7 @@ object vx_data_tree {
               msg = vx_core.vx_msg_from_error("vx/data/tree/leaf", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":value")) {
+          } else if ((key == ":value")) {
             if (valsub == vx_p_value) {
             } else if (valsub is vx_core.Type_any) {
               var valvalue : vx_core.Type_any = valsub as vx_core.Type_any
@@ -819,6 +836,10 @@ object vx_data_tree {
   val e_leaf : vx_data_tree.Type_leaf = vx_data_tree.Class_leaf()
   val t_leaf : vx_data_tree.Type_leaf = vx_data_tree.Class_leaf()
 
+  /**
+   * type: leaflist
+   * (type leaflist)
+   */
   interface Type_leaflist : vx_core.Type_list {
     fun vx_listleaf() : List<vx_data_tree.Type_leaf>
     fun vx_leaf(index : vx_core.Type_int) : vx_data_tree.Type_leaf
@@ -888,8 +909,9 @@ object vx_data_tree {
           ischanged = true
           listval.add(allowsub)
         } else if (valsub is vx_data_tree.Type_leaf) {
+          var subitem : vx_data_tree.Type_leaf = valsub as vx_data_tree.Type_leaf
           ischanged = true
-          listval.add(valsub as vx_data_tree.Type_leaf)
+          listval.add(subitem)
         } else if (valsub is List<*>) {
           var listunknown : List<Any> = valsub as List<Any>
           for (item : Any in listunknown) {
@@ -952,6 +974,10 @@ object vx_data_tree {
   val e_leaflist : vx_data_tree.Type_leaflist = vx_data_tree.Class_leaflist()
   val t_leaflist : vx_data_tree.Type_leaflist = vx_data_tree.Class_leaflist()
 
+  /**
+   * type: tree
+   * (type tree)
+   */
   interface Type_tree : vx_core.Type_struct {
     fun id() : vx_core.Type_string
     fun name() : vx_core.Type_string
@@ -998,11 +1024,11 @@ object vx_data_tree {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       if (false) {
-      } else if ((skey==":id")) {
+      } else if ((skey == ":id")) {
         output = this.id()
-      } else if ((skey==":name")) {
+      } else if ((skey == ":name")) {
         output = this.name()
-      } else if ((skey==":branch")) {
+      } else if ((skey == ":branch")) {
         output = this.branch()
       }
       return output
@@ -1083,7 +1109,7 @@ object vx_data_tree {
           }
         } else {
           if (false) {
-          } else if ((key==":id")) {
+          } else if ((key == ":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is vx_core.Type_string) {
               var valid : vx_core.Type_string = valsub as vx_core.Type_string
@@ -1107,7 +1133,7 @@ object vx_data_tree {
               msg = vx_core.vx_msg_from_error("vx/data/tree/tree", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":name")) {
+          } else if ((key == ":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is vx_core.Type_string) {
               var valname : vx_core.Type_string = valsub as vx_core.Type_string
@@ -1131,7 +1157,7 @@ object vx_data_tree {
               msg = vx_core.vx_msg_from_error("vx/data/tree/tree", ":invalidvalue", msgmap)
               msgblock = vx_core.vx_copy(msgblock, msg)
             }
-          } else if ((key==":branch")) {
+          } else if ((key == ":branch")) {
             if (valsub == vx_p_branch) {
             } else if (valsub is vx_data_tree.Type_branch) {
               var valbranch : vx_data_tree.Type_branch = valsub as vx_data_tree.Type_branch
@@ -1205,6 +1231,10 @@ object vx_data_tree {
   val e_tree : vx_data_tree.Type_tree = vx_data_tree.Class_tree()
   val t_tree : vx_data_tree.Type_tree = vx_data_tree.Class_tree()
 
+  /**
+   * Constant: brancharrow-down
+   * {brancharrow}
+   */
   class Const_brancharrow_down {
     constructor() {}
     companion object {
@@ -1229,6 +1259,10 @@ object vx_data_tree {
   val c_brancharrow_down : vx_data_tree.Type_brancharrow = vx_data_tree.Class_brancharrow()
 
 
+  /**
+   * Constant: brancharrow-up
+   * {brancharrow}
+   */
   class Const_brancharrow_up {
     constructor() {}
     companion object {
@@ -1253,6 +1287,10 @@ object vx_data_tree {
   val c_brancharrow_up : vx_data_tree.Type_brancharrow = vx_data_tree.Class_brancharrow()
 
 
+  /**
+   * Constant: brancharrow-updown
+   * {brancharrow}
+   */
   class Const_brancharrow_updown {
     constructor() {}
     companion object {
